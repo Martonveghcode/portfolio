@@ -1,80 +1,12 @@
-﻿import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
+import heatmapConfig from "./heatmap";
 
 const LANGUAGE_OPTIONS = [
   { code: "en", label: "EN" },
   { code: "es", label: "ES" },
   { code: "fr", label: "FR" },
   { code: "de", label: "DE" },
-];
-
-const BASE_PROJECTS = [
-  {
-    id: "calendar",
-    title: "Homework Calendar",
-    summary: "Auto-assigns homework to class dates to avoid missed deadlines.",
-    tech: ["React", "Automation"],
-    links: {
-      github: "https://github.com/Martonveghcode/calendar",
-      live: "https://glittery-blini-4c6ea4.netlify.app",
-    },
-  },
-  {
-    id: "handwriting-pipeline",
-    title: "Handwriting Formatting Pipeline",
-    summary: "Cleans scanned notes, removes lines, and formats pages.",
-    tech: ["Python", "Imaging"],
-    links: {
-      github: "https://github.com/Martonveghcode/Handwriting-formatting-pipeline",
-    },
-  },
-  {
-    id: "chef-claude",
-    title: "Chef-Claude",
-    summary: "Ingredient-based recipe generator using Google APIs.",
-    tech: ["JavaScript", "APIs"],
-    links: {
-      github: "https://github.com/Martonveghcode/Projects/tree/main/chef-claude",
-    },
-  },
-  {
-    id: "react-blog",
-    title: "React Blog",
-    summary: "Blog that renders from data files without manual rebuilds.",
-    tech: ["React", "Content automation"],
-    links: {
-      github: "https://github.com/Martonveghcode/Projects/tree/main/react-blog",
-    },
-  },
-];
-
-const BASE_PAPERS = [
-  {
-    id: "paper-1",
-    title: "Paper slot #1",
-    summary: "Placeholder for a research paper or essay (add PDF soon).",
-    status: "Placeholder",
-  },
-  {
-    id: "paper-2",
-    title: "Paper slot #2",
-    summary: "Reserved for a future publication or writeup.",
-    status: "Placeholder",
-  },
-];
-
-const BASE_EXPERIENCE = [
-  {
-    id: "bda",
-    period: "2025",
-    title: "Budapest Design Apartments - Intern",
-    detail: "Client coordination and admin workflows.",
-  },
-  {
-    id: "rcnp",
-    period: "2024",
-    title: "Real Club Nautico de Palma - Intern",
-    detail: "Event logistics and on-site team support.",
-  },
 ];
 
 const translations = {
@@ -103,20 +35,6 @@ const translations = {
     papersTitle: "Papers",
     experienceTitle: "Experience",
     links: { live: "Live", github: "GitHub" },
-    projects: {
-      calendar: { summary: "Auto-assigns homework to class dates to avoid missed deadlines." },
-      "handwriting-pipeline": { summary: "Cleans scanned notes, removes lines, and formats pages." },
-      "chef-claude": { summary: "Ingredient-based recipe generator using Google APIs." },
-      "react-blog": { summary: "Blog that renders from data files without manual rebuilds." },
-    },
-    papers: {
-      "paper-1": { summary: "Placeholder for a research paper or essay (add PDF soon)." },
-      "paper-2": { summary: "Reserved for a future publication or writeup." },
-    },
-    experience: {
-      bda: { title: "Budapest Design Apartments - Intern", detail: "Client coordination and admin workflows." },
-      rcnp: { title: "Real Club Nautico de Palma - Intern", detail: "Event logistics and on-site team support." },
-    },
   },
   es: {
     nav: { home: "Inicio", projects: "Proyectos", papers: "Papers", experience: "Experiencia" },
@@ -143,20 +61,6 @@ const translations = {
     papersTitle: "Papers",
     experienceTitle: "Experiencia",
     links: { live: "Demo", github: "GitHub" },
-    projects: {
-      calendar: { summary: "Asigna tareas a fechas de clase para evitar retrasos." },
-      "handwriting-pipeline": { summary: "Limpia notas escaneadas, quita lineas y maqueta paginas." },
-      "chef-claude": { summary: "Generador de recetas segun ingredientes con APIs de Google." },
-      "react-blog": { summary: "Blog que se renderiza desde datos sin reconstruccion manual." },
-    },
-    papers: {
-      "paper-1": { summary: "Espacio reservado para un paper o ensayo (PDF pronto)." },
-      "paper-2": { summary: "Reservado para una futura publicacion o articulo." },
-    },
-    experience: {
-      bda: { title: "Budapest Design Apartments - Practicas", detail: "Coordinacion de clientes y flujos administrativos." },
-      rcnp: { title: "Real Club Nautico de Palma - Practicas", detail: "Logistica de eventos y apoyo en sitio." },
-    },
   },
   fr: {
     nav: { home: "Accueil", projects: "Projets", papers: "Papiers", experience: "Experience" },
@@ -183,20 +87,6 @@ const translations = {
     papersTitle: "Papiers",
     experienceTitle: "Experience",
     links: { live: "Demo", github: "GitHub" },
-    projects: {
-      calendar: { summary: "Assigne les devoirs aux dates de cours pour eviter les retards." },
-      "handwriting-pipeline": { summary: "Nettoie des notes scannees, retire les lignes et met en page." },
-      "chef-claude": { summary: "Generateur de recettes selon les ingredients via les APIs Google." },
-      "react-blog": { summary: "Blog rendu depuis des donnees sans reconstruction manuelle." },
-    },
-    papers: {
-      "paper-1": { summary: "Emplacement reserve pour un papier ou essai (PDF bientot)." },
-      "paper-2": { summary: "Reserve pour une future publication ou article." },
-    },
-    experience: {
-      bda: { title: "Budapest Design Apartments - Stage", detail: "Coordination clients et flux administratifs." },
-      rcnp: { title: "Real Club Nautico de Palma - Stage", detail: "Logistique d'evenements et support sur site." },
-    },
   },
   de: {
     nav: { home: "Start", projects: "Projekte", papers: "Papers", experience: "Erfahrung" },
@@ -208,8 +98,8 @@ const translations = {
     languagesTitle: "Sprachen",
     languagesList: [
       "Ungarisch (Muttersprache)",
-      "Englisch (fließend)",
-      "Spanisch (fließend)",
+      "Englisch (flieáend)",
+      "Spanisch (flieáend)",
       "Franzosisch (B2)",
       "Katalanisch (lerne)",
     ],
@@ -223,24 +113,248 @@ const translations = {
     papersTitle: "Papers",
     experienceTitle: "Erfahrung",
     links: { live: "Live", github: "GitHub" },
-    projects: {
-      calendar: { summary: "Ordnet Hausaufgaben automatisch Kurstagen zu, um Verzug zu vermeiden." },
-      "handwriting-pipeline": { summary: "Reinigt gescannte Notizen, entfernt Linien und formatiert Seiten." },
-      "chef-claude": { summary: "Rezeptgenerator nach Zutaten mit Google-APIs." },
-      "react-blog": { summary: "Blog rendert aus Daten ohne manuelles Neuaufbauen." },
-    },
-    papers: {
-      "paper-1": { summary: "Platzhalter fur Paper oder Essay (PDF bald)." },
-      "paper-2": { summary: "Reserviert fur eine spateren Veroffentlichung." },
-    },
-    experience: {
-      bda: { title: "Budapest Design Apartments - Praktikum", detail: "Kundenkoordination und administrative Ablaufe." },
-      rcnp: { title: "Real Club Nautico de Palma - Praktikum", detail: "Event-Logistik und Support vor Ort." },
-    },
   },
 };
 
-const githubHeatmap = "https://ghchart.rshah.org/216e39/Martonveghcode";
+const HEATMAP_COLORS = {
+  blue: ["#0d152c", "#1d4ed8", "#2563eb", "#38bdf8", "#7dd3fc"],
+  green: ["#0b2f26", "#1f6f43", "#22c55e", "#4ade80", "#86efac"],
+};
+
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatDateKey(date) {
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function alignToStartOfWeek(date, startWeekday = 1) {
+  const jsStart = startWeekday === 7 ? 0 : startWeekday; // JS Date: Sunday = 0
+  const jsDay = date.getDay();
+  const diff = (jsDay - jsStart + 7) % 7;
+  const aligned = new Date(date);
+  aligned.setHours(0, 0, 0, 0);
+  aligned.setDate(aligned.getDate() - diff);
+  return aligned;
+}
+
+function computeLevel(count, maxCount) {
+  if (!maxCount) return 0;
+  const ratio = count / maxCount;
+  if (ratio === 0) return 0;
+  if (ratio < 0.25) return 1;
+  if (ratio < 0.5) return 2;
+  if (ratio < 0.75) return 3;
+  return 4;
+}
+
+function normalizeEntries(rawEntries = [], minDate, maxDate) {
+  if (!minDate || !maxDate) return [];
+  const rangeMin = new Date(minDate);
+  rangeMin.setHours(0, 0, 0, 0);
+  const rangeMax = new Date(maxDate);
+  rangeMax.setHours(0, 0, 0, 0);
+
+  const parsed = rawEntries
+    .map((entry) => ({
+      date: entry.date instanceof Date ? entry.date : new Date(entry.date),
+      count: entry.count ?? entry.value ?? 0,
+      level: entry.level,
+    }))
+    .filter((entry) => entry.date >= rangeMin && entry.date <= rangeMax);
+
+  const maxCount = parsed.reduce((max, entry) => Math.max(max, entry.count), 0);
+  return parsed.map((entry) => ({
+    ...entry,
+    level: entry.level ?? computeLevel(entry.count, maxCount),
+  }));
+}
+
+function buildWeeks(entries, minDate, maxDate, startWeekday) {
+  if (!minDate || !maxDate) return [];
+
+  const rangeMin = new Date(minDate);
+  rangeMin.setHours(0, 0, 0, 0);
+  const rangeMax = new Date(maxDate);
+  rangeMax.setHours(0, 0, 0, 0);
+
+  const entryMap = new Map();
+  entries.forEach((entry) => {
+    entryMap.set(formatDateKey(entry.date), entry);
+  });
+
+  const weeks = [];
+  let cursor = alignToStartOfWeek(rangeMin, startWeekday);
+
+  while (cursor <= rangeMax) {
+    const week = [];
+    for (let i = 0; i < 7; i += 1) {
+      const day = new Date(cursor);
+      day.setDate(cursor.getDate() + i);
+      day.setHours(0, 0, 0, 0);
+      const key = formatDateKey(day);
+      const entry = entryMap.get(key);
+      week.push({
+        date: day,
+        count: entry?.count ?? 0,
+        level: entry?.level ?? 0,
+        inRange: day >= rangeMin && day <= rangeMax,
+      });
+    }
+    weeks.push(week);
+    cursor = new Date(cursor);
+    cursor.setDate(cursor.getDate() + 7);
+  }
+
+  return weeks;
+}
+
+function ContributionHeatmap({
+  username,
+  entries: providedEntries,
+  heatmapColor = "blue",
+  showMonthLabels = true,
+  weekdayLabel = "none", // reserved for future use
+  splittedMonthView = false, // kept for API parity
+  showCellDate = false,
+  startWeekday = 1,
+  cellRadius = 0,
+  cellSize = 18,
+  minDate,
+  maxDate = new Date(),
+  onCellTap,
+}) {
+  const [entries, setEntries] = useState(() => normalizeEntries(providedEntries ?? [], minDate, maxDate));
+  const [status, setStatus] = useState(providedEntries?.length ? "ready" : "loading");
+
+  useEffect(() => {
+    if (providedEntries?.length) {
+      setEntries(normalizeEntries(providedEntries, minDate, maxDate));
+      setStatus("ready");
+      return;
+    }
+
+    if (!username) return;
+
+    let cancelled = false;
+    const controller = new AbortController();
+
+    const load = async () => {
+      setStatus("loading");
+      try {
+        const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`, {
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error(`Failed to load contributions (${response.status})`);
+        const payload = await response.json();
+        const normalized = normalizeEntries(payload.contributions ?? [], minDate, maxDate);
+        if (!cancelled) {
+          setEntries(normalized);
+          setStatus("ready");
+        }
+      } catch (error) {
+        if (cancelled || error.name === "AbortError") return;
+        console.error("Failed to load contributions", error);
+        setEntries([]);
+        setStatus("error");
+      }
+    };
+
+    load();
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [providedEntries, username, minDate, maxDate]);
+
+  const colorScale = HEATMAP_COLORS[heatmapColor] ?? HEATMAP_COLORS.blue;
+  const columnGap = 4;
+
+  const weeks = useMemo(
+    () => buildWeeks(entries, minDate, maxDate, startWeekday),
+    [entries, minDate, maxDate, startWeekday]
+  );
+
+  const total = entries.reduce((sum, entry) => sum + entry.count, 0);
+  const startLabel = minDate
+    ? minDate.toLocaleDateString("en", { month: "short", day: "numeric", year: "numeric" })
+    : "";
+
+  const statusLabel =
+    status === "loading"
+      ? "Loading contributions..."
+      : status === "error"
+        ? "Could not load contributions"
+        : `${total} contributions since ${startLabel}`;
+
+  return (
+    <div
+      className="heatmap-shell"
+      data-weekday-label={weekdayLabel}
+      data-splitted-month-view={splittedMonthView ? "true" : "false"}
+      style={{
+        "--heatmap-cell-size": `${cellSize}px`,
+        "--heatmap-cell-radius": `${cellRadius}px`,
+      }}
+    >
+      {showMonthLabels && weeks.length ? (
+        <div
+          className="heatmap-months"
+          style={{
+            gridTemplateColumns: `repeat(${weeks.length}, ${cellSize}px)`,
+            columnGap: `${columnGap}px`,
+          }}
+        >
+          {weeks.map((week, idx) => {
+            const weekStartDate = week[0]?.date;
+            const prevStartDate = weeks[idx - 1]?.[0]?.date;
+            const shouldLabel =
+              weekStartDate && (!prevStartDate || weekStartDate.getMonth() !== prevStartDate.getMonth());
+            return shouldLabel ? (
+              <span key={`month-${idx}`} style={{ gridColumnStart: idx + 1 }}>
+                {MONTH_NAMES[weekStartDate.getMonth()]}
+              </span>
+            ) : null;
+          })}
+        </div>
+      ) : null}
+      <div className="heatmap-grid" style={{ columnGap: `${columnGap}px` }}>
+        {weeks.map((week, weekIdx) => (
+          <div key={`week-${weekIdx}`} className="heatmap-week" style={{ rowGap: `${columnGap}px` }}>
+            {week.map((day, dayIdx) => {
+              const color = day.inRange ? colorScale[Math.min(colorScale.length - 1, day.level)] : "transparent";
+              const label = `${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date.toLocaleDateString()}`;
+              return (
+                <button
+                  type="button"
+                  key={`day-${weekIdx}-${dayIdx}`}
+                  className={`heatmap-day ${day.inRange ? "" : "heatmap-day--outside"}`}
+                  style={{
+                    backgroundColor: day.inRange ? color : "transparent",
+                    borderColor: day.inRange && day.level > 0 ? color : "var(--border)",
+                    color: showCellDate ? "#0f172a" : "transparent",
+                  }}
+                  aria-label={label}
+                  title={label}
+                  onClick={() => {
+                    if (onCellTap) onCellTap(day.date, day.count);
+                  }}
+                >
+                  {showCellDate && day.inRange ? day.date.getDate() : null}
+                </button>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+      <div className="heatmap-meta">
+        <span className="muted small">{statusLabel}</span>
+      </div>
+    </div>
+  );
+}
 
 const PAGES = ["home", "projects", "papers", "experience"];
 
@@ -296,19 +410,47 @@ export default function App() {
   const [page, setPage] = useState("home");
   const copy = translations[language] ?? translations.en;
 
-  const localizedProjects = BASE_PROJECTS.map((project) => {
-    const override = copy.projects?.[project.id] ?? {};
-    return { ...project, title: override.title ?? project.title, summary: override.summary ?? project.summary };
+  const heatmapProps = useMemo(
+    () => ({
+      ...heatmapConfig,
+      minDate: heatmapConfig.minDate ?? new Date(2025, 5, 14),
+      maxDate: heatmapConfig.maxDate ?? new Date(),
+    }),
+    []
+  );
+
+  const localizedProjects = PROJECTS_CONTENT.map((project) => {
+    const projectTranslations = project.translations ?? {};
+    const locale = projectTranslations[language] ?? projectTranslations.en ?? {};
+    return {
+      id: project.id,
+      tech: project.tech ?? [],
+      links: project.links ?? {},
+      title: locale.title ?? projectTranslations.en?.title ?? project.title ?? "",
+      summary: locale.summary ?? projectTranslations.en?.summary ?? project.summary ?? "",
+    };
   });
 
-  const localizedPapers = BASE_PAPERS.map((paper) => {
-    const override = copy.papers?.[paper.id] ?? {};
-    return { ...paper, title: override.title ?? paper.title, summary: override.summary ?? paper.summary };
+  const localizedPapers = PAPERS_CONTENT.map((paper) => {
+    const paperTranslations = paper.translations ?? {};
+    const locale = paperTranslations[language] ?? paperTranslations.en ?? {};
+    return {
+      id: paper.id,
+      status: locale.status ?? paperTranslations.en?.status ?? paper.status ?? "",
+      title: locale.title ?? paperTranslations.en?.title ?? paper.title ?? "",
+      summary: locale.summary ?? paperTranslations.en?.summary ?? paper.summary ?? "",
+    };
   });
 
-  const localizedExperience = BASE_EXPERIENCE.map((item) => {
-    const override = copy.experience?.[item.id] ?? {};
-    return { ...item, title: override.title ?? item.title, detail: override.detail ?? item.detail };
+  const localizedExperience = EXPERIENCE_CONTENT.map((item) => {
+    const experienceTranslations = item.translations ?? {};
+    const locale = experienceTranslations[language] ?? experienceTranslations.en ?? {};
+    return {
+      id: item.id,
+      period: item.period,
+      title: locale.title ?? experienceTranslations.en?.title ?? item.title ?? "",
+      detail: locale.detail ?? experienceTranslations.en?.detail ?? item.detail ?? "",
+    };
   });
 
   const renderHome = () => (
@@ -321,7 +463,15 @@ export default function App() {
         </div>
         <div className="hero-aside">
           <p className="muted">{copy.githubTitle}</p>
-          <img className="heatmap" src={githubHeatmap} alt="GitHub heatmap" referrerpolicy="no-referrer" />
+          <ContributionHeatmap
+            {...heatmapProps}
+            username="Martonveghcode"
+            onCellTap={(date, value) => {
+              if (typeof heatmapProps.onCellTap === "function") {
+                heatmapProps.onCellTap(date, value);
+              }
+            }}
+          />
         </div>
       </section>
 
@@ -381,9 +531,11 @@ export default function App() {
                     {copy.links.live}
                   </a>
                 ) : null}
-                <a href={project.links.github} target="_blank" rel="noreferrer">
-                  {copy.links.github}
-                </a>
+                {project.links.github ? (
+                  <a href={project.links.github} target="_blank" rel="noreferrer">
+                    {copy.links.github}
+                  </a>
+                ) : null}
               </div>
             </article>
           ))}
@@ -437,24 +589,29 @@ export default function App() {
 
   return (
     <div className="page">
-      <Nav
-        language={language}
-        onLanguageChange={setLanguage}
-        page={page}
-        onNavigate={setPage}
-        copy={copy}
-      />
+      <Nav language={language} onLanguageChange={setLanguage} page={page} onNavigate={setPage} copy={copy} />
       {renderPage()}
       <footer className="footer">
         <div className="footer-info">
           <span>Marton Vegh</span>
           <span>Mallorca, Spain</span>
-          <span>Email: <a href="mailto:martonvegh2009@gmail.com">martonvegh2009@gmail.com</a></span>
-          <span>GitHub: <a href="https://github.com/Martonveghcode" target="_blank" rel="noreferrer">github.com/Martonveghcode</a></span>
+          <span>
+            Email: <a href="mailto:martonvegh2009@gmail.com">martonvegh2009@gmail.com</a>
+          </span>
+          <span>
+            GitHub:{" "}
+            <a href="https://github.com/Martonveghcode" target="_blank" rel="noreferrer">
+              github.com/Martonveghcode
+            </a>
+          </span>
         </div>
         <div className="footer-social">
-          <a href="https://www.instagram.com/marton.alt" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://github.com/Martonveghcode" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.instagram.com/marton.alt" target="_blank" rel="noreferrer">
+            Instagram
+          </a>
+          <a href="https://github.com/Martonveghcode" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
         </div>
       </footer>
     </div>
