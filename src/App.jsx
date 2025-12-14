@@ -321,7 +321,7 @@ export default function App() {
         </div>
         <div className="hero-aside">
           <p className="muted">{copy.githubTitle}</p>
-          <img className="heatmap" src={githubHeatmap} alt="GitHub heatmap" />
+          <img className="heatmap" src={githubHeatmap} alt="GitHub heatmap" referrerpolicy="no-referrer" />
         </div>
       </section>
 
