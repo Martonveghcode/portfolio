@@ -77,7 +77,6 @@ a:hover { text-decoration: underline; }
   grid-template-columns: 1.2fr 1fr;
   gap: 24px;
   padding: 18px 0 8px;
-  border-bottom: 1px solid var(--border);
 }
 
 .hero-text h1 { margin: 6px 0 10px; font-size: clamp(32px, 4vw, 48px); }
@@ -167,7 +166,7 @@ a:hover { text-decoration: underline; }
 .section { padding: 8px 0 0; }
 .section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .section-head h2 { margin: 0; font-size: 20px; }
-.divider { flex: 1; height: 1px; background: var(--border); }
+.divider { display: none; }
 
 .menu { display: flex; flex-wrap: wrap; gap: 10px; }
 .menu-item {
