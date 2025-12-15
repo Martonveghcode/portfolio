@@ -424,6 +424,7 @@ export default function App() {
     const locale = projectTranslations[language] ?? projectTranslations.en ?? {};
     return {
       id: project.id,
+      image: project.image ?? { src: "", alt: "" },
       tech: project.tech ?? [],
       links: project.links ?? {},
       title: locale.title ?? projectTranslations.en?.title ?? project.title ?? "",
@@ -519,8 +520,13 @@ export default function App() {
       <Section title={copy.projectsTitle}>
         <div className="list">
           {localizedProjects.map((project) => (
-            <article key={project.id} className="list-row">
-              <div>
+            <article key={project.id} className="list-row project-row">
+              {project.image?.src ? (
+                <div className="project-thumb">
+                  <img src={project.image.src} alt={project.image.alt || project.title} loading="lazy" />
+                </div>
+              ) : null}
+              <div className="project-body">
                 <p className="muted small">{project.tech.join(" / ")}</p>
                 <h3>{project.title}</h3>
                 <p className="muted">{project.summary}</p>

@@ -9,6 +9,10 @@ export const PROJECTS_CONTENT = [
       github: "https://github.com/Martonveghcode/calendar",
       live: "https://glittery-blini-4c6ea4.netlify.app",
     },
+    image: {
+      src: "https://placehold.co/640x360?text=Homework+Calendar",
+      alt: "Placeholder preview for Homework Calendar",
+    },
     translations: {
       en: { title: "Homework Calendar", summary: "Auto-assigns homework to class dates to avoid missed deadlines." },
       es: { title: "Homework Calendar", summary: "Asigna tareas a fechas de clase para evitar retrasos." },
@@ -21,6 +25,10 @@ export const PROJECTS_CONTENT = [
     tech: ["Python", "Imaging"],
     links: {
       github: "https://github.com/Martonveghcode/Handwriting-formatting-pipeline",
+    },
+    image: {
+      src: "https://placehold.co/640x360?text=Handwriting+Pipeline",
+      alt: "Placeholder preview for Handwriting Formatting Pipeline",
     },
     translations: {
       en: { title: "Handwriting Formatting Pipeline", summary: "Cleans scanned notes, removes lines, and formats pages." },
@@ -35,6 +43,10 @@ export const PROJECTS_CONTENT = [
     links: {
       github: "https://github.com/Martonveghcode/Projects/tree/main/chef-claude",
     },
+    image: {
+      src: "https://placehold.co/640x360?text=Chef+Claude",
+      alt: "Placeholder preview for Chef-Claude",
+    },
     translations: {
       en: { title: "Chef-Claude", summary: "Ingredient-based recipe generator using Google APIs." },
       es: { title: "Chef-Claude", summary: "Generador de recetas segun ingredientes con APIs de Google." },
@@ -47,6 +59,10 @@ export const PROJECTS_CONTENT = [
     tech: ["React", "Content automation"],
     links: {
       github: "https://github.com/Martonveghcode/Projects/tree/main/react-blog",
+    },
+    image: {
+      src: "https://placehold.co/640x360?text=React+Blog",
+      alt: "Placeholder preview for React Blog",
     },
     translations: {
       en: { title: "React Blog", summary: "Blog that renders from data files without manual rebuilds." },
