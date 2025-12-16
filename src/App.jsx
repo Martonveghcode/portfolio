@@ -11,109 +11,164 @@ const LANGUAGE_OPTIONS = [
 
 const translations = {
   en: {
-    nav: { home: "Home", projects: "Projects", papers: "Papers", experience: "Experience" },
-    heroTagline: "16-year-old developer", // keep concise per request
-    heroSub: "Focused on practical builds and clean delivery.",
-    aboutTitle: "Who I am",
-    aboutBlurb:
-      "Student developer with strong math/physics base, learning fast by shipping real tools. Multilingual and comfortable explaining what I build.",
-    languagesTitle: "Languages",
-    languagesList: [
-      "Hungarian (native)",
-      "English (fluent)",
-      "Spanish (fluent)",
-      "French (B2)",
-      "Catalan (learning)",
-    ],
-    stackTitle: "What I use",
-    stackCoreLabel: "Core",
-    stackLearningLabel: "Learning",
-    passionsTitle: "Passions",
-    passionsList: ["Automation", "Productivity tooling", "Pure mathematics", "Canoe sprint & track"],
-    githubTitle: "GitHub heatmap",
-    projectsTitle: "Projects",
-    papersTitle: "Papers",
-    experienceTitle: "Experience",
-    links: { live: "Live", github: "GitHub" },
-  },
-  es: {
-    nav: { home: "Inicio", projects: "Proyectos", papers: "Papers", experience: "Experiencia" },
-    heroTagline: "Desarrollador de 16 anos",
-    heroSub: "Enfocado en proyectos practicos y entregas limpias.",
-    aboutTitle: "Quien soy",
-    aboutBlurb:
-      "Estudiante desarrollador con base fuerte en mates/fisica, aprendiendo rapido al lanzar herramientas reales. Multilingue y capaz de explicar lo que construyo.",
-    languagesTitle: "Idiomas",
-    languagesList: [
-      "Hungaro (nativo)",
-      "Ingles (fluido)",
-      "Espanol (fluido)",
-      "Frances (B2)",
-      "Catalan (en aprendizaje)",
-    ],
-    stackTitle: "Que uso",
-    stackCoreLabel: "Nucleo",
-    stackLearningLabel: "Aprendiendo",
-    passionsTitle: "Pasiones",
-    passionsList: ["Automatizacion", "Productividad", "Matematicas puras", "Piraguismo y atletismo"],
-    githubTitle: "Heatmap de GitHub",
-    projectsTitle: "Proyectos",
-    papersTitle: "Papers",
-    experienceTitle: "Experiencia",
-    links: { live: "Demo", github: "GitHub" },
-  },
-  fr: {
-    nav: { home: "Accueil", projects: "Projets", papers: "Papiers", experience: "Experience" },
-    heroTagline: "Developpeur de 16 ans",
-    heroSub: "Focalise sur des projets concrets et une livraison propre.",
-    aboutTitle: "Qui je suis",
-    aboutBlurb:
-      "Etudiant developpeur avec une base solide en maths/physique, qui apprend vite en livrant des outils reels. Multilingue et a l'aise pour expliquer ce que je construis.",
-    languagesTitle: "Langues",
-    languagesList: [
-      "Hongrois (natif)",
-      "Anglais (courant)",
-      "Espagnol (courant)",
-      "Francais (B2)",
-      "Catalan (en apprentissage)",
-    ],
-    stackTitle: "Ce que j'utilise",
-    stackCoreLabel: "Noyau",
-    stackLearningLabel: "En apprentissage",
-    passionsTitle: "Passions",
-    passionsList: ["Automatisation", "Outils de productivite", "Mathematiques pures", "Canoe-kayak et athletisme"],
-    githubTitle: "Heatmap GitHub",
-    projectsTitle: "Projets",
-    papersTitle: "Papiers",
-    experienceTitle: "Experience",
-    links: { live: "Demo", github: "GitHub" },
-  },
-  de: {
-    nav: { home: "Start", projects: "Projekte", papers: "Papers", experience: "Erfahrung" },
-    heroTagline: "16-jahriger Entwickler",
-    heroSub: "Fokus auf praktische Builds und klare Umsetzung.",
-    aboutTitle: "Wer ich bin",
-    aboutBlurb:
-      "Schuler-Entwickler mit starker Mathe/Physik-Basis, lernt schnell durch reale Tools. Mehrsprachig und kann erklaren, was ich baue.",
-    languagesTitle: "Sprachen",
-    languagesList: [
-      "Ungarisch (Muttersprache)",
-      "Englisch (flieáend)",
-      "Spanisch (flieáend)",
-      "Franzosisch (B2)",
-      "Katalanisch (lerne)",
-    ],
-    stackTitle: "Was ich nutze",
-    stackCoreLabel: "Kern",
-    stackLearningLabel: "Lerne",
-    passionsTitle: "Leidenschaften",
-    passionsList: ["Automatisierung", "Produktivitatstools", "Reine Mathematik", "Kanu und Leichtathletik"],
-    githubTitle: "GitHub-Heatmap",
-    projectsTitle: "Projekte",
-    papersTitle: "Papers",
-    experienceTitle: "Erfahrung",
-    links: { live: "Live", github: "GitHub" },
-  },
+  nav: { home: "Home", projects: "Projects", papers: "Papers", experience: "Experience", whoami: "Who Am I" },
+  heroTagline: "16 year-old developer",
+  heroSub: "Focused on practical solutions that solve real problems.",
+  aboutTitle: "Who I am",
+  aboutBlurb:
+    "Student developer studying in Spain with a passion for maths. Started programming recently by learning web design, moving onto more data-science oriented programming.",
+  languagesTitle: "Languages",
+  languagesList: [
+    "Hungarian (native)",
+    "English (fluent)",
+    "Spanish (fluent)",
+    "French (fluent)",
+    "Catalan (learning)",
+  ],
+  stackTitle: "What I use",
+  stackCoreLabel: "Core",
+  stackLearningLabel: "Learning",
+  passionsTitle: "Interests",
+  passionsList: [
+    "Automation",
+    "Classical art",
+    "Books",
+    "Pure mathematics",
+    "Programming and algorithms",
+    "Sports",
+  ],
+  githubTitle: "GitHub heatmap",
+  projectsTitle: "Projects",
+  papersTitle: "Papers",
+  experienceTitle: "Experience",
+  whoAmITitle: "Who Am I",
+  sportsAchievementsTitle: "Canoe sprint achievements",
+  links: { live: "Live", github: "GitHub" },
+},
+
+es: {
+  nav: { home: "Inicio", projects: "Proyectos", papers: "Papers", experience: "Experiencia", whoami: "Quien soy" },
+  heroTagline: "Desarrollador de 16 años",
+  heroSub: "Enfocado en soluciones prácticas que resuelven problemas reales.",
+  aboutTitle: "Quién soy",
+  aboutBlurb:
+    "Estudiante desarrollador que estudia en España con pasión por las matemáticas. Empezó a programar recientemente aprendiendo diseño web y pasando luego a programación más orientada a ciencia de datos.",
+  languagesTitle: "Idiomas",
+  languagesList: [
+    "Húngaro (nativo)",
+    "Inglés (fluido)",
+    "Español (fluido)",
+    "Francés (fluido)",
+    "Catalán (en aprendizaje)",
+  ],
+  stackTitle: "Qué uso",
+  stackCoreLabel: "Núcleo",
+  stackLearningLabel: "Aprendiendo",
+  passionsTitle: "Intereses",
+  passionsList: [
+    "Automatización",
+    "Arte clásico",
+    "Libros",
+    "Matemáticas puras",
+    "Programación y algoritmos",
+    "Deporte",
+  ],
+  githubTitle: "Heatmap de GitHub",
+  projectsTitle: "Proyectos",
+  papersTitle: "Papers",
+  experienceTitle: "Experiencia",
+  whoAmITitle: "Quien soy",
+  sportsAchievementsTitle: "Logros en piraguismo de velocidad",
+  links: { live: "Live", github: "GitHub" },
+},
+
+fr: {
+  nav: { home: "Accueil", projects: "Projets", papers: "Papiers", experience: "Expérience", whoami: "Qui je suis" },
+  heroTagline: "Développeur de 16 ans",
+  heroSub: "Axé sur des solutions pratiques qui résolvent de vrais problèmes.",
+  aboutTitle: "Qui je suis",
+  aboutBlurb:
+    "Étudiant développeur étudiant en Espagne avec une passion pour les mathématiques. A commencé la programmation récemment par le design web, puis s’est orienté vers une programmation plus axée sur la science des données.",
+  languagesTitle: "Langues",
+  languagesList: [
+    "Hongrois (natif)",
+    "Anglais (courant)",
+    "Espagnol (courant)",
+    "Français (courant)",
+    "Catalan (en apprentissage)",
+  ],
+  stackTitle: "Ce que j’utilise",
+  stackCoreLabel: "Noyau",
+  stackLearningLabel: "Apprentissage",
+  passionsTitle: "Intérêts",
+  passionsList: [
+    "Automatisation",
+    "Art classique",
+    "Livres",
+    "Mathématiques pures",
+    "Programmation et algorithmes",
+    "Sport",
+  ],
+  githubTitle: "Heatmap GitHub",
+  projectsTitle: "Projets",
+  papersTitle: "Papiers",
+  experienceTitle: "Expérience",
+  whoAmITitle: "Qui je suis",
+  sportsAchievementsTitle: "Palmares en canoe sprint",
+  links: { live: "Live", github: "GitHub" },
+},
+
+de: {
+  nav: { home: "Start", projects: "Projekte", papers: "Papers", experience: "Erfahrung", whoami: "Wer ich bin" },
+  heroTagline: "16-jähriger Entwickler",
+  heroSub: "Fokus auf praktische Lösungen, die reale Probleme lösen.",
+  aboutTitle: "Wer ich bin",
+  aboutBlurb:
+    "Schüler-Entwickler, der in Spanien studiert und eine Leidenschaft für Mathematik hat. Hat kürzlich mit dem Programmieren begonnen, zunächst mit Webdesign und später mit stärker datenwissenschaftlich orientierter Programmierung.",
+  languagesTitle: "Sprachen",
+  languagesList: [
+    "Ungarisch (Muttersprache)",
+    "Englisch (fließend)",
+    "Spanisch (fließend)",
+    "Französisch (fließend)",
+    "Katalanisch (lernend)",
+  ],
+  stackTitle: "Was ich nutze",
+  stackCoreLabel: "Kern",
+  stackLearningLabel: "Lernen",
+  passionsTitle: "Interessen",
+  passionsList: [
+    "Automatisierung",
+    "Klassische Kunst",
+    "Bücher",
+    "Reine Mathematik",
+    "Programmierung und Algorithmen",
+    "Sport",
+  ],
+  githubTitle: "GitHub-Heatmap",
+  projectsTitle: "Projekte",
+  papersTitle: "Papers",
+  experienceTitle: "Erfahrung",
+  whoAmITitle: "Wer ich bin",
+  sportsAchievementsTitle: "Erfolge im Kanusprint",
+  links: { live: "Live", github: "GitHub" },
+},
+
+
+};
+
+const WHO_AM_I_CONTENT = {
+  paragraphs: [
+    "Marton Vegh (born 2009-04-04). Born in Budapest and lived there for seven years before moving to Mallorca nine years ago.",
+    "Education: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-current). Lifelong into sports like swimming and football; started canoe sprint in 2018 for seven years and now training short- to medium-distance running (5k to 10k) without competing officially yet.",
+  ],
+  achievements: [
+    "23x Mallorca champion",
+    "8x Balearic champion",
+    "Champion of Spain east zone",
+    "1x 3rd in Spain (C1)",
+    "2x 3rd in Spain (C2)",
+  ],
 };
 
 const HEATMAP_COLORS = {
@@ -356,7 +411,7 @@ function ContributionHeatmap({
   );
 }
 
-const PAGES = ["home", "projects", "papers", "experience"];
+const PAGES = ["home", "projects", "papers", "experience", "whoami"];
 
 function Nav({ language, onLanguageChange, page, onNavigate, copy }) {
   return (
@@ -586,10 +641,35 @@ export default function App() {
     </main>
   );
 
+  const renderWhoAmI = () => (
+    <main className="layout single">
+      <Section title={copy.whoAmITitle ?? translations.en.whoAmITitle}>
+        <div className="grid two">
+          <div>
+            {WHO_AM_I_CONTENT.paragraphs.map((text, idx) => (
+              <p key={`whoami-text-${idx}`} className="muted">
+                {text}
+              </p>
+            ))}
+          </div>
+          <div>
+            <h3>{copy.sportsAchievementsTitle ?? translations.en.sportsAchievementsTitle}</h3>
+            <ul className="muted">
+              {WHO_AM_I_CONTENT.achievements.map((achievement) => (
+                <li key={achievement}>{achievement}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+    </main>
+  );
+
   const renderPage = () => {
     if (page === "projects") return renderProjects();
     if (page === "papers") return renderPapers();
     if (page === "experience") return renderExperience();
+    if (page === "whoami") return renderWhoAmI();
     return renderHome();
   };
 

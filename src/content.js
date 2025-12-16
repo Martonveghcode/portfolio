@@ -109,10 +109,23 @@ export const EXPERIENCE_CONTENT = [
     id: "rcnp",
     period: "2024",
     translations: {
-      en: { title: "Real Club Nautico de Palma - Intern", detail: "Event logistics and on-site team support." },
-      es: { title: "Real Club Nautico de Palma - Practicas", detail: "Logistica de eventos y apoyo en sitio." },
-      fr: { title: "Real Club Nautico de Palma - Stage", detail: "Logistique d'evenements et support sur site." },
-      de: { title: "Real Club Nautico de Palma - Praktikum", detail: "Event-Logistik und Support vor Ort." },
+      en: {
+  title: "Real Club Nautico de Palma - Intern",
+  detail: "Event logistics, on-site team support as well as monitoring of the racing team."
+},
+es: {
+  title: "Real Club Nautico de Palma - Practicas",
+  detail: "Logística de eventos, apoyo al equipo en sitio así como supervisión del equipo de regatas."
+},
+fr: {
+  title: "Real Club Nautico de Palma - Stage",
+  detail: "Logistique des événements, support de l’équipe sur site ainsi que le suivi de l’équipe de course."
+},
+de: {
+  title: "Real Club Nautico de Palma - Praktikum",
+  detail: "Eventlogistik, Unterstützung des Teams vor Ort sowie Überwachung des Rennteams."
+},
+
     },
   },
 ];
