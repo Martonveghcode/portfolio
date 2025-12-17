@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import { ColorUtils } from "react-color-palette-generator/src/utils/colorUtils";
+import { HARMONY_LABELS, HARMONY_TYPES, PALETTE_ROLES } from "react-color-palette-generator/src/utils/constants";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
 import heatmapConfig from "./heatmap";
 
@@ -177,6 +179,49 @@ const HEATMAP_COLORS = {
 };
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+const ROLE_LABELS = {
+  [PALETTE_ROLES.PRIMARY]: "Primary",
+  [PALETTE_ROLES.SECONDARY]: "Secondary",
+  [PALETTE_ROLES.ACCENT]: "Accent",
+  [PALETTE_ROLES.TEXT]: "Text",
+  [PALETTE_ROLES.BACKGROUND]: "Background",
+  [PALETTE_ROLES.SURFACE]: "Surface",
+};
+
+const DEFAULT_THEME_PALETTE = {
+  [PALETTE_ROLES.PRIMARY]: "#38bdf8",
+  [PALETTE_ROLES.SECONDARY]: "#7dd3fc",
+  [PALETTE_ROLES.ACCENT]: "#f1f2f4",
+  [PALETTE_ROLES.BACKGROUND]: "#0f1013",
+  [PALETTE_ROLES.SURFACE]: "#16181d",
+  [PALETTE_ROLES.TEXT]: "#f1f2f4",
+};
+
+function applyPaletteToDocument(palette) {
+  if (typeof document === "undefined") return;
+
+  const merged = { ...DEFAULT_THEME_PALETTE, ...palette };
+  const background = merged[PALETTE_ROLES.BACKGROUND];
+  const surface =
+    merged[PALETTE_ROLES.SURFACE] ??
+    ColorUtils.blendColors(background, merged[PALETTE_ROLES.PRIMARY], 0.15);
+  const primary = merged[PALETTE_ROLES.PRIMARY];
+  const accent = merged[PALETTE_ROLES.ACCENT] ?? primary;
+  const text = merged[PALETTE_ROLES.TEXT] ?? ColorUtils.getContrastColor(background, true);
+  const border = ColorUtils.blendColors(text, background, 0.8);
+  const muted = ColorUtils.blendColors(text, background, 0.6);
+  const strongPanel = ColorUtils.blendColors(surface, primary, 0.25);
+
+  const root = document.documentElement;
+  root.style.setProperty("--bg", background);
+  root.style.setProperty("--panel", surface);
+  root.style.setProperty("--panel-strong", strongPanel);
+  root.style.setProperty("--text", text);
+  root.style.setProperty("--muted", muted);
+  root.style.setProperty("--accent", accent);
+  root.style.setProperty("--border", border);
+}
 
 function formatDateKey(date) {
   const year = date.getFullYear();
@@ -460,10 +505,185 @@ function Section({ title, children }) {
   );
 }
 
+function ThemeLab({ palette, onApply }) {
+  const baseSeed = palette?.[PALETTE_ROLES.PRIMARY] ?? DEFAULT_THEME_PALETTE[PALETTE_ROLES.PRIMARY];
+  const [open, setOpen] = useState(false);
+  const [baseColor, setBaseColor] = useState(baseSeed);
+  const [baseInput, setBaseInput] = useState(baseSeed);
+  const [harmony, setHarmony] = useState(HARMONY_TYPES.TRIADIC);
+
+  useEffect(() => {
+    if (palette?.[PALETTE_ROLES.PRIMARY]) {
+      setBaseColor(palette[PALETTE_ROLES.PRIMARY]);
+      setBaseInput(palette[PALETTE_ROLES.PRIMARY]);
+    }
+  }, [palette]);
+
+  const draftPalette = useMemo(() => {
+    try {
+      return ColorUtils.generateHarmony(baseColor, harmony, true);
+    } catch {
+      return ColorUtils.getFallbackPalette(true);
+    }
+  }, [baseColor, harmony]);
+
+  const paletteEntries = useMemo(
+    () =>
+      [
+        PALETTE_ROLES.PRIMARY,
+        PALETTE_ROLES.SECONDARY,
+        PALETTE_ROLES.ACCENT,
+        PALETTE_ROLES.SURFACE,
+        PALETTE_ROLES.BACKGROUND,
+        PALETTE_ROLES.TEXT,
+      ]
+        .map((role) => ({ role, color: draftPalette?.[role] }))
+        .filter((entry) => entry.color),
+    [draftPalette]
+  );
+
+  const handleBaseInput = (value) => {
+    setBaseInput(value);
+    if (ColorUtils.isValidColor(value)) {
+      setBaseColor(value);
+    }
+  };
+
+  const handleApply = () => {
+    if (onApply) onApply(draftPalette);
+    setOpen(false);
+  };
+
+  const handleRandomize = () => {
+    const randomSeed = ColorUtils.generateRandomColor();
+    setBaseInput(randomSeed);
+    setBaseColor(randomSeed);
+  };
+
+  const safeColorValue = ColorUtils.isValidColor(baseInput)
+    ? baseInput
+    : DEFAULT_THEME_PALETTE[PALETTE_ROLES.PRIMARY];
+
+  return (
+    <div className="theme-lab">
+      <button
+        type="button"
+        className="theme-lab__toggle"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-expanded={open}
+        aria-controls="theme-lab-panel"
+        title="Open palette generator"
+      >
+        Palette
+      </button>
+
+      {open ? (
+        <>
+          <button
+            type="button"
+            className="theme-lab__backdrop"
+            aria-label="Close theme lab"
+            onClick={() => setOpen(false)}
+          />
+          <div className="theme-lab__panel" id="theme-lab-panel">
+            <div className="theme-lab__header">
+              <div>
+                <p className="small muted">Powered by react-color-palette-generator</p>
+                <h4 className="theme-lab__title">Theme lab</h4>
+              </div>
+              <button type="button" className="chip" onClick={() => setOpen(false)}>
+                Close
+              </button>
+            </div>
+
+            <div className="theme-lab__controls">
+              <label className="theme-lab__field">
+                <span>Base color</span>
+                <div className="theme-lab__inputs">
+                  <input
+                    type="color"
+                    value={safeColorValue}
+                    onChange={(event) => handleBaseInput(event.target.value)}
+                    aria-label="Pick base color"
+                  />
+                  <input
+                    type="text"
+                    value={baseInput}
+                    onChange={(event) => handleBaseInput(event.target.value)}
+                    className="theme-lab__text-input"
+                    spellCheck="false"
+                  />
+                </div>
+              </label>
+
+              <label className="theme-lab__field">
+                <span>Harmony</span>
+                <select
+                  value={harmony}
+                  onChange={(event) => setHarmony(event.target.value)}
+                  className="theme-lab__select"
+                >
+                  {Object.entries(HARMONY_LABELS).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <div className="theme-lab__actions">
+                <button type="button" className="chip" onClick={handleRandomize}>
+                  Shuffle
+                </button>
+                <button type="button" className="chip chip-active" onClick={handleApply}>
+                  Apply theme
+                </button>
+              </div>
+            </div>
+
+            <div className="theme-lab__swatches">
+              {paletteEntries.map(({ role, color }) => (
+                <div key={role} className="theme-lab__swatch">
+                  <div className="theme-lab__swatch-color" style={{ backgroundColor: color }} />
+                  <div className="theme-lab__swatch-meta">
+                    <span>{ROLE_LABELS[role] ?? role}</span>
+                    <span className="small muted">{color}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="theme-lab__footer muted small">
+              Applies primary, surface, background, border, muted and accent variables across the site.
+            </div>
+          </div>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
 export default function App() {
   const [language, setLanguage] = useState("en");
   const [page, setPage] = useState("home");
+  const [themePalette, setThemePalette] = useState(DEFAULT_THEME_PALETTE);
   const copy = translations[language] ?? translations.en;
+
+  useEffect(() => {
+    applyPaletteToDocument(themePalette);
+  }, [themePalette]);
+
+  const handleApplyTheme = (palette) => {
+    const mergedPalette = {
+      ...DEFAULT_THEME_PALETTE,
+      ...palette,
+      [PALETTE_ROLES.ACCENT]:
+        palette?.[PALETTE_ROLES.ACCENT] ??
+        palette?.[PALETTE_ROLES.PRIMARY] ??
+        DEFAULT_THEME_PALETTE[PALETTE_ROLES.ACCENT],
+    };
+    setThemePalette(mergedPalette);
+  };
 
   const heatmapProps = useMemo(
     () => ({
@@ -677,6 +897,7 @@ export default function App() {
     <div className="page">
       <Nav language={language} onLanguageChange={setLanguage} page={page} onNavigate={setPage} copy={copy} />
       {renderPage()}
+      <ThemeLab palette={themePalette} onApply={handleApplyTheme} />
       <footer className="footer">
         <div className="footer-info">
           <span>Marton Vegh</span>
