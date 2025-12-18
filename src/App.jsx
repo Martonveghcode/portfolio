@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ColorUtils } from "react-color-palette-generator/src/utils/colorUtils";
 import { HARMONY_LABELS, HARMONY_TYPES, PALETTE_ROLES } from "react-color-palette-generator/src/utils/constants";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
+import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
 
 const LANGUAGE_OPTIONS = [
@@ -44,6 +45,8 @@ const translations = {
   papersTitle: "Papers",
   experienceTitle: "Experience",
   whoAmITitle: "Who Am I",
+  favoriteBooksTitle: "My top 15 favourite books",
+  worstBooksTitle: "Top 3 worst books",
   sportsAchievementsTitle: "Canoe sprint achievements",
   links: { live: "Live", github: "GitHub" },
 },
@@ -80,6 +83,8 @@ es: {
   papersTitle: "Papers",
   experienceTitle: "Experiencia",
   whoAmITitle: "Quien soy",
+  favoriteBooksTitle: "Mis 15 libros favoritos",
+  worstBooksTitle: "Top 3 peores libros",
   sportsAchievementsTitle: "Logros en piraguismo de velocidad",
   links: { live: "Live", github: "GitHub" },
 },
@@ -116,6 +121,8 @@ fr: {
   papersTitle: "Papiers",
   experienceTitle: "Expérience",
   whoAmITitle: "Qui je suis",
+  favoriteBooksTitle: "Mes 15 livres preferes",
+  worstBooksTitle: "Top 3 pires livres",
   sportsAchievementsTitle: "Palmares en canoe sprint",
   links: { live: "Live", github: "GitHub" },
 },
@@ -152,25 +159,13 @@ de: {
   papersTitle: "Papers",
   experienceTitle: "Erfahrung",
   whoAmITitle: "Wer ich bin",
+  favoriteBooksTitle: "Meine Top 15 Lieblingsbucher",
+  worstBooksTitle: "Top 3 schlechteste Bucher",
   sportsAchievementsTitle: "Erfolge im Kanusprint",
   links: { live: "Live", github: "GitHub" },
 },
 
 
-};
-
-const WHO_AM_I_CONTENT = {
-  paragraphs: [
-    "Marton Vegh (born 2009-04-04). Born in Budapest and lived there for seven years before moving to Mallorca nine years ago.",
-    "Education: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-current). Lifelong into sports like swimming and football; started canoe sprint in 2018 for seven years and now training short- to medium-distance running (5k to 10k) without competing officially yet.",
-  ],
-  achievements: [
-    "23x Mallorca champion",
-    "8x Balearic champion",
-    "Champion of Spain east zone",
-    "1x 3rd in Spain (C1)",
-    "2x 3rd in Spain (C2)",
-  ],
 };
 
 const HEATMAP_COLORS = {
@@ -458,7 +453,7 @@ function ContributionHeatmap({
 
 const PAGES = ["home", "projects", "papers", "experience", "whoami"];
 
-function Nav({ language, onLanguageChange, page, onNavigate, copy }) {
+function Nav({ language, onLanguageChange, page, onNavigate, copy, paletteControl }) {
   return (
     <header className="topbar">
       <div className="identity">
@@ -488,16 +483,18 @@ function Nav({ language, onLanguageChange, page, onNavigate, copy }) {
             {option.label}
           </button>
         ))}
+        {paletteControl ? <div className="theme-slot">{paletteControl}</div> : null}
       </div>
     </header>
   );
 }
 
-function Section({ title, children }) {
+function Section({ title, children, aside }) {
   return (
     <section className="section">
       <div className="section-head">
         <h2>{title}</h2>
+        {aside ? <div className="section-aside">{aside}</div> : null}
         <div className="divider" />
       </div>
       {children}
@@ -729,6 +726,47 @@ export default function App() {
     };
   });
 
+  const localizedWhoAmI = useMemo(() => {
+    const whoAmITranslations = WHO_AM_I_CONTENT.translations ?? {};
+    const locale = whoAmITranslations[language] ?? whoAmITranslations.en ?? {};
+    const favoriteBooks = (WHO_AM_I_CONTENT.favoriteBooks ?? [])
+      .slice()
+      .sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0))
+      .map((book) => {
+        const bookTranslations = book.translations ?? {};
+        const bookLocale = bookTranslations[language] ?? bookTranslations.en ?? {};
+        return {
+          id: book.id,
+          rank: book.rank,
+          cover: book.cover ?? {},
+          title: bookLocale.title ?? bookTranslations.en?.title ?? "",
+          author: bookLocale.author ?? bookTranslations.en?.author ?? "",
+          note: bookLocale.note ?? bookTranslations.en?.note ?? "",
+        };
+      });
+    const worstBooks = (WHO_AM_I_CONTENT.worstBooks ?? [])
+      .slice()
+      .sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0))
+      .map((book) => {
+        const bookTranslations = book.translations ?? {};
+        const bookLocale = bookTranslations[language] ?? bookTranslations.en ?? {};
+        return {
+          id: book.id,
+          rank: book.rank,
+          cover: book.cover ?? {},
+          title: bookLocale.title ?? bookTranslations.en?.title ?? "",
+          author: bookLocale.author ?? bookTranslations.en?.author ?? "",
+          reason: bookLocale.reason ?? bookTranslations.en?.reason ?? "",
+        };
+      });
+    return {
+      paragraphs: locale.paragraphs ?? whoAmITranslations.en?.paragraphs ?? [],
+      achievements: locale.achievements ?? whoAmITranslations.en?.achievements ?? [],
+      favoriteBooks,
+      worstBooks,
+    };
+  }, [language]);
+
   const renderHome = () => (
     <main className="layout">
       <section className="hero">
@@ -863,23 +901,71 @@ export default function App() {
 
   const renderWhoAmI = () => (
     <main className="layout single">
-      <Section title={copy.whoAmITitle ?? translations.en.whoAmITitle}>
-        <div className="grid two">
-          <div>
-            {WHO_AM_I_CONTENT.paragraphs.map((text, idx) => (
-              <p key={`whoami-text-${idx}`} className="muted">
-                {text}
-              </p>
-            ))}
-          </div>
-          <div>
-            <h3>{copy.sportsAchievementsTitle ?? translations.en.sportsAchievementsTitle}</h3>
+      <div className="whoami-pair">
+        <Section title={copy.whoAmITitle ?? translations.en.whoAmITitle}>
+          {localizedWhoAmI.paragraphs.map((text, idx) => (
+            <p key={`whoami-text-${idx}`} className="muted">
+              {text}
+            </p>
+          ))}
+        </Section>
+
+        <Section title={copy.sportsAchievementsTitle ?? translations.en.sportsAchievementsTitle}>
+          <div className="achievements-block">
+            <div className="achievement-visual">
+              <img
+                src="https://placehold.co/220x150?text=Canoe+sprint"
+                alt="Canoe sprint placeholder"
+                loading="lazy"
+              />
+            </div>
             <ul className="muted">
-              {WHO_AM_I_CONTENT.achievements.map((achievement) => (
+              {localizedWhoAmI.achievements.map((achievement) => (
                 <li key={achievement}>{achievement}</li>
               ))}
             </ul>
           </div>
+        </Section>
+      </div>
+
+      <Section title={copy.favoriteBooksTitle ?? translations.en.favoriteBooksTitle}>
+        <div className="list">
+          {localizedWhoAmI.favoriteBooks.map((book) => (
+            <article key={book.id} className="list-row book-row">
+              {book.cover?.src ? (
+                <div className="book-thumb">
+                  <img src={book.cover.src} alt={book.cover.alt || book.title} loading="lazy" />
+                </div>
+              ) : null}
+              <div className="book-body">
+                <p className="muted small">#{book.rank ?? ""}</p>
+                <h3>{book.title}</h3>
+                {book.author ? <p className="muted">{book.author}</p> : null}
+                {book.note ? <p className="muted small">{book.note}</p> : null}
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section title={copy.worstBooksTitle ?? translations.en.worstBooksTitle}>
+        
+        <div className="list">
+          {localizedWhoAmI.worstBooks.map((book) => (
+            <article key={book.id} className="list-row book-row">
+              {book.cover?.src ? (
+                <div className="book-thumb">
+                  <img src={book.cover.src} alt={book.cover.alt || book.title} loading="lazy" />
+                </div>
+              ) : null}
+              <div className="book-body">
+                <p className="muted small">#{book.rank ?? ""}</p>
+                <h3>{book.title}</h3>
+                {book.author ? <p className="muted">{book.author}</p> : null}
+                {book.reason ? <p className="muted small">{book.reason}</p> : null}
+              </div>
+            </article>
+          ))}
         </div>
       </Section>
     </main>
@@ -895,9 +981,15 @@ export default function App() {
 
   return (
     <div className="page">
-      <Nav language={language} onLanguageChange={setLanguage} page={page} onNavigate={setPage} copy={copy} />
+      <Nav
+        language={language}
+        onLanguageChange={setLanguage}
+        page={page}
+        onNavigate={setPage}
+        copy={copy}
+        paletteControl={<ThemeLab palette={themePalette} onApply={handleApplyTheme} />}
+      />
       {renderPage()}
-      <ThemeLab palette={themePalette} onApply={handleApplyTheme} />
       <footer className="footer">
         <div className="footer-info">
           <span>Marton Vegh</span>
