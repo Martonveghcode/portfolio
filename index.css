@@ -359,3 +359,18 @@ a:hover { text-decoration: underline; }
   .project-row { grid-template-columns: 1fr; }
   .project-thumb { max-width: 100%; }
 }
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Internet Explorer 10+ */
+body {
+  -ms-overflow-style: none;
+}
