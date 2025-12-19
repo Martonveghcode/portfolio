@@ -71,6 +71,7 @@ a:hover { text-decoration: underline; }
 
 .layout { display: flex; flex-direction: column; gap: 28px; margin-top: 20px; }
 .layout.single { max-width: 900px; margin-left: auto; margin-right: auto; }
+.books-layout { max-width: min(1200px, 92vw); }
 
 .hero {
   display: grid;
@@ -181,6 +182,14 @@ a:hover { text-decoration: underline; }
 .grid.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 
 .list { display: flex; flex-direction: column; gap: 10px; }
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  width: min(80vw, 1200px);
+  max-width: 100%;
+  margin: 0 auto;
+}
 .list-row {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -204,17 +213,18 @@ a:hover { text-decoration: underline; }
 }
 
 .book-row {
-  grid-template-columns: 120px 1fr;
-  align-items: center;
-  gap: 14px;
+  grid-template-columns: clamp(160px, 35vw, 216px) 1fr;
+  align-items: flex-start;
+  gap: 16px;
 }
 .book-thumb {
-  width: 120px;
-  max-width: 120px;
+  width: 100%;
 }
 .book-thumb img {
   width: 100%;
-  height: 170px;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  max-height: 340px;
   object-fit: cover;
   display: block;
   border: 1px solid var(--border);
@@ -358,6 +368,15 @@ a:hover { text-decoration: underline; }
   .hero { grid-template-columns: 1fr; }
   .project-row { grid-template-columns: 1fr; }
   .project-thumb { max-width: 100%; }
+}
+
+@media (max-width: 520px) {
+  .books-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  .book-row { grid-template-columns: 1fr; }
+  .book-thumb { max-width: 260px; margin: 0 auto; }
 }
 
 /* Chrome, Edge, Safari */

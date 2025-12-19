@@ -900,7 +900,7 @@ export default function App() {
   );
 
   const renderWhoAmI = () => (
-    <main className="layout single">
+    <main className="layout single books-layout">
       <div className="whoami-pair">
         <Section title={copy.whoAmITitle ?? translations.en.whoAmITitle}>
           {localizedWhoAmI.paragraphs.map((text, idx) => (
@@ -914,7 +914,7 @@ export default function App() {
           <div className="achievements-block">
             <div className="achievement-visual">
               <img
-                src="https://placehold.co/220x150?text=Canoe+sprint"
+                src="https://i.ibb.co/PZmb2gTS/Whats-App-Image-2025-12-19-at-10-48-27.jpg"
                 alt="Canoe sprint placeholder"
                 loading="lazy"
               />
@@ -929,7 +929,7 @@ export default function App() {
       </div>
 
       <Section title={copy.favoriteBooksTitle ?? translations.en.favoriteBooksTitle}>
-        <div className="list">
+        <div className="list books-grid">
           {localizedWhoAmI.favoriteBooks.map((book) => (
             <article key={book.id} className="list-row book-row">
               {book.cover?.src ? (
@@ -950,7 +950,7 @@ export default function App() {
 
       <Section title={copy.worstBooksTitle ?? translations.en.worstBooksTitle}>
         
-        <div className="list">
+        <div className="list books-grid">
           {localizedWhoAmI.worstBooks.map((book) => (
             <article key={book.id} className="list-row book-row">
               {book.cover?.src ? (
