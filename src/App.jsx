@@ -193,29 +193,167 @@ const DEFAULT_THEME_PALETTE = {
   [PALETTE_ROLES.TEXT]: "#f1f2f4",
 };
 
-function applyPaletteToDocument(palette) {
+const PATTERN_OPTIONS = [
+  { value: "none", label: "Solid" },
+  { value: "stripes", label: "Diagonal stripes" },
+  { value: "dots", label: "Soft dots" },
+  { value: "grid", label: "Grid" },
+  { value: "blobs", label: "Blurred blobs" },
+  { value: "hypnotic-2", label: "Hypnotic 2" },
+  { value: "waves", label: "Waves" },
+  { value: "spaghetti", label: "Spaghetti" },
+];
+
+const DEFAULT_BACKGROUND_PATTERN = {
+  pattern: "none",
+  colorA: "#1c1f25",
+  colorB: DEFAULT_THEME_PALETTE[PALETTE_ROLES.BACKGROUND],
+};
+
+function blend(color, other, amount) {
+  return ColorUtils.blendColors(color, other, amount);
+}
+
+function patternPalette(background, fallbackBg, primary) {
+  const baseBg = fallbackBg;
+  const isBlobs = background?.pattern === "blobs";
+
+  const main = ColorUtils.isValidColor(background?.colorA)
+    ? background.colorA
+    : isBlobs
+      ? blend(primary ?? baseBg, "#000000", 0.45)
+      : blend(baseBg, primary ?? baseBg, 0.22);
+
+  const accent = ColorUtils.isValidColor(background?.colorB)
+    ? background.colorB
+    : isBlobs
+      ? blend(baseBg, "#ffffff", 0.3)
+      : blend(baseBg, "#ffffff", 0.14);
+
+  const light = isBlobs ? blend(main, "#ffffff", 0.2) : blend(baseBg, "#ffffff", 0.32);
+  const white = "#ffffff";
+  const withAlpha = (color, alpha) => `color-mix(in srgb, ${color} ${Math.round(alpha * 100)}%, transparent)`;
+
+  return {
+    pattern: background?.pattern ?? "none",
+    main,
+    accent,
+    light,
+    white,
+    main50: withAlpha(main, 0.5),
+    main75: withAlpha(main, 0.75),
+    main30: withAlpha(main, 0.3),
+    main20: withAlpha(main, 0.2),
+    accent30: withAlpha(accent, 0.3),
+    accent50: withAlpha(accent, 0.5),
+    baseBg,
+  };
+}
+
+const PATTERN_BUILDERS = {
+  stripes: ({ main, accent }) => ({
+    image: `repeating-linear-gradient(135deg, ${main} 0, ${main} 12px, ${accent} 12px, ${accent} 24px), linear-gradient(${accent}, ${accent})`,
+    size: "auto",
+  }),
+  dots: ({ main, accent }) => ({
+    image: `radial-gradient(circle at 10px 10px, ${main} 0, ${main} 4px, #0000 5px), linear-gradient(${accent}, ${accent})`,
+    size: "28px 28px",
+  }),
+  grid: ({ main, accent }) => ({
+    image: `linear-gradient(${main} 1px, #0000 1px), linear-gradient(90deg, ${main} 1px, #0000 1px), linear-gradient(${accent}, ${accent})`,
+    size: "32px 32px",
+  }),
+  blobs: () => ({
+    image: "none",
+    size: "auto",
+    position: "0 0",
+    repeat: "repeat",
+  }),
+  "hypnotic-2": ({ main, accent }) => ({
+    image: `radial-gradient(64px at 100% 0, ${accent} 6.25%, ${main} 6.3% 18.75%, ${accent} 18.8% 31.25%, ${main} 31.3% 43.75%, ${accent} 43.8% 56.25%, ${main} 56.3% 68.75%, #0000 0), radial-gradient(64px at 0 0, ${accent} 6.25%, ${main} 6.3% 18.75%, ${accent} 18.8% 31.25%, ${main} 31.3% 43.75%, ${accent} 43.8% 56.25%, ${main} 56.3% 68.75%, #0000 0), radial-gradient(64px at 0 100%, ${accent} 6.25%, ${main} 6.3% 18.75%, ${accent} 18.8% 31.25%, ${main} 31.3% 43.75%, ${accent} 43.8% 56.25%, ${main} 56.3% 68.75%, #0000 0), radial-gradient(64px at 100% 100%, ${accent} 6.25%, ${main} 6.3% 18.75%, ${accent} 18.8% 31.25%, ${main} 31.3% 43.75%, ${accent} 43.8% 56.25%, ${main} 56.3% 68.75%, #0000 0), linear-gradient(${accent}, ${accent})`,
+    size: "64px 64px",
+  }),
+  waves: ({ main, accent }) => ({
+    image: `repeating-radial-gradient(circle at 0 0, transparent 0, ${accent} 32px), repeating-linear-gradient(${main}, ${main}), linear-gradient(${accent}, ${accent})`,
+    size: "auto",
+  }),
+  spaghetti: ({ main, main20, main30, main50, main75, accent, accent30 }) => ({
+    image: `radial-gradient(at bottom right, ${main} 0, ${main} 8px, ${main20} 8px, ${main20} 16px, ${main75} 16px, ${main75} 24px, ${main30} 24px, ${main30} 32px, ${main30} 32px, ${main30} 40px, ${main75} 40px, ${main75} 48px, ${main20} 48px, ${main20} 56px, transparent 56px, transparent 64px), radial-gradient(at top left, transparent 0, transparent 8px, ${main20} 8px, ${main20} 16px, ${main75} 16px, ${main75} 24px, ${main30} 24px, ${main30} 32px, ${main30} 32px, ${main30} 40px, ${main75} 40px, ${main75} 48px, ${main20} 48px, ${main20} 56px, ${main} 56px, ${main} 64px, transparent 64px, transparent 160px), linear-gradient(${accent30}, ${accent30})`,
+    size: "64px 64px, 64px 64px, auto",
+    repeat: "repeat",
+    blendMode: "multiply",
+  }),
+};
+
+function buildPatternStyles(background, fallbackBg, primary) {
+  const palette = patternPalette(background, fallbackBg, primary);
+  const builder = PATTERN_BUILDERS[palette.pattern];
+  if (!builder) return { image: "none", size: "auto", position: "0 0", repeat: "repeat" };
+  const result = builder(palette);
+  return {
+    image: result.image ?? "none",
+    size: result.size ?? "auto",
+    position: result.position ?? "0 0",
+    repeat: result.repeat ?? "repeat",
+    blendMode: result.blendMode ?? result.backgroundBlendMode ?? "normal",
+    colors: palette,
+  };
+}
+
+function applyPaletteToDocument(palette, backgroundPattern = DEFAULT_BACKGROUND_PATTERN) {
   if (typeof document === "undefined") return;
 
   const merged = { ...DEFAULT_THEME_PALETTE, ...palette };
-  const background = merged[PALETTE_ROLES.BACKGROUND];
+  const patternBaseColor =
+    ColorUtils.isValidColor(backgroundPattern?.colorB) && backgroundPattern?.colorB
+      ? backgroundPattern.colorB
+      : merged[PALETTE_ROLES.BACKGROUND];
+  const rawBackground = patternBaseColor ?? merged[PALETTE_ROLES.BACKGROUND];
+  const backgroundColor = blend(rawBackground, "#000000", 0.3);
   const surface =
-    merged[PALETTE_ROLES.SURFACE] ??
-    ColorUtils.blendColors(background, merged[PALETTE_ROLES.PRIMARY], 0.15);
+    merged[PALETTE_ROLES.SURFACE] ?? ColorUtils.blendColors(backgroundColor, merged[PALETTE_ROLES.PRIMARY], 0.15);
   const primary = merged[PALETTE_ROLES.PRIMARY];
   const accent = merged[PALETTE_ROLES.ACCENT] ?? primary;
-  const text = merged[PALETTE_ROLES.TEXT] ?? ColorUtils.getContrastColor(background, true);
-  const border = ColorUtils.blendColors(text, background, 0.8);
-  const muted = ColorUtils.blendColors(text, background, 0.6);
+  const text = merged[PALETTE_ROLES.TEXT] ?? ColorUtils.getContrastColor(backgroundColor, true);
+  const border = ColorUtils.blendColors(text, backgroundColor, 0.8);
+  const muted = ColorUtils.blendColors(text, backgroundColor, 0.6);
   const strongPanel = ColorUtils.blendColors(surface, primary, 0.25);
 
+  const patternStyles = buildPatternStyles(backgroundPattern, backgroundColor, primary);
+  const patternActive = backgroundPattern?.pattern && backgroundPattern.pattern !== "none";
+  const overlayOpacity =
+    patternActive && backgroundPattern?.pattern === "blobs"
+      ? 0.06
+      : patternActive
+        ? 0.35
+        : 0.14;
+  const overlay = overlayOpacity > 0 ? `linear-gradient(rgba(0,0,0,${overlayOpacity}), rgba(0,0,0,${overlayOpacity}))` : "none";
+
   const root = document.documentElement;
-  root.style.setProperty("--bg", background);
+  if (typeof document !== "undefined" && document.body) {
+    document.body.setAttribute("data-bg-pattern", backgroundPattern?.pattern ?? "none");
+  }
+
+  const blobMainComputed = patternStyles.colors?.main ?? primary ?? backgroundColor;
+  const blobAccentComputed = patternStyles.colors?.accent ?? accent;
+  const blobLightComputed = patternStyles.colors?.light ?? muted;
+
+  root.style.setProperty("--bg", backgroundColor);
   root.style.setProperty("--panel", surface);
   root.style.setProperty("--panel-strong", strongPanel);
   root.style.setProperty("--text", text);
   root.style.setProperty("--muted", muted);
   root.style.setProperty("--accent", accent);
   root.style.setProperty("--border", border);
+  root.style.setProperty("--bg-overlay-image", overlay);
+  root.style.setProperty("--bg-pattern-image", patternStyles.image ?? "none");
+  root.style.setProperty("--bg-pattern-size", patternStyles.size ?? "auto");
+  root.style.setProperty("--bg-pattern-position", patternStyles.position ?? "0 0");
+  root.style.setProperty("--bg-pattern-repeat", patternStyles.repeat ?? "repeat");
+  root.style.setProperty("--bg-pattern-blend", patternStyles.blendMode ?? "normal");
+  root.style.setProperty("--blob-main", blobMainComputed);
+  root.style.setProperty("--blob-accent", blobAccentComputed);
+  root.style.setProperty("--blob-light", blobLightComputed);
 }
 
 function formatDateKey(date) {
@@ -502,19 +640,33 @@ function Section({ title, children, aside }) {
   );
 }
 
-function ThemeLab({ palette, onApply }) {
+function ThemeLab({ palette, background, onApply }) {
   const baseSeed = palette?.[PALETTE_ROLES.PRIMARY] ?? DEFAULT_THEME_PALETTE[PALETTE_ROLES.PRIMARY];
   const [open, setOpen] = useState(false);
   const [baseColor, setBaseColor] = useState(baseSeed);
   const [baseInput, setBaseInput] = useState(baseSeed);
   const [harmony, setHarmony] = useState(HARMONY_TYPES.TRIADIC);
+  const [pattern, setPattern] = useState(background?.pattern ?? DEFAULT_BACKGROUND_PATTERN.pattern);
+  const [patternColorA, setPatternColorA] = useState(background?.colorA ?? DEFAULT_BACKGROUND_PATTERN.colorA);
+  const [patternColorB, setPatternColorB] = useState(background?.colorB ?? DEFAULT_BACKGROUND_PATTERN.colorB);
+  const [patternDirty, setPatternDirty] = useState(false);
 
   useEffect(() => {
     if (palette?.[PALETTE_ROLES.PRIMARY]) {
       setBaseColor(palette[PALETTE_ROLES.PRIMARY]);
       setBaseInput(palette[PALETTE_ROLES.PRIMARY]);
+      setPatternDirty(false);
     }
   }, [palette]);
+
+  useEffect(() => {
+    if (background) {
+      setPattern(background.pattern ?? DEFAULT_BACKGROUND_PATTERN.pattern);
+      setPatternColorA(background.colorA ?? DEFAULT_BACKGROUND_PATTERN.colorA);
+      setPatternColorB(background.colorB ?? DEFAULT_BACKGROUND_PATTERN.colorB);
+      setPatternDirty(false);
+    }
+  }, [background]);
 
   const draftPalette = useMemo(() => {
     try {
@@ -523,6 +675,39 @@ function ThemeLab({ palette, onApply }) {
       return ColorUtils.getFallbackPalette(true);
     }
   }, [baseColor, harmony]);
+
+  const softenedPalette = useMemo(() => {
+    const backgroundColor =
+      draftPalette?.[PALETTE_ROLES.BACKGROUND] ?? DEFAULT_THEME_PALETTE[PALETTE_ROLES.BACKGROUND];
+    const primaryColor = draftPalette?.[PALETTE_ROLES.PRIMARY] ?? DEFAULT_THEME_PALETTE[PALETTE_ROLES.PRIMARY];
+    const accentColor = draftPalette?.[PALETTE_ROLES.ACCENT] ?? primaryColor;
+    const tonedBackground = blend(backgroundColor, "#000000", 0.25);
+    const tonedSurface = blend(tonedBackground, primaryColor, 0.1);
+    const tonedAccent = blend(accentColor, "#ffffff", 0.12);
+    return {
+      ...draftPalette,
+      [PALETTE_ROLES.BACKGROUND]: tonedBackground,
+      [PALETTE_ROLES.SURFACE]: tonedSurface,
+      [PALETTE_ROLES.ACCENT]: tonedAccent,
+      [PALETTE_ROLES.TEXT]:
+        draftPalette?.[PALETTE_ROLES.TEXT] ?? ColorUtils.getContrastColor(tonedBackground, true),
+    };
+  }, [draftPalette]);
+
+  const derivedPatternColors = useMemo(() => {
+    const bg = softenedPalette?.[PALETTE_ROLES.BACKGROUND] ?? DEFAULT_THEME_PALETTE[PALETTE_ROLES.BACKGROUND];
+    const primary = softenedPalette?.[PALETTE_ROLES.PRIMARY] ?? DEFAULT_THEME_PALETTE[PALETTE_ROLES.PRIMARY];
+    return {
+      colorA: blend(bg, primary, 0.18),
+      colorB: blend(bg, "#000000", 0.12),
+    };
+  }, [softenedPalette]);
+
+  useEffect(() => {
+    if (patternDirty) return;
+    setPatternColorA(derivedPatternColors.colorA);
+    setPatternColorB(derivedPatternColors.colorB);
+  }, [derivedPatternColors, patternDirty]);
 
   const paletteEntries = useMemo(
     () =>
@@ -534,20 +719,31 @@ function ThemeLab({ palette, onApply }) {
         PALETTE_ROLES.BACKGROUND,
         PALETTE_ROLES.TEXT,
       ]
-        .map((role) => ({ role, color: draftPalette?.[role] }))
+        .map((role) => ({ role, color: softenedPalette?.[role] }))
         .filter((entry) => entry.color),
-    [draftPalette]
+    [softenedPalette]
   );
 
   const handleBaseInput = (value) => {
     setBaseInput(value);
+    setPatternDirty(false);
     if (ColorUtils.isValidColor(value)) {
       setBaseColor(value);
     }
   };
 
   const handleApply = () => {
-    if (onApply) onApply(draftPalette);
+    const resolvedPatternA = patternDirty ? patternColorA : derivedPatternColors.colorA;
+    const resolvedPatternB = patternDirty ? patternColorB : derivedPatternColors.colorB;
+    const safePatternA = ColorUtils.isValidColor(resolvedPatternA) ? resolvedPatternA : derivedPatternColors.colorA;
+    const safePatternB = ColorUtils.isValidColor(resolvedPatternB) ? resolvedPatternB : derivedPatternColors.colorB;
+
+    const backgroundPayload = {
+      pattern,
+      colorA: safePatternA,
+      colorB: safePatternB,
+    };
+    if (onApply) onApply({ palette: softenedPalette, background: backgroundPayload });
     setOpen(false);
   };
 
@@ -555,6 +751,25 @@ function ThemeLab({ palette, onApply }) {
     const randomSeed = ColorUtils.generateRandomColor();
     setBaseInput(randomSeed);
     setBaseColor(randomSeed);
+    setPatternDirty(false);
+  };
+
+  const handleRandomizePattern = () => {
+    const available = PATTERN_OPTIONS.map((option) => option.value);
+    const next = available[Math.floor(Math.random() * available.length)];
+    setPattern(next);
+  };
+
+  const handleRandomizePatternColors = () => {
+    setPatternColorA(ColorUtils.generateRandomColor());
+    setPatternColorB(ColorUtils.generateRandomColor());
+    setPatternDirty(true);
+  };
+
+  const handleRandomizeEverything = () => {
+    handleRandomize();
+    handleRandomizePattern();
+    handleRandomizePatternColors();
   };
 
   const safeColorValue = ColorUtils.isValidColor(baseInput)
@@ -628,9 +843,93 @@ function ThemeLab({ palette, onApply }) {
                 </select>
               </label>
 
+              <div className="theme-lab__background">
+                <div className="theme-lab__background-head">
+                  <span>Background pattern</span>
+                  <div className="theme-lab__mini-actions">
+                    <button type="button" className="chip" onClick={handleRandomizePattern}>
+                      Shuffle pattern
+                    </button>
+                    <button type="button" className="chip" onClick={handleRandomizePatternColors}>
+                      Shuffle colors
+                    </button>
+                  </div>
+                </div>
+
+                <label className="theme-lab__field">
+                  <span>Pattern style</span>
+                  <select
+                    value={pattern}
+                    onChange={(event) => setPattern(event.target.value)}
+                    className="theme-lab__select"
+                  >
+                    {PATTERN_OPTIONS.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <div className="theme-lab__background-grid">
+                  <label className="theme-lab__field">
+                    <span>Foreground</span>
+                    <div className="theme-lab__inputs">
+                      <input
+                        type="color"
+                        value={ColorUtils.isValidColor(patternColorA) ? patternColorA : DEFAULT_BACKGROUND_PATTERN.colorA}
+                        onChange={(event) => {
+                          setPatternDirty(true);
+                          setPatternColorA(event.target.value);
+                        }}
+                        aria-label="Pick pattern foreground color"
+                      />
+                      <input
+                        type="text"
+                        value={patternColorA}
+                        onChange={(event) => {
+                          setPatternDirty(true);
+                          setPatternColorA(event.target.value);
+                        }}
+                        className="theme-lab__text-input"
+                        spellCheck="false"
+                      />
+                    </div>
+                  </label>
+
+                  <label className="theme-lab__field">
+                    <span>Background</span>
+                    <div className="theme-lab__inputs">
+                      <input
+                        type="color"
+                        value={ColorUtils.isValidColor(patternColorB) ? patternColorB : DEFAULT_BACKGROUND_PATTERN.colorB}
+                        onChange={(event) => {
+                          setPatternDirty(true);
+                          setPatternColorB(event.target.value);
+                        }}
+                        aria-label="Pick pattern background color"
+                      />
+                      <input
+                        type="text"
+                        value={patternColorB}
+                        onChange={(event) => {
+                          setPatternDirty(true);
+                          setPatternColorB(event.target.value);
+                        }}
+                        className="theme-lab__text-input"
+                        spellCheck="false"
+                      />
+                    </div>
+                  </label>
+                </div>
+              </div>
+
               <div className="theme-lab__actions">
                 <button type="button" className="chip" onClick={handleRandomize}>
-                  Shuffle
+                  Shuffle palette
+                </button>
+                <button type="button" className="chip" onClick={handleRandomizeEverything}>
+                  Shuffle all
                 </button>
                 <button type="button" className="chip chip-active" onClick={handleApply}>
                   Apply theme
@@ -664,13 +963,16 @@ export default function App() {
   const [language, setLanguage] = useState("en");
   const [page, setPage] = useState("home");
   const [themePalette, setThemePalette] = useState(DEFAULT_THEME_PALETTE);
+  const [backgroundPattern, setBackgroundPattern] = useState(DEFAULT_BACKGROUND_PATTERN);
   const copy = translations[language] ?? translations.en;
 
   useEffect(() => {
-    applyPaletteToDocument(themePalette);
-  }, [themePalette]);
+    applyPaletteToDocument(themePalette, backgroundPattern);
+  }, [themePalette, backgroundPattern]);
 
-  const handleApplyTheme = (palette) => {
+  const handleApplyTheme = (payload) => {
+    const palette = payload?.palette ?? payload;
+    const background = payload?.background ?? backgroundPattern;
     const mergedPalette = {
       ...DEFAULT_THEME_PALETTE,
       ...palette,
@@ -679,7 +981,23 @@ export default function App() {
         palette?.[PALETTE_ROLES.PRIMARY] ??
         DEFAULT_THEME_PALETTE[PALETTE_ROLES.ACCENT],
     };
+    const baseBg = mergedPalette[PALETTE_ROLES.BACKGROUND] ?? DEFAULT_THEME_PALETTE[PALETTE_ROLES.BACKGROUND];
+    const basePrimary = mergedPalette[PALETTE_ROLES.PRIMARY] ?? DEFAULT_THEME_PALETTE[PALETTE_ROLES.PRIMARY];
+    const derivedColorA =
+      background?.colorA && ColorUtils.isValidColor(background.colorA)
+        ? background.colorA
+        : blend(baseBg, basePrimary, 0.18);
+    const derivedColorB =
+      background?.colorB && ColorUtils.isValidColor(background.colorB)
+        ? background.colorB
+        : blend(baseBg, "#000000", 0.12);
     setThemePalette(mergedPalette);
+    setBackgroundPattern({
+      ...DEFAULT_BACKGROUND_PATTERN,
+      ...background,
+      colorA: derivedColorA,
+      colorB: derivedColorB,
+    });
   };
 
   const heatmapProps = useMemo(
@@ -987,7 +1305,7 @@ export default function App() {
         page={page}
         onNavigate={setPage}
         copy={copy}
-        paletteControl={<ThemeLab palette={themePalette} onApply={handleApplyTheme} />}
+        paletteControl={<ThemeLab palette={themePalette} background={backgroundPattern} onApply={handleApplyTheme} />}
       />
       {renderPage()}
       <footer className="footer">

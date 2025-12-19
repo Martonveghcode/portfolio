@@ -13,7 +13,13 @@
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  background: var(--bg);
+  position: relative;
+  background-color: var(--bg);
+  background-image: var(--bg-overlay-image, none), var(--bg-pattern-image, none);
+  background-size: auto, var(--bg-pattern-size, auto);
+  background-position: 0 0, var(--bg-pattern-position, 0 0);
+  background-repeat: no-repeat, var(--bg-pattern-repeat, repeat);
+  background-blend-mode: normal, var(--bg-pattern-blend, normal);
   color: var(--text);
   font-family: "Space Grotesk", "Inter", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -361,6 +367,32 @@ a:hover { text-decoration: underline; }
 }
 .theme-lab__swatch-meta { display: flex; flex-direction: column; gap: 2px; font-weight: 700; }
 .theme-lab__footer { line-height: 1.4; }
+.theme-lab__background {
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.theme-lab__background-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.theme-lab__mini-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.theme-lab__background-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
 
 @media (max-width: 900px) {
   .topbar { grid-template-columns: 1fr; align-items: flex-start; }
@@ -392,4 +424,162 @@ html {
 /* Internet Explorer 10+ */
 body {
   -ms-overflow-style: none;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  z-index: -1;
+}
+
+body[data-bg-pattern="blobs"]::before {
+  opacity: 1;
+  inset: -145%;
+  rotate: -45deg;
+  background-image:
+    radial-gradient(4px 100px at 0px 235px, var(--blob-main, var(--accent)), #00000000),
+    radial-gradient(4px 100px at 300px 235px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 117.5px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 252px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 252px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 126px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 150px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 150px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 75px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 253px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 253px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 126.5px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 204px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 204px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 102px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 134px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 134px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 67px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 179px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 179px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 89.5px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 299px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 299px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 149.5px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 215px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 215px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 107.5px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 281px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 281px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 140.5px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 158px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 158px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 79px, var(--blob-accent, var(--accent)) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 210px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(4px 100px at 300px 210px, var(--blob-main, var(--accent)), #0000),
+    radial-gradient(3px 4px at 150px 105px, var(--blob-accent, var(--accent)) 100%, #0000 150%);
+  background-size:
+    300px 235px,
+    300px 235px,
+    300px 235px,
+    300px 252px,
+    300px 252px,
+    300px 252px,
+    300px 150px,
+    300px 150px,
+    300px 150px,
+    300px 253px,
+    300px 253px,
+    300px 253px,
+    300px 204px,
+    300px 204px,
+    300px 204px,
+    300px 134px,
+    300px 134px,
+    300px 134px,
+    300px 179px,
+    300px 179px,
+    300px 179px,
+    300px 299px,
+    300px 299px,
+    300px 299px,
+    300px 215px,
+    300px 215px,
+    300px 215px,
+    300px 281px,
+    300px 281px,
+    300px 281px,
+    300px 158px,
+    300px 158px,
+    300px 158px,
+    300px 210px,
+    300px 210px,
+    300px 210px;
+  animation: blob-lines 150s linear infinite;
+  z-index: -1;
+}
+
+body[data-bg-pattern="blobs"]::after {
+  opacity: 1;
+  inset: 0;
+  background-image: radial-gradient(circle at 50% 50%, #0000 0, #0000 2px, var(--blob-accent, #111) 2px);
+  background-size: 8px 8px;
+  background-repeat: repeat;
+  animation: blob-hue 5s ease-in-out infinite;
+  --blob-filter: blur(16px) brightness(0.92);
+  backdrop-filter: var(--blob-filter) hue-rotate(0deg);
+  -webkit-backdrop-filter: var(--blob-filter) hue-rotate(0deg);
+  filter: none;
+  z-index: -1;
+}
+
+@keyframes blob-hue {
+  0% { backdrop-filter: var(--blob-filter) hue-rotate(0deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(0deg); }
+  25% { backdrop-filter: var(--blob-filter) hue-rotate(-25deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(-25deg); }
+  28% { backdrop-filter: var(--blob-filter) hue-rotate(0deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(0deg); }
+  32% { backdrop-filter: var(--blob-filter) hue-rotate(-20deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(-20deg); }
+  39% { backdrop-filter: var(--blob-filter) hue-rotate(0deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(0deg); }
+  40% { backdrop-filter: var(--blob-filter) hue-rotate(-20deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(-20deg); }
+  41% { backdrop-filter: var(--blob-filter) hue-rotate(0deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(0deg); }
+  42% { backdrop-filter: var(--blob-filter) hue-rotate(-25deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(-25deg); }
+  44% { backdrop-filter: var(--blob-filter) hue-rotate(0deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(0deg); }
+  58% { backdrop-filter: var(--blob-filter) hue-rotate(-20deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(-20deg); }
+  64% { backdrop-filter: var(--blob-filter) hue-rotate(0deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(0deg); }
+  80% { backdrop-filter: var(--blob-filter) hue-rotate(-25deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(-25deg); }
+  100% { backdrop-filter: var(--blob-filter) hue-rotate(0deg); -webkit-backdrop-filter: var(--blob-filter) hue-rotate(0deg); }
+}
+
+@keyframes blob-lines {
+  0% {
+    background-position:
+      0px 220px, 3px 220px, 151.5px 337.5px,
+      25px 24px, 28px 24px, 176.5px 150px,
+      50px 16px, 53px 16px, 201.5px 91px,
+      75px 224px, 78px 224px, 226.5px 350.5px,
+      100px 19px, 103px 19px, 251.5px 121px,
+      125px 120px, 128px 120px, 276.5px 187px,
+      150px 31px, 153px 31px, 301.5px 120.5px,
+      175px 235px, 178px 235px, 326.5px 384.5px,
+      200px 121px, 203px 121px, 351.5px 228.5px,
+      225px 224px, 228px 224px, 376.5px 364.5px,
+      250px 26px, 253px 26px, 401.5px 105px,
+      275px 75px, 278px 75px, 426.5px 180px,
+      0 0;
+  }
+  100% {
+    background-position:
+      0px 6800px, 3px 6800px, 151.5px 6917.5px,
+      25px 13632px, 28px 13632px, 176.5px 13758px,
+      50px 5416px, 53px 5416px, 201.5px 5491px,
+      75px 17175px, 78px 17175px, 226.5px 17301.5px,
+      100px 5119px, 103px 5119px, 251.5px 5221px,
+      125px 8428px, 128px 8428px, 276.5px 8495px,
+      150px 9876px, 153px 9876px, 301.5px 9965.5px,
+      175px 13391px, 178px 13391px, 326.5px 13540.5px,
+      200px 14741px, 203px 14741px, 351.5px 14848.5px,
+      225px 18770px, 228px 18770px, 376.5px 18910.5px,
+      250px 5082px, 253px 5082px, 401.5px 5161px,
+      275px 6375px, 278px 6375px, 426.5px 6480px,
+      0 0;
+  }
 }
