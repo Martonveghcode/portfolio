@@ -19,7 +19,7 @@ const translations = {
   heroSub: "Focused on practical solutions that solve real problems.",
   aboutTitle: "Who I am",
   aboutBlurb:
-    "Student developer studying in Spain with a passion for maths. Started programming recently by learning web design, moving onto more data-science oriented programming.",
+    "Student developer studying in Spain with a passion for maths. Based in Mallorca. Started programming recently by learning web design, moving onto more data-science oriented programming.",
   languagesTitle: "Languages",
   languagesList: [
     "Hungarian (native)",

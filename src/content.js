@@ -10,7 +10,7 @@ export const PROJECTS_CONTENT = [
       live: "https://glittery-blini-4c6ea4.netlify.app",
     },
     image: {
-      src: "https://placehold.co/640x360?text=Homework+Calendar",
+      src: "https://i.ibb.co/V0PxFhQq/opera-Jdvu-X5-W9z5.png",
       alt: "Placeholder preview for Homework Calendar",
     },
     translations: {
@@ -27,7 +27,7 @@ export const PROJECTS_CONTENT = [
       github: "https://github.com/Martonveghcode/Handwriting-formatting-pipeline",
     },
     image: {
-      src: "https://placehold.co/640x360?text=Handwriting+Pipeline",
+      src: "https://i.ibb.co/4Rft0dM5/opera-a3d1-Myeaym.png",
       alt: "Placeholder preview for Handwriting Formatting Pipeline",
     },
     translations: {
@@ -44,7 +44,7 @@ export const PROJECTS_CONTENT = [
       github: "https://github.com/Martonveghcode/Projects/tree/main/chef-claude",
     },
     image: {
-      src: "https://placehold.co/640x360?text=Chef+Claude",
+      src: "https://i.ibb.co/p6BMMqXk/opera-4-Sda5hyj-XR.png",
       alt: "Placeholder preview for Chef-Claude",
     },
     translations: {
@@ -61,7 +61,7 @@ export const PROJECTS_CONTENT = [
       github: "https://github.com/Martonveghcode/Projects/tree/main/react-blog",
     },
     image: {
-      src: "https://placehold.co/640x360?text=React+Blog",
+      src: "https://i.ibb.co/dwdRFTdt/opera-Ano-Qlk-Av7-E.png",
       alt: "Placeholder preview for React Blog",
     },
     translations: {
