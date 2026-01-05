@@ -594,9 +594,6 @@ const PAGES = ["home", "projects", "papers", "experience", "whoami"];
 function Nav({ language, onLanguageChange, page, onNavigate, copy, paletteControl }) {
   return (
     <header className="topbar">
-      <div className="identity">
-        <p className="name">Marton Vegh</p>
-      </div>
       <nav className="nav-links">
         {PAGES.map((key) => (
           <button
@@ -624,9 +621,10 @@ function Nav({ language, onLanguageChange, page, onNavigate, copy, paletteContro
   );
 }
 
-function Section({ title, children, aside }) {
+function Section({ title, children, aside, className }) {
+  const sectionClass = className ? `section ${className}` : "section";
   return (
-    <section className="section">
+    <section className={sectionClass}>
       <div className="section-head">
         <h2>{title}</h2>
         {aside ? <div className="section-aside">{aside}</div> : null}
@@ -1027,6 +1025,7 @@ export default function App() {
       status: locale.status ?? paperTranslations.en?.status ?? paper.status ?? "",
       title: locale.title ?? paperTranslations.en?.title ?? paper.title ?? "",
       summary: locale.summary ?? paperTranslations.en?.summary ?? paper.summary ?? "",
+      link: locale.link ?? paperTranslations.en?.link ?? paper.link ?? "",
     };
   });
 
@@ -1084,29 +1083,31 @@ export default function App() {
 
   const renderHome = () => (
     <main className="layout">
-      <section className="hero">
-        <div className="hero-text">
-          <p className="muted">{copy.heroTagline}</p>
-          <h1>Marton Vegh</h1>
-          <p className="lede">{copy.heroSub}</p>
-        </div>
-        <div className="hero-aside">
-          <p className="muted">{copy.githubTitle}</p>
-          <ContributionHeatmap
-            {...heatmapProps}
-            username="Martonveghcode"
-            onCellTap={(date, value) => {
-              if (typeof heatmapProps.onCellTap === "function") {
-                heatmapProps.onCellTap(date, value);
-              }
-            }}
-          />
-        </div>
-      </section>
+      <div className="hero-stack">
+        <section className="hero">
+          <div className="hero-text">
+            <p className="muted">{copy.heroTagline}</p>
+            <h1>Marton Vegh</h1>
+            <p className="lede">{copy.heroSub}</p>
+          </div>
+          <div className="hero-aside">
+            <p className="muted">{copy.githubTitle}</p>
+            <ContributionHeatmap
+              {...heatmapProps}
+              username="Martonveghcode"
+              onCellTap={(date, value) => {
+                if (typeof heatmapProps.onCellTap === "function") {
+                  heatmapProps.onCellTap(date, value);
+                }
+              }}
+            />
+          </div>
+        </section>
 
-      <Section title={copy.aboutTitle}>
-        <p className="muted">{copy.aboutBlurb}</p>
-      </Section>
+        <Section title={copy.aboutTitle} className="section-box about-section">
+          <p className="muted">{copy.aboutBlurb}</p>
+        </Section>
+      </div>
 
       <Section title={copy.languagesTitle}>
         <div className="menu">
@@ -1146,7 +1147,7 @@ export default function App() {
   const renderProjects = () => (
     <main className="layout single">
       <Section title={copy.projectsTitle}>
-        <div className="list">
+        <div className="list projects-list">
           {localizedProjects.map((project) => (
             <article key={project.id} className="list-row project-row">
               {project.image?.src ? (
@@ -1188,6 +1189,13 @@ export default function App() {
                 <p className="muted small">{paper.status}</p>
                 <h3>{paper.title}</h3>
                 <p className="muted">{paper.summary}</p>
+                {paper.link ? (
+                  <p className="muted small">
+                    <a href={paper.link} target="_blank" rel="noreferrer">
+                      View paper
+                    </a>
+                  </p>
+                ) : null}
               </div>
             </article>
           ))}

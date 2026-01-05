@@ -77,21 +77,33 @@ export const PAPERS_CONTENT = [
   {
     id: "paper-1",
     translations: {
-      en: { title: "Paper slot #1", summary: "Placeholder for a research paper or essay (add PDF soon).", status: "Placeholder" },
-      es: { title: "Paper slot #1", summary: "Espacio reservado para un paper o ensayo (PDF pronto).", status: "Placeholder" },
-      fr: { title: "Paper slot #1", summary: "Emplacement reserve pour un papier ou essai (PDF bientot).", status: "Placeholder" },
-      de: { title: "Paper slot #1", summary: "Platzhalter fur Paper oder Essay (PDF bald).", status: "Placeholder" },
+      en: {
+        title: "Observer-Receiver Model",
+        summary: "Draft paper; full text available in the linked Google Doc.",
+        status: "Draft",
+        link: "https://docs.google.com/document/d/1WhN38fEUqHaLmpaMrAETql27EopbL355gEz_t12w-0Y/edit?usp=sharing",
+      },
+      es: {
+        title: "Observer-Receiver Model",
+        summary: "Borrador; texto completo en el Google Doc enlazado.",
+        status: "Borrador",
+        link: "https://docs.google.com/document/d/1WhN38fEUqHaLmpaMrAETql27EopbL355gEz_t12w-0Y/edit?usp=sharing",
+      },
+      fr: {
+        title: "Observer-Receiver Model",
+        summary: "Brouillon; texte complet dans le Google Doc lie.",
+        status: "Brouillon",
+        link: "https://docs.google.com/document/d/1WhN38fEUqHaLmpaMrAETql27EopbL355gEz_t12w-0Y/edit?usp=sharing",
+      },
+      de: {
+        title: "Observer-Receiver Model",
+        summary: "Entwurf; Volltext im verlinkten Google-Dokument.",
+        status: "Entwurf",
+        link: "https://docs.google.com/document/d/1WhN38fEUqHaLmpaMrAETql27EopbL355gEz_t12w-0Y/edit?usp=sharing",
+      },
     },
   },
-  {
-    id: "paper-2",
-    translations: {
-      en: { title: "Paper slot #2", summary: "Reserved for a future publication or writeup.", status: "Placeholder" },
-      es: { title: "Paper slot #2", summary: "Reservado para una futura publicacion o articulo.", status: "Placeholder" },
-      fr: { title: "Paper slot #2", summary: "Reserve pour une future publication ou article.", status: "Placeholder" },
-      de: { title: "Paper slot #2", summary: "Reserviert fur eine spateren Veroffentlichung.", status: "Placeholder" },
-    },
-  },
+  
 ];
 
 export const EXPERIENCE_CONTENT = [
@@ -129,5 +141,4 @@ de: {
     },
   },
 ];
-
 
