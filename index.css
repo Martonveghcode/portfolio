@@ -40,16 +40,6 @@ a:hover { text-decoration: underline; }
 }
 
 .identity { display: flex; align-items: center; gap: 12px; }
-.initials {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  background: var(--panel-strong);
-  border: 1px solid var(--border);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
 .name { margin: 0; font-weight: 700; font-size: 16px; }
 .small { font-size: 12px; }
 

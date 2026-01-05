@@ -205,9 +205,9 @@ const PATTERN_OPTIONS = [
 ];
 
 const DEFAULT_BACKGROUND_PATTERN = {
-  pattern: "none",
-  colorA: "#1c1f25",
-  colorB: DEFAULT_THEME_PALETTE[PALETTE_ROLES.BACKGROUND],
+  pattern: "blobs",
+  colorA: "#5200f5",
+  colorB: "#000000",
 };
 
 function blend(color, other, amount) {
@@ -595,10 +595,7 @@ function Nav({ language, onLanguageChange, page, onNavigate, copy, paletteContro
   return (
     <header className="topbar">
       <div className="identity">
-        <div className="initials">MV</div>
-        <div>
-          <p className="name">Marton Vegh</p>
-        </div>
+        <p className="name">Marton Vegh</p>
       </div>
       <nav className="nav-links">
         {PAGES.map((key) => (
@@ -1325,9 +1322,6 @@ export default function App() {
         <div className="footer-social">
           <a href="https://www.instagram.com/marton.alt" target="_blank" rel="noreferrer">
             Instagram
-          </a>
-          <a href="https://github.com/Martonveghcode" target="_blank" rel="noreferrer">
-            GitHub
           </a>
         </div>
       </footer>
