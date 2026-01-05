@@ -14,7 +14,11 @@ export const PROJECTS_CONTENT = [
       alt: "Placeholder preview for Homework Calendar",
     },
     translations: {
-      en: { title: "Homework Calendar", summary: "Auto-assigns homework to class dates to avoid missed deadlines." },
+      en: {
+        title: "Homework Calendar",
+        summary:
+          "Lesson Calendar is a Vite + React + Tailwind single-page app that helps students manage recurring lessons and push Class/Test/Homework events to Google Calendar.",
+      },
       es: { title: "Homework Calendar", summary: "Asigna tareas a fechas de clase para evitar retrasos." },
       fr: { title: "Homework Calendar", summary: "Assigne les devoirs aux dates de cours pour eviter les retards." },
       de: { title: "Homework Calendar", summary: "Ordnet Hausaufgaben automatisch Kurstagen zu, um Verzug zu vermeiden." },
@@ -31,7 +35,11 @@ export const PROJECTS_CONTENT = [
       alt: "Placeholder preview for Handwriting Formatting Pipeline",
     },
     translations: {
-      en: { title: "Handwriting Formatting Pipeline", summary: "Cleans scanned notes, removes lines, and formats pages." },
+      en: {
+        title: "Handwriting Formatting Pipeline",
+        summary:
+          'An extension/pipeline to "My Text in Your Handwriting" by Thaines. Includes text formatting, limited Unicode->ASCII support, a print-formatting pipeline, and training-data processing macros/utils, plus a recommended training sheet.',
+      },
       es: { title: "Handwriting Formatting Pipeline", summary: "Limpia notas escaneadas, quita lineas y maqueta paginas." },
       fr: { title: "Handwriting Formatting Pipeline", summary: "Nettoie des notes scannees, retire les lignes et met en page." },
       de: { title: "Handwriting Formatting Pipeline", summary: "Reinigt gescannte Notizen, entfernt Linien und formatiert Seiten." },
@@ -65,7 +73,11 @@ export const PROJECTS_CONTENT = [
       alt: "Placeholder preview for React Blog",
     },
     translations: {
-      en: { title: "React Blog", summary: "Blog that renders from data files without manual rebuilds." },
+      en: {
+        title: "React Blog",
+        summary:
+          "Travel journal-style blog rendered from a data file. Each entry shows an image, country, dates, text, and a link to Google Maps. A small exercise in mapping data into reusable entry components.",
+      },
       es: { title: "React Blog", summary: "Blog que se renderiza desde datos sin reconstruccion manual." },
       fr: { title: "React Blog", summary: "Blog rendu depuis des donnees sans reconstruction manuelle." },
       de: { title: "React Blog", summary: "Blog rendert aus Daten ohne manuelles Neuaufbauen." },
@@ -141,4 +153,3 @@ de: {
     },
   },
 ];
-

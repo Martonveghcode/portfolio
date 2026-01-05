@@ -66,6 +66,7 @@ a:hover { text-decoration: underline; }
 
 .layout { display: flex; flex-direction: column; gap: 28px; margin-top: 20px; }
 .layout.single { max-width: 900px; margin-left: auto; margin-right: auto; }
+.layout.single.projects-layout { max-width: min(1200px, 96vw); }
 .books-layout { max-width: min(1200px, 92vw); }
 
 .hero {
@@ -223,15 +224,22 @@ a:hover { text-decoration: underline; }
 .list-row h3 { margin: 4px 0 6px; }
 .links { display: flex; align-items: center; gap: 12px; }
 .project-row {
-  grid-template-columns: minmax(320px, 420px) 1fr 140px;
-  align-items: stretch;
+  grid-template-columns: minmax(420px, 620px) 1fr 140px;
+  align-items: center;
   gap: 18px;
   min-height: 260px;
 }
 .project-thumb {
   width: 100%;
-  max-width: 420px;
+  max-width: 620px;
   height: 100%;
+}
+.project-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  line-height: 1.5;
 }
 .project-thumb img {
   width: 100%;

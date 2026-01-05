@@ -168,6 +168,13 @@ de: {
 
 };
 
+const CV_LINKS = {
+  en: "https://docs.google.com/document/d/1ySTOOs4WWW-R1iwxHmrNS7cDCPykq0WpGquFvU6jHkg/edit?usp=sharing",
+  es: "https://docs.google.com/document/d/1CjebLBCKT-dVCapR6NFn3rT9jIjyMSaEpMWFKl__EDo/edit?usp=sharing",
+  fr: "https://docs.google.com/document/d/1ySTOOs4WWW-R1iwxHmrNS7cDCPykq0WpGquFvU6jHkg/edit?usp=sharing",
+  de: "https://docs.google.com/document/d/1ySTOOs4WWW-R1iwxHmrNS7cDCPykq0WpGquFvU6jHkg/edit?usp=sharing",
+};
+
 const HEATMAP_COLORS = {
   blue: ["#0d152c", "#1d4ed8", "#2563eb", "#38bdf8", "#7dd3fc"],
   green: ["#0b2f26", "#1f6f43", "#22c55e", "#4ade80", "#86efac"],
@@ -206,7 +213,7 @@ const PATTERN_OPTIONS = [
 
 const DEFAULT_BACKGROUND_PATTERN = {
   pattern: "blobs",
-  colorA: "#5200f5",
+  colorA: "#ffffff",
   colorB: "#000000",
 };
 
@@ -960,6 +967,7 @@ export default function App() {
   const [themePalette, setThemePalette] = useState(DEFAULT_THEME_PALETTE);
   const [backgroundPattern, setBackgroundPattern] = useState(DEFAULT_BACKGROUND_PATTERN);
   const copy = translations[language] ?? translations.en;
+  const cvLink = CV_LINKS[language] ?? CV_LINKS.en;
 
   useEffect(() => {
     applyPaletteToDocument(themePalette, backgroundPattern);
@@ -1145,7 +1153,7 @@ export default function App() {
   );
 
   const renderProjects = () => (
-    <main className="layout single">
+    <main className="layout single projects-layout">
       <Section title={copy.projectsTitle}>
         <div className="list projects-list">
           {localizedProjects.map((project) => (
@@ -1328,6 +1336,9 @@ export default function App() {
           </span>
         </div>
         <div className="footer-social">
+          <a href={cvLink} target="_blank" rel="noreferrer">
+            CV
+          </a>
           <a href="https://www.instagram.com/marton.alt" target="_blank" rel="noreferrer">
             Instagram
           </a>
