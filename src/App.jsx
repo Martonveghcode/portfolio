@@ -1318,7 +1318,6 @@ export default function App() {
         page={page}
         onNavigate={setPage}
         copy={copy}
-        paletteControl={<ThemeLab palette={themePalette} background={backgroundPattern} onApply={handleApplyTheme} />}
       />
       {renderPage()}
       <footer className="footer">
