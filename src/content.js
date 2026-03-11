@@ -46,41 +46,57 @@ export const PROJECTS_CONTENT = [
     },
   },
   {
-    id: "chef-claude",
-    tech: ["JavaScript", "APIs"],
-    links: {
-      github: "https://github.com/Martonveghcode/Projects/tree/main/chef-claude",
-    },
-    image: {
-      src: "https://i.ibb.co/p6BMMqXk/opera-4-Sda5hyj-XR.png",
-      alt: "Placeholder preview for Chef-Claude",
-    },
+    id: "portfolio-analytics-tool",
+    tech: ["Python", "yfinance", "NumPy", "Pandas", "SciPy", "Matplotlib"],
+    links: {},
     translations: {
-      en: { title: "Chef-Claude", summary: "Ingredient-based recipe generator using Google APIs." },
-      es: { title: "Chef-Claude", summary: "Generador de recetas segun ingredientes con APIs de Google." },
-      fr: { title: "Chef-Claude", summary: "Generateur de recettes selon les ingredients via les APIs Google." },
-      de: { title: "Chef-Claude", summary: "Rezeptgenerator nach Zutaten mit Google-APIs." },
+      en: {
+        title: "Portfolio Analytics Tool",
+        summary:
+          "Portfolio Analytics Tool is a Python script using yfinance, NumPy, Pandas, and SciPy that builds portfolios from share holdings and analyzes performance with Sharpe, Sortino, max drawdown, and beta vs SPY, while also generating an efficient frontier and optimized portfolios (max-Sharpe and minimum-variance) with matplotlib visualizations.",
+      },
+      es: {
+        title: "Portfolio Analytics Tool",
+        summary:
+          "Script en Python con yfinance, NumPy, Pandas y SciPy para construir carteras, analizar su rendimiento y generar frontera eficiente con optimizacion max-Sharpe y minima varianza.",
+      },
+      fr: {
+        title: "Portfolio Analytics Tool",
+        summary:
+          "Script Python avec yfinance, NumPy, Pandas et SciPy pour construire des portefeuilles, analyser les performances et tracer une frontiere efficiente avec optimisation max-Sharpe et variance minimale.",
+      },
+      de: {
+        title: "Portfolio Analytics Tool",
+        summary:
+          "Python-Skript mit yfinance, NumPy, Pandas und SciPy, das Portfolios aufbaut, Performance analysiert und eine effiziente Frontier mit Max-Sharpe- und Minimum-Varianz-Optimierung visualisiert.",
+      },
     },
   },
   {
-    id: "react-blog",
-    tech: ["React", "Content automation"],
-    links: {
-      github: "https://github.com/Martonveghcode/Projects/tree/main/react-blog",
-    },
-    image: {
-      src: "https://i.ibb.co/dwdRFTdt/opera-Ano-Qlk-Av7-E.png",
-      alt: "Placeholder preview for React Blog",
-    },
+    id: "grammar-trainer",
+    tech: ["Python", "Streamlit", "SQLite", "LLM"],
+    links: {},
     translations: {
       en: {
-        title: "React Blog",
+        title: "Grammar Trainer",
         summary:
-          "Travel journal-style blog rendered from a data file. Each entry shows an image, country, dates, text, and a link to Google Maps. A small exercise in mapping data into reusable entry components.",
+          "Valores del \"Se\" Trainer is a Streamlit (Python) app that generates Spanish sentences with LLMs to help students practice identifying the function and value of \"se\", providing instant feedback, explanations, and adaptive practice using SQLite-based performance tracking and personalized question generation.",
       },
-      es: { title: "React Blog", summary: "Blog que se renderiza desde datos sin reconstruccion manual." },
-      fr: { title: "React Blog", summary: "Blog rendu depuis des donnees sans reconstruction manuelle." },
-      de: { title: "React Blog", summary: "Blog rendert aus Daten ohne manuelles Neuaufbauen." },
+      es: {
+        title: "Grammar Trainer",
+        summary:
+          "App en Streamlit (Python) que genera frases en espanol con LLM para practicar la funcion y el valor de \"se\", con feedback instantaneo, explicaciones y practica adaptativa con seguimiento en SQLite.",
+      },
+      fr: {
+        title: "Grammar Trainer",
+        summary:
+          "Application Streamlit (Python) qui genere des phrases espagnoles via LLM pour pratiquer la fonction et la valeur de \"se\", avec feedback immediat, explications et suivi adapte base sur SQLite.",
+      },
+      de: {
+        title: "Grammar Trainer",
+        summary:
+          "Streamlit-App (Python), die mit LLM spanische Satze fur das Uben von Funktion und Wert von \"se\" erzeugt, mit sofortigem Feedback, Erklarungen und adaptivem Training via SQLite-Tracking.",
+      },
     },
   },
 ];

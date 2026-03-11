@@ -229,6 +229,10 @@ a:hover { text-decoration: underline; }
   gap: 18px;
   min-height: 260px;
 }
+.project-row--compact {
+  grid-template-columns: 1fr 140px;
+  min-height: auto;
+}
 .project-thumb {
   width: 100%;
   max-width: 620px;
@@ -281,11 +285,57 @@ a:hover { text-decoration: underline; }
   font-size: 18px;
 }
 
+.whoami-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 300px);
+  gap: 16px;
+  align-items: start;
+}
 .whoami-pair {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 16px;
   align-items: start;
+}
+.whoami-books-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.books-dropdown {
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+.books-dropdown summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 12px;
+  font-weight: 700;
+}
+.books-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+.books-dropdown summary::after {
+  content: "+";
+  float: right;
+  color: var(--muted);
+}
+.books-dropdown[open] summary::after {
+  content: "-";
+}
+.books-dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.books-dropdown-item p {
+  margin: 0;
+}
+.books-dropdown-title {
+  font-weight: 700;
 }
 .achievements-block {
   display: flex;
@@ -436,8 +486,10 @@ a:hover { text-decoration: underline; }
   .about-section { grid-column: 1; max-width: 100%; margin-top: -24px; }
   .hero { grid-template-columns: 1fr; }
   .project-row { grid-template-columns: 1fr; min-height: auto; }
+  .project-row--compact { grid-template-columns: 1fr; }
   .project-thumb { max-width: 100%; height: auto; }
   .project-thumb img { min-height: 0; height: auto; }
+  .whoami-shell { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {

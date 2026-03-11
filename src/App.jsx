@@ -1157,7 +1157,10 @@ export default function App() {
       <Section title={copy.projectsTitle}>
         <div className="list projects-list">
           {localizedProjects.map((project) => (
-            <article key={project.id} className="list-row project-row">
+            <article
+              key={project.id}
+              className={`list-row project-row ${project.image?.src ? "" : "project-row--compact"}`}
+            >
               {project.image?.src ? (
                 <div className="project-thumb">
                   <img src={project.image.src} alt={project.image.alt || project.title} loading="lazy" />
@@ -1232,73 +1235,66 @@ export default function App() {
 
   const renderWhoAmI = () => (
     <main className="layout single books-layout">
-      <div className="whoami-pair">
-        <Section title={copy.whoAmITitle ?? translations.en.whoAmITitle}>
-          {localizedWhoAmI.paragraphs.map((text, idx) => (
-            <p key={`whoami-text-${idx}`} className="muted">
-              {text}
-            </p>
-          ))}
-        </Section>
+      <div className="whoami-shell">
+        <div className="whoami-pair">
+          <Section title={copy.whoAmITitle ?? translations.en.whoAmITitle}>
+            {localizedWhoAmI.paragraphs.map((text, idx) => (
+              <p key={`whoami-text-${idx}`} className="muted">
+                {text}
+              </p>
+            ))}
+          </Section>
 
-        <Section title={copy.sportsAchievementsTitle ?? translations.en.sportsAchievementsTitle}>
-          <div className="achievements-block">
-            <div className="achievement-visual">
-              <img
-                src="https://i.ibb.co/PZmb2gTS/Whats-App-Image-2025-12-19-at-10-48-27.jpg"
-                alt="Canoe sprint placeholder"
-                loading="lazy"
-              />
+          <Section title={copy.sportsAchievementsTitle ?? translations.en.sportsAchievementsTitle}>
+            <div className="achievements-block">
+              <div className="achievement-visual">
+                <img
+                  src="https://i.ibb.co/PZmb2gTS/Whats-App-Image-2025-12-19-at-10-48-27.jpg"
+                  alt="Canoe sprint placeholder"
+                  loading="lazy"
+                />
+              </div>
+              <ul className="muted">
+                {localizedWhoAmI.achievements.map((achievement) => (
+                  <li key={achievement}>{achievement}</li>
+                ))}
+              </ul>
             </div>
-            <ul className="muted">
-              {localizedWhoAmI.achievements.map((achievement) => (
-                <li key={achievement}>{achievement}</li>
+          </Section>
+        </div>
+
+        <aside className="whoami-books-side">
+          <details className="books-dropdown">
+            <summary>{copy.favoriteBooksTitle ?? translations.en.favoriteBooksTitle}</summary>
+            <ul className="books-dropdown-list">
+              {localizedWhoAmI.favoriteBooks.map((book) => (
+                <li key={book.id} className="books-dropdown-item">
+                  <p className="books-dropdown-title">
+                    #{book.rank ?? ""} {book.title}
+                  </p>
+                  {book.author ? <p className="muted small">{book.author}</p> : null}
+                  {book.note ? <p className="muted small">{book.note}</p> : null}
+                </li>
               ))}
             </ul>
-          </div>
-        </Section>
+          </details>
+
+          <details className="books-dropdown">
+            <summary>{copy.worstBooksTitle ?? translations.en.worstBooksTitle}</summary>
+            <ul className="books-dropdown-list">
+              {localizedWhoAmI.worstBooks.map((book) => (
+                <li key={book.id} className="books-dropdown-item">
+                  <p className="books-dropdown-title">
+                    #{book.rank ?? ""} {book.title}
+                  </p>
+                  {book.author ? <p className="muted small">{book.author}</p> : null}
+                  {book.reason ? <p className="muted small">{book.reason}</p> : null}
+                </li>
+              ))}
+            </ul>
+          </details>
+        </aside>
       </div>
-
-      <Section title={copy.favoriteBooksTitle ?? translations.en.favoriteBooksTitle}>
-        <div className="list books-grid">
-          {localizedWhoAmI.favoriteBooks.map((book) => (
-            <article key={book.id} className="list-row book-row">
-              {book.cover?.src ? (
-                <div className="book-thumb">
-                  <img src={book.cover.src} alt={book.cover.alt || book.title} loading="lazy" />
-                </div>
-              ) : null}
-              <div className="book-body">
-                <p className="muted small">#{book.rank ?? ""}</p>
-                <h3>{book.title}</h3>
-                {book.author ? <p className="muted">{book.author}</p> : null}
-                {book.note ? <p className="muted small">{book.note}</p> : null}
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section title={copy.worstBooksTitle ?? translations.en.worstBooksTitle}>
-        
-        <div className="list books-grid">
-          {localizedWhoAmI.worstBooks.map((book) => (
-            <article key={book.id} className="list-row book-row">
-              {book.cover?.src ? (
-                <div className="book-thumb">
-                  <img src={book.cover.src} alt={book.cover.alt || book.title} loading="lazy" />
-                </div>
-              ) : null}
-              <div className="book-body">
-                <p className="muted small">#{book.rank ?? ""}</p>
-                <h3>{book.title}</h3>
-                {book.author ? <p className="muted">{book.author}</p> : null}
-                {book.reason ? <p className="muted small">{book.reason}</p> : null}
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
     </main>
   );
 
