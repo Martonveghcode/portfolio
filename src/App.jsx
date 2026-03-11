@@ -1157,15 +1157,7 @@ export default function App() {
       <Section title={copy.projectsTitle}>
         <div className="list projects-list">
           {localizedProjects.map((project) => (
-            <article
-              key={project.id}
-              className={`list-row project-row ${project.image?.src ? "" : "project-row--compact"}`}
-            >
-              {project.image?.src ? (
-                <div className="project-thumb">
-                  <img src={project.image.src} alt={project.image.alt || project.title} loading="lazy" />
-                </div>
-              ) : null}
+            <article key={project.id} className="list-row project-row project-row--compact">
               <div className="project-body">
                 <p className="muted small">{project.tech.join(" / ")}</p>
                 <h3>{project.title}</h3>

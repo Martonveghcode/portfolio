@@ -7,7 +7,6 @@ export const PROJECTS_CONTENT = [
     tech: ["React", "Automation"],
     links: {
       github: "https://github.com/Martonveghcode/calendar",
-      live: "https://glittery-blini-4c6ea4.netlify.app",
     },
     image: {
       src: "https://i.ibb.co/V0PxFhQq/opera-Jdvu-X5-W9z5.png",
