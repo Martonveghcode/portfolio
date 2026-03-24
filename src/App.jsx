@@ -3,7 +3,7 @@ import ContributionHeatmap from "./ContributionHeatmap";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
-import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, STACK, translations } from "./siteData";
+import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
 function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggleTheme, cvLink, copy }) {
   return (
@@ -194,11 +194,9 @@ function BookCard({ book, detailKey }) {
   );
 }
 
-function HomePage({ copy, cvLink, heatmapProps, projects, papers, experience, whoAmI, onNavigate }) {
-  const highlightedProjects = projects.slice(0, 2);
-
+function HomePage({ copy, cvLink, heatmapProps, onNavigate }) {
   return (
-    <main className="site-main">
+    <main className="site-main site-main--home">
       <section className="hero">
         <div className="hero-card">
           <p className="eyebrow">{copy.heroTagline}</p>
@@ -223,81 +221,15 @@ function HomePage({ copy, cvLink, heatmapProps, projects, papers, experience, wh
 
         <div className="hero-rail">
           <article className="surface-card heatmap-card">
-            <SectionHeader eyebrow={copy.nav.home} title={copy.githubTitle} />
             <ContributionHeatmap
               {...heatmapProps}
               username={PROFILE.githubHandle}
+              cellSize={12}
               onCellTap={(date, value) => {
                 if (typeof heatmapProps.onCellTap === "function") heatmapProps.onCellTap(date, value);
               }}
             />
           </article>
-
-          <article className="surface-card stats-card">
-            <SectionHeader eyebrow={copy.aboutTitle} title={copy.whoAmITitle} />
-            <div className="stats-grid">
-              <div className="stat-block"><span className="small muted">{copy.projectsTitle}</span><strong>{projects.length}</strong></div>
-              <div className="stat-block"><span className="small muted">{copy.papersTitle}</span><strong>{papers.length}</strong></div>
-              <div className="stat-block"><span className="small muted">{copy.experienceTitle}</span><strong>{experience.length}</strong></div>
-              <div className="stat-block"><span className="small muted">{copy.favoriteBooksTitle}</span><strong>{whoAmI.favoriteBooks.length}</strong></div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="content-section">
-        <div className="overview-grid">
-          <article className="surface-card info-card">
-            <SectionHeader title={copy.languagesTitle} />
-            <div className="chip-list">
-              {copy.languagesList.map((item) => <span key={item} className="chip">{item}</span>)}
-            </div>
-          </article>
-
-          <article className="surface-card info-card">
-            <SectionHeader title={copy.stackTitle} />
-            <div className="stack-grid">
-              <div className="stack-block">
-                <p className="eyebrow">{copy.stackCoreLabel}</p>
-                <div className="chip-list">
-                  {STACK.core.map((item) => <span key={item} className="chip chip--mono">{item}</span>)}
-                </div>
-              </div>
-              <div className="stack-block">
-                <p className="eyebrow">{copy.stackLearningLabel}</p>
-                <div className="chip-list">
-                  {STACK.learning.map((item) => <span key={item} className="chip chip--mono">{item}</span>)}
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article className="surface-card info-card">
-            <SectionHeader title={copy.passionsTitle} />
-            <div className="chip-list">
-              {copy.passionsList.map((item) => <span key={item} className="chip">{item}</span>)}
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="content-section">
-        <SectionHeader eyebrow={copy.nav.projects} title={copy.projectsTitle} />
-        <div className="project-grid">
-          {highlightedProjects.map((project) => <ProjectCard key={project.id} project={project} copy={copy} compact />)}
-        </div>
-      </section>
-
-      <section className="content-section split-layout">
-        <div className="split-layout__column">
-          <SectionHeader eyebrow={copy.nav.papers} title={copy.papersTitle} />
-          <div className="text-card-list">
-            {papers.map((paper) => <PaperCard key={paper.id} paper={paper} copy={copy} />)}
-          </div>
-        </div>
-        <div className="split-layout__column">
-          <SectionHeader eyebrow={copy.nav.experience} title={copy.experienceTitle} />
-          <ExperienceTimeline items={experience} compact />
         </div>
       </section>
     </main>
@@ -493,10 +425,6 @@ export default function App() {
       copy={copy}
       cvLink={cvLink}
       heatmapProps={heatmapProps}
-      projects={localizedProjects}
-      papers={localizedPapers}
-      experience={localizedExperience}
-      whoAmI={localizedWhoAmI}
       onNavigate={setPage}
     />
   );
