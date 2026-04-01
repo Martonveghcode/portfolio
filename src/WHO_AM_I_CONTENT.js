@@ -2,8 +2,9 @@ export const WHO_AM_I_CONTENT = {
   translations: {
     en: {
       paragraphs: [
-        "Marton Vegh (born 2009-04-04). Born in Budapest and lived there for seven years before moving to Mallorca nine years ago.",
         "Education: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-current). Lifelong into sports like swimming and football; started canoe sprint in 2018 for seven years and now training short- to medium-distance running (5k to 10k) without competing officially yet.",
+        "I speak 5 languages fluently: Hungarian, English, Spanish, French and Catalan.",
+        "I have a passion for computer science, math, art, sports, books and politics.",
       ],
       achievements: [
         "23x Mallorca champion",
@@ -15,8 +16,9 @@ export const WHO_AM_I_CONTENT = {
     },
     es: {
       paragraphs: [
-        "Marton Vegh (nacido 2009-04-04). Nacido en Budapest y vivio alli siete anos antes de mudarse a Mallorca hace nueve anos.",
-        "Formacion: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-actual). Toda la vida en deportes como natacion y futbol; empezo piraguismo de velocidad en 2018 durante siete anos y ahora entrena carrera de corta y media distancia (5k a 10k) aun sin competir oficialmente.",
+        "Formacion: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-actual). Toda la vida en deportes como natacion y futbol; empezo piraguismo de velocidad en 2018 durante siete anos y ahora entrena carrera de corta y media distancia (5k a 10k) sin competir oficialmente todavia.",
+        "Hablo 5 idiomas con fluidez: hungaro, ingles, espanol, frances y catalan.",
+        "Me apasionan la informatica, las matematicas, el arte, el deporte, los libros y la politica.",
       ],
       achievements: [
         "23x campeon de Mallorca",
@@ -28,8 +30,9 @@ export const WHO_AM_I_CONTENT = {
     },
     fr: {
       paragraphs: [
-        "Marton Vegh (ne 2009-04-04). Ne a Budapest et y a vecu sept ans avant de demenager a Majorque il y a neuf ans.",
-        "Formation: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-actuel). Toujours dans le sport comme la natation et le football; a commence le canoe sprint en 2018 pendant sept ans et s'entraine maintenant a la course courte/moyenne distance (5k a 10k) sans encore concourir officiellement.",
+        "Formation: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-actuel). J'ai toujours aime des sports comme la natation et le football; j'ai commence le canoe sprint en 2018 pendant sept ans et je m'entraine maintenant en course de courte et moyenne distance (5k a 10k) sans encore concourir officiellement.",
+        "Je parle 5 langues couramment: hongrois, anglais, espagnol, francais et catalan.",
+        "Je suis passionne par l'informatique, les mathematiques, l'art, le sport, les livres et la politique.",
       ],
       achievements: [
         "23x champion de Majorque",
@@ -41,8 +44,9 @@ export const WHO_AM_I_CONTENT = {
     },
     de: {
       paragraphs: [
-        "Marton Vegh (geboren 2009-04-04). In Budapest geboren und dort sieben Jahre gelebt, bevor er vor neun Jahren nach Mallorca zog.",
-        "Ausbildung: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-heute). Immer im Sport aktiv wie Schwimmen und Fussball; 2018 mit Kanu-Sprint begonnen (sieben Jahre) und trainiert jetzt Kurz- bis Mittelstreckenlauf (5k bis 10k), noch ohne offizielle Wettkampfe.",
+        "Ausbildung: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-heute). Schon immer in Sportarten wie Schwimmen und Fussball aktiv; 2018 mit Kanu-Sprint begonnen und sieben Jahre betrieben, jetzt Training im Kurz- bis Mittelstreckenlauf (5k bis 10k), bisher noch ohne offizielle Wettkampfe.",
+        "Ich spreche 5 Sprachen fliessend: Ungarisch, Englisch, Spanisch, Franzosisch und Katalanisch.",
+        "Ich habe eine Leidenschaft fur Informatik, Mathematik, Kunst, Sport, Bucher und Politik.",
       ],
       achievements: [
         "23x Mallorca-Meister",
@@ -245,6 +249,83 @@ export const WHO_AM_I_CONTENT = {
         fr: { title: "Matilda", author: "David Walliams" },
         de: { title: "Matilda", author: "David Walliams" },
         hu: { title: "Matilda", author: "David Walliams" },
+      },
+    },
+  ],
+  favoritePaintings: [
+    {
+      id: "saturn-devouring-his-son",
+      rank: 1,
+      cover: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Francisco_de_Goya%2C_Saturno_devorando_a_su_hijo_%281819-1823%29.jpg/960px-Francisco_de_Goya%2C_Saturno_devorando_a_su_hijo_%281819-1823%29.jpg",
+        alt: "Saturn Devouring His Son by Francisco de Goya",
+      },
+      translations: {
+        en: { title: "Saturn Devouring His Son", artist: "Francisco de Goya" },
+        es: { title: "Saturno devorando a su hijo", artist: "Francisco de Goya" },
+        fr: { title: "Saturne devorant un de ses fils", artist: "Francisco de Goya" },
+        de: { title: "Saturn verschlingt seinen Sohn", artist: "Francisco de Goya" },
+        hu: { title: "Saturnusz felfalja fiat", artist: "Francisco de Goya" },
+      },
+    },
+    {
+      id: "coronation-of-napoleon",
+      rank: 2,
+      cover: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Jacques-Louis_David_-_The_Coronation_of_Napoleon_%281805-1807%29.jpg",
+        alt: "The Coronation of Napoleon by Jacques-Louis David",
+      },
+      translations: {
+        en: { title: "The Coronation of Napoleon", artist: "Jacques-Louis David" },
+        es: { title: "La coronacion de Napoleon", artist: "Jacques-Louis David" },
+        fr: { title: "Le Sacre de Napoleon", artist: "Jacques-Louis David" },
+        de: { title: "Die Kronung Napoleons", artist: "Jacques-Louis David" },
+        hu: { title: "Napoleon koronazasa", artist: "Jacques-Louis David" },
+      },
+    },
+    {
+      id: "judith-beheading-holofernes",
+      rank: 3,
+      cover: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/df/Caravaggio_-_Giuditta_e_Oloferne_%28ca._1599%29.jpg",
+        alt: "Judith Beheading Holofernes by Caravaggio",
+      },
+      translations: {
+        en: { title: "Judith Beheading Holofernes", artist: "Caravaggio" },
+        es: { title: "Judit decapitando a Holofernes", artist: "Caravaggio" },
+        fr: { title: "Judith decapitant Holopherne", artist: "Caravaggio" },
+        de: { title: "Judith enthauptet Holofernes", artist: "Caravaggio" },
+        hu: { title: "Judit lefejezi Holoferneszt", artist: "Caravaggio" },
+      },
+    },
+    {
+      id: "school-of-athens",
+      rank: 4,
+      cover: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg",
+        alt: "The School of Athens by Raphael",
+      },
+      translations: {
+        en: { title: "The School of Athens", artist: "Raphael" },
+        es: { title: "La escuela de Atenas", artist: "Rafael" },
+        fr: { title: "L'Ecole d'Athenes", artist: "Raphael" },
+        de: { title: "Die Schule von Athen", artist: "Raffael" },
+        hu: { title: "Az atheni iskola", artist: "Raffaello" },
+      },
+    },
+    {
+      id: "las-meninas",
+      rank: 5,
+      cover: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Las_Meninas_01.jpg/1280px-Las_Meninas_01.jpg",
+        alt: "Las Meninas by Diego Velazquez",
+      },
+      translations: {
+        en: { title: "Las Meninas", artist: "Diego Velazquez" },
+        es: { title: "Las Meninas", artist: "Diego Velazquez" },
+        fr: { title: "Les Menines", artist: "Diego Velazquez" },
+        de: { title: "Las Meninas", artist: "Diego Velazquez" },
+        hu: { title: "Las Meninas", artist: "Diego Velazquez" },
       },
     },
   ],
