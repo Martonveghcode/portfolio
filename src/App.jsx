@@ -7,6 +7,9 @@ import heatmapConfig from "./heatmap";
 import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
+const PROJECT_DISPLAY_ORDER = ["portfolio-analytics-tool", "handwriting-pipeline", "calendar", "grammar-trainer"];
+const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
+
 function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggleTheme, cvLink, copy }) {
   return (
     <header className="site-nav">
@@ -467,6 +470,10 @@ export default function App() {
       title: locale.title ?? projectTranslations.en?.title ?? project.title ?? "",
       summary: locale.summary ?? projectTranslations.en?.summary ?? project.summary ?? "",
     };
+  }).sort((left, right) => {
+    const leftRank = PROJECT_DISPLAY_RANK.get(left.id) ?? Number.MAX_SAFE_INTEGER;
+    const rightRank = PROJECT_DISPLAY_RANK.get(right.id) ?? Number.MAX_SAFE_INTEGER;
+    return leftRank - rightRank;
   }), [language]);
 
   const localizedPapers = useMemo(() => PAPERS_CONTENT.map((paper) => {
