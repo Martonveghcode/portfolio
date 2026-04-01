@@ -179,6 +179,49 @@ function BookCard({ book, detailKey }) {
   );
 }
 
+function FavoriteBooksAccordion({ title, books }) {
+  const previewBooks = books.slice(0, 3);
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <section className={`favorite-books-module ${isOpen ? "is-open" : ""}`}>
+      <button
+        type="button"
+        className="favorite-books-module__summary"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen((current) => !current)}
+      >
+        <div className="favorite-books-module__header">
+          <h2>{title}</h2>
+        </div>
+
+        <div className="favorite-books-module__preview">
+          {previewBooks.map((book) => (
+            <div key={book.id} className="favorite-books-module__preview-item">
+              <div className="favorite-books-module__preview-frame">
+                {book.cover?.src ? (
+                  <img src={book.cover.src} alt={book.cover.alt || book.title} loading="lazy" />
+                ) : (
+                  <div className="book-card__fallback">{book.title}</div>
+                )}
+                <span className="favorite-books-module__preview-rank">#{book.rank}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </button>
+
+      <div className="favorite-books-module__content">
+        <div className="favorite-books-module__inner">
+          <div className="books-grid books-grid--favorite">
+            {books.map((book) => <BookCard key={book.id} book={book} detailKey="note" />)}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HomePage({ copy, heatmapProps }) {
   return (
     <main className="site-main site-main--home">
@@ -267,16 +310,7 @@ function WhoAmIPage({ copy, whoAmI }) {
         </article>
       </section>
       <section className="content-section">
-        <SectionHeader title={copy.favoriteBooksTitle} />
-        <div className="books-grid">
-          {whoAmI.favoriteBooks.map((book) => <BookCard key={book.id} book={book} detailKey="note" />)}
-        </div>
-      </section>
-      <section className="content-section">
-        <SectionHeader title={copy.worstBooksTitle} />
-        <div className="books-grid books-grid--compact">
-          {whoAmI.worstBooks.map((book) => <BookCard key={book.id} book={book} detailKey="reason" />)}
-        </div>
+        <FavoriteBooksAccordion title={copy.favoriteBooksTitle} books={whoAmI.favoriteBooks} />
       </section>
     </main>
   );
