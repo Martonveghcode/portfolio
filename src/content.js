@@ -126,7 +126,7 @@ export const PAPERS_CONTENT = [
     translations: {
       en: {
         title: "Observer-Receiver Model",
-        summary: "Draft paper; full text available in the linked Google Doc.",
+        summary: "A Theory of Consciousness as an External Observer Dependent on the Brain",
         status: "Draft",
         link: "https://docs.google.com/document/d/1WhN38fEUqHaLmpaMrAETql27EopbL355gEz_t12w-0Y/edit?usp=sharing",
       },

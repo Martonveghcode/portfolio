@@ -34,8 +34,8 @@ function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggle
           <a className="nav-action" href={cvLink} target="_blank" rel="noreferrer">
             CV
           </a>
-          <a className="nav-action" href={PROFILE.instagramUrl} target="_blank" rel="noreferrer">
-            Instagram
+          <a className="nav-action" href="https://orcid.org/0009-0004-2687-8812" target="_blank" rel="noreferrer">
+            ORCID
           </a>
           <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
             {theme === "dark" ? "Dark" : "Light"}
