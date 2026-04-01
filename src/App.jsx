@@ -31,11 +31,14 @@ function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggle
           <a className="nav-action" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
             GitHub
           </a>
+          <a className="nav-action" href={`mailto:${PROFILE.email}`}>
+            Gmail
+          </a>
           <a className="nav-action" href={cvLink} target="_blank" rel="noreferrer">
             CV
           </a>
-          <a className="nav-action" href={PROFILE.instagramUrl} target="_blank" rel="noreferrer">
-            Instagram
+          <a className="nav-action" href="https://orcid.org/0009-0004-2687-8812" target="_blank" rel="noreferrer">
+            ORCID
           </a>
           <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
             {theme === "dark" ? "Dark" : "Light"}
@@ -85,16 +88,6 @@ function ProjectCard({ project, copy, compact = false }) {
       </div>
 
       <div className="project-card__body">
-        {project.tech.length ? (
-          <div className="tag-row">
-            {project.tech.map((tech) => (
-              <span key={`${project.id}-${tech}`} className="tag">
-                {tech}
-              </span>
-            ))}
-          </div>
-        ) : null}
-
         <div className="card-copy">
           <h3>{project.title}</h3>
           <p className="muted">{project.summary}</p>
@@ -154,34 +147,49 @@ function ExperienceTimeline({ items, compact = false }) {
   );
 }
 
-function BookCard({ book, detailKey }) {
-  const detail = book[detailKey];
+function MediaCard({ item, detailKey, mediaOrientation = "portrait" }) {
+  const detail = item[detailKey];
+  const imageSizes = mediaOrientation === "landscape"
+    ? "(max-width: 760px) 100vw, 520px"
+    : "(max-width: 760px) 100vw, 320px";
 
   return (
-    <article className="book-card">
-      <div className="book-card__cover">
-        {book.cover?.src ? (
-          <img src={book.cover.src} alt={book.cover.alt || book.title} loading="lazy" />
+    <article className={`book-card ${mediaOrientation === "landscape" ? "book-card--landscape" : ""}`}>
+      <div className={`book-card__cover ${mediaOrientation === "landscape" ? "book-card__cover--landscape" : ""}`}>
+        {item.cover?.src ? (
+          <img
+            src={item.cover.src}
+            srcSet={item.cover.srcSet}
+            sizes={imageSizes}
+            alt={item.cover.alt || item.title}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+          />
         ) : (
-          <div className="book-card__fallback">{book.title}</div>
+          <div className="book-card__fallback">{item.title}</div>
         )}
       </div>
       <div className="book-card__body">
-        <p className="eyebrow">#{book.rank}</p>
-        <h3>{book.title}</h3>
-        {book.author ? <p className="small muted">{book.author}</p> : null}
+        <p className="eyebrow">#{item.rank}</p>
+        <h3>{item.title}</h3>
+        {item.subtitle ? <p className="small muted">{item.subtitle}</p> : null}
         {detail ? <p className="muted">{detail}</p> : null}
       </div>
     </article>
   );
 }
 
-function FavoriteBooksAccordion({ title, books }) {
-  const previewBooks = books.slice(0, 3);
+function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation = "portrait" }) {
+  const previewItems = items.slice(0, 3);
   const [isOpen, setIsOpen] = useState(false);
+  const isLandscape = mediaOrientation === "landscape";
+  const previewSizes = isLandscape
+    ? "(max-width: 520px) 100vw, (max-width: 760px) 33vw, 280px"
+    : "(max-width: 520px) 100vw, (max-width: 760px) 33vw, 220px";
 
   return (
-    <section className={`favorite-books-module ${isOpen ? "is-open" : ""}`}>
+    <section className={`favorite-books-module ${isOpen ? "is-open" : ""} ${isLandscape ? "favorite-books-module--landscape" : ""}`}>
       <button
         type="button"
         className="favorite-books-module__summary"
@@ -193,15 +201,23 @@ function FavoriteBooksAccordion({ title, books }) {
         </div>
 
         <div className="favorite-books-module__preview">
-          {previewBooks.map((book) => (
-            <div key={book.id} className="favorite-books-module__preview-item">
-              <div className="favorite-books-module__preview-frame">
-                {book.cover?.src ? (
-                  <img src={book.cover.src} alt={book.cover.alt || book.title} loading="lazy" />
+          {previewItems.map((item) => (
+            <div key={item.id} className="favorite-books-module__preview-item">
+              <div className={`favorite-books-module__preview-frame ${mediaOrientation === "landscape" ? "favorite-books-module__preview-frame--landscape" : ""}`}>
+                {item.cover?.src ? (
+                  <img
+                    src={item.cover.src}
+                    srcSet={item.cover.srcSet}
+                    sizes={previewSizes}
+                    alt={item.cover.alt || item.title}
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
+                  />
                 ) : (
-                  <div className="book-card__fallback">{book.title}</div>
+                  <div className="book-card__fallback">{item.title}</div>
                 )}
-                <span className="favorite-books-module__preview-rank">#{book.rank}</span>
+                <span className="favorite-books-module__preview-rank">#{item.rank}</span>
               </div>
             </div>
           ))}
@@ -210,8 +226,15 @@ function FavoriteBooksAccordion({ title, books }) {
 
       <div className="favorite-books-module__content">
         <div className="favorite-books-module__inner">
-          <div className="books-grid books-grid--favorite">
-            {books.map((book) => <BookCard key={book.id} book={book} detailKey="note" />)}
+          <div className={`books-grid books-grid--favorite ${mediaOrientation === "landscape" ? "books-grid--landscape" : ""}`}>
+            {items.map((item) => (
+              <MediaCard
+                key={item.id}
+                item={item}
+                detailKey={detailKey}
+                mediaOrientation={mediaOrientation}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -314,7 +337,19 @@ function WhoAmIPage({ copy, whoAmI }) {
         </article>
       </section>
       <section className="content-section">
-        <FavoriteBooksAccordion title={copy.favoriteBooksTitle} books={whoAmI.favoriteBooks} />
+        <FavoriteCollectionAccordion
+          title={copy.favoriteBooksTitle}
+          items={whoAmI.favoriteBooks}
+          detailKey="note"
+        />
+      </section>
+      <section className="content-section">
+        <FavoriteCollectionAccordion
+          title={copy.favoritePaintingsTitle}
+          items={whoAmI.favoritePaintings}
+          detailKey="note"
+          mediaOrientation="landscape"
+        />
       </section>
     </main>
   );
@@ -397,8 +432,20 @@ export default function App() {
         rank: book.rank,
         cover: book.cover ?? {},
         title: bookLocale.title ?? bookTranslations.en?.title ?? "",
-        author: bookLocale.author ?? bookTranslations.en?.author ?? "",
+        subtitle: bookLocale.author ?? bookTranslations.en?.author ?? "",
         note: bookLocale.note ?? bookTranslations.en?.note ?? "",
+      };
+    });
+    const favoritePaintings = (WHO_AM_I_CONTENT.favoritePaintings ?? []).slice().sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0)).map((painting) => {
+      const paintingTranslations = painting.translations ?? {};
+      const paintingLocale = paintingTranslations[language] ?? paintingTranslations.en ?? {};
+      return {
+        id: painting.id,
+        rank: painting.rank,
+        cover: painting.cover ?? {},
+        title: paintingLocale.title ?? paintingTranslations.en?.title ?? "",
+        subtitle: paintingLocale.artist ?? paintingTranslations.en?.artist ?? "",
+        note: paintingLocale.note ?? paintingTranslations.en?.note ?? "",
       };
     });
     const worstBooks = (WHO_AM_I_CONTENT.worstBooks ?? []).slice().sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0)).map((book) => {
@@ -417,6 +464,7 @@ export default function App() {
       paragraphs: locale.paragraphs ?? whoAmITranslations.en?.paragraphs ?? [],
       achievements: locale.achievements ?? whoAmITranslations.en?.achievements ?? [],
       favoriteBooks,
+      favoritePaintings,
       worstBooks,
     };
   }, [language]);
