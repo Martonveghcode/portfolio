@@ -1,5 +1,5 @@
 // Data hub for projects, papers, and experience with per-language fields.
-// Add/edit items here: each entry has translations for en, es, fr, de.
+// Add/edit items here: each entry has translations for en, es, fr, de, hu.
 
 export const PROJECTS_CONTENT = [
   {
@@ -21,6 +21,11 @@ export const PROJECTS_CONTENT = [
       es: { title: "Homework Calendar", summary: "Asigna tareas a fechas de clase para evitar retrasos." },
       fr: { title: "Homework Calendar", summary: "Assigne les devoirs aux dates de cours pour eviter les retards." },
       de: { title: "Homework Calendar", summary: "Ordnet Hausaufgaben automatisch Kurstagen zu, um Verzug zu vermeiden." },
+      hu: {
+        title: "Homework Calendar",
+        summary:
+          "A Lesson Calendar egy Vite + React + Tailwind alapú egyoldalas alkalmazas, amely segit a diakoknak az ismetlodo orak kezeleseben, es az Ora/Dolgozat/Hazi esemenyek Google Calendarba kuldeseben.",
+      },
     },
   },
   {
@@ -42,6 +47,11 @@ export const PROJECTS_CONTENT = [
       es: { title: "Handwriting Formatting Pipeline", summary: "Limpia notas escaneadas, quita lineas y maqueta paginas." },
       fr: { title: "Handwriting Formatting Pipeline", summary: "Nettoie des notes scannees, retire les lignes et met en page." },
       de: { title: "Handwriting Formatting Pipeline", summary: "Reinigt gescannte Notizen, entfernt Linien und formatiert Seiten." },
+      hu: {
+        title: "Handwriting Formatting Pipeline",
+        summary:
+          'Egy kiegeszites/pipeline a Thaines fele "My Text in Your Handwriting" projekthez. Tartalmaz szovegformazast, korlatozott Unicode->ASCII tamogatast, nyomtatasra optimalizalt torzset, valamint tanitoadat-feldolgozo makrokat es eszkozoket, plusz egy ajanlott gyakorlolapot.',
+      },
     },
   },
   {
@@ -69,6 +79,11 @@ export const PROJECTS_CONTENT = [
         summary:
           "Python-Skript mit yfinance, NumPy, Pandas und SciPy, das Portfolios aufbaut, Performance analysiert und eine effiziente Frontier mit Max-Sharpe- und Minimum-Varianz-Optimierung visualisiert.",
       },
+      hu: {
+        title: "Portfolio Analytics Tool",
+        summary:
+          "Python szkript yfinance, NumPy, Pandas es SciPy csomagokkal, amely reszvenyallomanybol portfoliokat epit, elemez Sharpe, Sortino, maximalis visszaeses es SPY-hoz viszonyitott beta mutatokkal, valamint hatekony hatarvonalat es optimalizalt portfoliokat general matplotlib vizualizaciokkal.",
+      },
     },
   },
   {
@@ -95,6 +110,11 @@ export const PROJECTS_CONTENT = [
         title: "Grammar Trainer",
         summary:
           "Streamlit-App (Python), die mit LLM spanische Satze fur das Uben von Funktion und Wert von \"se\" erzeugt, mit sofortigem Feedback, Erklarungen und adaptivem Training via SQLite-Tracking.",
+      },
+      hu: {
+        title: "Grammar Trainer",
+        summary:
+          "Egy Streamlit (Python) alkalmazas, amely LLM-ekkel spanyol mondatokat general a \"se\" szerepenek es ertekenek gyakorlasahoz, azonnali visszajelzessel, magyarazatokkal es SQLite-alapu teljesitmenykovetessel tamogatott adaptiv feladatokkal.",
       },
     },
   },
@@ -128,9 +148,14 @@ export const PAPERS_CONTENT = [
         status: "Entwurf",
         link: "https://docs.google.com/document/d/1WhN38fEUqHaLmpaMrAETql27EopbL355gEz_t12w-0Y/edit?usp=sharing",
       },
+      hu: {
+        title: "Observer-Receiver Model",
+        summary: "Piszkozat; a teljes szoveg az alabb linkelt Google Dokumentumban erheto el.",
+        status: "Piszkozat",
+        link: "https://docs.google.com/document/d/1WhN38fEUqHaLmpaMrAETql27EopbL355gEz_t12w-0Y/edit?usp=sharing",
+      },
     },
   },
-  
 ];
 
 export const EXPERIENCE_CONTENT = [
@@ -142,6 +167,7 @@ export const EXPERIENCE_CONTENT = [
       es: { title: "Budapest Design Apartments - Practicas", detail: "Coordinacion de clientes y flujos administrativos." },
       fr: { title: "Budapest Design Apartments - Stage", detail: "Coordination clients et flux administratifs." },
       de: { title: "Budapest Design Apartments - Praktikum", detail: "Kundenkoordination und administrative Ablaufe." },
+      hu: { title: "Budapest Design Apartments - Gyakornok", detail: "Ugyfelkoordinacio es adminisztrativ workflow-k." },
     },
   },
   {
@@ -149,22 +175,25 @@ export const EXPERIENCE_CONTENT = [
     period: "2024",
     translations: {
       en: {
-  title: "Real Club Nautico de Palma - Intern",
-  detail: "Event logistics, on-site team support as well as monitoring of the racing team."
-},
-es: {
-  title: "Real Club Nautico de Palma - Practicas",
-  detail: "Logística de eventos, apoyo al equipo en sitio así como supervisión del equipo de regatas."
-},
-fr: {
-  title: "Real Club Nautico de Palma - Stage",
-  detail: "Logistique des événements, support de l’équipe sur site ainsi que le suivi de l’équipe de course."
-},
-de: {
-  title: "Real Club Nautico de Palma - Praktikum",
-  detail: "Eventlogistik, Unterstützung des Teams vor Ort sowie Überwachung des Rennteams."
-},
-
+        title: "Real Club Nautico de Palma - Intern",
+        detail: "Event logistics, on-site team support as well as monitoring of the racing team.",
+      },
+      es: {
+        title: "Real Club Nautico de Palma - Practicas",
+        detail: "Logistica de eventos, apoyo al equipo en sitio asi como supervision del equipo de regatas.",
+      },
+      fr: {
+        title: "Real Club Nautico de Palma - Stage",
+        detail: "Logistique des evenements, support de l'equipe sur site ainsi que le suivi de l'equipe de course.",
+      },
+      de: {
+        title: "Real Club Nautico de Palma - Praktikum",
+        detail: "Eventlogistik, Unterstutzung des Teams vor Ort sowie Uberwachung des Rennteams.",
+      },
+      hu: {
+        title: "Real Club Nautico de Palma - Gyakornok",
+        detail: "Rendezvenylogisztika, helyszini csapattamogatas, valamint a versenycsapat munkajanak kovetese.",
+      },
     },
   },
 ];

@@ -15,6 +15,7 @@
   --accent-strong: rgba(10, 108, 218, 0.24);
   --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.08);
   --shadow-card: 0 20px 44px rgba(15, 23, 42, 0.08);
+  --nav-width: min(1480px, calc(100vw - 24px));
   --content-width: min(1200px, calc(100vw - 48px));
   --reading-width: min(760px, calc(100vw - 48px));
   --heatmap-border: #d8dee6;
@@ -100,16 +101,16 @@ select:focus-visible {
   position: sticky;
   top: 0;
   z-index: 20;
-  padding: 20px 24px 0;
+  padding: 16px 12px 0;
 }
 
 .site-nav__inner {
-  width: var(--content-width);
+  width: var(--nav-width);
   margin: 0 auto;
-  padding: 14px 18px;
+  padding: 12px 14px;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 18px;
+  gap: 12px;
   align-items: center;
   border: 1px solid var(--border);
   border-radius: 22px;
@@ -151,8 +152,8 @@ select:focus-visible {
 .site-footer__info,
 .site-footer__links { display: flex; flex-wrap: wrap; }
 
-.site-nav__links { gap: 8px; justify-content: center; }
-.site-nav__actions { gap: 10px; justify-content: flex-end; align-items: center; }
+.site-nav__links { gap: 6px; justify-content: center; min-width: 0; }
+.site-nav__actions { gap: 8px; justify-content: flex-end; align-items: center; }
 .language-switch { gap: 6px; padding: 3px; border: 1px solid var(--border); border-radius: 14px; background: var(--section-bg); }
 
 .nav-tab,
@@ -162,8 +163,8 @@ select:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 10px 14px;
+  min-height: 38px;
+  padding: 8px 12px;
   border-radius: 10px;
   color: var(--text);
   cursor: pointer;
@@ -178,7 +179,7 @@ select:focus-visible {
 .nav-tab--active,
 .language-chip--active { background: var(--accent-soft); border-color: var(--accent-strong); color: var(--accent); }
 .theme-toggle,
-.language-chip { min-width: 58px; }
+.language-chip { min-width: 46px; }
 
 .site-main {
   width: var(--content-width);
@@ -234,7 +235,10 @@ select:focus-visible {
 .book-card__body,
 .timeline-item__card { padding: 28px; }
 
-.page-intro { margin-bottom: 28px; }
+.page-intro {
+  margin-bottom: 28px;
+  border-radius: 24px 24px 42px 42px;
+}
 .hero-card h1,
 .page-intro h1 { margin: 10px 0 0; letter-spacing: -0.04em; }
 .hero-card h1 { font-size: clamp(3.2rem, 8vw, 4.5rem); line-height: 1.02; }
@@ -342,6 +346,43 @@ select:focus-visible {
 
 .content-section { margin-top: 72px; }
 .info-card { min-height: 100%; }
+.projects-stack {
+  display: grid;
+  gap: 24px;
+}
+.dropdown-card {
+  overflow: hidden;
+  padding: 0;
+}
+.dropdown-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+  padding: 20px 28px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+.dropdown-summary::-webkit-details-marker { display: none; }
+.dropdown-summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 20px;
+  line-height: 1;
+}
+.dropdown-card[open] .dropdown-summary {
+  border-bottom: 1px solid var(--border);
+}
+.dropdown-card[open] .dropdown-summary::after {
+  content: "-";
+}
+.dropdown-panel {
+  padding: 20px 28px 28px;
+}
 
 .project-grid {
   display: grid;
@@ -425,6 +466,7 @@ select:focus-visible {
 
 .prose,
 .achievement-card { display: grid; gap: 18px; }
+.prose-media,
 .achievement-media,
 .book-card__cover {
   overflow: hidden;
@@ -433,7 +475,16 @@ select:focus-visible {
   background: var(--section-bg);
 }
 
+.prose-media {
+  width: 589px;
+  max-width: 100%;
+  height: 590px;
+  justify-self: start;
+}
+
+.prose-media img,
 .achievement-media img { width: 100%; height: 100%; object-fit: cover; }
+.prose-media img { object-position: center 30%; }
 .achievement-list { padding-left: 20px; color: var(--text); }
 
 .books-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -531,6 +582,8 @@ select:focus-visible {
   .text-card,
   .book-card__body,
   .timeline-item__card { padding: 22px; }
+  .dropdown-summary,
+  .dropdown-panel { padding-left: 22px; padding-right: 22px; }
   .hero-card h1 { font-size: clamp(2.6rem, 14vw, 3.4rem); }
   .timeline-item { grid-template-columns: 1fr; }
   .timeline::before { display: none; }

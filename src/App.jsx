@@ -34,6 +34,9 @@ function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggle
           <a className="nav-action" href={cvLink} target="_blank" rel="noreferrer">
             CV
           </a>
+          <a className="nav-action" href={PROFILE.instagramUrl} target="_blank" rel="noreferrer">
+            Instagram
+          </a>
           <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
             {theme === "dark" ? "Dark" : "Light"}
           </button>
@@ -64,24 +67,6 @@ function SectionHeader({ eyebrow, title, action }) {
       </div>
       {action ? <div className="section-header__action">{action}</div> : null}
     </div>
-  );
-}
-
-function Action({ href, onClick, children, variant = "secondary", newTab = false }) {
-  const className = `button button--${variant}`;
-
-  if (href) {
-    return (
-      <a className={className} href={href} target={newTab ? "_blank" : undefined} rel={newTab ? "noreferrer" : undefined}>
-        {children}
-      </a>
-    );
-  }
-
-  return (
-    <button type="button" className={className} onClick={onClick}>
-      {children}
-    </button>
   );
 }
 
@@ -194,7 +179,7 @@ function BookCard({ book, detailKey }) {
   );
 }
 
-function HomePage({ copy, cvLink, heatmapProps, onNavigate }) {
+function HomePage({ copy, heatmapProps }) {
   return (
     <main className="site-main site-main--home">
       <section className="hero">
@@ -203,20 +188,6 @@ function HomePage({ copy, cvLink, heatmapProps, onNavigate }) {
           <h1>{PROFILE.name}</h1>
           <p className="hero-subtitle">{copy.heroSub}</p>
           <p className="hero-description">{copy.aboutBlurb}</p>
-
-          <div className="hero-actions">
-            <Action onClick={() => onNavigate("projects")} variant="primary">{copy.projectsTitle}</Action>
-            <Action onClick={() => onNavigate("whoami")} variant="secondary">{copy.whoAmITitle}</Action>
-            <Action href={cvLink} newTab variant="secondary">CV</Action>
-          </div>
-
-          <div className="meta-row">
-            <span className="meta-pill">{PROFILE.location}</span>
-            <a className="meta-pill meta-pill--link" href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
-            <a className="meta-pill meta-pill--link" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
-              github.com/Martonveghcode
-            </a>
-          </div>
         </div>
 
         <div className="hero-rail">
@@ -236,23 +207,29 @@ function HomePage({ copy, cvLink, heatmapProps, onNavigate }) {
   );
 }
 
-function ProjectsPage({ copy, projects }) {
+function ProjectsPage({ copy, projects, papers }) {
   return (
     <main className="site-main">
-      <section className="page-intro"><p className="eyebrow">{copy.nav.projects}</p><h1>{copy.projectsTitle}</h1></section>
-      <div className="project-grid project-grid--full">
-        {projects.map((project) => <ProjectCard key={project.id} project={project} copy={copy} />)}
-      </div>
-    </main>
-  );
-}
+      <section className="page-intro page-intro--curved">
+        <p className="eyebrow">{copy.nav.projects}</p>
+        <h1>{copy.projectsTitle}</h1>
+      </section>
 
-function PapersPage({ copy, papers }) {
-  return (
-    <main className="site-main site-main--reading">
-      <section className="page-intro"><p className="eyebrow">{copy.nav.papers}</p><h1>{copy.papersTitle}</h1></section>
-      <div className="text-card-list">
-        {papers.map((paper) => <PaperCard key={paper.id} paper={paper} copy={copy} />)}
+      <div className="projects-stack">
+        <details className="surface-card dropdown-card">
+          <summary className="dropdown-summary">
+            <span>{copy.papersTitle}</span>
+          </summary>
+          <div className="dropdown-panel">
+            <div className="text-card-list">
+              {papers.map((paper) => <PaperCard key={paper.id} paper={paper} copy={copy} />)}
+            </div>
+          </div>
+        </details>
+
+        <div className="project-grid project-grid--full">
+          {projects.map((project) => <ProjectCard key={project.id} project={project} copy={copy} />)}
+        </div>
       </div>
     </main>
   );
@@ -277,6 +254,9 @@ function WhoAmIPage({ copy, whoAmI }) {
           <div className="prose">
             {whoAmI.paragraphs.map((paragraph, index) => <p key={`whoami-${index}`} className="muted">{paragraph}</p>)}
           </div>
+          <div className="prose-media">
+            <img src="https://i.ibb.co/v4NqTbzz/IMG-8888-1.jpg" alt="IMG 8888(1)" loading="lazy" />
+          </div>
         </article>
         <article className="surface-card achievement-card">
           <SectionHeader title={copy.sportsAchievementsTitle} />
@@ -299,23 +279,6 @@ function WhoAmIPage({ copy, whoAmI }) {
         </div>
       </section>
     </main>
-  );
-}
-
-function Footer({ cvLink }) {
-  return (
-    <footer className="site-footer">
-      <div className="site-footer__info">
-        <span>{PROFILE.name}</span>
-        <span>{PROFILE.location}</span>
-        <a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
-        <a href={PROFILE.githubUrl} target="_blank" rel="noreferrer">github.com/Martonveghcode</a>
-      </div>
-      <div className="site-footer__links">
-        <a href={cvLink} target="_blank" rel="noreferrer">CV</a>
-        <a href={PROFILE.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
-      </div>
-    </footer>
   );
 }
 
@@ -423,14 +386,12 @@ export default function App() {
   let pageView = (
     <HomePage
       copy={copy}
-      cvLink={cvLink}
       heatmapProps={heatmapProps}
-      onNavigate={setPage}
     />
   );
 
-  if (page === "projects") pageView = <ProjectsPage copy={copy} projects={localizedProjects} />;
-  if (page === "papers") pageView = <PapersPage copy={copy} papers={localizedPapers} />;
+  if (page === "projects") pageView = <ProjectsPage copy={copy} projects={localizedProjects} papers={localizedPapers} />;
+  if (page === "papers") pageView = <ProjectsPage copy={copy} projects={localizedProjects} papers={localizedPapers} />;
   if (page === "experience") pageView = <ExperiencePage copy={copy} experience={localizedExperience} />;
   if (page === "whoami") pageView = <WhoAmIPage copy={copy} whoAmI={localizedWhoAmI} />;
 
@@ -447,7 +408,6 @@ export default function App() {
         copy={copy}
       />
       {pageView}
-      <Footer cvLink={cvLink} />
     </div>
   );
 }

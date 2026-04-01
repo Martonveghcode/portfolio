@@ -3,9 +3,10 @@ export const LANGUAGE_OPTIONS = [
   { code: "es", label: "ES" },
   { code: "fr", label: "FR" },
   { code: "de", label: "DE" },
+  { code: "hu", label: "HU" },
 ];
 
-export const PAGES = ["home", "projects", "papers", "experience", "whoami"];
+export const PAGES = ["home", "projects", "experience", "whoami"];
 
 export const PROFILE = {
   name: "Marton Vegh",
@@ -27,6 +28,7 @@ export const CV_LINKS = {
   es: "https://docs.google.com/document/d/1CjebLBCKT-dVCapR6NFn3rT9jIjyMSaEpMWFKl__EDo/edit?usp=sharing",
   fr: "https://docs.google.com/document/d/1ySTOOs4WWW-R1iwxHmrNS7cDCPykq0WpGquFvU6jHkg/edit?usp=sharing",
   de: "https://docs.google.com/document/d/1ySTOOs4WWW-R1iwxHmrNS7cDCPykq0WpGquFvU6jHkg/edit?usp=sharing",
+  hu: "https://docs.google.com/document/d/1ySTOOs4WWW-R1iwxHmrNS7cDCPykq0WpGquFvU6jHkg/edit?usp=sharing",
 };
 
 export const translations = {
@@ -131,5 +133,29 @@ export const translations = {
     worstBooksTitle: "Top 3 schlechteste Bucher",
     sportsAchievementsTitle: "Erfolge im Kanusprint",
     links: { live: "Live", github: "GitHub", paper: "Papier ansehen" },
+  },
+  hu: {
+    nav: { home: "Kezdolap", projects: "Projektek", papers: "Tanulmanyok", experience: "Tapasztalat", whoami: "Ki vagyok" },
+    heroTagline: "16 eves fejleszto",
+    heroSub: "Gyakorlati, valos problemakat megoldo megoldasokra fokuszalok.",
+    aboutTitle: "Ki vagyok",
+    aboutBlurb:
+      "Spanyolorszagban tanulo diak fejleszto vagyok, eros matematikai erdeklodessel. Mallorcan elek. Nemreg kezdtem programozni webdizajnnal, majd egyre inkabb az adatorientalt fejlesztes fele fordultam.",
+    languagesTitle: "Nyelvek",
+    languagesList: ["Magyar (anyanyelv)", "Angol (folyekony)", "Spanyol (folyekony)", "Francia (folyekony)", "Katalan (tanulas alatt)"],
+    stackTitle: "Amit hasznalok",
+    stackCoreLabel: "Alap",
+    stackLearningLabel: "Tanulom",
+    passionsTitle: "Erdeklodes",
+    passionsList: ["Automatizalas", "Klasszikus muveszet", "Konyvek", "Tiszta matematika", "Programozas es algoritmusok", "Sport"],
+    githubTitle: "GitHub heatmap",
+    projectsTitle: "Projektek",
+    papersTitle: "Tanulmanyok",
+    experienceTitle: "Tapasztalat",
+    whoAmITitle: "Ki vagyok",
+    favoriteBooksTitle: "A top 15 kedvenc konyvem",
+    worstBooksTitle: "Top 3 legrosszabb konyv",
+    sportsAchievementsTitle: "Kajak sprint eredmenyek",
+    links: { live: "Elo", github: "GitHub", paper: "Tanulmany megnyitasa" },
   },
 };

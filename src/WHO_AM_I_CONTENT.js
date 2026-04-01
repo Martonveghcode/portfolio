@@ -1,4 +1,3 @@
-
 export const WHO_AM_I_CONTENT = {
   translations: {
     en: {
@@ -53,6 +52,19 @@ export const WHO_AM_I_CONTENT = {
         "2x 3. in Spanien (C2)",
       ],
     },
+    hu: {
+      paragraphs: [
+        "Marton Vegh (szuletett: 2009-04-04). Budapesten szuletett, es het evig ott elt, mielott kilenc eve Mallorcara koltozott.",
+        "Tanulmanyok: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-jelenleg). Gyerekkora ota fontos resze az eletének az uszas es a foci; 2018-ban kezdett kajak sprintelni, amit het even at uzott, most pedig rovid- es kozepes tavfutast (5k-10k) edz, egyelore hivatalos versenyzes nelkul.",
+      ],
+      achievements: [
+        "23x Mallorca-bajnok",
+        "8x Baleaar-bajnok",
+        "Spanyolorszag keleti zona bajnoka",
+        "1x 3. hely Spanyolorszagban (C1)",
+        "2x 3. hely Spanyolorszagban (C2)",
+      ],
+    },
   },
   favoriteBooks: [
     {
@@ -64,6 +76,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Dune", author: "Frank Herbert", note: "Favoritos de la saga Dune 1-6 (Messiah, Children, God Emperor, Heretics)." },
         fr: { title: "Dune", author: "Frank Herbert", note: "Favoris dans la saga Dune 1-6 (Messiah, Children, God Emperor, Heretics)." },
         de: { title: "Dune", author: "Frank Herbert", note: "Lieblinge aus der Dune-Reihe 1-6 (Messiah, Children, God Emperor, Heretics)." },
+        hu: { title: "Dune", author: "Frank Herbert", note: "Kedvencek a Dune 1-6 kotetei kozul (Messiah, Children, God Emperor, Heretics)." },
       },
     },
     {
@@ -75,6 +88,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Rebelion en la granja", author: "George Orwell" },
         fr: { title: "La Ferme des animaux", author: "George Orwell" },
         de: { title: "Farm der Tiere", author: "George Orwell" },
+        hu: { title: "Allatfarm", author: "George Orwell" },
       },
     },
     {
@@ -86,6 +100,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "El Principe", author: "Niccolo Machiavelli" },
         fr: { title: "Le Prince", author: "Niccolo Machiavelli" },
         de: { title: "Der Prinz", author: "Niccolo Machiavelli" },
+        hu: { title: "A fejedelem", author: "Niccolo Machiavelli" },
       },
     },
     {
@@ -97,6 +112,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Percy Jackson y los dioses del Olimpo", author: "Rick Riordan", note: "Toda la saga de Percy Jackson." },
         fr: { title: "Percy Jackson et les dieux de l'Olympe", author: "Rick Riordan", note: "Toute la serie Percy Jackson." },
         de: { title: "Percy Jackson", author: "Rick Riordan", note: "Komplette Percy-Jackson-Reihe." },
+        hu: { title: "Percy Jackson and the Olympians", author: "Rick Riordan", note: "A teljes Percy Jackson ciklus." },
       },
     },
     {
@@ -108,6 +124,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "El Arco de la Guadaña", author: "Neal Shusterman", note: "Trilogia Arc of a Scythe (Scythe, Thunderhead, The Toll)." },
         fr: { title: "La Faucheuse", author: "Neal Shusterman", note: "Trilogie Arc of a Scythe (Scythe, Thunderhead, The Toll)." },
         de: { title: "Scythe", author: "Neal Shusterman", note: "Trilogie Arc of a Scythe (Scythe, Thunderhead, The Toll)." },
+        hu: { title: "Scythe", author: "Neal Shusterman", note: "Az Arc of a Scythe trilogia (Scythe, Thunderhead, The Toll)." },
       },
     },
     {
@@ -119,6 +136,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Magnus Chase y los dioses de Asgard", author: "Rick Riordan", note: "Libros 1-3." },
         fr: { title: "Magnus Chase et les dieux d'Asgard", author: "Rick Riordan", note: "Livres 1-3." },
         de: { title: "Magnus Chase", author: "Rick Riordan", note: "Bander 1-3." },
+        hu: { title: "Magnus Chase and the Gods of Asgard", author: "Rick Riordan", note: "1-3. kotet." },
       },
     },
     {
@@ -130,6 +148,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Teresa Raquin", author: "Emile Zola" },
         fr: { title: "Therese Raquin", author: "Emile Zola" },
         de: { title: "Therese Raquin", author: "Emile Zola" },
+        hu: { title: "Therese Raquin", author: "Emile Zola" },
       },
     },
     {
@@ -141,6 +160,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Los Miserables", author: "Victor Hugo" },
         fr: { title: "Les Miserables", author: "Victor Hugo" },
         de: { title: "Les Miserables", author: "Victor Hugo" },
+        hu: { title: "A nyomorultak", author: "Victor Hugo" },
       },
     },
     {
@@ -152,6 +172,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Heroes del Olimpo", author: "Rick Riordan", note: "Los cinco libros de Heroes del Olimpo." },
         fr: { title: "Les Heros de l'Olympe", author: "Rick Riordan", note: "Les cinq livres des Heros de l'Olympe." },
         de: { title: "Helden des Olymp", author: "Rick Riordan", note: "Funf Bande der Helden des Olymp." },
+        hu: { title: "Heroes of Olympus", author: "Rick Riordan", note: "Az otkonyves Heroes of Olympus ciklus." },
       },
     },
     {
@@ -163,6 +184,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Dry", author: "Neal Shusterman" },
         fr: { title: "Dry", author: "Neal Shusterman" },
         de: { title: "Dry", author: "Neal Shusterman" },
+        hu: { title: "Dry", author: "Neal Shusterman" },
       },
     },
     {
@@ -174,6 +196,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Gone", author: "Micheal Grant" },
         fr: { title: "Gone", author: "Micheal Grant" },
         de: { title: "Gone", author: "Micheal Grant" },
+        hu: { title: "Gone", author: "Micheal Grant" },
       },
     },
     {
@@ -185,6 +208,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Diario de Greg", author: "Jeff Kinney" },
         fr: { title: "Journal d'un degonfle", author: "Jeff Kinney" },
         de: { title: "Gregs Tagebuch", author: "Jeff Kinney" },
+        hu: { title: "Egy ropi naploja", author: "Jeff Kinney" },
       },
     },
     {
@@ -196,6 +220,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "La Abuela Gangster", author: "David Walliams" },
         fr: { title: "Mamie Gangster", author: "David Walliams" },
         de: { title: "Gangsta-Oma", author: "David Walliams" },
+        hu: { title: "Gangsta Granny", author: "David Walliams" },
       },
     },
     {
@@ -207,6 +232,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Los peores ninos del mundo", author: "David Walliams" },
         fr: { title: "Les pires enfants du monde", author: "David Walliams" },
         de: { title: "Die schlimmsten Kinder der Welt", author: "David Walliams" },
+        hu: { title: "The World's Worst Children", author: "David Walliams" },
       },
     },
     {
@@ -218,6 +244,7 @@ export const WHO_AM_I_CONTENT = {
         es: { title: "Matilda", author: "David Walliams" },
         fr: { title: "Matilda", author: "David Walliams" },
         de: { title: "Matilda", author: "David Walliams" },
+        hu: { title: "Matilda", author: "David Walliams" },
       },
     },
   ],
@@ -247,6 +274,11 @@ export const WHO_AM_I_CONTENT = {
           author: "Eloy Moreno",
           reason: "Schiebt den Melodram-Faktor so hoch, dass Tempo leidet und Figuren flach bleiben trotz des Themas.",
         },
+        hu: {
+          title: "Invisible",
+          author: "Eloy Moreno",
+          reason: "Annyira tulnyomja a melodramat, hogy a tempó lelassul, raadasul a fo karakter sekely es sztereotip.",
+        },
       },
     },
     {
@@ -274,6 +306,11 @@ export const WHO_AM_I_CONTENT = {
           author: "Malala Yousafzai",
           reason: "Wichtige Geschichte, aber holprig redigiert, voller Wiederholungen und fremder Stimme ohne echten Ton.",
         },
+        hu: {
+          title: "En vagyok Malala",
+          author: "Malala Yousafzai",
+          reason: "Fontos tortenet, de a szerkesztes egyenetlen, tul sok benne az ismetles, es a csaladi hang sem eleg eros.",
+        },
       },
     },
     {
@@ -300,6 +337,11 @@ export const WHO_AM_I_CONTENT = {
           title: "Kleines Land",
           author: "Gael Faye",
           reason: "Setting farbig, doch der Ton schwankt zwischen lyrisch und klischeehaft, Figuren bleiben dunne.",
+        },
+        hu: {
+          title: "Small Country",
+          author: "Gael Faye",
+          reason: "Eros a kozeg, de a hangnem a lirikustol a klisesig ingadozik, es a fo karakter is unalmas.",
         },
       },
     },
