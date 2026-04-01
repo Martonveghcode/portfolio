@@ -93,7 +93,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "the-prince",
-      rank: 3,
+      rank: 5,
       cover: { src: "https://cdn.penguin.co.uk/dam-assets/books/9780099518495/9780099518495-jacket-large.jpg", alt: "Cover of The Prince" },
       translations: {
         en: { title: "The Prince", author: "Niccolo Machiavelli" },
@@ -105,19 +105,19 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "percy-jackson",
-      rank: 4,
-      cover: { src: "https://www.readriordan.com/content/uploads/2022/02/FINALPJ_LightningThief_rpkg_CVR-265x400.jpg", alt: "Cover of Percy Jackson and the Olympians" },
+      rank: 3,
+      cover: { src: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1375886757i/18299452.jpg", alt: "Cover of The Last Question" },
       translations: {
-        en: { title: "Percy Jackson and the Olympians", author: "Rick Riordan", note: "Entire Percy Jackson cycle." },
-        es: { title: "Percy Jackson y los dioses del Olimpo", author: "Rick Riordan", note: "Toda la saga de Percy Jackson." },
-        fr: { title: "Percy Jackson et les dieux de l'Olympe", author: "Rick Riordan", note: "Toute la serie Percy Jackson." },
-        de: { title: "Percy Jackson", author: "Rick Riordan", note: "Komplette Percy-Jackson-Reihe." },
-        hu: { title: "Percy Jackson and the Olympians", author: "Rick Riordan", note: "A teljes Percy Jackson ciklus." },
+        en: { title: "The Last Question", author: "Isaac Asimov" },
+        es: { title: "The Last Question", author: "Isaac Asimov" },
+        fr: { title: "The Last Question", author: "Isaac Asimov" },
+        de: { title: "The Last Question", author: "Isaac Asimov" },
+        hu: { title: "The Last Question", author: "Isaac Asimov" },
       },
     },
     {
       id: "scythe",
-      rank: 5,
+      rank: 12,
       cover: { src: "https://marvel-b1-cdn.bc0a.com/f00000000280066/d2snwnmzyr8jue.cloudfront.net/ssd_9781442472440_270.jpeg", alt: "Cover of Scythe" },
       translations: {
         en: { title: "Scythe", author: "Neal Shusterman", note: "Arc of a Scythe trilogy (Scythe, Thunderhead, The Toll)." },
@@ -130,13 +130,13 @@ export const WHO_AM_I_CONTENT = {
     {
       id: "magnus-chase",
       rank: 6,
-      cover: { src: "https://m.media-amazon.com/images/I/A1QyRbbYArL.jpg", alt: "Cover of Magnus Chase and the Gods of Asgard" },
+      cover: { src: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1634813070i/59424827.jpg", alt: "Cover of The Last Answer" },
       translations: {
-        en: { title: "Magnus Chase and the Gods of Asgard", author: "Rick Riordan", note: "Books 1-3." },
-        es: { title: "Magnus Chase y los dioses de Asgard", author: "Rick Riordan", note: "Libros 1-3." },
-        fr: { title: "Magnus Chase et les dieux d'Asgard", author: "Rick Riordan", note: "Livres 1-3." },
-        de: { title: "Magnus Chase", author: "Rick Riordan", note: "Bander 1-3." },
-        hu: { title: "Magnus Chase and the Gods of Asgard", author: "Rick Riordan", note: "1-3. kotet." },
+        en: { title: "The Last Answer", author: "Isaac Asimov" },
+        es: { title: "The Last Answer", author: "Isaac Asimov" },
+        fr: { title: "The Last Answer", author: "Isaac Asimov" },
+        de: { title: "The Last Answer", author: "Isaac Asimov" },
+        hu: { title: "The Last Answer", author: "Isaac Asimov" },
       },
     },
     {
@@ -166,13 +166,13 @@ export const WHO_AM_I_CONTENT = {
     {
       id: "heroes-of-olympus",
       rank: 9,
-      cover: { src: "https://m.media-amazon.com/images/I/81p6PiiJTxL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Heroes of Olympus" },
+      cover: { src: "https://m.media-amazon.com/images/I/51BAOQmWnBL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of The Lottery" },
       translations: {
-        en: { title: "Heroes of Olympus", author: "Rick Riordan", note: "Five-book Heroes of Olympus arc." },
-        es: { title: "Heroes del Olimpo", author: "Rick Riordan", note: "Los cinco libros de Heroes del Olimpo." },
-        fr: { title: "Les Heros de l'Olympe", author: "Rick Riordan", note: "Les cinq livres des Heros de l'Olympe." },
-        de: { title: "Helden des Olymp", author: "Rick Riordan", note: "Funf Bande der Helden des Olymp." },
-        hu: { title: "Heroes of Olympus", author: "Rick Riordan", note: "Az otkonyves Heroes of Olympus ciklus." },
+        en: { title: "The Lottery", author: "Shirley Jackson" },
+        es: { title: "The Lottery", author: "Shirley Jackson" },
+        fr: { title: "The Lottery", author: "Shirley Jackson" },
+        de: { title: "The Lottery", author: "Shirley Jackson" },
+        hu: { title: "The Lottery", author: "Shirley Jackson" },
       },
     },
     {
@@ -201,14 +201,14 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "wimpy-kid",
-      rank: 12,
-      cover: { src: "https://m.media-amazon.com/images/I/81R2N4PRuUL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Diary of a Wimpy Kid" },
+      rank: 4,
+      cover: { src: "https://m.media-amazon.com/images/I/51Oknho43qL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Lolita" },
       translations: {
-        en: { title: "Diary of a Wimpy Kid", author: "Jeff Kinney" },
-        es: { title: "Diario de Greg", author: "Jeff Kinney" },
-        fr: { title: "Journal d'un degonfle", author: "Jeff Kinney" },
-        de: { title: "Gregs Tagebuch", author: "Jeff Kinney" },
-        hu: { title: "Egy ropi naploja", author: "Jeff Kinney" },
+        en: { title: "Lolita", author: "Vladimir Nabokov" },
+        es: { title: "Lolita", author: "Vladimir Nabokov" },
+        fr: { title: "Lolita", author: "Vladimir Nabokov" },
+        de: { title: "Lolita", author: "Vladimir Nabokov" },
+        hu: { title: "Lolita", author: "Vladimir Nabokov" },
       },
     },
     {
