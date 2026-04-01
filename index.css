@@ -794,6 +794,27 @@ select:focus-visible {
 .heatmap-day--outside { visibility: hidden; pointer-events: none; }
 .heatmap-meta { display: flex; flex-wrap: wrap; gap: 6px; }
 
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.projects-stack,
+.whoami-grid,
+.content-section,
+.timeline,
+.favorite-books-module__content {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 960px;
+}
+
 .hero-card,
 .surface-card,
 .project-card,

@@ -56,7 +56,7 @@ export const WHO_AM_I_CONTENT = {
         "2x 3. in Spanien (C2)",
       ],
     },
-    hu: {
+    huLegacy: {
       paragraphs: [
         "Marton Vegh (szuletett: 2009-04-04). Budapesten szuletett, es het evig ott elt, mielott kilenc eve Mallorcara koltozott.",
         "Tanulmanyok: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-jelenleg). Gyerekkora ota fontos resze az eletének az uszas es a foci; 2018-ban kezdett kajak sprintelni, amit het even at uzott, most pedig rovid- es kozepes tavfutast (5k-10k) edz, egyelore hivatalos versenyzes nelkul.",

@@ -9,8 +9,10 @@ export const PROJECTS_CONTENT = [
       github: "https://github.com/Martonveghcode/calendar",
     },
     image: {
-      src: "https://i.ibb.co/PvjTz00Q/image-2026-04-01-130833486.png",
+      src: "/projects/homework-calendar-dashboard.png",
       alt: "Preview of Homework Calendar",
+      width: 1118,
+      height: 858,
     },
     translations: {
       en: {
@@ -47,8 +49,10 @@ export const PROJECTS_CONTENT = [
       github: "https://github.com/Martonveghcode/Handwriting-formatting-pipeline",
     },
     image: {
-      src: "https://i.ibb.co/4Rft0dM5/opera-a3d1-Myeaym.png",
+      src: "/projects/handwriting-formatting-pipeline.png",
       alt: "Placeholder preview for Handwriting Formatting Pipeline",
+      width: 759,
+      height: 470,
     },
     translations: {
       en: {
@@ -83,8 +87,10 @@ export const PROJECTS_CONTENT = [
     tech: ["Python", "yfinance", "NumPy", "Pandas", "SciPy", "Matplotlib"],
     links: {},
     image: {
-      src: "https://i.ibb.co/rhhQhcj/python-CEp-LD2-TERt.png",
+      src: "/projects/portfolio-analytics-tool.png",
       alt: "Preview of Portfolio Analytics Tool",
+      width: 1250,
+      height: 750,
     },
     translations: {
       en: {
@@ -119,8 +125,10 @@ export const PROJECTS_CONTENT = [
     tech: ["Python", "Streamlit", "SQLite", "LLM"],
     links: {},
     image: {
-      src: "https://i.ibb.co/qL6yXtff/opera-Wsc-Rf-KREz-I.png",
+      src: "/projects/grammar-trainer.png",
       alt: "Preview of Grammar Trainer",
+      width: 1796,
+      height: 1236,
     },
     translations: {
       en: {
