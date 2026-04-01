@@ -56,10 +56,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   -ms-overflow-style: none;
-  background:
-    radial-gradient(circle at top right, rgba(10, 108, 218, 0.12), transparent 30%),
-    radial-gradient(circle at left -10%, rgba(10, 108, 218, 0.08), transparent 36%),
-    var(--page-bg);
+  background: var(--page-bg);
   color: var(--text-strong);
   font-family: "Inter", "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -95,7 +92,97 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
-.page-shell { min-height: 100vh; }
+.page-shell {
+  position: relative;
+  min-height: 100vh;
+}
+
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.app-background__container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.08)),
+    linear-gradient(135deg, #ffe8f3 0%, #d9f3ff 100%);
+}
+
+.app-background__container::before,
+.app-background__container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    #ff9aa2,
+    #ffb7b2,
+    #ffdac1,
+    #e2f0cb,
+    #a2e4ff,
+    #c9afff,
+    #ffb7b2,
+    #ff9aa2
+  );
+  transform: translate(-50%, -50%);
+  animation: app-pattern-rotate 8s linear infinite;
+  filter: blur(50px);
+  opacity: 0.5;
+}
+
+.app-background__container::after {
+  width: 180%;
+  height: 180%;
+  animation: app-pattern-rotate-reverse 10s linear infinite;
+  opacity: 0.35;
+}
+
+:root[data-theme="dark"] .app-background__container {
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.22)),
+    linear-gradient(135deg, #0b0d10 0%, #12161a 54%, #10233b 100%);
+}
+
+:root[data-theme="dark"] .app-background__container::before,
+:root[data-theme="dark"] .app-background__container::after {
+  background: conic-gradient(
+    from 0deg,
+    rgba(10, 108, 218, 0.9),
+    rgba(47, 108, 191, 0.7),
+    rgba(92, 146, 214, 0.6),
+    rgba(16, 35, 59, 0.8),
+    rgba(10, 108, 218, 0.9)
+  );
+  opacity: 0.24;
+}
+
+.site-nav,
+.site-main {
+  position: relative;
+}
+
+.site-main {
+  z-index: 1;
+}
+
+@keyframes app-pattern-rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes app-pattern-rotate-reverse {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
 
 .site-nav {
   position: sticky;

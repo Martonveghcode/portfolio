@@ -222,6 +222,14 @@ function FavoriteBooksAccordion({ title, books }) {
   );
 }
 
+function AppBackground() {
+  return (
+    <div className="app-background" aria-hidden="true">
+      <div className="app-background__container" />
+    </div>
+  );
+}
+
 function HomePage({ copy, heatmapProps }) {
   return (
     <main className="site-main site-main--home">
@@ -431,6 +439,7 @@ export default function App() {
 
   return (
     <div className="page-shell">
+      <AppBackground />
       <SiteNav
         page={page}
         onNavigate={setPage}
