@@ -7,6 +7,79 @@ const HEATMAP_COLORS = {
 };
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const CONTRIBUTION_CACHE_TTL_MS = 1000 * 60 * 30;
+const contributionCache = new Map();
+const contributionRequestCache = new Map();
+
+function getContributionCacheKey(username) {
+  return `portfolio-github-contributions:${username.toLowerCase()}`;
+}
+
+function storeContributionCache(username, contributions) {
+  const cacheEntry = {
+    fetchedAt: Date.now(),
+    contributions,
+  };
+
+  contributionCache.set(username, cacheEntry);
+
+  if (typeof window !== "undefined") {
+    try {
+      window.localStorage.setItem(getContributionCacheKey(username), JSON.stringify(cacheEntry));
+    } catch {
+      // Ignore storage failures and keep the in-memory cache.
+    }
+  }
+
+  return cacheEntry;
+}
+
+function readContributionCache(username) {
+  if (!username) return null;
+
+  const inMemoryEntry = contributionCache.get(username);
+  if (inMemoryEntry) return inMemoryEntry;
+
+  if (typeof window === "undefined") return null;
+
+  try {
+    const rawValue = window.localStorage.getItem(getContributionCacheKey(username));
+    if (!rawValue) return null;
+
+    const parsedValue = JSON.parse(rawValue);
+    if (!Array.isArray(parsedValue?.contributions) || typeof parsedValue?.fetchedAt !== "number") return null;
+
+    contributionCache.set(username, parsedValue);
+    return parsedValue;
+  } catch {
+    return null;
+  }
+}
+
+function isContributionCacheFresh(cacheEntry) {
+  return Boolean(cacheEntry) && Date.now() - cacheEntry.fetchedAt < CONTRIBUTION_CACHE_TTL_MS;
+}
+
+function fetchContributionData(username) {
+  const pendingRequest = contributionRequestCache.get(username);
+  if (pendingRequest) return pendingRequest;
+
+  const request = fetch(`https://github-contributions-api.jogruber.de/v4/${username}`)
+    .then(async (response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to load contributions (${response.status})`);
+      }
+
+      const payload = await response.json();
+      return storeContributionCache(username, payload.contributions ?? []);
+    })
+    .finally(() => {
+      contributionRequestCache.delete(username);
+    });
+
+  contributionRequestCache.set(username, request);
+  return request;
+}
 
 function formatDateKey(date) {
   const year = date.getFullYear();
@@ -122,6 +195,12 @@ function getInitialEntries(providedEntries, minDate, maxDate, syntheticActivity)
   return normalizeEntries(providedEntries, minDate, maxDate, syntheticActivity);
 }
 
+function getCachedEntries(username, minDate, maxDate, syntheticActivity) {
+  const cachedEntry = readContributionCache(username);
+  if (!cachedEntry) return [];
+  return normalizeEntries(cachedEntry.contributions, minDate, maxDate, syntheticActivity);
+}
+
 function buildWeeks(entries, minDate, maxDate, startWeekday) {
   if (!minDate || !maxDate) return [];
 
@@ -179,8 +258,18 @@ export default function ContributionHeatmap({
   onCellTap,
   syntheticActivity,
 }) {
-  const [entries, setEntries] = useState(() => getInitialEntries(providedEntries, minDate, maxDate, syntheticActivity));
-  const [status, setStatus] = useState(providedEntries?.length ? "ready" : "loading");
+  const [entries, setEntries] = useState(() => {
+    if (providedEntries?.length) {
+      return getInitialEntries(providedEntries, minDate, maxDate, syntheticActivity);
+    }
+
+    return getCachedEntries(username, minDate, maxDate, syntheticActivity);
+  });
+  const [status, setStatus] = useState(() => {
+    if (providedEntries?.length) return "ready";
+    if (readContributionCache(username)) return "ready";
+    return username ? "loading" : "idle";
+  });
 
   useEffect(() => {
     if (providedEntries?.length) {
@@ -189,43 +278,49 @@ export default function ContributionHeatmap({
       return undefined;
     }
 
-    if (!username) return undefined;
-
-    let cancelled = false;
-    const controller = new AbortController();
-
-    async function load() {
-      setStatus("loading");
-
-      try {
-        const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`, {
-          signal: controller.signal,
-        });
-
-        if (!response.ok) {
-          throw new Error(`Failed to load contributions (${response.status})`);
-        }
-
-        const payload = await response.json();
-        const normalized = normalizeEntries(payload.contributions ?? [], minDate, maxDate, syntheticActivity);
-
-        if (!cancelled) {
-          setEntries(normalized);
-          setStatus("ready");
-        }
-      } catch (error) {
-        if (cancelled || error.name === "AbortError") return;
-        console.error("Failed to load contributions", error);
-        setEntries([]);
-        setStatus("error");
-      }
+    if (!username) {
+      setEntries([]);
+      setStatus("idle");
+      return undefined;
     }
 
-    load();
+    let cancelled = false;
+    const cachedEntry = readContributionCache(username);
+
+    if (cachedEntry) {
+      setEntries(normalizeEntries(cachedEntry.contributions, minDate, maxDate, syntheticActivity));
+      setStatus("ready");
+    } else {
+      setStatus("loading");
+    }
+
+    if (cachedEntry && isContributionCacheFresh(cachedEntry)) {
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    fetchContributionData(username)
+      .then((freshCacheEntry) => {
+        if (cancelled) return;
+
+        const normalized = normalizeEntries(freshCacheEntry.contributions, minDate, maxDate, syntheticActivity);
+        setEntries(normalized);
+        setStatus("ready");
+      })
+      .catch((error) => {
+        if (cancelled) return;
+
+        console.error("Failed to load contributions", error);
+
+        if (!cachedEntry) {
+          setEntries([]);
+          setStatus("error");
+        }
+      });
 
     return () => {
       cancelled = true;
-      controller.abort();
     };
   }, [providedEntries, username, minDate, maxDate, syntheticActivity]);
 
@@ -237,10 +332,11 @@ export default function ContributionHeatmap({
     [entries, minDate, maxDate, startWeekday]
   );
 
-  const total = entries.reduce((sum, entry) => sum + entry.count, 0);
-  const startLabel = minDate
-    ? minDate.toLocaleDateString("en", { month: "short", day: "numeric", year: "numeric" })
-    : "";
+  const total = useMemo(() => entries.reduce((sum, entry) => sum + entry.count, 0), [entries]);
+  const startLabel = useMemo(
+    () => (minDate ? minDate.toLocaleDateString("en", { month: "short", day: "numeric", year: "numeric" }) : ""),
+    [minDate]
+  );
 
   const statusLabel =
     status === "error"
