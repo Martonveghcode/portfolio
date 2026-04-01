@@ -35,28 +35,91 @@ function computeLevel(count, maxCount) {
   return 4;
 }
 
-function normalizeEntries(rawEntries = [], minDate, maxDate) {
+function toStartOfDay(value) {
+  const date = value instanceof Date ? new Date(value) : new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+function getSeededUnit(seed) {
+  let hash = 2166136261;
+
+  for (let index = 0; index < seed.length; index += 1) {
+    hash ^= seed.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return (hash >>> 0) / 4294967295;
+}
+
+function applySyntheticActivity(entries, minDate, maxDate, syntheticActivity) {
+  if (!syntheticActivity?.enabled || !minDate || !maxDate) return entries;
+
+  const startDate = toStartOfDay(syntheticActivity.startDate);
+  if (!startDate) return entries;
+
+  const probability = syntheticActivity.probability ?? 0.5;
+  const minExtra = syntheticActivity.minExtra ?? syntheticActivity.count ?? 1;
+  const maxExtra = syntheticActivity.maxExtra ?? syntheticActivity.count ?? minExtra;
+  const entryMap = new Map(entries.map((entry) => [formatDateKey(entry.date), { ...entry }]));
+  const cursor = new Date(startDate > minDate ? startDate : minDate);
+
+  while (cursor <= maxDate) {
+    const key = formatDateKey(cursor);
+
+    if (getSeededUnit(`${key}-chance`) < probability) {
+      const extra =
+        minExtra === maxExtra
+          ? minExtra
+          : minExtra + Math.floor(getSeededUnit(`${key}-count`) * (maxExtra - minExtra + 1));
+      const existingEntry = entryMap.get(key);
+
+      if (existingEntry) {
+        existingEntry.count += extra;
+        existingEntry.level = undefined;
+      } else {
+        entryMap.set(key, {
+          date: new Date(cursor),
+          count: extra,
+          level: undefined,
+        });
+      }
+    }
+
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  return Array.from(entryMap.values()).sort((left, right) => left.date - right.date);
+}
+
+function normalizeEntries(rawEntries = [], minDate, maxDate, syntheticActivity) {
   if (!minDate || !maxDate) return [];
 
-  const rangeMin = new Date(minDate);
-  rangeMin.setHours(0, 0, 0, 0);
-  const rangeMax = new Date(maxDate);
-  rangeMax.setHours(0, 0, 0, 0);
+  const rangeMin = toStartOfDay(minDate);
+  const rangeMax = toStartOfDay(maxDate);
 
   const parsedEntries = rawEntries
     .map((entry) => ({
-      date: entry.date instanceof Date ? entry.date : new Date(entry.date),
+      date: toStartOfDay(entry.date),
       count: entry.count ?? entry.value ?? 0,
       level: entry.level,
     }))
-    .filter((entry) => entry.date >= rangeMin && entry.date <= rangeMax);
+    .filter((entry) => entry.date && entry.date >= rangeMin && entry.date <= rangeMax);
 
-  const maxCount = parsedEntries.reduce((max, entry) => Math.max(max, entry.count), 0);
+  const entriesWithSyntheticActivity = applySyntheticActivity(parsedEntries, rangeMin, rangeMax, syntheticActivity);
 
-  return parsedEntries.map((entry) => ({
+  const maxCount = entriesWithSyntheticActivity.reduce((max, entry) => Math.max(max, entry.count), 0);
+
+  return entriesWithSyntheticActivity.map((entry) => ({
     ...entry,
     level: entry.level ?? computeLevel(entry.count, maxCount),
   }));
+}
+
+function getInitialEntries(providedEntries, minDate, maxDate, syntheticActivity) {
+  if (!providedEntries?.length) return [];
+  return normalizeEntries(providedEntries, minDate, maxDate, syntheticActivity);
 }
 
 function buildWeeks(entries, minDate, maxDate, startWeekday) {
@@ -114,13 +177,14 @@ export default function ContributionHeatmap({
   minDate,
   maxDate = new Date(),
   onCellTap,
+  syntheticActivity,
 }) {
-  const [entries, setEntries] = useState(() => normalizeEntries(providedEntries ?? [], minDate, maxDate));
+  const [entries, setEntries] = useState(() => getInitialEntries(providedEntries, minDate, maxDate, syntheticActivity));
   const [status, setStatus] = useState(providedEntries?.length ? "ready" : "loading");
 
   useEffect(() => {
     if (providedEntries?.length) {
-      setEntries(normalizeEntries(providedEntries, minDate, maxDate));
+      setEntries(normalizeEntries(providedEntries, minDate, maxDate, syntheticActivity));
       setStatus("ready");
       return undefined;
     }
@@ -143,7 +207,7 @@ export default function ContributionHeatmap({
         }
 
         const payload = await response.json();
-        const normalized = normalizeEntries(payload.contributions ?? [], minDate, maxDate);
+        const normalized = normalizeEntries(payload.contributions ?? [], minDate, maxDate, syntheticActivity);
 
         if (!cancelled) {
           setEntries(normalized);
@@ -163,7 +227,7 @@ export default function ContributionHeatmap({
       cancelled = true;
       controller.abort();
     };
-  }, [providedEntries, username, minDate, maxDate]);
+  }, [providedEntries, username, minDate, maxDate, syntheticActivity]);
 
   const colorScale = HEATMAP_COLORS[heatmapColor] ?? HEATMAP_COLORS.blue;
   const columnGap = 4;
@@ -179,11 +243,11 @@ export default function ContributionHeatmap({
     : "";
 
   const statusLabel =
-    status === "loading"
-      ? "Loading contributions..."
-      : status === "error"
-        ? "Could not load contributions"
-        : `${total} contributions since ${startLabel}`;
+    status === "error"
+      ? "Could not load contributions"
+      : status === "ready"
+        ? `${total} contributions since ${startLabel}`
+        : "";
 
   return (
     <div
@@ -247,9 +311,11 @@ export default function ContributionHeatmap({
         ))}
       </div>
 
-      <div className="heatmap-meta">
-        <span className="small muted">{statusLabel}</span>
-      </div>
+      {statusLabel ? (
+        <div className="heatmap-meta">
+          <span className="small muted">{statusLabel}</span>
+        </div>
+      ) : null}
     </div>
   );
 }
