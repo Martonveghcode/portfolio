@@ -24,6 +24,13 @@ const heatmapConfig = {
   minDate: new Date(2025, 5, 14), // June is month index 5
   maxDate: new Date(),
   entries: undefined, // Provide entries to disable fetching by username
+  syntheticActivity: {
+    enabled: true,
+    startDate: new Date(2025, 8, 1), // September 1, 2025
+    probability: 0.5,
+    minExtra: 1,
+    maxExtra: 3,
+  },
   onCellTap: (date, value) => {
     console.log(`Tapped: ${date.toDateString()} with ${value} contributions`);
   },
