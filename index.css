@@ -383,8 +383,7 @@ select:focus-visible {
 
 .chip--mono,
 .tag,
-.meta-pill,
-.timeline-item__period {
+.meta-pill {
   font-family: "SF Mono", ui-monospace, Menlo, Monaco, "Cascadia Code", monospace;
 }
 
@@ -508,42 +507,25 @@ select:focus-visible {
 .status-pill { color: var(--accent); background: var(--accent-soft); border-color: var(--accent-strong); }
 .inline-link { color: var(--accent); font-weight: 600; }
 
-.timeline { display: grid; gap: 18px; position: relative; }
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 22px;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-  background: var(--border);
-}
+.timeline { display: grid; gap: 20px; }
 
 .timeline-item {
   display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 20px;
-  position: relative;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 24px;
   align-items: start;
 }
 
-.timeline-item__meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  position: relative;
-  z-index: 1;
+.timeline-item__period {
+  padding-top: 10px;
+  color: var(--text-soft);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-align: right;
+  white-space: nowrap;
 }
-
-.timeline-item__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 0 0 0 6px var(--accent-soft);
-}
-
-.timeline-item__period { color: var(--text-soft); font-size: 13px; }
 
 .whoami-grid {
   display: grid;
@@ -821,7 +803,10 @@ select:focus-visible {
   .favorite-books-module__preview { gap: 12px; }
   .hero-card h1 { font-size: clamp(2.6rem, 14vw, 3.4rem); }
   .timeline-item { grid-template-columns: 1fr; }
-  .timeline::before { display: none; }
+  .timeline-item__period {
+    padding-top: 0;
+    text-align: left;
+  }
   .overview-grid,
   .project-grid,
   .books-grid,

@@ -143,10 +143,7 @@ function ExperienceTimeline({ items, compact = false }) {
     <div className={`timeline ${compact ? "timeline--compact" : ""}`}>
       {items.map((item) => (
         <article key={item.id} className="timeline-item">
-          <div className="timeline-item__meta">
-            <span className="timeline-item__dot" />
-            <span className="timeline-item__period">{item.period}</span>
-          </div>
+          <span className="timeline-item__period">{item.period}</span>
           <div className="timeline-item__card">
             <h3>{item.title}</h3>
             <p className="muted">{item.detail}</p>
