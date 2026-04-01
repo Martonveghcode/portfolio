@@ -259,7 +259,6 @@ function ProjectsPage({ copy, projects, papers }) {
   return (
     <main className="site-main">
       <section className="page-intro page-intro--curved">
-        <p className="eyebrow">{copy.nav.projects}</p>
         <h1>{copy.projectsTitle}</h1>
       </section>
 
@@ -286,7 +285,7 @@ function ProjectsPage({ copy, projects, papers }) {
 function ExperiencePage({ copy, experience }) {
   return (
     <main className="site-main site-main--reading">
-      <section className="page-intro"><p className="eyebrow">{copy.nav.experience}</p><h1>{copy.experienceTitle}</h1></section>
+      <section className="page-intro"><h1>{copy.experienceTitle}</h1></section>
       <ExperienceTimeline items={experience} />
     </main>
   );
@@ -295,7 +294,7 @@ function ExperiencePage({ copy, experience }) {
 function WhoAmIPage({ copy, whoAmI }) {
   return (
     <main className="site-main">
-      <section className="page-intro"><p className="eyebrow">{copy.nav.whoami}</p><h1>{copy.whoAmITitle}</h1></section>
+      <section className="page-intro"><h1>{copy.whoAmITitle}</h1></section>
       <section className="whoami-grid">
         <article className="surface-card prose-card">
           <SectionHeader title={copy.aboutTitle} />
