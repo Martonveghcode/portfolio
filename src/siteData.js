@@ -15,7 +15,8 @@ export const PROFILE = {
   githubHandle: "Martonveghcode",
   githubUrl: "https://github.com/Martonveghcode",
   instagramUrl: "https://www.instagram.com/marton.alt",
-  sportsImage: "https://i.ibb.co/PZmb2gTS/Whats-App-Image-2025-12-19-at-10-48-27.jpg",
+  profileImage: "/profile/marton-vegh-portrait.jpg",
+  sportsImage: "/profile/marton-vegh-canoe-sprint.jpg",
 };
 
 export const STACK = {

@@ -1,9 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useState } from "react";
 import ContributionHeatmap from "./ContributionHeatmap";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
+import SeoRouteContent from "./SeoRouteContent";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
+import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
+
+const PROJECT_DISPLAY_ORDER = ["portfolio-analytics-tool", "handwriting-pipeline", "calendar", "grammar-trainer"];
+const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 
 function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggleTheme, cvLink, copy }) {
   return (
@@ -78,7 +83,15 @@ function ProjectCard({ project, copy, compact = false }) {
     <article className={`project-card ${compact ? "project-card--compact" : ""}`}>
       <div className={`project-media ${project.image?.src ? "" : "project-media--empty"}`}>
         {project.image?.src ? (
-          <img src={project.image.src} alt={project.image.alt || project.title} loading="lazy" />
+          <img
+            src={project.image.src}
+            alt={project.image.alt || project.title}
+            width={project.image.width}
+            height={project.image.height}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+          />
         ) : (
           <div className="project-media__fallback">
             <span className="eyebrow">{project.tech[0] ?? copy.projectsTitle}</span>
@@ -183,6 +196,7 @@ function MediaCard({ item, detailKey, mediaOrientation = "portrait" }) {
 function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation = "portrait" }) {
   const previewItems = items.slice(0, 3);
   const [isOpen, setIsOpen] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
   const isLandscape = mediaOrientation === "landscape";
   const previewSizes = isLandscape
     ? "(max-width: 520px) 100vw, (max-width: 760px) 33vw, 280px"
@@ -194,7 +208,13 @@ function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation
         type="button"
         className="favorite-books-module__summary"
         aria-expanded={isOpen}
-        onClick={() => setIsOpen((current) => !current)}
+        onClick={() => {
+          setIsOpen((current) => {
+            const nextState = !current;
+            if (nextState) setHasOpened(true);
+            return nextState;
+          });
+        }}
       >
         <div className="favorite-books-module__header">
           <h2>{title}</h2>
@@ -226,16 +246,18 @@ function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation
 
       <div className="favorite-books-module__content">
         <div className="favorite-books-module__inner">
-          <div className={`books-grid books-grid--favorite ${mediaOrientation === "landscape" ? "books-grid--landscape" : ""}`}>
-            {items.map((item) => (
-              <MediaCard
-                key={item.id}
-                item={item}
-                detailKey={detailKey}
-                mediaOrientation={mediaOrientation}
-              />
-            ))}
-          </div>
+          {hasOpened ? (
+            <div className={`books-grid books-grid--favorite ${mediaOrientation === "landscape" ? "books-grid--landscape" : ""}`}>
+              {items.map((item) => (
+                <MediaCard
+                  key={item.id}
+                  item={item}
+                  detailKey={detailKey}
+                  mediaOrientation={mediaOrientation}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
@@ -325,12 +347,30 @@ function WhoAmIPage({ copy, whoAmI }) {
             {whoAmI.paragraphs.map((paragraph, index) => <p key={`whoami-${index}`} className="muted">{paragraph}</p>)}
           </div>
           <div className="prose-media">
-            <img src="https://i.ibb.co/v4NqTbzz/IMG-8888-1.jpg" alt="IMG 8888(1)" loading="lazy" />
+            <img
+              src={PROFILE.profileImage}
+              alt="IMG 8888(1)"
+              width="748"
+              height="1625"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+            />
           </div>
         </article>
         <article className="surface-card achievement-card">
           <SectionHeader title={copy.sportsAchievementsTitle} />
-          <div className="achievement-media"><img src={PROFILE.sportsImage} alt="Canoe sprint" loading="lazy" /></div>
+          <div className="achievement-media">
+            <img
+              src={PROFILE.sportsImage}
+              alt="Canoe sprint"
+              width="1200"
+              height="1600"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+            />
+          </div>
           <ul className="achievement-list">
             {whoAmI.achievements.map((achievement) => <li key={achievement}>{achievement}</li>)}
           </ul>
@@ -362,10 +402,17 @@ function getInitialTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+function getInitialPathname() {
+  if (typeof window === "undefined") return PRIMARY_PAGE_PATHS.home;
+  return normalizePath(window.location.pathname);
+}
+
 export default function App() {
   const [language, setLanguage] = useState("en");
-  const [page, setPage] = useState("home");
+  const [pathname, setPathname] = useState(getInitialPathname);
   const [theme, setTheme] = useState(getInitialTheme);
+  const route = useMemo(() => resolveRoute(pathname), [pathname]);
+  const page = route.page;
 
   const copy = translations[language] ?? translations.en;
   const cvLink = CV_LINKS[language] ?? CV_LINKS.en;
@@ -376,8 +423,35 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  useEffect(() => {
+    const runtimeSiteUrl = getRuntimeSiteUrl();
+    applyRouteMetadata(route, runtimeSiteUrl);
+  }, [route]);
+
+  useEffect(() => {
+    document.getElementById("seo-content")?.remove();
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const handlePopState = () => {
+      setPathname(normalizePath(window.location.pathname));
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
+  useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
-  }, [page]);
+  }, [route.canonicalPath]);
 
   const heatmapProps = useMemo(() => ({
     ...heatmapConfig,
@@ -396,6 +470,10 @@ export default function App() {
       title: locale.title ?? projectTranslations.en?.title ?? project.title ?? "",
       summary: locale.summary ?? projectTranslations.en?.summary ?? project.summary ?? "",
     };
+  }).sort((left, right) => {
+    const leftRank = PROJECT_DISPLAY_RANK.get(left.id) ?? Number.MAX_SAFE_INTEGER;
+    const rightRank = PROJECT_DISPLAY_RANK.get(right.id) ?? Number.MAX_SAFE_INTEGER;
+    return leftRank - rightRank;
   }), [language]);
 
   const localizedPapers = useMemo(() => PAPERS_CONTENT.map((paper) => {
@@ -469,6 +547,28 @@ export default function App() {
     };
   }, [language]);
 
+  function navigateToPath(nextPath) {
+    const normalizedPath = normalizePath(nextPath);
+
+    if (typeof window !== "undefined" && normalizePath(window.location.pathname) !== normalizedPath) {
+      window.history.pushState({}, "", normalizedPath);
+    }
+
+    startTransition(() => {
+      setPathname(normalizedPath);
+    });
+  }
+
+  function handlePrimaryPageNavigate(nextPage) {
+    navigateToPath(PRIMARY_PAGE_PATHS[nextPage] ?? PRIMARY_PAGE_PATHS.home);
+  }
+
+  function handleLanguageChange(nextLanguage) {
+    startTransition(() => {
+      setLanguage(nextLanguage);
+    });
+  }
+
   let pageView = (
     <HomePage
       copy={copy}
@@ -486,14 +586,15 @@ export default function App() {
       <AppBackground />
       <SiteNav
         page={page}
-        onNavigate={setPage}
+        onNavigate={handlePrimaryPageNavigate}
         language={language}
-        onLanguageChange={setLanguage}
+        onLanguageChange={handleLanguageChange}
         theme={theme}
         onToggleTheme={() => setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"))}
         cvLink={cvLink}
         copy={copy}
       />
+      <SeoRouteContent route={route} />
       {pageView}
     </div>
   );
