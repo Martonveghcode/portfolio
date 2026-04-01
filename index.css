@@ -554,13 +554,22 @@ select:focus-visible {
 
 .prose-media img,
 .achievement-media img { width: 100%; height: 100%; object-fit: cover; }
-.prose-media img { object-position: center 30%; }
+.prose-media img {
+  height: calc(100% + 20px);
+  object-position: center 30%;
+  transform: translateY(-20px);
+}
 .achievement-list { padding-left: 20px; color: var(--text); }
 
 .books-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .books-grid--favorite { padding-top: 8px; }
 .books-grid--landscape { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .book-card { overflow: hidden; }
+.book-card--landscape {
+  contain: layout paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 420px;
+}
 .book-card__cover { aspect-ratio: 2 / 3; border-radius: 0; border-left: 0; border-right: 0; border-top: 0; }
 .book-card__cover img { width: 100%; height: 100%; object-fit: cover; }
 .book-card__cover--landscape { aspect-ratio: 16 / 10; }
@@ -655,6 +664,10 @@ select:focus-visible {
   aspect-ratio: 16 / 10;
 }
 
+.favorite-books-module--landscape .favorite-books-module__preview-frame {
+  contain: layout paint;
+}
+
 :root[data-theme="dark"] .favorite-books-module__preview-frame {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
 }
@@ -669,6 +682,7 @@ select:focus-visible {
 
 .favorite-books-module__preview-frame--landscape img {
   object-position: center;
+  transform: none;
 }
 
 .favorite-books-module__preview-rank {
@@ -724,6 +738,15 @@ select:focus-visible {
 
 .favorite-books-module.is-open .favorite-books-module__content {
   grid-template-rows: 1fr;
+}
+
+.favorite-books-module--landscape .favorite-books-module__preview {
+  transition: max-height 240ms ease, opacity 180ms ease, transform 240ms ease, margin 240ms ease;
+}
+
+.favorite-books-module--landscape .favorite-books-module__preview-item,
+.favorite-books-module--landscape .favorite-books-module__content {
+  transition-duration: 200ms;
 }
 
 .site-footer {

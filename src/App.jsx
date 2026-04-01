@@ -31,6 +31,9 @@ function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggle
           <a className="nav-action" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
             GitHub
           </a>
+          <a className="nav-action" href={`mailto:${PROFILE.email}`}>
+            Gmail
+          </a>
           <a className="nav-action" href={cvLink} target="_blank" rel="noreferrer">
             CV
           </a>
@@ -85,16 +88,6 @@ function ProjectCard({ project, copy, compact = false }) {
       </div>
 
       <div className="project-card__body">
-        {project.tech.length ? (
-          <div className="tag-row">
-            {project.tech.map((tech) => (
-              <span key={`${project.id}-${tech}`} className="tag">
-                {tech}
-              </span>
-            ))}
-          </div>
-        ) : null}
-
         <div className="card-copy">
           <h3>{project.title}</h3>
           <p className="muted">{project.summary}</p>
@@ -156,12 +149,23 @@ function ExperienceTimeline({ items, compact = false }) {
 
 function MediaCard({ item, detailKey, mediaOrientation = "portrait" }) {
   const detail = item[detailKey];
+  const imageSizes = mediaOrientation === "landscape"
+    ? "(max-width: 760px) 100vw, 520px"
+    : "(max-width: 760px) 100vw, 320px";
 
   return (
     <article className={`book-card ${mediaOrientation === "landscape" ? "book-card--landscape" : ""}`}>
       <div className={`book-card__cover ${mediaOrientation === "landscape" ? "book-card__cover--landscape" : ""}`}>
         {item.cover?.src ? (
-          <img src={item.cover.src} alt={item.cover.alt || item.title} loading="lazy" />
+          <img
+            src={item.cover.src}
+            srcSet={item.cover.srcSet}
+            sizes={imageSizes}
+            alt={item.cover.alt || item.title}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+          />
         ) : (
           <div className="book-card__fallback">{item.title}</div>
         )}
@@ -179,9 +183,13 @@ function MediaCard({ item, detailKey, mediaOrientation = "portrait" }) {
 function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation = "portrait" }) {
   const previewItems = items.slice(0, 3);
   const [isOpen, setIsOpen] = useState(false);
+  const isLandscape = mediaOrientation === "landscape";
+  const previewSizes = isLandscape
+    ? "(max-width: 520px) 100vw, (max-width: 760px) 33vw, 280px"
+    : "(max-width: 520px) 100vw, (max-width: 760px) 33vw, 220px";
 
   return (
-    <section className={`favorite-books-module ${isOpen ? "is-open" : ""}`}>
+    <section className={`favorite-books-module ${isOpen ? "is-open" : ""} ${isLandscape ? "favorite-books-module--landscape" : ""}`}>
       <button
         type="button"
         className="favorite-books-module__summary"
@@ -197,7 +205,15 @@ function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation
             <div key={item.id} className="favorite-books-module__preview-item">
               <div className={`favorite-books-module__preview-frame ${mediaOrientation === "landscape" ? "favorite-books-module__preview-frame--landscape" : ""}`}>
                 {item.cover?.src ? (
-                  <img src={item.cover.src} alt={item.cover.alt || item.title} loading="lazy" />
+                  <img
+                    src={item.cover.src}
+                    srcSet={item.cover.srcSet}
+                    sizes={previewSizes}
+                    alt={item.cover.alt || item.title}
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
+                  />
                 ) : (
                   <div className="book-card__fallback">{item.title}</div>
                 )}

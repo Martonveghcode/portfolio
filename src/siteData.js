@@ -65,11 +65,11 @@ export const translations = {
   },
   es: {
     nav: { home: "Inicio", projects: "Proyectos", papers: "Papers", experience: "Experiencia", whoami: "Quien soy" },
-    heroTagline: "Desarrollador de 16 anos",
+    heroTagline: "Aspirante a ingeniero financiero cuantitativo que habla 5 idiomas",
     heroSub: "Enfocado en soluciones practicas que resuelven problemas reales.",
     aboutTitle: "Quien soy",
     aboutBlurb:
-      "Estudiante desarrollador que estudia en Espana con pasion por las matematicas. Vive en Mallorca. Empezo a programar recientemente aprendiendo diseno web y despues paso a una programacion mas orientada a ciencia de datos.",
+      "Estudiante desarrollador que estudia en Espana con pasion por la politica, las finanzas y las matematicas. Vive en Mallorca. Tiene algo de experiencia en diseno web con React y actualmente estudia un MicroMasters del MIT en finanzas.",
     languagesTitle: "Idiomas",
     languagesList: ["Hungaro (nativo)", "Ingles (fluido)", "Espanol (fluido)", "Frances (fluido)", "Catalan (aprendiendo)"],
     stackTitle: "Que uso",
@@ -90,11 +90,11 @@ export const translations = {
   },
   fr: {
     nav: { home: "Accueil", projects: "Projets", papers: "Papiers", experience: "Experience", whoami: "Qui je suis" },
-    heroTagline: "Developpeur de 16 ans",
+    heroTagline: "Aspirant ingenieur financier quantitatif parlant 5 langues",
     heroSub: "Centre sur des solutions pratiques qui resolvent de vrais problemes.",
     aboutTitle: "Qui je suis",
     aboutBlurb:
-      "Etudiant developpeur en Espagne avec une passion pour les mathematiques. Base a Majorque. A commence a programmer recemment par le design web avant de passer a une programmation plus orientee data science.",
+      "Etudiant developpeur en Espagne avec une passion pour la politique, la finance et les mathematiques. Base a Majorque. Il a un peu d'experience en web design avec React et suit actuellement un MicroMasters du MIT en finance.",
     languagesTitle: "Langues",
     languagesList: ["Hongrois (natif)", "Anglais (courant)", "Espagnol (courant)", "Francais (courant)", "Catalan (en apprentissage)"],
     stackTitle: "Ce que j'utilise",
@@ -115,11 +115,11 @@ export const translations = {
   },
   de: {
     nav: { home: "Start", projects: "Projekte", papers: "Papers", experience: "Erfahrung", whoami: "Wer ich bin" },
-    heroTagline: "16-jahriger Entwickler",
+    heroTagline: "Funfsprachiger angehender quantitativer Finanzingenieur",
     heroSub: "Fokus auf praktische Losungen, die reale Probleme losen.",
     aboutTitle: "Wer ich bin",
     aboutBlurb:
-      "Schuler-Entwickler in Spanien mit einer Leidenschaft fur Mathematik. Lebt auf Mallorca. Hat vor kurzem mit dem Programmieren uber Webdesign begonnen und bewegt sich jetzt starker in Richtung datenorientierter Entwicklung.",
+      "Studentischer Entwickler in Spanien mit einer Leidenschaft fur Politik, Finanzen und Mathematik. Lebt auf Mallorca. Hat etwas Erfahrung mit React-Webdesign und studiert derzeit ein MIT MicroMasters in Finance.",
     languagesTitle: "Sprachen",
     languagesList: ["Ungarisch (Muttersprache)", "Englisch (fliessend)", "Spanisch (fliessend)", "Franzosisch (fliessend)", "Katalanisch (lernend)"],
     stackTitle: "Was ich nutze",
@@ -140,11 +140,11 @@ export const translations = {
   },
   hu: {
     nav: { home: "Kezdolap", projects: "Projektek", papers: "Tanulmanyok", experience: "Tapasztalat", whoami: "Ki vagyok" },
-    heroTagline: "16 eves fejleszto",
+    heroTagline: "Ot nyelven beszelo leendo kvantitativ penzugyi mernok",
     heroSub: "Gyakorlati, valos problemakat megoldo megoldasokra fokuszalok.",
     aboutTitle: "Ki vagyok",
     aboutBlurb:
-      "Spanyolorszagban tanulo diak fejleszto vagyok, eros matematikai erdeklodessel. Mallorcan elek. Nemreg kezdtem programozni webdizajnnal, majd egyre inkabb az adatorientalt fejlesztes fele fordultam.",
+      "Spanyolorszagban tanulo diak fejleszto vagyok, akit a politika, a penzugy es a matematika erdekel. Mallorcan elek. Van nemi tapasztalatom React webdizajnban, es jelenleg az MIT penzugyi MicroMasters kepzeset tanulom.",
     languagesTitle: "Nyelvek",
     languagesList: ["Magyar (anyanyelv)", "Angol (folyekony)", "Spanyol (folyekony)", "Francia (folyekony)", "Katalan (tanulas alatt)"],
     stackTitle: "Amit hasznalok",
