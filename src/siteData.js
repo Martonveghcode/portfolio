@@ -34,11 +34,11 @@ export const CV_LINKS = {
 export const translations = {
   en: {
     nav: { home: "Home", projects: "Projects", papers: "Papers", experience: "Experience", whoami: "Who Am I" },
-    heroTagline: "16 year-old developer",
+    heroTagline: "Penta-lingual aspiring quantitative financial engineer",
     heroSub: "Focused on practical solutions that solve real problems.",
     aboutTitle: "Who I am",
     aboutBlurb:
-      "Student developer studying in Spain with a passion for maths. Based in Mallorca. Started programming recently by learning web design, moving onto more data-science oriented programming.",
+      "Student developer studying in spain with a passion for politics, finance and math. Based in mallorca. Some experience in react web design and currently studying a MIT micromasters in finance.",
     languagesTitle: "Languages",
     languagesList: [
       "Hungarian (native)",
