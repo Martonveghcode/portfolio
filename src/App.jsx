@@ -9,6 +9,7 @@ import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./site
 
 const PROJECT_DISPLAY_ORDER = ["portfolio-analytics-tool", "handwriting-pipeline", "calendar", "grammar-trainer"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
+const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}`;
 
 function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggleTheme, cvLink, copy }) {
   return (
@@ -36,7 +37,7 @@ function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggle
           <a className="nav-action" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a className="nav-action" href={`mailto:${PROFILE.email}`}>
+          <a className="nav-action" href={GMAIL_COMPOSE_URL} target="_blank" rel="noreferrer">
             Gmail
           </a>
           <a className="nav-action" href={cvLink} target="_blank" rel="noreferrer">
@@ -474,7 +475,7 @@ function getInitialTheme() {
   if (typeof window === "undefined") return "light";
   const savedTheme = window.localStorage.getItem("portfolio-theme");
   if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "light";
 }
 
 function getInitialPathname() {
