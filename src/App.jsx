@@ -1,4 +1,4 @@
-import { Fragment, startTransition, useEffect, useMemo, useState } from "react";
+import { Fragment, startTransition, useEffect, useMemo, useRef, useState } from "react";
 import ContributionHeatmap from "./ContributionHeatmap";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
 import SeoRouteContent from "./SeoRouteContent";
@@ -266,16 +266,14 @@ function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation
   );
 }
 
-function ProfileTextAccordion({ title, paragraphs, quote, quoteSource }) {
-  const [isOpen, setIsOpen] = useState(false);
-
+function ProfileTextAccordion({ title, paragraphs, quote, quoteSource, isOpen, onToggle }) {
   return (
     <section className={`favorite-books-module favorite-books-module--text ${isOpen ? "is-open" : ""}`}>
       <button
         type="button"
         className="favorite-books-module__summary favorite-books-module__summary--text"
         aria-expanded={isOpen}
-        onClick={() => setIsOpen((current) => !current)}
+        onClick={onToggle}
       >
         <div className="favorite-books-module__header">
           <h3>{title}</h3>
@@ -376,31 +374,82 @@ function ExperiencePage({ copy, experience }) {
 }
 
 function WhoAmIPage({ copy, whoAmI }) {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const proseCardRef = useRef(null);
+  const achievementCardRef = useRef(null);
+  const [lockedHeight, setLockedHeight] = useState(0);
+
+  useEffect(() => {
+    if (isProfileOpen) return undefined;
+
+    const updateLockedHeight = () => {
+      const proseHeight = proseCardRef.current?.getBoundingClientRect().height ?? 0;
+      const achievementHeight = achievementCardRef.current?.getBoundingClientRect().height ?? 0;
+      const nextHeight = Math.max(proseHeight, achievementHeight);
+      if (nextHeight > 0) setLockedHeight(nextHeight);
+    };
+
+    updateLockedHeight();
+
+    const handleResize = () => {
+      updateLockedHeight();
+    };
+
+    let observer;
+
+    if (typeof ResizeObserver !== "undefined") {
+      observer = new ResizeObserver(() => {
+        updateLockedHeight();
+      });
+
+      if (proseCardRef.current) observer.observe(proseCardRef.current);
+      if (achievementCardRef.current) observer.observe(achievementCardRef.current);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isProfileOpen]);
+
   return (
     <main className="site-main">
       <section className="page-intro"><h1>{copy.whoAmITitle}</h1></section>
-      <section className="whoami-grid">
-        <article className="surface-card prose-card">
-          <SectionHeader title={copy.aboutTitle} />
-          <ProfileTextAccordion
-            title={whoAmI.bioAccordionTitle}
-            paragraphs={whoAmI.bioParagraphs}
-            quote={whoAmI.bioQuote}
-            quoteSource={whoAmI.bioQuoteSource}
-          />
-          <div className="prose-media">
-            <img
-              src={PROFILE.profileImage}
-              alt="IMG 8888(1)"
-              width="748"
-              height="1625"
-              loading="lazy"
-              decoding="async"
-              fetchPriority="low"
-            />
+      <section
+        className={`whoami-grid ${isProfileOpen ? "whoami-grid--profile-open" : ""}`}
+        style={lockedHeight ? { "--whoami-lock-height": `${lockedHeight}px` } : undefined}
+      >
+        <article ref={proseCardRef} className={`surface-card prose-card ${isProfileOpen ? "prose-card--morph-open" : ""}`}>
+          <div className="prose-card__body">
+            <div className="prose-card__content">
+              <SectionHeader title={copy.aboutTitle} />
+              <ProfileTextAccordion
+                title={whoAmI.bioAccordionTitle}
+                paragraphs={whoAmI.bioParagraphs}
+                quote={whoAmI.bioQuote}
+                quoteSource={whoAmI.bioQuoteSource}
+                isOpen={isProfileOpen}
+                onToggle={() => setIsProfileOpen((current) => !current)}
+              />
+            </div>
+            <div className="prose-card__media-shell">
+              <div className="prose-media">
+                <img
+                  src={PROFILE.profileImage}
+                  alt="IMG 8888(1)"
+                  width="748"
+                  height="1625"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                />
+              </div>
+            </div>
           </div>
         </article>
-        <article className="surface-card achievement-card">
+        <article ref={achievementCardRef} className={`surface-card achievement-card ${isProfileOpen ? "achievement-card--shifted" : ""}`}>
           <SectionHeader title={copy.sportsAchievementsTitle} />
           <div className="achievement-media">
             <img
