@@ -11,8 +11,8 @@ export const PROJECTS_CONTENT = [
     image: {
       src: "/projects/homework-calendar-dashboard.png",
       alt: "Preview of Homework Calendar",
-      width: 1118,
-      height: 858,
+      width: 1505,
+      height: 940,
     },
     translations: {
       en: {
@@ -127,8 +127,8 @@ export const PROJECTS_CONTENT = [
     image: {
       src: "/projects/grammar-trainer.png",
       alt: "Preview of Grammar Trainer",
-      width: 1796,
-      height: 1236,
+      width: 1617,
+      height: 921,
     },
     translations: {
       en: {
