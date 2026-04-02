@@ -196,7 +196,6 @@ function MediaCard({ item, detailKey, mediaOrientation = "portrait" }) {
 function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation = "portrait" }) {
   const previewItems = items.slice(0, 3);
   const [isOpen, setIsOpen] = useState(false);
-  const [hasOpened, setHasOpened] = useState(false);
   const isLandscape = mediaOrientation === "landscape";
   const previewSizes = isLandscape
     ? "(max-width: 520px) 100vw, (max-width: 760px) 33vw, 280px"
@@ -208,13 +207,7 @@ function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation
         type="button"
         className="favorite-books-module__summary"
         aria-expanded={isOpen}
-        onClick={() => {
-          setIsOpen((current) => {
-            const nextState = !current;
-            if (nextState) setHasOpened(true);
-            return nextState;
-          });
-        }}
+        onClick={() => setIsOpen((current) => !current)}
       >
         <div className="favorite-books-module__header">
           <h2>{title}</h2>
@@ -248,18 +241,16 @@ function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation
 
       <div className="favorite-books-module__content">
         <div className="favorite-books-module__inner">
-          {hasOpened ? (
-            <div className={`books-grid books-grid--favorite ${mediaOrientation === "landscape" ? "books-grid--landscape" : ""}`}>
-              {items.map((item) => (
-                <MediaCard
-                  key={item.id}
-                  item={item}
-                  detailKey={detailKey}
-                  mediaOrientation={mediaOrientation}
-                />
-              ))}
-            </div>
-          ) : null}
+          <div className={`books-grid books-grid--favorite ${mediaOrientation === "landscape" ? "books-grid--landscape" : ""}`}>
+            {items.map((item) => (
+              <MediaCard
+                key={item.id}
+                item={item}
+                detailKey={detailKey}
+                mediaOrientation={mediaOrientation}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -393,8 +384,11 @@ function WhoAmIPage({ copy, whoAmI }) {
     }
 
     if (isProfileOpen) {
-      setShowProfileImage(true);
       setIsProfileOpen(false);
+      hideProfileImageTimeoutRef.current = window.setTimeout(() => {
+        setShowProfileImage(true);
+        hideProfileImageTimeoutRef.current = null;
+      }, 220);
       return;
     }
 
@@ -402,7 +396,7 @@ function WhoAmIPage({ copy, whoAmI }) {
     hideProfileImageTimeoutRef.current = window.setTimeout(() => {
       setShowProfileImage(false);
       hideProfileImageTimeoutRef.current = null;
-    }, 360);
+    }, 90);
   }
 
   return (
