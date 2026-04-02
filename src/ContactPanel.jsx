@@ -166,7 +166,6 @@ export default function ContactPanel({ language, page, openSignal }) {
           </button>
 
           <div className="contact-panel__copy">
-            <p className="eyebrow">Get in touch</p>
             <h2>Send a message</h2>
           </div>
 
@@ -178,7 +177,6 @@ export default function ContactPanel({ language, page, openSignal }) {
                 name="name"
                 value={formData.name}
                 onChange={updateField}
-                placeholder="Your name"
                 required
               />
             </label>
@@ -190,7 +188,6 @@ export default function ContactPanel({ language, page, openSignal }) {
                 name="email"
                 value={formData.email}
                 onChange={updateField}
-                placeholder="you@example.com"
                 required
               />
             </label>
