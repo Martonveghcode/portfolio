@@ -1,4 +1,4 @@
-import { startTransition, useEffect, useMemo, useState } from "react";
+import { Fragment, startTransition, useEffect, useMemo, useState } from "react";
 import ContributionHeatmap from "./ContributionHeatmap";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
 import SeoRouteContent from "./SeoRouteContent";
@@ -14,10 +14,10 @@ function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggle
   return (
     <header className="site-nav">
       <div className="site-nav__inner">
-        <button type="button" className="brand" onClick={() => onNavigate("home")}>
+        <div className="brand">
           <span className="brand__name">{PROFILE.name}</span>
           <span className="brand__meta">{PROFILE.location}</span>
-        </button>
+        </div>
 
         <nav className="site-nav__links" aria-label="Primary">
           {PAGES.map((key) => (
@@ -220,27 +220,29 @@ function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation
           <h2>{title}</h2>
         </div>
 
-        <div className="favorite-books-module__preview">
-          {previewItems.map((item) => (
-            <div key={item.id} className="favorite-books-module__preview-item">
-              <div className={`favorite-books-module__preview-frame ${mediaOrientation === "landscape" ? "favorite-books-module__preview-frame--landscape" : ""}`}>
-                {item.cover?.src ? (
-                  <img
-                    src={item.cover.src}
-                    srcSet={item.cover.srcSet}
-                    sizes={previewSizes}
-                    alt={item.cover.alt || item.title}
-                    loading="lazy"
-                    decoding="async"
-                    fetchPriority="low"
-                  />
-                ) : (
-                  <div className="book-card__fallback">{item.title}</div>
-                )}
-                <span className="favorite-books-module__preview-rank">#{item.rank}</span>
+        <div className="favorite-books-module__preview-shell">
+          <div className="favorite-books-module__preview">
+            {previewItems.map((item) => (
+              <div key={item.id} className="favorite-books-module__preview-item">
+                <div className={`favorite-books-module__preview-frame ${mediaOrientation === "landscape" ? "favorite-books-module__preview-frame--landscape" : ""}`}>
+                  {item.cover?.src ? (
+                    <img
+                      src={item.cover.src}
+                      srcSet={item.cover.srcSet}
+                      sizes={previewSizes}
+                      alt={item.cover.alt || item.title}
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
+                    />
+                  ) : (
+                    <div className="book-card__fallback">{item.title}</div>
+                  )}
+                  <span className="favorite-books-module__preview-rank">#{item.rank}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </button>
 
@@ -258,6 +260,43 @@ function FavoriteCollectionAccordion({ title, items, detailKey, mediaOrientation
               ))}
             </div>
           ) : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProfileTextAccordion({ title, paragraphs, quote, quoteSource }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <section className={`favorite-books-module favorite-books-module--text ${isOpen ? "is-open" : ""}`}>
+      <button
+        type="button"
+        className="favorite-books-module__summary favorite-books-module__summary--text"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen((current) => !current)}
+      >
+        <div className="favorite-books-module__header">
+          <h3>{title}</h3>
+        </div>
+      </button>
+
+      <div className="favorite-books-module__content favorite-books-module__content--text">
+        <div className="favorite-books-module__inner favorite-books-module__inner--text">
+          <div className="prose-card__accordion-copy">
+            {paragraphs.map((paragraph, index) => (
+              <Fragment key={`profile-story-${index}`}>
+                <p className="muted">{paragraph}</p>
+                {quote && index === 0 ? (
+                  <blockquote className="prose-card__quote">
+                    <p>{quote}</p>
+                    {quoteSource ? <cite>{quoteSource}</cite> : null}
+                  </blockquote>
+                ) : null}
+              </Fragment>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -343,9 +382,12 @@ function WhoAmIPage({ copy, whoAmI }) {
       <section className="whoami-grid">
         <article className="surface-card prose-card">
           <SectionHeader title={copy.aboutTitle} />
-          <div className="prose">
-            {whoAmI.paragraphs.map((paragraph, index) => <p key={`whoami-${index}`} className="muted">{paragraph}</p>)}
-          </div>
+          <ProfileTextAccordion
+            title={whoAmI.bioAccordionTitle}
+            paragraphs={whoAmI.bioParagraphs}
+            quote={whoAmI.bioQuote}
+            quoteSource={whoAmI.bioQuoteSource}
+          />
           <div className="prose-media">
             <img
               src={PROFILE.profileImage}
@@ -540,6 +582,10 @@ export default function App() {
     });
     return {
       paragraphs: locale.paragraphs ?? whoAmITranslations.en?.paragraphs ?? [],
+      bioAccordionTitle: locale.bioAccordionTitle ?? whoAmITranslations.en?.bioAccordionTitle ?? "Read the full profile",
+      bioParagraphs: locale.bioParagraphs ?? whoAmITranslations.en?.bioParagraphs ?? [],
+      bioQuote: locale.bioQuote ?? whoAmITranslations.en?.bioQuote ?? "",
+      bioQuoteSource: locale.bioQuoteSource ?? whoAmITranslations.en?.bioQuoteSource ?? "",
       achievements: locale.achievements ?? whoAmITranslations.en?.achievements ?? [],
       favoriteBooks,
       favoritePaintings,

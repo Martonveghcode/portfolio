@@ -1,6 +1,14 @@
 export const WHO_AM_I_CONTENT = {
   translations: {
     en: {
+      bioAccordionTitle: "Read the full profile",
+      bioParagraphs: [
+        "My name is Marton Vegh. I was born in Budapest and have lived in Mallorca for nine years, attending BIC, Lycee Francais de Palma, and now Aixa Llaut. This international background has given me fluency in five languages and exposure to contrasting educational systems and social environments.",
+        "Moving between these systems, I've witnessed how education shapes not just knowledge, but perspectives, opportunities, and social mobility itself. I observe these structures among my friends on a daily basis. This awareness has made me both grateful for my opportunities and committed to understanding how systems can be made more equitable and productive for future generations.",
+        "Beyond athletics, I'm pursuing MIT's first-year university program and am currently on Linear Algebra (18.06), alongside Foundations of Modern Finance I through edX. Linear algebra appeals to my love of pure mathematics. What I find elegant about math is how simple concepts cascade into powerful frameworks, how basic vector operations relate to everything from 3D graphics to machine learning algorithms. Finance draws me because I want to understand the quantitative frameworks behind the political and economic systems I've observed. Even between just Budapest and Mallorca, I've seen firsthand how policies affect different communities in vastly different ways. I've also learned programming (HTML, CSS, React, JavaScript, and currently Python and C++) to build tools that solve practical problems. For example, I created a pipeline that converts typed text into my handwriting, cursive so illegible it qualifies as a cryptographic challenge. This has eliminated over 60 hours of tedious transcription work in the past three months, time I've redirected toward more meaningful work.",
+      ],
+      bioQuote: "L'\u00e9cole est l'instrument privil\u00e9gi\u00e9 de la reproduction des in\u00e9galit\u00e9s sociales.",
+      bioQuoteSource: "Pierre Bourdieu, La Reproduction",
       paragraphs: [
         "Education: BIC (2016-2020), Lycee Francais de Palma (2020-2025), Aixa Llaut (2025-current). Lifelong into sports like swimming and football; started canoe sprint in 2018 for seven years and now training short- to medium-distance running (5k to 10k) without competing officially yet.",
         "I speak 5 languages fluently: Hungarian, English, Spanish, French and Catalan.",
