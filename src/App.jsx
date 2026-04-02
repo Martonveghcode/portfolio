@@ -375,53 +375,41 @@ function ExperiencePage({ copy, experience }) {
 
 function WhoAmIPage({ copy, whoAmI }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const proseCardRef = useRef(null);
-  const achievementCardRef = useRef(null);
-  const [lockedHeight, setLockedHeight] = useState(0);
+  const [showProfileImage, setShowProfileImage] = useState(true);
+  const hideProfileImageTimeoutRef = useRef(null);
 
   useEffect(() => {
-    if (isProfileOpen) return undefined;
-
-    const updateLockedHeight = () => {
-      const proseHeight = proseCardRef.current?.getBoundingClientRect().height ?? 0;
-      const achievementHeight = achievementCardRef.current?.getBoundingClientRect().height ?? 0;
-      const nextHeight = Math.max(proseHeight, achievementHeight);
-      if (nextHeight > 0) setLockedHeight(nextHeight);
+    return () => {
+      if (hideProfileImageTimeoutRef.current) {
+        window.clearTimeout(hideProfileImageTimeoutRef.current);
+      }
     };
+  }, []);
 
-    updateLockedHeight();
-
-    const handleResize = () => {
-      updateLockedHeight();
-    };
-
-    let observer;
-
-    if (typeof ResizeObserver !== "undefined") {
-      observer = new ResizeObserver(() => {
-        updateLockedHeight();
-      });
-
-      if (proseCardRef.current) observer.observe(proseCardRef.current);
-      if (achievementCardRef.current) observer.observe(achievementCardRef.current);
+  function handleProfileToggle() {
+    if (hideProfileImageTimeoutRef.current) {
+      window.clearTimeout(hideProfileImageTimeoutRef.current);
+      hideProfileImageTimeoutRef.current = null;
     }
 
-    window.addEventListener("resize", handleResize);
+    if (isProfileOpen) {
+      setShowProfileImage(true);
+      setIsProfileOpen(false);
+      return;
+    }
 
-    return () => {
-      observer?.disconnect();
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isProfileOpen]);
+    setIsProfileOpen(true);
+    hideProfileImageTimeoutRef.current = window.setTimeout(() => {
+      setShowProfileImage(false);
+      hideProfileImageTimeoutRef.current = null;
+    }, 360);
+  }
 
   return (
     <main className="site-main">
       <section className="page-intro"><h1>{copy.whoAmITitle}</h1></section>
-      <section
-        className={`whoami-grid ${isProfileOpen ? "whoami-grid--profile-open" : ""}`}
-        style={lockedHeight ? { "--whoami-lock-height": `${lockedHeight}px` } : undefined}
-      >
-        <article ref={proseCardRef} className={`surface-card prose-card ${isProfileOpen ? "prose-card--morph-open" : ""}`}>
+      <section className={`whoami-grid ${isProfileOpen ? "whoami-grid--profile-open" : ""}`}>
+        <article className={`surface-card prose-card ${isProfileOpen ? "prose-card--profile-open" : ""}`}>
           <div className="prose-card__body">
             <div className="prose-card__content">
               <SectionHeader title={copy.aboutTitle} />
@@ -431,25 +419,27 @@ function WhoAmIPage({ copy, whoAmI }) {
                 quote={whoAmI.bioQuote}
                 quoteSource={whoAmI.bioQuoteSource}
                 isOpen={isProfileOpen}
-                onToggle={() => setIsProfileOpen((current) => !current)}
+                onToggle={handleProfileToggle}
               />
             </div>
-            <div className="prose-card__media-shell">
-              <div className="prose-media">
-                <img
-                  src={PROFILE.profileImage}
-                  alt="IMG 8888(1)"
-                  width="748"
-                  height="1625"
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                />
+            {showProfileImage ? (
+              <div className="prose-card__media-shell">
+                <div className="prose-media">
+                  <img
+                    src={PROFILE.profileImage}
+                    alt="IMG 8888(1)"
+                    width="748"
+                    height="1625"
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
+                  />
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </article>
-        <article ref={achievementCardRef} className={`surface-card achievement-card ${isProfileOpen ? "achievement-card--shifted" : ""}`}>
+        <article className="surface-card achievement-card">
           <SectionHeader title={copy.sportsAchievementsTitle} />
           <div className="achievement-media">
             <img

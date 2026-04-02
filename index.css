@@ -534,36 +534,34 @@ select:focus-visible {
 
 .whoami-grid--profile-open {
   align-items: start;
-  grid-template-columns: minmax(0, 1.48fr) minmax(320px, 0.82fr);
-  gap: clamp(24px, 3vw, 42px);
 }
 
 .prose-card {
-  position: relative;
-  z-index: 1;
-  transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1), height 420ms cubic-bezier(0.2, 0.8, 0.2, 1), padding 320ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  display: grid;
+  gap: 18px;
+  padding-bottom: 14px;
 }
 
 .prose-card__body {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas:
-    "content"
-    "media";
-  gap: 18px;
+  gap: 9px;
+  transition: gap 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .prose-card__content {
-  grid-area: content;
   display: grid;
   gap: 18px;
   align-content: start;
-  min-width: 0;
 }
 
 .prose-card__media-shell {
-  grid-area: media;
-  min-width: 0;
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+  transition: grid-template-rows 360ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 220ms ease, transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .prose-card .section-header {
@@ -582,68 +580,30 @@ select:focus-visible {
 }
 
 .prose-media {
+  min-height: 0;
   width: 589px;
   max-width: 100%;
-  height: 610px;
+  height: 690px;
   justify-self: start;
-  transition: width 420ms cubic-bezier(0.2, 0.8, 0.2, 1), height 420ms cubic-bezier(0.2, 0.8, 0.2, 1), border-radius 320ms ease, border-width 320ms ease;
 }
 
 .prose-media img,
 .achievement-media img { width: 100%; height: 100%; object-fit: cover; }
 .prose-media img {
-  height: calc(100% + 20px);
+  height: calc(100% + 230px);
   object-position: center top;
-  transform: translateY(-20px);
+  transform: translateY(-120px);
 }
 .achievement-list { padding-left: 20px; color: var(--text); }
 
-.achievement-card {
-  transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms ease, border-color 220ms ease;
-}
-
-.whoami-grid--profile-open .achievement-card--shifted {
-  height: var(--whoami-lock-height, 885.46px);
-  transform: translateX(clamp(10px, 1.8vw, 28px));
-}
-
-.prose-card--morph-open {
-  height: var(--whoami-lock-height, 885.46px);
-  padding: 0;
-  overflow: hidden;
-  transform: translateX(clamp(18px, 3vw, 44px));
-  z-index: 3;
-}
-
-.prose-card--morph-open .prose-card__body {
-  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
-  grid-template-areas: "media content";
+.prose-card--profile-open .prose-card__body {
   gap: 0;
-  height: 100%;
 }
 
-.prose-card--morph-open .prose-card__content {
-  align-content: stretch;
-  min-height: 0;
-  padding: 28px 30px 28px 32px;
-}
-
-.prose-card--morph-open .prose-card__media-shell {
-  height: 100%;
-}
-
-.prose-card--morph-open .prose-media {
-  width: 100%;
-  max-width: none;
-  height: 100%;
-  border-width: 0 1px 0 0;
-  border-radius: 24px 0 0 24px;
-}
-
-.prose-card--morph-open .prose-media img {
-  height: calc(100% + 20px);
-  object-position: center top;
-  transform: translateY(-20px);
+.prose-card--profile-open .prose-card__media-shell {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-12px);
 }
 
 .books-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -862,23 +822,6 @@ select:focus-visible {
   padding-bottom: 24px;
 }
 
-.prose-card--morph-open .favorite-books-module--text {
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-}
-
-.prose-card--morph-open .favorite-books-module__content--text {
-  min-height: 0;
-}
-
-.prose-card--morph-open .favorite-books-module.is-open .favorite-books-module__inner--text {
-  min-height: 0;
-  overflow: auto;
-  padding-right: 18px;
-  overscroll-behavior: contain;
-}
-
 .prose-card__accordion-copy {
   display: grid;
   gap: 18px;
@@ -1001,50 +944,6 @@ select:focus-visible {
   .hero,
   .split-layout,
   .whoami-grid { grid-template-columns: 1fr; }
-  .whoami-grid--profile-open {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  .prose-card--morph-open {
-    position: relative;
-    height: auto;
-    padding: 28px;
-    transform: none;
-    overflow: visible;
-  }
-  .prose-card--morph-open .prose-card__body {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "content"
-      "media";
-    gap: 18px;
-  }
-  .prose-card--morph-open .prose-card__content {
-    padding: 0;
-    align-content: start;
-  }
-  .prose-card--morph-open .prose-card__media-shell {
-    height: auto;
-  }
-  .prose-card--morph-open .prose-media {
-    width: 589px;
-    max-width: 100%;
-    height: 610px;
-    border-width: 1px;
-    border-radius: 18px;
-  }
-  .prose-card--morph-open .favorite-books-module--text {
-    height: auto;
-    display: block;
-  }
-  .prose-card--morph-open .favorite-books-module.is-open .favorite-books-module__inner--text {
-    overflow: visible;
-    padding-right: 24px;
-  }
-  .whoami-grid--profile-open .achievement-card--shifted {
-    height: auto;
-    transform: none;
-  }
   .site-nav__links { justify-content: flex-start; }
   .site-nav__actions { justify-content: flex-start; }
   .overview-grid,
@@ -1068,6 +967,7 @@ select:focus-visible {
   .dropdown-panel { padding-left: 22px; padding-right: 22px; }
   .favorite-books-module__summary,
   .favorite-books-module__inner { padding-left: 22px; padding-right: 22px; }
+  .prose-card { padding-bottom: 11px; }
   .favorite-books-module__preview { gap: 12px; }
   .hero-card h1 { font-size: clamp(2.6rem, 14vw, 3.4rem); }
   .timeline-item { grid-template-columns: 1fr; }
