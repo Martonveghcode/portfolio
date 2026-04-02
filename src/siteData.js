@@ -37,7 +37,7 @@ export const translations = {
     nav: { home: "Home", projects: "Projects", papers: "Papers", experience: "Experience", whoami: "Who Am I" },
     heroTagline: "Penta-lingual aspiring quantitative financial engineer",
     heroSub: "Focused on practical solutions that solve real problems.",
-    aboutTitle: "Who I am",
+    aboutTitle: "General information",
     aboutBlurb:
       "Student developer studying in spain with a passion for politics, finance and math. Based in mallorca. Some experience in react web design and currently studying a MIT micromasters in finance.",
     languagesTitle: "Languages",
