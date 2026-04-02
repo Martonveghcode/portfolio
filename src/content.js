@@ -162,6 +162,46 @@ export const PROJECTS_CONTENT = [
 
 export const PAPERS_CONTENT = [
   {
+    id: "paper-3",
+    translations: {
+      en: {
+        title: "A critique on Famine, Affluence and Morality",
+        summary:
+          "A critique of Peter Singer arguing that, while his demand for near-total charitable sacrifice may be morally compelling in theory, it is unrealistic because human motivation is built around relative improvement, status, and inequality rather than equality.",
+        status: "Draft",
+        link: "https://docs.google.com/document/d/1NyIs5iayQ69dcyUi4G92bpA0n4TWqpYGQI6upaur6Nc/edit?usp=sharing",
+      },
+      es: {
+        title: "A critique on Famine, Affluence and Morality",
+        summary:
+          "A critique of Peter Singer arguing that, while his demand for near-total charitable sacrifice may be morally compelling in theory, it is unrealistic because human motivation is built around relative improvement, status, and inequality rather than equality.",
+        status: "Borrador",
+        link: "https://docs.google.com/document/d/1NyIs5iayQ69dcyUi4G92bpA0n4TWqpYGQI6upaur6Nc/edit?usp=sharing",
+      },
+      fr: {
+        title: "A critique on Famine, Affluence and Morality",
+        summary:
+          "A critique of Peter Singer arguing that, while his demand for near-total charitable sacrifice may be morally compelling in theory, it is unrealistic because human motivation is built around relative improvement, status, and inequality rather than equality.",
+        status: "Brouillon",
+        link: "https://docs.google.com/document/d/1NyIs5iayQ69dcyUi4G92bpA0n4TWqpYGQI6upaur6Nc/edit?usp=sharing",
+      },
+      de: {
+        title: "A critique on Famine, Affluence and Morality",
+        summary:
+          "A critique of Peter Singer arguing that, while his demand for near-total charitable sacrifice may be morally compelling in theory, it is unrealistic because human motivation is built around relative improvement, status, and inequality rather than equality.",
+        status: "Entwurf",
+        link: "https://docs.google.com/document/d/1NyIs5iayQ69dcyUi4G92bpA0n4TWqpYGQI6upaur6Nc/edit?usp=sharing",
+      },
+      hu: {
+        title: "A critique on Famine, Affluence and Morality",
+        summary:
+          "A critique of Peter Singer arguing that, while his demand for near-total charitable sacrifice may be morally compelling in theory, it is unrealistic because human motivation is built around relative improvement, status, and inequality rather than equality.",
+        status: "Piszkozat",
+        link: "https://docs.google.com/document/d/1NyIs5iayQ69dcyUi4G92bpA0n4TWqpYGQI6upaur6Nc/edit?usp=sharing",
+      },
+    },
+  },
+  {
     id: "paper-1",
     translations: {
       en: {
@@ -193,6 +233,41 @@ export const PAPERS_CONTENT = [
         summary: "Piszkozat; a teljes szoveg az alabb linkelt Google Dokumentumban erheto el.",
         status: "Piszkozat",
         link: "https://docs.google.com/document/d/1WhN38fEUqHaLmpaMrAETql27EopbL355gEz_t12w-0Y/edit?usp=sharing",
+      },
+    },
+  },
+  {
+    id: "paper-2",
+    translations: {
+      en: {
+        title: "Why a World Without Inequality and Suffering Cannot Exist",
+        summary: "I wish to argue that a world without inequality and suffering cannot exist.",
+        status: "Draft",
+        link: "https://docs.google.com/document/d/1G5LHGuydF6bf-0t5e3wA29iCAavrqbhzfU-rm3onV2I/edit?usp=sharing",
+      },
+      es: {
+        title: "Why a World Without Inequality and Suffering Cannot Exist",
+        summary: "I wish to argue that a world without inequality and suffering cannot exist.",
+        status: "Borrador",
+        link: "https://docs.google.com/document/d/1G5LHGuydF6bf-0t5e3wA29iCAavrqbhzfU-rm3onV2I/edit?usp=sharing",
+      },
+      fr: {
+        title: "Why a World Without Inequality and Suffering Cannot Exist",
+        summary: "I wish to argue that a world without inequality and suffering cannot exist.",
+        status: "Brouillon",
+        link: "https://docs.google.com/document/d/1G5LHGuydF6bf-0t5e3wA29iCAavrqbhzfU-rm3onV2I/edit?usp=sharing",
+      },
+      de: {
+        title: "Why a World Without Inequality and Suffering Cannot Exist",
+        summary: "I wish to argue that a world without inequality and suffering cannot exist.",
+        status: "Entwurf",
+        link: "https://docs.google.com/document/d/1G5LHGuydF6bf-0t5e3wA29iCAavrqbhzfU-rm3onV2I/edit?usp=sharing",
+      },
+      hu: {
+        title: "Why a World Without Inequality and Suffering Cannot Exist",
+        summary: "I wish to argue that a world without inequality and suffering cannot exist.",
+        status: "Piszkozat",
+        link: "https://docs.google.com/document/d/1G5LHGuydF6bf-0t5e3wA29iCAavrqbhzfU-rm3onV2I/edit?usp=sharing",
       },
     },
   },
