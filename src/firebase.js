@@ -25,11 +25,19 @@ function withTimeout(promise, timeoutMs = 8000) {
   ]);
 }
 
-export async function saveLeadCapture(payload) {
-  const entryRef = push(ref(db, "portfolioLeads"));
+async function saveDatabaseEntry(path, payload) {
+  const entryRef = push(ref(db, path));
 
   await withTimeout(set(entryRef, {
     ...payload,
     createdAt: serverTimestamp(),
   }));
+}
+
+export async function saveCookieConsent(payload) {
+  await saveDatabaseEntry("cookieConsents", payload);
+}
+
+export async function saveContactSubmission(payload) {
+  await saveDatabaseEntry("contactSubmissions", payload);
 }

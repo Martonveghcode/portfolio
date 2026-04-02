@@ -1,7 +1,8 @@
 import { Fragment, startTransition, useEffect, useMemo, useRef, useState } from "react";
 import ContributionHeatmap from "./ContributionHeatmap";
+import ContactPanel from "./ContactPanel";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
-import LeadCaptureBanner from "./LeadCaptureBanner";
+import CookieConsentBanner from "./CookieConsentBanner";
 import SeoRouteContent from "./SeoRouteContent";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
@@ -12,7 +13,7 @@ const PROJECT_DISPLAY_ORDER = ["portfolio-analytics-tool", "handwriting-pipeline
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}`;
 
-function SiteNav({ page, onNavigate, onOpenLeadCapture, language, onLanguageChange, theme, onToggleTheme, cvLink, copy }) {
+function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy }) {
   return (
     <header className="site-nav">
       <div className="site-nav__inner">
@@ -32,7 +33,7 @@ function SiteNav({ page, onNavigate, onOpenLeadCapture, language, onLanguageChan
               {copy.nav[key]}
             </button>
           ))}
-          <button type="button" className="nav-tab" onClick={onOpenLeadCapture}>
+          <button type="button" className="nav-tab" onClick={onOpenContactPanel}>
             {copy.getInTouch}
           </button>
         </nav>
@@ -491,7 +492,7 @@ export default function App() {
   const [language, setLanguage] = useState("en");
   const [pathname, setPathname] = useState(getInitialPathname);
   const [theme, setTheme] = useState(getInitialTheme);
-  const [leadCaptureOpenSignal, setLeadCaptureOpenSignal] = useState(0);
+  const [contactPanelOpenSignal, setContactPanelOpenSignal] = useState(0);
   const route = useMemo(() => resolveRoute(pathname), [pathname]);
   const page = route.page;
 
@@ -672,7 +673,7 @@ export default function App() {
       <SiteNav
         page={page}
         onNavigate={handlePrimaryPageNavigate}
-        onOpenLeadCapture={() => setLeadCaptureOpenSignal((current) => current + 1)}
+        onOpenContactPanel={() => setContactPanelOpenSignal((current) => current + 1)}
         language={language}
         onLanguageChange={handleLanguageChange}
         theme={theme}
@@ -682,7 +683,8 @@ export default function App() {
       />
       <SeoRouteContent route={route} />
       {pageView}
-      <LeadCaptureBanner language={language} page={page} openSignal={leadCaptureOpenSignal} />
+      <CookieConsentBanner language={language} page={page} />
+      <ContactPanel language={language} page={page} openSignal={contactPanelOpenSignal} />
     </div>
   );
 }
