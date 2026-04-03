@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { saveContactSubmission } from "./firebase";
 
-export default function ContactPanel({ language, page, openSignal }) {
+export default function ContactPanel({ language, page, openSignal, isMobile }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -20,6 +20,12 @@ export default function ContactPanel({ language, page, openSignal }) {
     setPosition(null);
     setIsOpen(true);
   }, [openSignal]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setPosition(null);
+    }
+  }, [isMobile]);
 
   useEffect(() => () => {
     if (dragCleanupRef.current) {
@@ -65,6 +71,7 @@ export default function ContactPanel({ language, page, openSignal }) {
   }
 
   function handleDragStart(event) {
+    if (isMobile) return;
     if (event.button !== 0) return;
 
     const panel = panelRef.current;
@@ -141,29 +148,31 @@ export default function ContactPanel({ language, page, openSignal }) {
 
   const panelStyle = position
     ? {
-      left: `${position.x}px`,
-      top: `${position.y}px`,
-      bottom: "auto",
-      transform: "none",
-    }
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        bottom: "auto",
+        transform: "none",
+      }
     : undefined;
 
   return (
     <div className="contact-panel-shell" aria-label="Get in touch">
       <aside
         ref={panelRef}
-        className={`contact-panel ${position ? "contact-panel--floating" : ""}`}
+        className={`contact-panel ${isMobile ? "contact-panel--mobile" : ""} ${position ? "contact-panel--floating" : ""}`}
         style={panelStyle}
       >
         <div className="contact-panel__inner">
-          <button
-            type="button"
-            className="contact-panel__drag-handle"
-            onPointerDown={handleDragStart}
-            aria-label="Drag contact form"
-          >
-            <span className="contact-panel__drag-pill" />
-          </button>
+          {!isMobile ? (
+            <button
+              type="button"
+              className="contact-panel__drag-handle"
+              onPointerDown={handleDragStart}
+              aria-label="Drag contact form"
+            >
+              <span className="contact-panel__drag-pill" />
+            </button>
+          ) : null}
 
           <div className="contact-panel__copy">
             <h2>Send a message</h2>
