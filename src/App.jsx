@@ -132,9 +132,6 @@ function ProjectCard({ project, copy, compact = false }) {
 function PaperCard({ paper, copy }) {
   return (
     <article className="text-card">
-      <div className="status-row">
-        {paper.status ? <span className="status-pill">{paper.status}</span> : null}
-      </div>
       <div className="card-copy">
         <h3>{paper.title}</h3>
         <p className="muted">{paper.summary}</p>
