@@ -37,6 +37,7 @@ export const translations = {
     nav: { home: "Home", projects: "Projects", papers: "Papers", experience: "Experience", whoami: "Who Am I" },
     heroTagline: "Penta-lingual aspiring quantitative financial engineer",
     heroSub: "Focused on practical solutions that solve real problems.",
+    getInTouch: "Get in touch",
     aboutTitle: "General information",
     aboutBlurb:
       "Student developer studying in spain with a passion for politics, finance and math. Based in mallorca. Some experience in react web design and currently studying a MIT micromasters in finance.",
@@ -68,6 +69,7 @@ export const translations = {
     nav: { home: "Inicio", projects: "Proyectos", papers: "Papers", experience: "Experiencia", whoami: "Quien soy" },
     heroTagline: "Aspirante a ingeniero financiero cuantitativo que habla 5 idiomas",
     heroSub: "Enfocado en soluciones practicas que resuelven problemas reales.",
+    getInTouch: "Get in touch",
     aboutTitle: "Quien soy",
     aboutBlurb:
       "Estudiante desarrollador que estudia en Espana con pasion por la politica, las finanzas y las matematicas. Vive en Mallorca. Tiene algo de experiencia en diseno web con React y actualmente estudia un MicroMasters del MIT en finanzas.",
@@ -93,6 +95,7 @@ export const translations = {
     nav: { home: "Accueil", projects: "Projets", papers: "Papiers", experience: "Experience", whoami: "Qui je suis" },
     heroTagline: "Aspirant ingenieur financier quantitatif parlant 5 langues",
     heroSub: "Centre sur des solutions pratiques qui resolvent de vrais problemes.",
+    getInTouch: "Get in touch",
     aboutTitle: "Qui je suis",
     aboutBlurb:
       "Etudiant developpeur en Espagne avec une passion pour la politique, la finance et les mathematiques. Base a Majorque. Il a un peu d'experience en web design avec React et suit actuellement un MicroMasters du MIT en finance.",
@@ -118,6 +121,7 @@ export const translations = {
     nav: { home: "Start", projects: "Projekte", papers: "Papers", experience: "Erfahrung", whoami: "Wer ich bin" },
     heroTagline: "Funfsprachiger angehender quantitativer Finanzingenieur",
     heroSub: "Fokus auf praktische Losungen, die reale Probleme losen.",
+    getInTouch: "Get in touch",
     aboutTitle: "Wer ich bin",
     aboutBlurb:
       "Studentischer Entwickler in Spanien mit einer Leidenschaft fur Politik, Finanzen und Mathematik. Lebt auf Mallorca. Hat etwas Erfahrung mit React-Webdesign und studiert derzeit ein MIT MicroMasters in Finance.",
@@ -143,6 +147,7 @@ export const translations = {
     nav: { home: "Kezdolap", projects: "Projektek", papers: "Tanulmanyok", experience: "Tapasztalat", whoami: "Ki vagyok" },
     heroTagline: "Ot nyelven beszelo leendo kvantitativ penzugyi mernok",
     heroSub: "Gyakorlati, valos problemakat megoldo megoldasokra fokuszalok.",
+    getInTouch: "Get in touch",
     aboutTitle: "Ki vagyok",
     aboutBlurb:
       "Spanyolorszagban tanulo diak fejleszto vagyok, akit a politika, a penzugy es a matematika erdekel. Mallorcan elek. Van nemi tapasztalatom React webdizajnban, es jelenleg az MIT penzugyi MicroMasters kepzeset tanulom.",

@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "firebase": "^12.11.0",
     "react": "^19.2.0",
     "react-color-palette-generator": "github:jepeteo/react-color-palette-generator",
     "react-dom": "^19.2.0"

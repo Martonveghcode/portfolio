@@ -1,6 +1,8 @@
 import { Fragment, startTransition, useEffect, useMemo, useRef, useState } from "react";
 import ContributionHeatmap from "./ContributionHeatmap";
+import ContactPanel from "./ContactPanel";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
+import CookieConsentBanner from "./CookieConsentBanner";
 import SeoRouteContent from "./SeoRouteContent";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
@@ -11,7 +13,107 @@ const PROJECT_DISPLAY_ORDER = ["portfolio-analytics-tool", "handwriting-pipeline
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}`;
 
-function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggleTheme, cvLink, copy }) {
+function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
+    setIsMobileMenuOpen(false);
+  }, [isMobile, page, language]);
+
+  function handleMobileNavigate(nextPage) {
+    onNavigate(nextPage);
+    setIsMobileMenuOpen(false);
+  }
+
+  function handleMobileContactOpen() {
+    onOpenContactPanel();
+    setIsMobileMenuOpen(false);
+  }
+
+  if (isMobile) {
+    return (
+      <header className="site-nav site-nav--mobile">
+        <div className="site-nav__inner site-nav__inner--mobile">
+          <div className="brand">
+            <span className="brand__name">{PROFILE.name}</span>
+            <span className="brand__meta">{PROFILE.location}</span>
+          </div>
+
+          <div className="site-nav__mobile-toolbar">
+            <button type="button" className="nav-action" onClick={handleMobileContactOpen}>
+              {copy.getInTouch}
+            </button>
+            <button
+              type="button"
+              className="nav-action"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav-panel"
+              onClick={() => setIsMobileMenuOpen((current) => !current)}
+            >
+              {isMobileMenuOpen ? "Close" : "Menu"}
+            </button>
+          </div>
+
+          <div
+            id="mobile-nav-panel"
+            className={`site-nav__mobile-panel ${isMobileMenuOpen ? "is-open" : ""}`}
+          >
+            <nav className="site-nav__mobile-links" aria-label="Primary">
+              {PAGES.map((key) => (
+                <button
+                  type="button"
+                  key={key}
+                  className={`nav-tab ${page === key ? "nav-tab--active" : ""}`}
+                  onClick={() => handleMobileNavigate(key)}
+                >
+                  {copy.nav[key]}
+                </button>
+              ))}
+            </nav>
+
+            <div className="site-nav__mobile-actions">
+              <a className="nav-action" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a className="nav-action" href={GMAIL_COMPOSE_URL} target="_blank" rel="noreferrer">
+                Gmail
+              </a>
+              <a className="nav-action" href={cvLink} target="_blank" rel="noreferrer">
+                CV
+              </a>
+              <a className="nav-action" href="https://orcid.org/0009-0004-2687-8812" target="_blank" rel="noreferrer">
+                ORCID
+              </a>
+              <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
+                {theme === "dark" ? "Dark" : "Light"}
+              </button>
+            </div>
+
+            <div className="site-nav__mobile-meta">
+              <div className="language-switch" aria-label="Language">
+                {LANGUAGE_OPTIONS.map((option) => (
+                  <button
+                    type="button"
+                    key={option.code}
+                    className={`language-chip ${language === option.code ? "language-chip--active" : ""}`}
+                    onClick={() => onLanguageChange(option.code)}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="site-nav">
       <div className="site-nav__inner">
@@ -31,6 +133,9 @@ function SiteNav({ page, onNavigate, language, onLanguageChange, theme, onToggle
               {copy.nav[key]}
             </button>
           ))}
+          <button type="button" className="nav-tab" onClick={onOpenContactPanel}>
+            {copy.getInTouch}
+          </button>
         </nav>
 
         <div className="site-nav__actions">
@@ -127,9 +232,6 @@ function ProjectCard({ project, copy, compact = false }) {
 function PaperCard({ paper, copy }) {
   return (
     <article className="text-card">
-      <div className="status-row">
-        {paper.status ? <span className="status-pill">{paper.status}</span> : null}
-      </div>
       <div className="card-copy">
         <h3>{paper.title}</h3>
         <p className="muted">{paper.summary}</p>
@@ -483,10 +585,17 @@ function getInitialPathname() {
   return normalizePath(window.location.pathname);
 }
 
+function getInitialIsMobile() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(max-width: 760px)").matches;
+}
+
 export default function App() {
   const [language, setLanguage] = useState("en");
   const [pathname, setPathname] = useState(getInitialPathname);
   const [theme, setTheme] = useState(getInitialTheme);
+  const [isMobile, setIsMobile] = useState(getInitialIsMobile);
+  const [contactPanelOpenSignal, setContactPanelOpenSignal] = useState(0);
   const route = useMemo(() => resolveRoute(pathname), [pathname]);
   const page = route.page;
 
@@ -523,6 +632,25 @@ export default function App() {
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const mediaQuery = window.matchMedia("(max-width: 760px)");
+    const handleChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    setIsMobile(mediaQuery.matches);
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
   }, []);
 
   useEffect(() => {
@@ -667,15 +795,19 @@ export default function App() {
       <SiteNav
         page={page}
         onNavigate={handlePrimaryPageNavigate}
+        onOpenContactPanel={() => setContactPanelOpenSignal((current) => current + 1)}
         language={language}
         onLanguageChange={handleLanguageChange}
         theme={theme}
         onToggleTheme={() => setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"))}
         cvLink={cvLink}
         copy={copy}
+        isMobile={isMobile}
       />
       <SeoRouteContent route={route} />
       {pageView}
+      <CookieConsentBanner language={language} page={page} />
+      <ContactPanel language={language} page={page} openSignal={contactPanelOpenSignal} isMobile={isMobile} />
     </div>
   );
 }
