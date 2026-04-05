@@ -11,7 +11,7 @@ export const PRIMARY_PAGE_PATHS = {
   whoami: "/who-am-i/",
 };
 
-const paper = PAPERS_CONTENT[0];
+const observerPaper = PAPERS_CONTENT.find((entry) => entry.id === "paper-1") ?? PAPERS_CONTENT[0];
 const projectById = Object.fromEntries(PROJECTS_CONTENT.map((project) => [project.id, project]));
 
 const BASE_PERSON_SCHEMA = {
@@ -307,14 +307,14 @@ const ROUTE_DEFINITIONS = [
     description:
       "Draft paper route for Observer-Receiver Model, a theory of consciousness by Marton Vegh described as an external observer dependent on the brain.",
     image: "/profile/marton-vegh-portrait.jpg",
-    hiddenHeading: paper.translations.en.title,
+    hiddenHeading: observerPaper.translations.en.title,
     hiddenParagraphs: [
-      `${paper.translations.en.title} is a draft paper presented on the portfolio as written research work alongside the software projects.`,
-      `The paper summary on the site describes it as "${paper.translations.en.summary}". This dedicated route provides clearer page-level context for search and indexing while linking back to the main portfolio projects and papers section.`,
+      `${observerPaper.translations.en.title} is a draft paper presented on the portfolio as written research work alongside the software projects.`,
+      `The paper summary on the site describes it as "${observerPaper.translations.en.summary}". This dedicated route provides clearer page-level context for search and indexing while linking back to the main portfolio projects and papers section.`,
       "Because the paper is hosted in an external Google Doc, this page also functions as a stable summary destination on the main site with structured metadata and an internal hierarchy.",
     ],
     relatedPaths: ["/projects/", "/about/marton-vegh/", "/"],
-    externalLink: paper.translations.en.link,
+    externalLink: observerPaper.translations.en.link,
   },
 ];
 
