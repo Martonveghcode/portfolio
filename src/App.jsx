@@ -15,6 +15,7 @@ const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encod
 
 function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const ui = copy.ui ?? translations.en.ui;
 
   useEffect(() => {
     if (!isMobile) {
@@ -55,7 +56,7 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
               aria-controls="mobile-nav-panel"
               onClick={() => setIsMobileMenuOpen((current) => !current)}
             >
-              {isMobileMenuOpen ? "Close" : "Menu"}
+              {isMobileMenuOpen ? ui.close : ui.menu}
             </button>
           </div>
 
@@ -63,7 +64,7 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
             id="mobile-nav-panel"
             className={`site-nav__mobile-panel ${isMobileMenuOpen ? "is-open" : ""}`}
           >
-            <nav className="site-nav__mobile-links" aria-label="Primary">
+            <nav className="site-nav__mobile-links" aria-label={ui.primaryNavLabel}>
               {PAGES.map((key) => (
                 <button
                   type="button"
@@ -89,13 +90,13 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
               <a className="nav-action" href="https://orcid.org/0009-0004-2687-8812" target="_blank" rel="noreferrer">
                 ORCID
               </a>
-              <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
-                {theme === "dark" ? "Dark" : "Light"}
+              <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label={ui.themeToggleLabel}>
+                {theme === "dark" ? ui.themeDark : ui.themeLight}
               </button>
             </div>
 
             <div className="site-nav__mobile-meta">
-              <div className="language-switch" aria-label="Language">
+              <div className="language-switch" aria-label={ui.languageLabel}>
                 {LANGUAGE_OPTIONS.map((option) => (
                   <button
                     type="button"
@@ -122,7 +123,7 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
           <span className="brand__meta">{PROFILE.location}</span>
         </div>
 
-        <nav className="site-nav__links" aria-label="Primary">
+        <nav className="site-nav__links" aria-label={ui.primaryNavLabel}>
           {PAGES.map((key) => (
             <button
               type="button"
@@ -151,10 +152,10 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
           <a className="nav-action" href="https://orcid.org/0009-0004-2687-8812" target="_blank" rel="noreferrer">
             ORCID
           </a>
-          <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
-            {theme === "dark" ? "Dark" : "Light"}
+          <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label={ui.themeToggleLabel}>
+            {theme === "dark" ? ui.themeDark : ui.themeLight}
           </button>
-          <div className="language-switch" aria-label="Language">
+          <div className="language-switch" aria-label={ui.languageLabel}>
             {LANGUAGE_OPTIONS.map((option) => (
               <button
                 type="button"
@@ -807,7 +808,7 @@ export default function App() {
       <SeoRouteContent route={route} />
       {pageView}
       <CookieConsentBanner language={language} page={page} />
-      <ContactPanel language={language} page={page} openSignal={contactPanelOpenSignal} isMobile={isMobile} />
+      <ContactPanel language={language} page={page} openSignal={contactPanelOpenSignal} isMobile={isMobile} copy={copy} />
     </div>
   );
 }
