@@ -162,6 +162,46 @@ export const PROJECTS_CONTENT = [
 
 export const PAPERS_CONTENT = [
   {
+    id: "paper-aldar-2q25-report",
+    translations: {
+      en: {
+        title: "Revised ALDAR 2Q25 Report",
+        summary:
+          "A revised and improved upon version of the original report published by UAE Equity Research.",
+        status: "Report",
+        link: "https://docs.google.com/document/d/1GjpRo6A48ZVIfTBseMVwPqdbt_Gwc-6z-N1JFiroatE/edit?usp=sharing",
+      },
+      es: {
+        title: "Revised ALDAR 2Q25 Report",
+        summary:
+          "Una version revisada y mejorada del informe original publicado por UAE Equity Research.",
+        status: "Informe",
+        link: "https://docs.google.com/document/d/1GjpRo6A48ZVIfTBseMVwPqdbt_Gwc-6z-N1JFiroatE/edit?usp=sharing",
+      },
+      fr: {
+        title: "Revised ALDAR 2Q25 Report",
+        summary:
+          "Une version revisee et amelioree du rapport original publie par UAE Equity Research.",
+        status: "Rapport",
+        link: "https://docs.google.com/document/d/1GjpRo6A48ZVIfTBseMVwPqdbt_Gwc-6z-N1JFiroatE/edit?usp=sharing",
+      },
+      de: {
+        title: "Revised ALDAR 2Q25 Report",
+        summary:
+          "Eine uberarbeitete und verbesserte Version des ursprunglichen Berichts, der von UAE Equity Research veroffentlicht wurde.",
+        status: "Bericht",
+        link: "https://docs.google.com/document/d/1GjpRo6A48ZVIfTBseMVwPqdbt_Gwc-6z-N1JFiroatE/edit?usp=sharing",
+      },
+      hu: {
+        title: "Revised ALDAR 2Q25 Report",
+        summary:
+          "Az UAE Equity Research altal publikalt eredeti jelentes atdolgozott es tovabbfejlesztett valtozata.",
+        status: "Jelentes",
+        link: "https://docs.google.com/document/d/1GjpRo6A48ZVIfTBseMVwPqdbt_Gwc-6z-N1JFiroatE/edit?usp=sharing",
+      },
+    },
+  },
+  {
     id: "paper-3",
     translations: {
       en: {
