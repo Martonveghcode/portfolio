@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { saveContactSubmission } from "./firebase";
 
-export default function ContactPanel({ language, page, openSignal, isMobile }) {
+export default function ContactPanel({ language, page, openSignal, isMobile, copy }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,6 +13,7 @@ export default function ContactPanel({ language, page, openSignal, isMobile }) {
   });
   const panelRef = useRef(null);
   const dragCleanupRef = useRef(null);
+  const contactCopy = copy.contactForm;
 
   useEffect(() => {
     if (!openSignal) return;
@@ -140,7 +141,7 @@ export default function ContactPanel({ language, page, openSignal, isMobile }) {
       setIsOpen(false);
     } catch (error) {
       console.error("Contact submission failed:", error);
-      setErrorMessage("Could not send your message. Check the database rules and try again.");
+      setErrorMessage(contactCopy.error);
     } finally {
       setIsSubmitting(false);
     }
@@ -156,7 +157,7 @@ export default function ContactPanel({ language, page, openSignal, isMobile }) {
     : undefined;
 
   return (
-    <div className="contact-panel-shell" aria-label="Get in touch">
+    <div className="contact-panel-shell" aria-label={contactCopy.shellLabel}>
       <aside
         ref={panelRef}
         className={`contact-panel ${isMobile ? "contact-panel--mobile" : ""} ${position ? "contact-panel--floating" : ""}`}
@@ -168,19 +169,19 @@ export default function ContactPanel({ language, page, openSignal, isMobile }) {
               type="button"
               className="contact-panel__drag-handle"
               onPointerDown={handleDragStart}
-              aria-label="Drag contact form"
+              aria-label={contactCopy.dragLabel}
             >
               <span className="contact-panel__drag-pill" />
             </button>
           ) : null}
 
           <div className="contact-panel__copy">
-            <h2>Send a message</h2>
+            <h2>{contactCopy.title}</h2>
           </div>
 
           <form className="contact-panel__form" onSubmit={handleSubmit}>
             <label className="contact-panel__field">
-              <span>Name</span>
+              <span>{contactCopy.name}</span>
               <input
                 type="text"
                 name="name"
@@ -191,7 +192,7 @@ export default function ContactPanel({ language, page, openSignal, isMobile }) {
             </label>
 
             <label className="contact-panel__field">
-              <span>Email</span>
+              <span>{contactCopy.email}</span>
               <input
                 type="email"
                 name="email"
@@ -202,12 +203,12 @@ export default function ContactPanel({ language, page, openSignal, isMobile }) {
             </label>
 
             <label className="contact-panel__field contact-panel__field--wide">
-              <span>Message</span>
+              <span>{contactCopy.message}</span>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={updateField}
-                placeholder="Write a short message"
+                placeholder={contactCopy.messagePlaceholder}
                 rows="4"
                 required
               />
@@ -215,10 +216,10 @@ export default function ContactPanel({ language, page, openSignal, isMobile }) {
 
             <div className="contact-panel__actions">
               <button type="button" className="button button--secondary" onClick={closePanel} disabled={isSubmitting}>
-                Close
+                {contactCopy.close}
               </button>
               <button type="submit" className="button button--primary" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send"}
+                {isSubmitting ? contactCopy.sending : contactCopy.send}
               </button>
             </div>
 
