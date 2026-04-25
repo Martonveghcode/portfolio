@@ -1,6 +1,10 @@
 // Data hub for projects, papers, and experience with per-language fields.
 // Add/edit items here: each entry has translations for en, es, fr, de, hu.
 
+import { GOOGLE_DOC_DOCUMENTS } from "./paperDocuments.js";
+
+const googleDocDocument = (document) => ({ ...document, displayMode: "google-doc-export" });
+
 export const PROJECTS_CONTENT = [
   {
     id: "calendar",
@@ -162,6 +166,44 @@ export const PROJECTS_CONTENT = [
 
 export const PAPERS_CONTENT = [
   {
+    id: "paper-narrative-premium-market-discontinuity",
+    translations: {
+      en: {
+        title: "Narrative Premium and the Discontinuity of Modern Markets",
+        summary:
+          "An argument that modern markets often turn headlines, policy hints, and early company results into broad conclusions before the underlying reality has changed.",
+        status: "Draft",
+        document: {
+          title: "Narrative Premium and the Discontinuity of Modern Markets",
+          sections: [
+            {
+              heading: "Abstract",
+              paragraphs: [
+                "Modern markets are increasingly willing to move before the underlying facts have actually changed at all. The clearest version of this is the Trump headline trade: a comment, post, tariff pause, ceasefire claim, or negotiation hint can move indexes, oil, and semiconductors up or down 10% long before the policy, war, trade route, or earnings reality is settled. This paper argues that recent moves in equities, oil, Intel, ASML, and Nvidia and in general show a market structure that is too quick to turn headlines into broad conclusions. The issue is that markets often treat comments, partial signals, and early company results as if they already prove the full economic outcome of the situation.",
+              ],
+            },
+            {
+              heading: "POINTS",
+              paragraphs: [
+                "The strongest example is Trump's ability to move markets almost instantly. In April 2025, after Trump announced a 90-day tariff pause, the S&P 500 jumped about 9.5%-9.6%, the Nasdaq rose 12.2%, and roughly $4 trillion was added to S&P 500 market value in one day, according to Reuters. (Reuters) That was not because factories, trade flows, or consumer demand changed in a few hours. It happened because investors quickly repriced what they thought the next version of policy might be. The same pattern appeared around the Iran conflict. Stocks rallied on ceasefire relief even while Reuters was still reporting ship seizures in the Strait of Hormuz and CEOs were warning about prolonged energy costs. (Reuters) That is the point: the market was trading Trump's signal before the underlying geopolitical and energy system had resolved. This matters more with Trump because his comments are often outright not true, tactical, contradictory, and designed to create leverage. The markets react to his posts on Truth-Social about the straight of Hormuz being reopened like if it were a message from God, except that we find out 2 hours later that ships are getting shot at while passing through.",
+                "Oil shows the same problem in a more physical market. The Strait of Hormuz is not some abstract story: the IEA says around 20 million barrels per day of crude and oil products moved through it in 2025, about 25% of seaborne oil trade, and flows later plunged during the conflict. (IEA) That should move prices. But the speed of the moves is the issue. USO rose roughly 25% in four trading days, then dropped almost 10% in one day. The Guardian reported that oil plunged after Trump announced a \"Totally free and open straight of hormuz\" and conditional ceasefire. (The Guardian) But later we find out that this is not the case. Reopening \"under management\" is not the same thing as normal shipping, normal insurance, repaired infrastructure, or stable production. If the war risk fades, oil can easily settle much lower than panic levels. A move back toward the $100-110 area would not be surprising, and if the war actually ends and the shipping risk clears, a return closer to $85-90 is possible. The broader point is that oil prices have been moving faster than the actual energy system can adjust.",
+                "The semiconductor reaction looks even more stretched. Intel had a strong report, and the move in Intel itself makes sense up to a point. Business Insider reported that Intel posted $13.58 billion in revenue versus $12.42 billion expected, EPS of $0.29 versus $0.01 expected, data-center revenue up 22%, and foundry revenue up 16%. (Business Insider) Reuters also reported that Intel's forecast helped send U.S. chip stocks to record highs. (Reuters) That is where the market goes too far. Intel beating expectations does not automatically prove that the entire semiconductor sector deserves to rerate at once. It does not prove that every AI infrastructure name, every chip stock, and every related supplier has the same upside. Intel's result may show CPU demand is better than expected, but it does not prove a full sector-wide acceleration.",
+                "ASML is almost the reverse case: the market can punish a company for near-term policy risk while ignoring the long-term monopoly position of the business. Reuters reported that ASML fell after U.S. lawmakers proposed tighter China restrictions on DUV immersion lithography tools, with China expected to be about 20% of ASML's 2026 sales and JPMorgan estimating up to a 10% EPS impact. (Reuters) That is a real risk, but it does not erase ASML's strategic position. ASML is still one of the most important companies in the global semiconductor supply chain, and the market often seems to price the policy headline without fully considering the long-term bottleneck value of the company. The same applies to AI capital expenditure. Investors often treat announced spending as if it automatically becomes finished data centers, deployed GPUs, and future profit. But recent reporting says almost half of planned U.S. data centers for 2026 may be delayed or canceled because of power, transformers, switchgear, batteries, and other infrastructure limits. (Bloomberg) That makes the AI trade more fragile than the headline capex numbers suggest. Nvidia can still be a great company, and AI demand can still be huge, but capital expenditure is not revenue until the infrastructure is actually built, powered, and used profitably.",
+              ],
+            },
+            {
+              heading: "Conclusion",
+              paragraphs: [
+                "The modern market is too willing to trade the headline as if it already contains the outcome. Trump says something, and the market moves. Intel beats, and the whole semiconductor sector rallies. ASML gets hit by export-control risk, and investors compress a long-term monopoly-like position into a short-term policy trade. Oil spikes or collapses on ceasefire language even though shipping, production, insurance, and infrastructure take much longer to normalize.",
+                "That is the discontinuity. Prices are moving on comments, hype, policy hints, and early interpretations faster than the underlying economy can change. Sometimes the move is directionally right. The problem is size and speed. The market is often too confident too early.",
+              ],
+            },
+          ],
+        },
+      },
+    },
+  },
+  {
     id: "paper-aldar-2q25-report",
     translations: {
       en: {
@@ -203,6 +245,7 @@ export const PAPERS_CONTENT = [
   },
   {
     id: "paper-3",
+    document: googleDocDocument(GOOGLE_DOC_DOCUMENTS.singerCritique),
     translations: {
       en: {
         title: "A critique on Famine, Affluence and Morality",

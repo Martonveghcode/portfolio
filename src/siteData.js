@@ -85,7 +85,8 @@ export const translations = {
     favoritePaintingsTitle: "My top 5 favourite paintings",
     worstBooksTitle: "Top 3 worst books",
     sportsAchievementsTitle: "Canoe sprint achievements",
-    links: { live: "Live", github: "GitHub", paper: "View paper" },
+    paperViewer: { dragLabel: "Drag paper viewer" },
+    links: { live: "Live", github: "GitHub", paper: "View paper", previewPaper: "Read on page", hidePaperPreview: "Hide text" },
   },
   es: {
     nav: { home: "Inicio", projects: "Proyectos", papers: "Articulos", experience: "Experiencia", whoami: "Quien soy" },
@@ -133,7 +134,8 @@ export const translations = {
     favoritePaintingsTitle: "Mis 5 pinturas favoritas",
     worstBooksTitle: "Top 3 peores libros",
     sportsAchievementsTitle: "Logros en piraguismo de velocidad",
-    links: { live: "Live", github: "GitHub", paper: "Ver paper" },
+    paperViewer: { dragLabel: "Mover visor del paper" },
+    links: { live: "Live", github: "GitHub", paper: "Ver paper", previewPaper: "Leer aqui", hidePaperPreview: "Ocultar texto" },
   },
   fr: {
     nav: { home: "Accueil", projects: "Projets", papers: "Articles", experience: "Experience", whoami: "Qui je suis" },
@@ -181,7 +183,8 @@ export const translations = {
     favoritePaintingsTitle: "Mes 5 peintures preferees",
     worstBooksTitle: "Top 3 pires livres",
     sportsAchievementsTitle: "Palmares en canoe sprint",
-    links: { live: "Live", github: "GitHub", paper: "Voir le papier" },
+    paperViewer: { dragLabel: "Deplacer le lecteur du papier" },
+    links: { live: "Live", github: "GitHub", paper: "Voir le papier", previewPaper: "Lire ici", hidePaperPreview: "Masquer le texte" },
   },
   de: {
     nav: { home: "Start", projects: "Projekte", papers: "Publikationen", experience: "Erfahrung", whoami: "Wer ich bin" },
@@ -229,7 +232,8 @@ export const translations = {
     favoritePaintingsTitle: "Meine 5 Lieblingsgemalde",
     worstBooksTitle: "Top 3 schlechteste Bucher",
     sportsAchievementsTitle: "Erfolge im Kanusprint",
-    links: { live: "Live", github: "GitHub", paper: "Papier ansehen" },
+    paperViewer: { dragLabel: "Papieransicht verschieben" },
+    links: { live: "Live", github: "GitHub", paper: "Papier ansehen", previewPaper: "Hier lesen", hidePaperPreview: "Text ausblenden" },
   },
   hu: {
     nav: { home: "Kezdolap", projects: "Projektek", papers: "Tanulmanyok", experience: "Tapasztalat", whoami: "Ki vagyok" },
@@ -277,6 +281,7 @@ export const translations = {
     favoritePaintingsTitle: "Az 5 kedvenc festmenyem",
     worstBooksTitle: "Top 3 legrosszabb konyv",
     sportsAchievementsTitle: "Kajak sprint eredmenyek",
-    links: { live: "Elo", github: "GitHub", paper: "Tanulmany megnyitasa" },
+    paperViewer: { dragLabel: "Tanulmanynezet mozgatasa" },
+    links: { live: "Elo", github: "GitHub", paper: "Tanulmany megnyitasa", previewPaper: "Olvasas itt", hidePaperPreview: "Szoveg elrejtese" },
   },
 };
