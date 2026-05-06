@@ -126,8 +126,20 @@ export const WHO_AM_I_CONTENT = {
   },
   favoriteBooks: [
     {
-      id: "dune",
+      id: "divine-comedy",
       rank: 1,
+      cover: { src: "/books/divine-comedy.png", alt: "Cover of The Divine Comedy" },
+      translations: {
+        en: { title: "The Divine Comedy", author: "Dante Alighieri" },
+        es: { title: "La Divina Comedia", author: "Dante Alighieri" },
+        fr: { title: "La Divine Comedie", author: "Dante Alighieri" },
+        de: { title: "Die Gottliche Komodie", author: "Dante Alighieri" },
+        hu: { title: "Isteni szinjatek", author: "Dante Alighieri" },
+      },
+    },
+    {
+      id: "dune",
+      rank: 2,
       cover: { src: "https://m.media-amazon.com/images/I/81oCKLejI0L._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Dune" },
       translations: {
         en: { title: "Dune", author: "Frank Herbert", note: "Series favorites across Dune 1-6 (Messiah, Children, God Emperor, Heretics)." },
@@ -139,7 +151,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "animal-farm",
-      rank: 2,
+      rank: 3,
       cover: { src: "https://m.media-amazon.com/images/I/61KPPB-34FL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Animal Farm" },
       translations: {
         en: { title: "Animal Farm", author: "George Orwell" },
@@ -151,7 +163,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "the-prince",
-      rank: 5,
+      rank: 6,
       cover: { src: "https://cdn.penguin.co.uk/dam-assets/books/9780099518495/9780099518495-jacket-large.jpg", alt: "Cover of The Prince" },
       translations: {
         en: { title: "The Prince", author: "Niccolo Machiavelli" },
@@ -163,7 +175,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "percy-jackson",
-      rank: 3,
+      rank: 4,
       cover: { src: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1375886757i/18299452.jpg", alt: "Cover of The Last Question" },
       translations: {
         en: { title: "The Last Question", author: "Isaac Asimov" },
@@ -175,7 +187,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "scythe",
-      rank: 12,
+      rank: 13,
       cover: { src: "https://marvel-b1-cdn.bc0a.com/f00000000280066/d2snwnmzyr8jue.cloudfront.net/ssd_9781442472440_270.jpeg", alt: "Cover of Scythe" },
       translations: {
         en: { title: "Scythe", author: "Neal Shusterman", note: "Arc of a Scythe trilogy (Scythe, Thunderhead, The Toll)." },
@@ -187,7 +199,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "magnus-chase",
-      rank: 6,
+      rank: 7,
       cover: { src: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1634813070i/59424827.jpg", alt: "Cover of The Last Answer" },
       translations: {
         en: { title: "The Last Answer", author: "Isaac Asimov" },
@@ -199,7 +211,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "therese-raquin",
-      rank: 7,
+      rank: 8,
       cover: { src: "https://www.albaeditorial.es/wp-content/uploads/2020/10/97888484288633-therese-raquin-alba-editorial.jpg", alt: "Cover of Therese Raquin" },
       translations: {
         en: { title: "Therese Raquin", author: "Emile Zola" },
@@ -211,7 +223,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "les-miserables",
-      rank: 8,
+      rank: 9,
       cover: { src: "https://m.media-amazon.com/images/I/81e1NPAQJmL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Les Miserables" },
       translations: {
         en: { title: "Les Miserables", author: "Victor Hugo" },
@@ -223,7 +235,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "heroes-of-olympus",
-      rank: 9,
+      rank: 10,
       cover: { src: "https://m.media-amazon.com/images/I/51BAOQmWnBL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of The Lottery" },
       translations: {
         en: { title: "The Lottery", author: "Shirley Jackson" },
@@ -235,7 +247,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "dry",
-      rank: 10,
+      rank: 11,
       cover: { src: "https://m.media-amazon.com/images/I/71D3dW7fYsL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Dry" },
       translations: {
         en: { title: "Dry", author: "Neal Shusterman" },
@@ -247,7 +259,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "gone",
-      rank: 11,
+      rank: 12,
       cover: { src: "https://m.media-amazon.com/images/I/61cb2Pl-YrL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Gone" },
       translations: {
         en: { title: "Gone", author: "Micheal Grant" },
@@ -259,7 +271,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "wimpy-kid",
-      rank: 4,
+      rank: 5,
       cover: { src: "https://m.media-amazon.com/images/I/51Oknho43qL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Lolita" },
       translations: {
         en: { title: "Lolita", author: "Vladimir Nabokov" },
@@ -271,7 +283,7 @@ export const WHO_AM_I_CONTENT = {
     },
     {
       id: "gangsta-granny",
-      rank: 13,
+      rank: 14,
       cover: { src: "https://m.media-amazon.com/images/I/81gRmybsAML._AC_UF1000,1000_QL80_.jpg", alt: "Cover of Gangsta Granny" },
       translations: {
         en: { title: "Gangsta Granny", author: "David Walliams" },
@@ -279,18 +291,6 @@ export const WHO_AM_I_CONTENT = {
         fr: { title: "Mamie Gangster", author: "David Walliams" },
         de: { title: "Gangsta-Oma", author: "David Walliams" },
         hu: { title: "Gangsta Granny", author: "David Walliams" },
-      },
-    },
-    {
-      id: "the-twits",
-      rank: 14,
-      cover: { src: "https://m.media-amazon.com/images/I/81HPUgVf4cL._AC_UF1000,1000_QL80_.jpg", alt: "Cover of The Worlds worst children" },
-      translations: {
-        en: { title: "The World's Worst Children", author: "David Walliams" },
-        es: { title: "Los peores ninos del mundo", author: "David Walliams" },
-        fr: { title: "Les pires enfants du monde", author: "David Walliams" },
-        de: { title: "Die schlimmsten Kinder der Welt", author: "David Walliams" },
-        hu: { title: "The World's Worst Children", author: "David Walliams" },
       },
     },
     {
