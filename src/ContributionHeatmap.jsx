@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const HEATMAP_COLORS = {
   blue: ["#d8e8ff", "#9fc3ff", "#5e9bf0", "#0a6cda", "#005fcc"],
@@ -253,11 +253,17 @@ export default function ContributionHeatmap({
   startWeekday = 1,
   cellRadius = 6,
   cellSize = 14,
+  columnGap: preferredColumnGap = 4,
+  fitToWidth = false,
+  minCellSize = 4,
+  minColumnGap = 1,
   minDate,
   maxDate = new Date(),
   onCellTap,
   syntheticActivity,
 }) {
+  const shellRef = useRef(null);
+  const [availableWidth, setAvailableWidth] = useState(null);
   const [entries, setEntries] = useState(() => {
     if (providedEntries?.length) {
       return getInitialEntries(providedEntries, minDate, maxDate, syntheticActivity);
@@ -325,12 +331,52 @@ export default function ContributionHeatmap({
   }, [providedEntries, username, minDate, maxDate, syntheticActivity]);
 
   const colorScale = HEATMAP_COLORS[heatmapColor] ?? HEATMAP_COLORS.blue;
-  const columnGap = 4;
 
   const weeks = useMemo(
     () => buildWeeks(entries, minDate, maxDate, startWeekday),
     [entries, minDate, maxDate, startWeekday]
   );
+
+  useEffect(() => {
+    if (!fitToWidth || typeof ResizeObserver === "undefined") return undefined;
+
+    const shell = shellRef.current;
+    if (!shell) return undefined;
+
+    const observer = new ResizeObserver((observedEntries) => {
+      const nextWidth = observedEntries[0]?.contentRect.width ?? shell.clientWidth;
+      setAvailableWidth((currentWidth) => (
+        currentWidth !== null && Math.abs(currentWidth - nextWidth) < 0.5 ? currentWidth : nextWidth
+      ));
+    });
+
+    observer.observe(shell);
+    return () => observer.disconnect();
+  }, [fitToWidth]);
+
+  const fittedSizing = useMemo(() => {
+    if (!fitToWidth || !availableWidth || !weeks.length) {
+      return { cellSize, columnGap: preferredColumnGap };
+    }
+
+    const weekCount = weeks.length;
+    const cellSizeWithPreferredGap = (availableWidth - ((weekCount - 1) * preferredColumnGap)) / weekCount;
+
+    if (cellSizeWithPreferredGap >= minCellSize) {
+      return {
+        cellSize: cellSizeWithPreferredGap,
+        columnGap: preferredColumnGap,
+      };
+    }
+
+    const compactColumnGap = minColumnGap;
+    const cellSizeWithCompactGap = (availableWidth - ((weekCount - 1) * compactColumnGap)) / weekCount;
+
+    return {
+      cellSize: Math.max(minCellSize, cellSizeWithCompactGap),
+      columnGap: compactColumnGap,
+    };
+  }, [availableWidth, cellSize, fitToWidth, minCellSize, minColumnGap, preferredColumnGap, weeks.length]);
 
   const total = useMemo(() => entries.reduce((sum, entry) => sum + entry.count, 0), [entries]);
   const startLabel = useMemo(
@@ -347,9 +393,10 @@ export default function ContributionHeatmap({
 
   return (
     <div
+      ref={shellRef}
       className="heatmap-shell"
       style={{
-        "--heatmap-cell-size": `${cellSize}px`,
+        "--heatmap-cell-size": `${fittedSizing.cellSize}px`,
         "--heatmap-cell-radius": `${cellRadius}px`,
       }}
     >
@@ -357,8 +404,8 @@ export default function ContributionHeatmap({
         <div
           className="heatmap-months"
           style={{
-            gridTemplateColumns: `repeat(${weeks.length}, ${cellSize}px)`,
-            columnGap: `${columnGap}px`,
+            gridTemplateColumns: `repeat(${weeks.length}, ${fittedSizing.cellSize}px)`,
+            columnGap: `${fittedSizing.columnGap}px`,
           }}
         >
           {weeks.map((week, index) => {
@@ -366,9 +413,16 @@ export default function ContributionHeatmap({
             const previousStartDate = weeks[index - 1]?.[0]?.date;
             const shouldLabel =
               weekStartDate && (!previousStartDate || weekStartDate.getMonth() !== previousStartDate.getMonth());
+            const shouldAlignLabelEnd = index >= weeks.length - 4;
 
             return shouldLabel ? (
-              <span key={`month-${index}`} style={{ gridColumnStart: index + 1 }}>
+              <span
+                key={`month-${index}`}
+                style={{
+                  gridColumnStart: index + 1,
+                  justifySelf: shouldAlignLabelEnd ? "end" : "start",
+                }}
+              >
                 {MONTH_NAMES[weekStartDate.getMonth()]}
               </span>
             ) : null;
@@ -376,9 +430,9 @@ export default function ContributionHeatmap({
         </div>
       ) : null}
 
-      <div className="heatmap-grid" style={{ columnGap: `${columnGap}px` }}>
+      <div className="heatmap-grid" style={{ columnGap: `${fittedSizing.columnGap}px` }}>
         {weeks.map((week, weekIndex) => (
-          <div key={`week-${weekIndex}`} className="heatmap-week" style={{ rowGap: `${columnGap}px` }}>
+          <div key={`week-${weekIndex}`} className="heatmap-week" style={{ rowGap: `${fittedSizing.columnGap}px` }}>
             {week.map((day, dayIndex) => {
               const color = day.inRange ? colorScale[Math.min(colorScale.length - 1, day.level)] : "transparent";
               const label = `${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date.toLocaleDateString()}`;

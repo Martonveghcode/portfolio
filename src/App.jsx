@@ -13,6 +13,14 @@ import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./site
 const PROJECT_DISPLAY_ORDER = ["portfolio-analytics-tool", "handwriting-pipeline", "calendar", "grammar-trainer"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}`;
+const DEFAULT_HEATMAP_RANGE_DAYS = 365;
+
+function getRollingHeatmapStartDate(maxDate, dayCount = DEFAULT_HEATMAP_RANGE_DAYS) {
+  const startDate = new Date(maxDate);
+  startDate.setHours(0, 0, 0, 0);
+  startDate.setDate(startDate.getDate() - Math.max(0, dayCount - 1));
+  return startDate;
+}
 
 function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -651,6 +659,7 @@ function HomePage({ copy, heatmapProps }) {
               {...heatmapProps}
               username={PROFILE.githubHandle}
               cellSize={12}
+              fitToWidth
               onCellTap={(date, value) => {
                 if (typeof heatmapProps.onCellTap === "function") heatmapProps.onCellTap(date, value);
               }}
@@ -888,11 +897,16 @@ export default function App() {
     window.scrollTo({ top: 0, left: 0 });
   }, [route.canonicalPath]);
 
-  const heatmapProps = useMemo(() => ({
-    ...heatmapConfig,
-    minDate: heatmapConfig.minDate ?? new Date(2025, 5, 14),
-    maxDate: heatmapConfig.maxDate ?? new Date(),
-  }), []);
+  const heatmapProps = useMemo(() => {
+    const maxDate = heatmapConfig.maxDate ?? new Date();
+    const rangeDays = heatmapConfig.rangeDays ?? DEFAULT_HEATMAP_RANGE_DAYS;
+
+    return {
+      ...heatmapConfig,
+      minDate: heatmapConfig.minDate ?? getRollingHeatmapStartDate(maxDate, rangeDays),
+      maxDate,
+    };
+  }, []);
 
   const localizedProjects = useMemo(() => PROJECTS_CONTENT.map((project) => {
     const projectTranslations = project.translations ?? {};

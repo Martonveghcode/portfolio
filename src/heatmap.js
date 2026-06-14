@@ -21,8 +21,9 @@ const heatmapConfig = {
   startWeekday: 1, // DateTime.monday
   cellRadius: 0,
   cellSize: 18,
-  minDate: new Date(2025, 5, 14), // June is month index 5
-  maxDate: new Date(),
+  rangeDays: 365,
+  minDate: undefined,
+  maxDate: undefined,
   entries: undefined, // Provide entries to disable fetching by username
   syntheticActivity: {
     enabled: true,

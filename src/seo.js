@@ -107,12 +107,12 @@ const ROUTE_DEFINITIONS = [
     type: "webpage",
     title: "Experience | Operations, Coordination, Team Support | Portfolio Marton",
     description:
-      "Experience timeline for Marton Vegh, including internship work in client coordination, event logistics, administrative workflows, and on-site team support.",
+      "Experience timeline for Marton Vegh, including internships, volunteer support, client coordination, event logistics, administrative workflows, and on-site team support.",
     image: "/profile/marton-vegh-canoe-sprint.jpg",
     hiddenHeading: "Experience background in coordination, logistics, and operational support",
     hiddenParagraphs: [
-      "The experience page documents hands-on work in client coordination, event logistics, team support, and operational workflow contexts. These roles complement the project work by showing experience with practical execution, communication, and organization.",
-      "The timeline includes internships at Budapest Design Apartments and Real Club Nautico de Palma, covering administrative workflows, client-facing coordination, racing-team support, and on-site logistics.",
+      "The experience page documents hands-on work in client coordination, event logistics, volunteer support, team support, and operational workflow contexts. These roles complement the project work by showing experience with practical execution, communication, and organization.",
+      "The timeline includes volunteer work at Casal de s'Escorxador supporting older adults with dementia, plus internships at Budapest Design Apartments and Real Club Nautico de Palma covering administrative workflows, client-facing coordination, racing-team support, and on-site logistics.",
     ],
     relatedPaths: ["/about/marton-vegh/", "/projects/", "/"],
   },

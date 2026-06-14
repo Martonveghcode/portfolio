@@ -358,6 +358,32 @@ export const PAPERS_CONTENT = [
 
 export const EXPERIENCE_CONTENT = [
   {
+    id: "casal-escorxador",
+    period: "2026",
+    translations: {
+      en: {
+        title: "Casal de s'Escorxador - Volunteer",
+        detail: "Volunteer support for older adults with dementia, helping with daily activities, companionship, and supervised care routines.",
+      },
+      es: {
+        title: "Casal de s'Escorxador - Voluntariado",
+        detail: "Apoyo voluntario a personas mayores con demencia, ayudando en actividades diarias, compania y rutinas supervisadas de cuidado.",
+      },
+      fr: {
+        title: "Casal de s'Escorxador - Benevolat",
+        detail: "Soutien benevole a des personnes agees atteintes de demence, avec aide aux activites quotidiennes, compagnie et routines de soin supervisees.",
+      },
+      de: {
+        title: "Casal de s'Escorxador - Freiwilligenarbeit",
+        detail: "Freiwillige Unterstutzung alterer Menschen mit Demenz, mit Hilfe bei Alltagsaktivitaten, Gesellschaft und betreuten Pflegeablaufen.",
+      },
+      hu: {
+        title: "Casal de s'Escorxador - Onkentes munka",
+        detail: "Onkentes tamogatas demenciaval elo idos embereknek, segitseggel a napi tevekenysegekben, tarsas jelenlettel es felugyelt gondozasi rutinokkal.",
+      },
+    },
+  },
+  {
     id: "bda",
     period: "2025",
     translations: {
