@@ -97,7 +97,7 @@ const ROUTE_DEFINITIONS = [
       "/projects/homework-calendar/",
       "/projects/handwriting-formatting-pipeline/",
       "/projects/portfolio-analytics-tool/",
-      "/projects/grammar-trainer/",
+      "/projects/habitro/",
     ],
   },
   {
@@ -195,14 +195,14 @@ const ROUTE_DEFINITIONS = [
     title: "Education Software Portfolio | Student Tools and Language Learning | Portfolio Marton",
     description:
       "Education software portfolio route featuring student planning and language-learning tools built with React, Python, SQLite, and LLM-assisted workflows.",
-    image: "/projects/grammar-trainer.png",
+    image: "/projects/habitro.png",
     hiddenHeading: "Education software and student tool portfolio",
     hiddenParagraphs: [
       "This education-focused route brings together projects built around student use cases, planning workflows, and language-learning support. The portfolio examples are designed to solve concrete problems: organizing recurring lessons, exporting schedules, or generating adaptive practice for grammar work.",
-      "Homework Calendar helps students manage recurring school structures in a browser-based interface and push the output into Google Calendar. Grammar Trainer uses Python, SQLite, and LLM-generated Spanish sentences to support grammar practice with instant feedback and adaptive questioning.",
+      "Homework Calendar helps students manage recurring school structures in a browser-based interface and push the output into Google Calendar. Habitro uses SQLite-based performance tracking and a daily workflow to support retained learning across school material.",
       "For search and indexing purposes, this page groups the education software angle of the portfolio into its own route while linking directly to the relevant case studies. That makes it easier to understand the niche the work serves without changing the visible homepage layout.",
     ],
-    relatedPaths: ["/projects/homework-calendar/", "/projects/grammar-trainer/", "/projects/"],
+    relatedPaths: ["/projects/homework-calendar/", "/projects/habitro/", "/projects/"],
   },
   {
     id: "case-study-homework-calendar",
@@ -276,19 +276,19 @@ const ROUTE_DEFINITIONS = [
     tech: getProjectTech("portfolio-analytics-tool"),
   },
   {
-    id: "case-study-grammar-trainer",
-    path: "/projects/grammar-trainer/",
+    id: "case-study-habitro",
+    path: "/projects/habitro/",
     page: "projects",
     type: "case-study",
-    title: "Grammar Trainer Case Study | Python, SQLite, LLM Education App | Portfolio Marton",
+    title: "Habitro Case Study | Daily Learning System with SQLite Tracking | Portfolio Marton",
     description:
-      "Case study for Grammar Trainer, a Python and SQLite grammar-learning app that uses LLM-generated Spanish sentences for adaptive student practice.",
-    image: "/projects/grammar-trainer.png",
-    hiddenHeading: `Case study: ${getProjectTitle("grammar-trainer")}`,
+      "Case study for Habitro, a daily learning system with individualized SQLite-based performance tracking for school material.",
+    image: "/projects/habitro.png",
+    hiddenHeading: `Case study: ${getProjectTitle("habitro")}`,
     hiddenParagraphs: [
-      `${getProjectTitle("grammar-trainer")} is an education software project built to support grammar practice through generated Spanish sentences, immediate feedback, and adaptive repetition.`,
-      "The core problem it addresses is that grammar exercises often become static and repetitive. By combining Python, SQLite, and LLM-assisted sentence generation, the app can tailor practice more closely to student performance and provide a feedback loop that goes beyond fixed worksheets.",
-      `The project sits at the intersection of education, language learning, and practical AI-assisted tooling. It uses persistent performance tracking and personalized question generation to make practice more responsive over time. Summary: ${getProjectSummary("grammar-trainer")}`,
+      `${getProjectTitle("habitro")} is an education software project built around a daily learning workflow for retaining and learning school material.`,
+      "The app uses individualized SQLite-based performance tracking so exercises can be reviewed through a more personal record of progress instead of a static worksheet flow.",
+      `In daily use, the system covers Spanish grammar, Catalan, and maths exercises. Summary: ${getProjectSummary("habitro")}`,
       "This route gives the project its own search-targeted case-study page and connects it to the portfolio's broader education-software niche without changing the visible structure of the projects page.",
     ],
     relatedPaths: [
@@ -296,7 +296,8 @@ const ROUTE_DEFINITIONS = [
       "/services/python-automation-analysis/",
       "/projects/",
     ],
-    tech: getProjectTech("grammar-trainer"),
+    repo: getProjectRepo("habitro"),
+    tech: getProjectTech("habitro"),
   },
   {
     id: "paper-observer-receiver-model",
