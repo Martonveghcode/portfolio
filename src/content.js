@@ -7,6 +7,46 @@ const googleDocDocument = (document) => ({ ...document, displayMode: "google-doc
 
 export const PROJECTS_CONTENT = [
   {
+    id: "macro-recorder-plus",
+    tech: ["Python", "PySide6", "Automation"],
+    links: {
+      github: "https://github.com/Martonveghcode/macro-recorder-plus",
+    },
+    image: {
+      src: "/projects/macro-recorder-plus.png",
+      alt: "Preview of Macro Recorder Plus",
+      width: 1600,
+      height: 950,
+    },
+    translations: {
+      en: {
+        title: "Macro Recorder +",
+        summary:
+          "The macro recorder that actually works. Windows desktop app built with Python and PySide6 for recording, editing, replaying, and exporting keyboard and mouse workflows. Exports to .py and .exe to make your macros run effortlessly. Fully open source and free.",
+      },
+      es: {
+        title: "Macro Recorder +",
+        summary:
+          "El grabador de macros que realmente funciona. App de escritorio para Windows hecha con Python y PySide6 para grabar, editar, reproducir y exportar flujos de teclado y raton. Exporta a .py y .exe para que tus macros se ejecuten sin esfuerzo. Totalmente de codigo abierto y gratis.",
+      },
+      fr: {
+        title: "Macro Recorder +",
+        summary:
+          "L'enregistreur de macros qui fonctionne vraiment. App de bureau Windows construite avec Python et PySide6 pour enregistrer, modifier, rejouer et exporter des flux clavier-souris. Exporte en .py et .exe pour faire tourner vos macros sans effort. Entierement open source et gratuit.",
+      },
+      de: {
+        title: "Macro Recorder +",
+        summary:
+          "Der Makrorekorder, der wirklich funktioniert. Windows-Desktop-App mit Python und PySide6 zum Aufzeichnen, Bearbeiten, Wiedergeben und Exportieren von Tastatur- und Mausablaufen. Exportiert nach .py und .exe, damit deine Makros reibungslos laufen. Vollstandig open source und kostenlos.",
+      },
+      hu: {
+        title: "Macro Recorder +",
+        summary:
+          "A makrorogzito, ami tenyleg mukodik. Windows asztali app Python es PySide6 alapon, billentyuzet- es egerfolyamatok rogzitesehez, szerkesztesehez, lejatszasahoz es exportalasahoz. .py es .exe formatumba exportal, hogy a makroid konnyeden fussanak. Teljesen nyilt forraskodu es ingyenes.",
+      },
+    },
+  },
+  {
     id: "calendar",
     tech: ["React", "Automation"],
     links: {
@@ -125,40 +165,42 @@ export const PROJECTS_CONTENT = [
     },
   },
   {
-    id: "grammar-trainer",
-    tech: ["Python", "Streamlit", "SQLite", "LLM"],
-    links: {},
+    id: "habitro",
+    tech: ["Python", "SQLite", "Education"],
+    links: {
+      github: "https://github.com/Martonveghcode/Habitro",
+    },
     image: {
-      src: "/projects/grammar-trainer.png",
-      alt: "Preview of Grammar Trainer",
-      width: 1617,
-      height: 921,
+      src: "/projects/habitro.png",
+      alt: "Preview of Habitro",
+      width: 1379,
+      height: 776,
     },
     translations: {
       en: {
-        title: "Grammar Trainer",
+        title: "Habitro",
         summary:
-          "A multifunctional grammar app that generates Spanish sentences with LLMs to help students practice identifying the different grammatical functions, providing instant feedback, explanations, and adaptive practice using SQLite-based performance tracking and personalized question generation.",
+          "A daily learning system optimized for retaining and learning school material. It has individualized SQLite-based performance tracking and a daily learning workflow; in my case, it includes Spanish grammar, Catalan, and maths exercises I do daily.",
       },
       es: {
-        title: "Grammar Trainer",
+        title: "Habitro",
         summary:
-          "Aplicacion gramatical multifuncion en Python que genera frases en espanol con LLM para ayudar a los estudiantes a practicar la identificacion de distintas funciones gramaticales, con feedback instantaneo, explicaciones y practica adaptativa mediante seguimiento del rendimiento en SQLite y generacion personalizada de preguntas.",
+          "Un sistema de aprendizaje diario optimizado para retener y aprender material escolar. Tiene seguimiento individualizado del rendimiento con SQLite y un flujo de estudio diario; en mi caso incluye gramatica espanola, catalan y ejercicios de matematicas que hago cada dia.",
       },
       fr: {
-        title: "Grammar Trainer",
+        title: "Habitro",
         summary:
-          "Application grammaticale multifonction en Python qui genere des phrases espagnoles via des LLM pour aider les eleves a pratiquer l'identification de differentes fonctions grammaticales, avec feedback immediat, explications et pratique adaptative basee sur un suivi des performances dans SQLite et une generation personnalisee de questions.",
+          "Un systeme d'apprentissage quotidien optimise pour retenir et apprendre les matieres scolaires. Il inclut un suivi individualise des performances avec SQLite et un flux de travail quotidien; dans mon cas, il couvre la grammaire espagnole, le catalan et des exercices de mathematiques que je fais chaque jour.",
       },
       de: {
-        title: "Grammar Trainer",
+        title: "Habitro",
         summary:
-          "Eine multifunktionale Grammatik-App in Python, die mit LLM spanische Satze erzeugt, damit Schulerinnen und Schuler verschiedene grammatische Funktionen erkennen uben konnen, mit sofortigem Feedback, Erklarungen und adaptivem Training auf Basis von SQLite-Leistungstracking und personalisierter Fragengenerierung.",
+          "Ein tagliches Lernsystem, optimiert zum Behalten und Lernen von Schulstoff. Es bietet individuelles SQLite-basiertes Leistungstracking und einen taglichen Lernablauf; in meinem Fall umfasst es spanische Grammatik, Katalanisch und Mathematikubungen, die ich jeden Tag mache.",
       },
       hu: {
-        title: "Grammar Trainer",
+        title: "Habitro",
         summary:
-          "Egy tobbfunkcios nyelvtani alkalmazas Pythonban, amely LLM-ekkel spanyol mondatokat general, hogy segitse a diakokat a kulonbozo nyelvtani funkciok felismeresenek gyakorlasaban, azonnali visszajelzessel, magyarazatokkal, SQLite-alapu teljesitmenykovetessel es szemelyre szabott feladatgeneralassal.",
+          "Napi tanulasi rendszer, amely az iskolai anyag megtartasara es megtanulasara van optimalizalva. Egyeni, SQLite-alapu teljesitmenykovetest es napi tanulasi workflow-t hasznal; az en esetemben spanyol nyelvtant, katalant es napi matematika feladatokat tartalmaz.",
       },
     },
   },
