@@ -10,7 +10,7 @@ import heatmapConfig from "./heatmap";
 import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
-const PROJECT_DISPLAY_ORDER = ["macro-recorder-plus", "portfolio-analytics-tool", "handwriting-pipeline", "calendar", "habitro"];
+const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "macro-recorder-plus", "portfolio-analytics-tool", "handwriting-pipeline", "habitro", "calendar"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}`;
 const DEFAULT_HEATMAP_RANGE_DAYS = 365;

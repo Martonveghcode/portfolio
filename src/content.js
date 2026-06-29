@@ -7,6 +7,46 @@ const googleDocDocument = (document) => ({ ...document, displayMode: "google-doc
 
 export const PROJECTS_CONTENT = [
   {
+    id: "ti-nspire-cxii-custom-keyboard-remap",
+    tech: ["C", "Ndless", "RAM Hooks"],
+    links: {
+      github: "https://github.com/Martonveghcode/ti-nspire-cxii-custom-keyboard-remap",
+    },
+    image: {
+      src: "/projects/ti-nspire-cxii-keyboard-remap.gif",
+      alt: "TI Nspire CX II keyboard remap demo",
+      width: 892,
+      height: 652,
+    },
+    translations: {
+      en: {
+        title: "TI Nspire CX II Custom Keyboard Remap",
+        summary:
+          "Remaps the TI Nspire CX II calculator keyboard into a QWERTY-style layout using low-level RAM hooks on the OS event queue.",
+      },
+      es: {
+        title: "TI Nspire CX II Custom Keyboard Remap",
+        summary:
+          "Remapea el teclado de la calculadora TI Nspire CX II a un formato tipo QWERTY usando hooks de RAM de bajo nivel en la cola de eventos del sistema.",
+      },
+      fr: {
+        title: "TI Nspire CX II Custom Keyboard Remap",
+        summary:
+          "Remappe le clavier de la calculatrice TI Nspire CX II vers une disposition de type QWERTY avec des hooks RAM bas niveau sur la file d'evenements du systeme.",
+      },
+      de: {
+        title: "TI Nspire CX II Custom Keyboard Remap",
+        summary:
+          "Ordnet die Tastatur des TI Nspire CX II Rechners mit Low-Level-RAM-Hooks in der OS-Event-Queue in ein QWERTY-artiges Layout um.",
+      },
+      hu: {
+        title: "TI Nspire CX II Custom Keyboard Remap",
+        summary:
+          "A TI Nspire CX II szamologep billentyuzetet QWERTY-szeru kiosztasra alakitja at alacsony szintu RAM hookokkal az OS esemenysoraban.",
+      },
+    },
+  },
+  {
     id: "macro-recorder-plus",
     tech: ["Python", "PySide6", "Automation"],
     links: {
