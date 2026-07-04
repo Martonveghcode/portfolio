@@ -642,6 +642,27 @@ function AppBackground() {
   );
 }
 
+function IndustryContributions() {
+  return (
+    <section className="industry-contributions" aria-labelledby="industry-contributions-title">
+      <h2 id="industry-contributions-title" className="industry-contributions__title">
+        Contributor to industry leading projects for
+      </h2>
+      <div className="industry-contributions__logo-line" aria-label="Industry leading project logos">
+        <a
+          className="industry-contributions__logo-link"
+          href="https://www.microsoft.com/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Microsoft"
+        >
+          <img src="/company-logos/microsoft.svg" alt="Microsoft" width="238" height="54" loading="lazy" decoding="async" />
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function HomePage({ copy, heatmapProps }) {
   return (
     <main className="site-main site-main--home">
@@ -649,7 +670,6 @@ function HomePage({ copy, heatmapProps }) {
         <div className="hero-card">
           <p className="eyebrow">{copy.heroTagline}</p>
           <h1>{PROFILE.name}</h1>
-          <p className="hero-subtitle">{copy.heroSub}</p>
           <p className="hero-description">{copy.aboutBlurb}</p>
         </div>
 
@@ -665,6 +685,7 @@ function HomePage({ copy, heatmapProps }) {
               }}
             />
           </article>
+          <IndustryContributions />
         </div>
       </section>
     </main>

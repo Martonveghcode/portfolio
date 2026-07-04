@@ -35,8 +35,7 @@ export const CV_LINKS = {
 export const translations = {
   en: {
     nav: { home: "Home", projects: "Projects", papers: "Papers", experience: "Experience", whoami: "Who Am I" },
-    heroTagline: "Penta-lingual aspiring quantitative financial engineer",
-    heroSub: "Focused on practical solutions that solve real problems.",
+    heroTagline: "Aspiring quantitative financial engineer",
     getInTouch: "Get in touch",
     ui: {
       menu: "Menu",
@@ -62,7 +61,7 @@ export const translations = {
     },
     aboutTitle: "General information",
     aboutBlurb:
-      "Student developer studying in spain with a passion for politics, finance and math. Based in mallorca. Some experience in react web design and currently studying a MIT micromasters in finance.",
+      "Pentalingual student developer based in Mallorca, Spain, focused on geopolitics, finance, and mathematics. I build React interfaces and practical tools in Python, JavaScript, C, and C++, have authored multiple independent papers, study corporate finance and probability, and compete as a national-level athlete.",
     languagesTitle: "Languages",
     languagesList: [
       "Hungarian (native)",
@@ -90,8 +89,7 @@ export const translations = {
   },
   es: {
     nav: { home: "Inicio", projects: "Proyectos", papers: "Articulos", experience: "Experiencia", whoami: "Quien soy" },
-    heroTagline: "Aspirante a ingeniero financiero cuantitativo que habla 5 idiomas",
-    heroSub: "Enfocado en soluciones practicas que resuelven problemas reales.",
+    heroTagline: "Aspirante a ingeniero financiero cuantitativo",
     getInTouch: "Ponte en contacto",
     ui: {
       menu: "Menu",
@@ -117,7 +115,7 @@ export const translations = {
     },
     aboutTitle: "Quien soy",
     aboutBlurb:
-      "Estudiante desarrollador que estudia en Espana con pasion por la politica, las finanzas y las matematicas. Vive en Mallorca. Tiene algo de experiencia en diseno web con React y actualmente estudia un MicroMasters del MIT en finanzas.",
+      "Estudiante desarrollador pentalingue basado en Mallorca, Espana, centrado en geopolitica, finanzas y matematicas. Construyo interfaces en React y herramientas practicas en Python, JavaScript, C y C++, he escrito varios papers independientes, estudio finanzas corporativas y probabilidad, y compito como atleta de nivel nacional.",
     languagesTitle: "Idiomas",
     languagesList: ["Hungaro (nativo)", "Ingles (fluido)", "Espanol (fluido)", "Frances (fluido)", "Catalan (aprendiendo)"],
     stackTitle: "Que uso",
@@ -139,8 +137,7 @@ export const translations = {
   },
   fr: {
     nav: { home: "Accueil", projects: "Projets", papers: "Articles", experience: "Experience", whoami: "Qui je suis" },
-    heroTagline: "Aspirant ingenieur financier quantitatif parlant 5 langues",
-    heroSub: "Centre sur des solutions pratiques qui resolvent de vrais problemes.",
+    heroTagline: "Aspirant ingenieur financier quantitatif",
     getInTouch: "Me contacter",
     ui: {
       menu: "Menu",
@@ -166,7 +163,7 @@ export const translations = {
     },
     aboutTitle: "Qui je suis",
     aboutBlurb:
-      "Etudiant developpeur en Espagne avec une passion pour la politique, la finance et les mathematiques. Base a Majorque. Il a un peu d'experience en web design avec React et suit actuellement un MicroMasters du MIT en finance.",
+      "Etudiant developpeur pentalingue base a Majorque, en Espagne, centre sur la geopolitique, la finance et les mathematiques. Je construis des interfaces React et des outils pratiques en Python, JavaScript, C et C++, j'ai redige plusieurs articles independants, j'etudie la finance d'entreprise et les probabilites, et je compete comme athlete de niveau national.",
     languagesTitle: "Langues",
     languagesList: ["Hongrois (natif)", "Anglais (courant)", "Espagnol (courant)", "Francais (courant)", "Catalan (en apprentissage)"],
     stackTitle: "Ce que j'utilise",
@@ -188,8 +185,7 @@ export const translations = {
   },
   de: {
     nav: { home: "Start", projects: "Projekte", papers: "Publikationen", experience: "Erfahrung", whoami: "Wer ich bin" },
-    heroTagline: "Funfsprachiger angehender quantitativer Finanzingenieur",
-    heroSub: "Fokus auf praktische Losungen, die reale Probleme losen.",
+    heroTagline: "Angehender quantitativer Finanzingenieur",
     getInTouch: "Kontakt",
     ui: {
       menu: "Menu",
@@ -215,7 +211,7 @@ export const translations = {
     },
     aboutTitle: "Wer ich bin",
     aboutBlurb:
-      "Studentischer Entwickler in Spanien mit einer Leidenschaft fur Politik, Finanzen und Mathematik. Lebt auf Mallorca. Hat etwas Erfahrung mit React-Webdesign und studiert derzeit ein MIT MicroMasters in Finance.",
+      "Funfsprachiger studentischer Entwickler auf Mallorca, Spanien, mit Fokus auf Geopolitik, Finanzen und Mathematik. Ich baue React-Oberflachen und praktische Tools in Python, JavaScript, C und C++, habe mehrere unabhangige Papers verfasst, studiere Corporate Finance und Wahrscheinlichkeit, und trete als Athlet auf nationalem Niveau an.",
     languagesTitle: "Sprachen",
     languagesList: ["Ungarisch (Muttersprache)", "Englisch (fliessend)", "Spanisch (fliessend)", "Franzosisch (fliessend)", "Katalanisch (lernend)"],
     stackTitle: "Was ich nutze",
@@ -237,8 +233,7 @@ export const translations = {
   },
   hu: {
     nav: { home: "Kezdolap", projects: "Projektek", papers: "Tanulmanyok", experience: "Tapasztalat", whoami: "Ki vagyok" },
-    heroTagline: "Ot nyelven beszelo leendo kvantitativ penzugyi mernok",
-    heroSub: "Gyakorlati, valos problemakat megoldo megoldasokra fokuszalok.",
+    heroTagline: "Leendo kvantitativ penzugyi mernok",
     getInTouch: "Lepj kapcsolatba",
     ui: {
       menu: "Menu",
@@ -264,7 +259,7 @@ export const translations = {
     },
     aboutTitle: "Ki vagyok",
     aboutBlurb:
-      "Spanyolorszagban tanulo diak fejleszto vagyok, akit a politika, a penzugy es a matematika erdekel. Mallorcan elek. Van nemi tapasztalatom React webdizajnban, es jelenleg az MIT penzugyi MicroMasters kepzeset tanulom.",
+      "Ot nyelven beszelo diak fejleszto vagyok Mallorcan, Spanyolorszagban, geopolitikai, penzugyi es matematikai fokusszal. React feluleteket es gyakorlati eszkozoket epitek Pythonban, JavaScriptben, C-ben es C++-ban, tobb fuggetlen tanulmanyt irtam, vallalati penzugyet es valoszinusegszamitast tanulok, es orszagos szintu sportolokent versenyzek.",
     languagesTitle: "Nyelvek",
     languagesList: ["Magyar (anyanyelv)", "Angol (folyekony)", "Spanyol (folyekony)", "Francia (folyekony)", "Katalan (tanulas alatt)"],
     stackTitle: "Amit hasznalok",
