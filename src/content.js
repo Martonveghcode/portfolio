@@ -469,7 +469,11 @@ export const EXPERIENCE_CONTENT = [
     id: "bda",
     period: "2025",
     translations: {
-      en: { title: "Budapest Design Apartments - Intern", detail: "Client coordination and admin workflows." },
+      en: {
+        title: "Budapest Design Apartments - Intern",
+        detail:
+          "Supported the remote management of short-term rental apartments by coordinating guest communications, monitoring bookings, updating listings, and assisting with administrative tasks through digital tools such as Booking.com and Hotelgram. Observed issue-resolution workflows involving maintenance, cleaning, and client support.",
+      },
       es: { title: "Budapest Design Apartments - Practicas", detail: "Coordinacion de clientes y flujos administrativos." },
       fr: { title: "Budapest Design Apartments - Stage", detail: "Coordination clients et flux administratifs." },
       de: { title: "Budapest Design Apartments - Praktikum", detail: "Kundenkoordination und administrative Ablaufe." },
@@ -482,7 +486,8 @@ export const EXPERIENCE_CONTENT = [
     translations: {
       en: {
         title: "Real Club Nautico de Palma - Intern",
-        detail: "Event logistics, on-site team support as well as monitoring of the racing team.",
+        detail:
+          "Supported daily nautical operations by assisting with event and training logistics, preparing and maintaining kayak/canoe equipment, coordinating with coaches, and observing athlete development through structured sessions, safety routines, and on-site team support.",
       },
       es: {
         title: "Real Club Nautico de Palma - Practicas",

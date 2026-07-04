@@ -371,7 +371,6 @@ select:focus-visible {
 .section-header h2 { font-size: 1.75rem; }
 .eyebrow { margin: 0; font-size: 12px; line-height: 1.5; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 
-.hero-subtitle,
 .hero-description,
 .card-copy p,
 .prose p,
@@ -379,7 +378,6 @@ select:focus-visible {
 .book-card__body p,
 .timeline-item__card p { margin: 0; line-height: 1.7; }
 
-.hero-subtitle { margin-top: 18px; font-size: 1.125rem; color: var(--text-strong); }
 .hero-description { margin-top: 12px; max-width: 62ch; color: var(--text); }
 
 .hero-actions,
@@ -456,6 +454,45 @@ select:focus-visible {
 .hero-rail,
 .stack-grid { grid-template-columns: 1fr; }
 .heatmap-card { overflow: hidden; }
+.industry-contributions {
+  width: 100%;
+  display: grid;
+  gap: 18px;
+  padding: 2px 0 0;
+  overflow: visible;
+}
+.industry-contributions__title {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+.industry-contributions__logo-line {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: center;
+  overflow: visible;
+}
+.industry-contributions__logo-link {
+  grid-column: 1;
+  justify-self: start;
+  display: inline-flex;
+  width: clamp(124px, 18vw, 172px);
+  transform: translateX(0);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+.industry-contributions__logo-link:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.08);
+}
+.industry-contributions__logo-link img {
+  width: 100%;
+  height: auto;
+}
 .overview-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .split-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
