@@ -12,6 +12,7 @@ Implemented the SEO audit recommendations from `seo-audit-report.md` across meta
 - Converted internal navigation controls from button-only routing to real anchor links while preserving the single-page app navigation behavior.
 - Added visible case-study links from project cards to their detailed project pages.
 - Improved image alt text for the profile portrait.
+- Localized the industry contribution heading across English, Spanish, French, German, and Hungarian.
 - Made the contribution heatmap use non-interactive elements when no tap handler is present, reducing unnecessary button semantics.
 - Added font preconnect hints to the generated HTML for better loading behavior.
 - Added an SEO output guard script that fails the build if the deprecated GitHub Pages domain appears in generated source or build output.
@@ -22,6 +23,7 @@ Implemented the SEO audit recommendations from `seo-audit-report.md` across meta
 - `src/App.jsx`
 - `src/ContributionHeatmap.jsx`
 - `src/CookieConsentBanner.jsx`
+- `src/siteData.js`
 - `src/seo.js`
 - `index.css`
 - `index.html`

@@ -648,11 +648,11 @@ function AppBackground() {
   );
 }
 
-function IndustryContributions() {
+function IndustryContributions({ title }) {
   return (
     <section className="industry-contributions" aria-labelledby="industry-contributions-title">
       <h2 id="industry-contributions-title" className="industry-contributions__title">
-        Contributor to industry leading projects for
+        {title}
       </h2>
       <div className="industry-contributions__logo-line" aria-label="Industry leading project logos">
         <a
@@ -689,7 +689,7 @@ function HomePage({ copy, heatmapProps }) {
               fitToWidth
             />
           </article>
-          <IndustryContributions />
+          <IndustryContributions title={copy.industryContributionsTitle} />
         </div>
       </section>
     </main>
