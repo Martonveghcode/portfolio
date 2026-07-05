@@ -1,8 +1,7 @@
 import { Fragment, startTransition, useEffect, useMemo, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import ContributionHeatmap from "./ContributionHeatmap";
 import ContactPanel from "./ContactPanel";
-import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
+import { EXPERIENCE_CONTENT, PROJECTS_CONTENT } from "./content";
 import CookieConsentBanner from "./CookieConsentBanner";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
@@ -245,253 +244,6 @@ function ProjectCard({ project, copy, compact = false }) {
   );
 }
 
-function PaperDocument({ document }) {
-  if (!document) return null;
-
-  const isGoogleDocExport = document.displayMode === "google-doc-export";
-
-  function isCompactExportLine(line) {
-    const trimmedLine = line.trim();
-    return trimmedLine.length > 0 && trimmedLine.length <= 72 && !/[.!?]$/.test(trimmedLine);
-  }
-
-  function buildGoogleDocBlocks(paragraphs) {
-    const blocks = [];
-    let compactLines = [];
-
-    function flushCompactLines() {
-      if (!compactLines.length) return;
-
-      blocks.push({
-        type: compactLines.length === 1 ? "subheading" : "compact-lines",
-        lines: compactLines,
-      });
-      compactLines = [];
-    }
-
-    paragraphs.forEach((paragraph) => {
-      if (isCompactExportLine(paragraph)) {
-        compactLines.push(paragraph);
-        return;
-      }
-
-      flushCompactLines();
-      blocks.push({ type: "paragraph", text: paragraph });
-    });
-
-    flushCompactLines();
-    return blocks;
-  }
-
-  function renderSectionParagraphs(section) {
-    if (!isGoogleDocExport) {
-      return (section.paragraphs ?? []).map((paragraph, index) => (
-        <p key={`${section.heading}-${index}`}>{paragraph}</p>
-      ));
-    }
-
-    return buildGoogleDocBlocks(section.paragraphs ?? []).map((block, index) => {
-      if (block.type === "paragraph") {
-        return <p key={`${section.heading}-paragraph-${index}`}>{block.text}</p>;
-      }
-
-      if (block.type === "subheading") {
-        return <p key={`${section.heading}-subheading-${index}`} className="paper-document__subheading">{block.lines[0]}</p>;
-      }
-
-      return (
-        <p key={`${section.heading}-compact-${index}`} className="paper-document__compact-lines">
-          {block.lines.map((line, lineIndex) => (
-            <span key={`${line}-${lineIndex}`}>{line}</span>
-          ))}
-        </p>
-      );
-    });
-  }
-
-  return (
-    <div className={`paper-document ${isGoogleDocExport ? "paper-document--google-doc" : ""}`}>
-      <h1>{document.title}</h1>
-      {(document.sections ?? []).map((section) => (
-        <section className="paper-document__section" key={section.heading}>
-          {section.heading ? <h2>{section.heading}</h2> : null}
-          {renderSectionParagraphs(section)}
-        </section>
-      ))}
-    </div>
-  );
-}
-
-function PaperCard({ paper, copy }) {
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const [viewerPosition, setViewerPosition] = useState(null);
-  const viewerRef = useRef(null);
-  const dragCleanupRef = useRef(null);
-  const viewerCopy = copy.paperViewer ?? translations.en.paperViewer ?? {};
-  const canPreviewPaper = Boolean(paper.document);
-
-  useEffect(() => () => {
-    if (dragCleanupRef.current) {
-      dragCleanupRef.current();
-      dragCleanupRef.current = null;
-    }
-
-    document.body.style.userSelect = "";
-    document.body.style.cursor = "";
-  }, []);
-
-  function clearDragListeners() {
-    if (dragCleanupRef.current) {
-      dragCleanupRef.current();
-      dragCleanupRef.current = null;
-    }
-
-    document.body.style.userSelect = "";
-    document.body.style.cursor = "";
-  }
-
-  function closeViewer() {
-    clearDragListeners();
-    setViewerPosition(null);
-    setIsViewerOpen(false);
-  }
-
-  function toggleViewer() {
-    if (isViewerOpen) {
-      closeViewer();
-      return;
-    }
-
-    setIsViewerOpen(true);
-  }
-
-  function clampViewerPosition(nextX, nextY, width, height) {
-    const margin = 12;
-    const maxX = Math.max(margin, window.innerWidth - width - margin);
-    const maxY = Math.max(margin, window.innerHeight - height - margin);
-
-    return {
-      x: Math.min(Math.max(nextX, margin), maxX),
-      y: Math.min(Math.max(nextY, margin), maxY),
-    };
-  }
-
-  function handleViewerDragStart(event) {
-    if (event.button !== 0) return;
-
-    const viewer = viewerRef.current;
-    if (!viewer) return;
-
-    clearDragListeners();
-
-    const rect = viewer.getBoundingClientRect();
-    const offsetX = event.clientX - rect.left;
-    const offsetY = event.clientY - rect.top;
-    const viewerWidth = rect.width;
-    const viewerHeight = rect.height;
-    const startPosition = clampViewerPosition(rect.left, rect.top, viewerWidth, viewerHeight);
-
-    setViewerPosition(startPosition);
-    document.body.style.userSelect = "none";
-    document.body.style.cursor = "grabbing";
-
-    const handlePointerMove = (moveEvent) => {
-      const nextPosition = clampViewerPosition(
-        moveEvent.clientX - offsetX,
-        moveEvent.clientY - offsetY,
-        viewerWidth,
-        viewerHeight,
-      );
-      setViewerPosition(nextPosition);
-    };
-
-    const handlePointerUp = () => {
-      clearDragListeners();
-    };
-
-    dragCleanupRef.current = () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("pointerup", handlePointerUp);
-    };
-
-    window.addEventListener("pointermove", handlePointerMove);
-    window.addEventListener("pointerup", handlePointerUp);
-
-    event.preventDefault();
-  }
-
-  const viewerStyle = viewerPosition
-    ? {
-        left: `${viewerPosition.x}px`,
-        top: `${viewerPosition.y}px`,
-      }
-    : undefined;
-  const paperViewer = canPreviewPaper && isViewerOpen ? (
-    <div
-      ref={viewerRef}
-      className={`paper-viewer ${viewerPosition ? "paper-viewer--floating" : ""}`}
-      style={viewerStyle}
-    >
-      <div className="paper-viewer__toolbar">
-        <button
-          type="button"
-          className="paper-viewer__drag-handle"
-          onPointerDown={handleViewerDragStart}
-          aria-label={viewerCopy.dragLabel}
-        >
-          <span className="paper-viewer__drag-pill" />
-        </button>
-
-        {viewerPosition ? (
-          <button type="button" className="paper-viewer__close-button" onClick={closeViewer}>
-            {copy.ui.close}
-          </button>
-        ) : null}
-      </div>
-
-      <div className="paper-viewer__scroll">
-        <PaperDocument document={paper.document} />
-      </div>
-    </div>
-  ) : null;
-
-  return (
-    <article className={`text-card paper-card ${isViewerOpen ? "paper-card--open" : ""}`}>
-      {!isViewerOpen ? (
-        <div className="card-copy">
-          <h3>{paper.title}</h3>
-          <p className="muted">{paper.summary}</p>
-        </div>
-      ) : null}
-
-      <div className="card-actions">
-        {canPreviewPaper ? (
-          <button
-            type="button"
-            className="paper-preview-button"
-            aria-expanded={isViewerOpen}
-            onClick={toggleViewer}
-          >
-            {isViewerOpen ? copy.links.hidePaperPreview : copy.links.previewPaper}
-          </button>
-        ) : null}
-
-        {paper.link ? (
-          <a className="inline-link" href={paper.link} target="_blank" rel="noreferrer">
-            {copy.links.paper}
-          </a>
-        ) : null}
-      </div>
-
-      {canPreviewPaper && isViewerOpen ? (
-        <div className={`paper-viewer-shell ${viewerPosition ? "paper-viewer-shell--floating" : ""}`}>
-          {viewerPosition && typeof document !== "undefined" ? createPortal(paperViewer, document.body) : paperViewer}
-        </div>
-      ) : null}
-    </article>
-  );
-}
-
 function ExperienceTimeline({ items, compact = false }) {
   return (
     <div className={`timeline ${compact ? "timeline--compact" : ""}`}>
@@ -696,28 +448,15 @@ function HomePage({ copy, heatmapProps }) {
   );
 }
 
-function ProjectsPage({ copy, projects, papers }) {
+function ProjectsPage({ copy, projects }) {
   return (
     <main className="site-main">
       <section className="page-intro page-intro--curved">
         <h1>{copy.projectsTitle}</h1>
       </section>
 
-      <div className="projects-stack">
-        <details className="surface-card dropdown-card">
-          <summary className="dropdown-summary">
-            <span>{copy.papersTitle}</span>
-          </summary>
-          <div className="dropdown-panel">
-            <div className="text-card-list">
-              {papers.map((paper) => <PaperCard key={paper.id} paper={paper} copy={copy} />)}
-            </div>
-          </div>
-        </details>
-
-        <div className="project-grid project-grid--full">
-          {projects.map((project) => <ProjectCard key={project.id} project={project} copy={copy} />)}
-        </div>
+      <div className="project-grid project-grid--full">
+        {projects.map((project) => <ProjectCard key={project.id} project={project} copy={copy} />)}
       </div>
     </main>
   );
@@ -841,7 +580,6 @@ function WhoAmIPage({ copy, whoAmI }) {
 const ROUTE_TYPE_LABELS = {
   service: "Portfolio focus",
   "case-study": "Case study",
-  paper: "Research note",
   profile: "Profile",
   webpage: "Site information",
 };
@@ -1078,19 +816,6 @@ export default function App() {
     return leftRank - rightRank;
   }), [language]);
 
-  const localizedPapers = useMemo(() => PAPERS_CONTENT.map((paper) => {
-    const paperTranslations = paper.translations ?? {};
-    const locale = paperTranslations[language] ?? paperTranslations.en ?? {};
-    return {
-      id: paper.id,
-      status: locale.status ?? paperTranslations.en?.status ?? paper.status ?? "",
-      title: locale.title ?? paperTranslations.en?.title ?? paper.title ?? "",
-      summary: locale.summary ?? paperTranslations.en?.summary ?? paper.summary ?? "",
-      link: locale.link ?? paperTranslations.en?.link ?? paper.link ?? "",
-      document: locale.document ?? paperTranslations.en?.document ?? paper.document ?? null,
-    };
-  }), [language]);
-
   const localizedExperience = useMemo(() => EXPERIENCE_CONTENT.map((item) => {
     const experienceTranslations = item.translations ?? {};
     const locale = experienceTranslations[language] ?? experienceTranslations.en ?? {};
@@ -1183,11 +908,10 @@ export default function App() {
     />
   );
 
-  if (page === "projects") pageView = <ProjectsPage copy={copy} projects={localizedProjects} papers={localizedPapers} />;
-  if (page === "papers") pageView = <ProjectsPage copy={copy} projects={localizedProjects} papers={localizedPapers} />;
+  if (page === "projects") pageView = <ProjectsPage copy={copy} projects={localizedProjects} />;
   if (page === "experience") pageView = <ExperiencePage copy={copy} experience={localizedExperience} />;
   if (page === "whoami") pageView = <WhoAmIPage copy={copy} whoAmI={localizedWhoAmI} />;
-  if (["service", "case-study", "paper", "profile", "privacy"].includes(page)) {
+  if (["service", "case-study", "profile", "privacy"].includes(page)) {
     pageView = <RouteDetailPage route={route} copy={copy} />;
   }
 

@@ -1,4 +1,4 @@
-import { PAPERS_CONTENT, PROJECTS_CONTENT } from "./content.js";
+import { PROJECTS_CONTENT } from "./content.js";
 import { PROFILE, STACK } from "./siteData.js";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT.js";
 
@@ -11,7 +11,6 @@ export const PRIMARY_PAGE_PATHS = {
   whoami: "/who-am-i/",
 };
 
-const observerPaper = PAPERS_CONTENT.find((entry) => entry.id === "paper-1") ?? PAPERS_CONTENT[0];
 const projectById = Object.fromEntries(PROJECTS_CONTENT.map((project) => [project.id, project]));
 
 const BASE_PERSON_SCHEMA = {
@@ -316,24 +315,6 @@ const ROUTE_DEFINITIONS = [
     repo: getProjectRepo("habitro"),
     tech: getProjectTech("habitro"),
   },
-  {
-    id: "paper-observer-receiver-model",
-    path: "/papers/observer-receiver-model/",
-    page: "paper",
-    type: "paper",
-    title: "Observer-Receiver Model | Draft Consciousness Paper | Portfolio Marton",
-    description:
-      "Draft paper route for Observer-Receiver Model, a theory of consciousness by Marton Vegh described as an external observer dependent on the brain.",
-    image: "/profile/marton-vegh-portrait.jpg",
-    hiddenHeading: observerPaper.translations.en.title,
-    hiddenParagraphs: [
-      `${observerPaper.translations.en.title} is a draft paper presented on the portfolio as written research work alongside the software projects.`,
-      `The paper summary on the site describes it as "${observerPaper.translations.en.summary}". This dedicated route provides clearer page-level context for search and indexing while linking back to the main portfolio projects and papers section.`,
-      "Because the paper is hosted in an external Google Doc, this page also functions as a stable summary destination on the main site with structured metadata and an internal hierarchy.",
-    ],
-    relatedPaths: ["/projects/", "/about/marton-vegh/", "/"],
-    externalLink: observerPaper.translations.en.link,
-  },
 ];
 
 function enrichRoute(route) {
@@ -400,10 +381,6 @@ function buildBreadcrumbList(route, siteUrl) {
     breadcrumbs.push({ name: "Projects", path: "/projects/" });
   }
 
-  if (route.path.startsWith("/papers/")) {
-    breadcrumbs.push({ name: "Papers", path: "/projects/" });
-  }
-
   if (route.path.startsWith("/services/")) {
     breadcrumbs.push({ name: "Services", path: "/" });
   }
@@ -467,19 +444,6 @@ function buildPrimarySchema(route, siteUrl) {
     };
   }
 
-  if (route.type === "paper") {
-    return {
-      "@type": "Article",
-      headline: route.hiddenHeading,
-      description: route.description,
-      author: {
-        "@type": "Person",
-        name: PROFILE.name,
-        url: getAbsoluteUrl(siteUrl, "/about/marton-vegh/"),
-      },
-      mainEntityOfPage: getAbsoluteUrl(siteUrl, route.path),
-    };
-  }
 
   return baseWebPage;
 }
