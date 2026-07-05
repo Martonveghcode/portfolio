@@ -22,27 +22,27 @@ export const PROJECTS_CONTENT = [
       en: {
         title: "TI Nspire CX II Custom Keyboard Remap",
         summary:
-          "Remaps the TI Nspire CX II calculator keyboard into a QWERTY-style layout using low-level RAM hooks on the OS event queue.",
+          "Remaps alphabetic input on the TI-Nspire CX II CAS into a QWERTY-style layout using an Ndless RAM hook on the OS event queue, making typing more familiar while preserving the calculator's native keyboard behavior.",
       },
       es: {
         title: "TI Nspire CX II Custom Keyboard Remap",
         summary:
-          "Remapea el teclado de la calculadora TI Nspire CX II a un formato tipo QWERTY usando hooks de RAM de bajo nivel en la cola de eventos del sistema.",
+          "Reasigna la entrada alfabética en la TI-Nspire CX II CAS a una distribución de estilo QWERTY mediante un hook de RAM de Ndless en la cola de eventos del sistema, haciendo la escritura más familiar mientras conserva el comportamiento nativo del teclado de la calculadora.",
       },
       fr: {
         title: "TI Nspire CX II Custom Keyboard Remap",
         summary:
-          "Remappe le clavier de la calculatrice TI Nspire CX II vers une disposition de type QWERTY avec des hooks RAM bas niveau sur la file d'evenements du systeme.",
+          "Remappe la saisie alphabétique sur la TI-Nspire CX II CAS en une disposition de type QWERTY grâce à un hook RAM Ndless sur la file d'événements du système, rendant la frappe plus familière tout en préservant le comportement natif du clavier de la calculatrice",
       },
       de: {
         title: "TI Nspire CX II Custom Keyboard Remap",
         summary:
-          "Ordnet die Tastatur des TI Nspire CX II Rechners mit Low-Level-RAM-Hooks in der OS-Event-Queue in ein QWERTY-artiges Layout um.",
+          "Ordnet die alphabetische Eingabe auf dem TI-Nspire CX II CAS mithilfe eines Ndless-RAM-Hooks in der Ereigniswarteschlange des Betriebssystems einem QWERTY-ähnlichen Layout zu, wodurch das Tippen vertrauter wird, während das native Tastaturverhalten des Rechners erhalten bleibt.",
       },
       hu: {
         title: "TI Nspire CX II Custom Keyboard Remap",
         summary:
-          "A TI Nspire CX II szamologep billentyuzetet QWERTY-szeru kiosztasra alakitja at alacsony szintu RAM hookokkal az OS esemenysoraban.",
+          "A TI-Nspire CX II CAS betűbevitelét QWERTY-stílusú kiosztásra alakítja egy Ndless RAM-hook segítségével az operációs rendszer eseménysorán, ismerősebbé téve a gépelést, miközben megőrzi a számológép natív billentyűzetműködését.",
       },
     },
   },
