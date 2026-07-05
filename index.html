@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png?v=20260401" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio Marton | Frontend Developer, Python, Quant Projects</title>
     <meta
@@ -11,7 +13,7 @@
     />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="author" content="Marton Vegh" />
-    <link rel="canonical" href="https://martonveghcode.github.io/portfolio" />
+    <link rel="canonical" href="https://marton.top" />
     <meta property="og:site_name" content="Portfolio Marton" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Portfolio Marton | Frontend Developer, Python, Quant Projects" />
@@ -19,35 +21,50 @@
       property="og:description"
       content="Portfolio Marton showcases React, Python, education software, automation, and quantitative finance projects by Marton Vegh."
     />
-    <meta property="og:url" content="https://martonveghcode.github.io/portfolio" />
-    <meta property="og:image" content="https://martonveghcode.github.io/portfolio/profile/marton-vegh-portrait.jpg" />
+    <meta property="og:url" content="https://marton.top" />
+    <meta property="og:image" content="https://marton.top/profile/marton-vegh-portrait.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Portfolio Marton | Frontend Developer, Python, Quant Projects" />
     <meta
       name="twitter:description"
       content="Portfolio Marton showcases React, Python, education software, automation, and quantitative finance projects by Marton Vegh."
     />
-    <meta name="twitter:image" content="https://martonveghcode.github.io/portfolio/profile/marton-vegh-portrait.jpg" />
+    <meta name="twitter:image" content="https://marton.top/profile/marton-vegh-portrait.jpg" />
     <style>
-      .visually-hidden {
-        position: absolute !important;
-        width: 1px !important;
-        height: 1px !important;
-        padding: 0 !important;
-        margin: -1px !important;
-        overflow: hidden !important;
-        clip: rect(0, 0, 0, 0) !important;
-        white-space: nowrap !important;
-        border: 0 !important;
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #16181b;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .seo-prerender {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+      .seo-prerender h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.08;
+      }
+      .seo-prerender p,
+      .seo-prerender li {
+        color: #4f5661;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      .seo-prerender a {
+        color: #0a6cda;
+        font-weight: 600;
       }
     </style>
     <script id="route-structured-data" type="application/ld+json">
-      [{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://martonveghcode.github.io/portfolio/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"url":"https://martonveghcode.github.io/portfolio/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://martonveghcode.github.io/portfolio","author":{"@type":"Person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"WebPage","name":"Portfolio Marton: frontend, Python, and quantitative project portfolio","description":"Portfolio Marton showcases Marton Vegh's React, Python, education software, and quantitative finance projects with focused case-study routes and technical project context.","url":"https://martonveghcode.github.io/portfolio","primaryImageOfPage":{"@type":"ImageObject","url":"https://martonveghcode.github.io/portfolio/profile/marton-vegh-portrait.jpg"},"about":{"@type":"Person","name":"Marton Vegh","url":"https://martonveghcode.github.io/portfolio/about/marton-vegh/"}}]
+      [{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://marton.top/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"url":"https://marton.top/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top","author":{"@type":"Person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"WebPage","name":"Portfolio Marton: frontend, Python, and quantitative project portfolio","description":"Portfolio Marton showcases Marton Vegh's React, Python, education software, and quantitative finance projects with focused case-study routes and technical project context.","url":"https://marton.top","primaryImageOfPage":{"@type":"ImageObject","url":"https://marton.top/profile/marton-vegh-portrait.jpg"},"about":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"}}]
     </script>
   </head>
   <body>
     <main id="seo-content">
-      <section class="visually-hidden" data-seo-route="home">
+      <section class="seo-prerender" data-seo-route="home">
         <article>
           <h1>Portfolio Marton: frontend, Python, and quantitative project portfolio</h1>
           <p>Portfolio Marton is the personal portfolio site of Marton Vegh, a student developer based in Mallorca, Spain. The work shown here focuses on practical software projects in React, JavaScript, Python, automation, and quantitative analysis.</p>

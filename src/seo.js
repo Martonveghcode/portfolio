@@ -2,7 +2,7 @@ import { PAPERS_CONTENT, PROJECTS_CONTENT } from "./content.js";
 import { PROFILE, STACK } from "./siteData.js";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT.js";
 
-export const DEFAULT_SITE_URL = "https://martonveghcode.github.io/portfolio";
+export const DEFAULT_SITE_URL = "https://marton.top";
 
 export const PRIMARY_PAGE_PATHS = {
   home: "/",
@@ -135,7 +135,7 @@ const ROUTE_DEFINITIONS = [
   {
     id: "profile",
     path: "/about/marton-vegh/",
-    page: "whoami",
+    page: "profile",
     type: "profile",
     title: "About Marton Vegh | Multilingual Student Developer Portfolio",
     description:
@@ -150,9 +150,26 @@ const ROUTE_DEFINITIONS = [
     relatedPaths: ["/who-am-i/", "/projects/", "/experience/"],
   },
   {
+    id: "privacy",
+    path: "/privacy/",
+    page: "privacy",
+    type: "webpage",
+    title: "Privacy and Cookies | Portfolio Marton",
+    description:
+      "Privacy and cookie information for Portfolio Marton, including contact form data, cookie consent records, local preferences, and external profile links.",
+    image: "/profile/marton-vegh-portrait.jpg",
+    hiddenHeading: "Privacy and cookie information for Portfolio Marton",
+    hiddenParagraphs: [
+      "Portfolio Marton uses a small amount of data to keep the site functional, remember basic preferences, and receive messages through the contact form.",
+      "The cookie preference banner records whether a visitor accepted or declined preferences, along with basic browser and page context needed to store that choice. The contact form collects the name, email address, and message a visitor submits.",
+      "The site also links to external services such as GitHub, ORCID, Google Docs, Gmail, and project repositories. Those services have their own privacy practices when opened.",
+    ],
+    relatedPaths: ["/about/marton-vegh/", "/projects/", "/"],
+  },
+  {
     id: "service-frontend",
     path: "/services/frontend-react-development/",
-    page: "home",
+    page: "service",
     type: "service",
     title: "Frontend Developer Portfolio | React, JavaScript, Performance | Portfolio Marton",
     description:
@@ -169,7 +186,7 @@ const ROUTE_DEFINITIONS = [
   {
     id: "service-python",
     path: "/services/python-automation-analysis/",
-    page: "home",
+    page: "service",
     type: "service",
     title: "Python Developer Portfolio | Automation, Analysis, Workflow Tools | Portfolio Marton",
     description:
@@ -190,7 +207,7 @@ const ROUTE_DEFINITIONS = [
   {
     id: "service-education",
     path: "/services/education-software-tools/",
-    page: "home",
+    page: "service",
     type: "service",
     title: "Education Software Portfolio | Student Tools and Language Learning | Portfolio Marton",
     description:
@@ -207,7 +224,7 @@ const ROUTE_DEFINITIONS = [
   {
     id: "case-study-homework-calendar",
     path: "/projects/homework-calendar/",
-    page: "projects",
+    page: "case-study",
     type: "case-study",
     title: "Homework Calendar Case Study | React Student Scheduling App | Portfolio Marton",
     description:
@@ -231,7 +248,7 @@ const ROUTE_DEFINITIONS = [
   {
     id: "case-study-handwriting",
     path: "/projects/handwriting-formatting-pipeline/",
-    page: "projects",
+    page: "case-study",
     type: "case-study",
     title: "Handwriting Formatting Pipeline Case Study | Python Workflow Tool | Portfolio Marton",
     description:
@@ -255,7 +272,7 @@ const ROUTE_DEFINITIONS = [
   {
     id: "case-study-portfolio-analytics",
     path: "/projects/portfolio-analytics-tool/",
-    page: "projects",
+    page: "case-study",
     type: "case-study",
     title: "Portfolio Analytics Tool Case Study | Python Finance Project | Portfolio Marton",
     description:
@@ -278,7 +295,7 @@ const ROUTE_DEFINITIONS = [
   {
     id: "case-study-habitro",
     path: "/projects/habitro/",
-    page: "projects",
+    page: "case-study",
     type: "case-study",
     title: "Habitro Case Study | Daily Learning System with SQLite Tracking | Portfolio Marton",
     description:
@@ -302,7 +319,7 @@ const ROUTE_DEFINITIONS = [
   {
     id: "paper-observer-receiver-model",
     path: "/papers/observer-receiver-model/",
-    page: "projects",
+    page: "paper",
     type: "paper",
     title: "Observer-Receiver Model | Draft Consciousness Paper | Portfolio Marton",
     description:
@@ -566,7 +583,7 @@ export function renderSeoContentHtml(route) {
     ? `<p><a href="${escapeHtml(content.externalLink.href)}">${escapeHtml(content.externalLink.label)}</a></p>`
     : "";
 
-  return `<section class="visually-hidden" data-seo-route="${escapeHtml(route.id)}"><article><h1>${escapeHtml(content.heading)}</h1>${content.paragraphs
+  return `<section class="seo-prerender" data-seo-route="${escapeHtml(route.id)}"><article><h1>${escapeHtml(content.heading)}</h1>${content.paragraphs
     .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
     .join("")}${externalLink}${links}</article></section>`;
 }

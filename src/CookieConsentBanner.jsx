@@ -56,6 +56,10 @@ export default function CookieConsentBanner({ language, page }) {
         <div className="cookie-banner__copy">
           <p className="eyebrow">Preferences</p>
           <h2>Cookies</h2>
+          <p>
+            Review how this site handles contact messages and cookie preferences on the{" "}
+            <a href="/privacy/">privacy page</a>.
+          </p>
         </div>
 
         <div className="cookie-banner__actions">

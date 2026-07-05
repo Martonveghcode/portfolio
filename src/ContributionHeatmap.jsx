@@ -437,20 +437,33 @@ export default function ContributionHeatmap({
               const color = day.inRange ? colorScale[Math.min(colorScale.length - 1, day.level)] : "transparent";
               const label = `${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date.toLocaleDateString()}`;
 
+              const dayKey = `day-${weekIndex}-${dayIndex}`;
+              const sharedProps = {
+                className: `heatmap-day ${day.inRange ? "" : "heatmap-day--outside"}`,
+                style: {
+                  backgroundColor: day.inRange ? color : "transparent",
+                  borderColor: day.inRange && day.level > 0 ? color : "var(--heatmap-border)",
+                  color: showCellDate ? "var(--heatmap-text)" : "transparent",
+                },
+                title: label,
+              };
+
+              if (!onCellTap) {
+                return (
+                  <span key={dayKey} {...sharedProps} aria-label={label}>
+                    {showCellDate && day.inRange ? day.date.getDate() : null}
+                  </span>
+                );
+              }
+
               return (
                 <button
+                  key={dayKey}
+                  {...sharedProps}
                   type="button"
-                  key={`day-${weekIndex}-${dayIndex}`}
-                  className={`heatmap-day ${day.inRange ? "" : "heatmap-day--outside"}`}
-                  style={{
-                    backgroundColor: day.inRange ? color : "transparent",
-                    borderColor: day.inRange && day.level > 0 ? color : "var(--heatmap-border)",
-                    color: showCellDate ? "var(--heatmap-text)" : "transparent",
-                  }}
                   aria-label={label}
-                  title={label}
                   onClick={() => {
-                    if (onCellTap) onCellTap(day.date, day.count);
+                    onCellTap(day.date, day.count);
                   }}
                 >
                   {showCellDate && day.inRange ? day.date.getDate() : null}
