@@ -37,6 +37,8 @@ function getHtmlDocument(route) {
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png?v=20260401" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${route.title}</title>
     <meta name="description" content="${route.description}" />
@@ -54,16 +56,31 @@ function getHtmlDocument(route) {
     <meta name="twitter:description" content="${route.description}" />
     <meta name="twitter:image" content="${getImageUrl(siteUrl, route.image)}" />
     <style>
-      .visually-hidden {
-        position: absolute !important;
-        width: 1px !important;
-        height: 1px !important;
-        padding: 0 !important;
-        margin: -1px !important;
-        overflow: hidden !important;
-        clip: rect(0, 0, 0, 0) !important;
-        white-space: nowrap !important;
-        border: 0 !important;
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #16181b;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .seo-prerender {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+      .seo-prerender h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.08;
+      }
+      .seo-prerender p,
+      .seo-prerender li {
+        color: #4f5661;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      .seo-prerender a {
+        color: #0a6cda;
+        font-weight: 600;
       }
     </style>
     <script id="route-structured-data" type="application/ld+json">${structuredData}</script>

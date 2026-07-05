@@ -4,14 +4,19 @@ import ContributionHeatmap from "./ContributionHeatmap";
 import ContactPanel from "./ContactPanel";
 import { EXPERIENCE_CONTENT, PAPERS_CONTENT, PROJECTS_CONTENT } from "./content";
 import CookieConsentBanner from "./CookieConsentBanner";
-import SeoRouteContent from "./SeoRouteContent";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
-import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
+import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
 const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "macro-recorder-plus", "portfolio-analytics-tool", "handwriting-pipeline", "habitro", "calendar"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
+const CASE_STUDY_PATHS = {
+  calendar: "/projects/homework-calendar/",
+  "handwriting-pipeline": "/projects/handwriting-formatting-pipeline/",
+  "portfolio-analytics-tool": "/projects/portfolio-analytics-tool/",
+  habitro: "/projects/habitro/",
+};
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}`;
 const DEFAULT_HEATMAP_RANGE_DAYS = 365;
 
@@ -26,17 +31,13 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const ui = copy.ui ?? translations.en.ui;
 
-  useEffect(() => {
-    if (!isMobile) {
-      setIsMobileMenuOpen(false);
-      return;
-    }
-
-    setIsMobileMenuOpen(false);
-  }, [isMobile, page, language]);
-
-  function handleMobileNavigate(nextPage) {
+  function handleNavClick(event, nextPage) {
+    event.preventDefault();
     onNavigate(nextPage);
+  }
+
+  function handleMobileNavigate(event, nextPage) {
+    handleNavClick(event, nextPage);
     setIsMobileMenuOpen(false);
   }
 
@@ -75,14 +76,14 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
           >
             <nav className="site-nav__mobile-links" aria-label={ui.primaryNavLabel}>
               {PAGES.map((key) => (
-                <button
-                  type="button"
+                <a
+                  href={PRIMARY_PAGE_PATHS[key] ?? "/"}
                   key={key}
                   className={`nav-tab ${page === key ? "nav-tab--active" : ""}`}
-                  onClick={() => handleMobileNavigate(key)}
+                  onClick={(event) => handleMobileNavigate(event, key)}
                 >
                   {copy.nav[key]}
-                </button>
+                </a>
               ))}
             </nav>
 
@@ -134,14 +135,14 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
 
         <nav className="site-nav__links" aria-label={ui.primaryNavLabel}>
           {PAGES.map((key) => (
-            <button
-              type="button"
+            <a
+              href={PRIMARY_PAGE_PATHS[key] ?? "/"}
               key={key}
               className={`nav-tab ${page === key ? "nav-tab--active" : ""}`}
-              onClick={() => onNavigate(key)}
+              onClick={(event) => handleNavClick(event, key)}
             >
               {copy.nav[key]}
-            </button>
+            </a>
           ))}
           <button type="button" className="nav-tab" onClick={onOpenContactPanel}>
             {copy.getInTouch}
@@ -223,6 +224,11 @@ function ProjectCard({ project, copy, compact = false }) {
         </div>
 
         <div className="card-actions">
+          {project.caseStudyPath ? (
+            <a className="inline-link" href={project.caseStudyPath}>
+              Case study
+            </a>
+          ) : null}
           {project.links.live ? (
             <a className="inline-link" href={project.links.live} target="_blank" rel="noreferrer">
               {copy.links.live}
@@ -678,11 +684,9 @@ function HomePage({ copy, heatmapProps }) {
             <ContributionHeatmap
               {...heatmapProps}
               username={PROFILE.githubHandle}
-              cellSize={12}
+              cellSize={16}
+              minCellSize={10}
               fitToWidth
-              onCellTap={(date, value) => {
-                if (typeof heatmapProps.onCellTap === "function") heatmapProps.onCellTap(date, value);
-              }}
             />
           </article>
           <IndustryContributions />
@@ -785,7 +789,7 @@ function WhoAmIPage({ copy, whoAmI }) {
                 <div className="prose-media">
                   <img
                     src={PROFILE.profileImage}
-                    alt="IMG 8888(1)"
+                    alt="Portrait of Marton Vegh"
                     width="748"
                     height="1625"
                     loading="lazy"
@@ -830,6 +834,135 @@ function WhoAmIPage({ copy, whoAmI }) {
           mediaOrientation="landscape"
         />
       </section>
+    </main>
+  );
+}
+
+const ROUTE_TYPE_LABELS = {
+  service: "Portfolio focus",
+  "case-study": "Case study",
+  paper: "Research note",
+  profile: "Profile",
+  webpage: "Site information",
+};
+
+function RelatedRouteLinks({ links }) {
+  if (!links.length) return null;
+
+  return (
+    <section className="route-page__related" aria-label="Related pages">
+      <h2>Related pages</h2>
+      <div className="route-link-grid">
+        {links.map((link) => (
+          <a className="route-link-card" href={link.href} key={link.href}>
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function RouteDetailPage({ route, copy }) {
+  const content = getRouteSeoContent(route);
+  const eyebrow = ROUTE_TYPE_LABELS[route.type] ?? "Portfolio page";
+  const isCaseStudy = route.type === "case-study";
+  const isPaper = route.type === "paper";
+  const isProfile = route.type === "profile";
+  const isPrivacy = route.id === "privacy";
+  const externalLink = content.externalLink;
+
+  return (
+    <main className="site-main route-page">
+      <section className="page-intro route-page__intro">
+        <p className="eyebrow">{eyebrow}</p>
+        <h1>{content.heading}</h1>
+        <p>{route.description}</p>
+      </section>
+
+      {route.image ? (
+        <section className="route-page__media-shell" aria-label={`${content.heading} image`}>
+          <img
+            src={route.image}
+            alt={content.heading}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+          />
+        </section>
+      ) : null}
+
+      <section className="surface-card route-page__body">
+        <div className="route-page__copy">
+          {content.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+
+        {route.tech?.length ? (
+          <div className="chip-list" aria-label="Technologies used">
+            {route.tech.map((tech) => (
+              <span className="chip" key={tech}>{tech}</span>
+            ))}
+          </div>
+        ) : null}
+
+        {isCaseStudy ? (
+          <div className="route-page__summary-grid">
+            <article>
+              <h2>Problem</h2>
+              <p>The project is framed around a concrete workflow problem instead of a generic portfolio demo.</p>
+            </article>
+            <article>
+              <h2>Role</h2>
+              <p>Independent build by {PROFILE.name}, covering problem framing, implementation, testing, and documentation.</p>
+            </article>
+            <article>
+              <h2>Evidence</h2>
+              <p>The project links back to related services and, where available, the public repository for code review.</p>
+            </article>
+          </div>
+        ) : null}
+
+        {isPrivacy ? (
+          <div className="route-page__summary-grid">
+            <article>
+              <h2>Contact form</h2>
+              <p>Submitted name, email address, and message content are used to respond to the message.</p>
+            </article>
+            <article>
+              <h2>Preferences</h2>
+              <p>The cookie banner stores the selected preference locally and may save basic page/browser context with that choice.</p>
+            </article>
+            <article>
+              <h2>External links</h2>
+              <p>GitHub, ORCID, Google Docs, Gmail, and repository links open external services with separate privacy policies.</p>
+            </article>
+          </div>
+        ) : null}
+
+        <div className="card-actions">
+          {route.repo ? (
+            <a className="inline-link" href={route.repo} target="_blank" rel="noreferrer">
+              {copy.links.github}
+            </a>
+          ) : null}
+          {externalLink ? (
+            <a className="inline-link" href={externalLink.href} target="_blank" rel="noreferrer">
+              {isPaper ? copy.links.paper : externalLink.label}
+            </a>
+          ) : null}
+          {isProfile ? (
+            <>
+              <a className="inline-link" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">GitHub</a>
+              <a className="inline-link" href={CV_LINKS.en} target="_blank" rel="noreferrer">CV</a>
+              <a className="inline-link" href={`mailto:${PROFILE.email}`}>Email</a>
+            </>
+          ) : null}
+        </div>
+      </section>
+
+      <RelatedRouteLinks links={content.links} />
     </main>
   );
 }
@@ -903,8 +1036,6 @@ export default function App() {
       setIsMobile(event.matches);
     };
 
-    setIsMobile(mediaQuery.matches);
-
     if (typeof mediaQuery.addEventListener === "function") {
       mediaQuery.addEventListener("change", handleChange);
       return () => mediaQuery.removeEventListener("change", handleChange);
@@ -937,6 +1068,7 @@ export default function App() {
       image: project.image ?? { src: "", alt: "" },
       tech: project.tech ?? [],
       links: project.links ?? {},
+      caseStudyPath: CASE_STUDY_PATHS[project.id],
       title: locale.title ?? projectTranslations.en?.title ?? project.title ?? "",
       summary: locale.summary ?? projectTranslations.en?.summary ?? project.summary ?? "",
     };
@@ -1055,6 +1187,9 @@ export default function App() {
   if (page === "papers") pageView = <ProjectsPage copy={copy} projects={localizedProjects} papers={localizedPapers} />;
   if (page === "experience") pageView = <ExperiencePage copy={copy} experience={localizedExperience} />;
   if (page === "whoami") pageView = <WhoAmIPage copy={copy} whoAmI={localizedWhoAmI} />;
+  if (["service", "case-study", "paper", "profile", "privacy"].includes(page)) {
+    pageView = <RouteDetailPage route={route} copy={copy} />;
+  }
 
   return (
     <div className="page-shell">
@@ -1071,7 +1206,6 @@ export default function App() {
         copy={copy}
         isMobile={isMobile}
       />
-      <SeoRouteContent route={route} />
       {pageView}
       <CookieConsentBanner language={language} page={page} />
       <ContactPanel language={language} page={page} openSignal={contactPanelOpenSignal} isMobile={isMobile} copy={copy} />
