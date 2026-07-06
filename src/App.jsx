@@ -664,6 +664,15 @@ function IndustryContributions() {
         >
           <img src="/company-logos/microsoft.svg" alt="Microsoft" width="238" height="54" loading="lazy" decoding="async" />
         </a>
+        <a
+          className="industry-contributions__logo-link"
+          href="https://www.uber.com/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Uber"
+        >
+          <img src="/company-logos/uber.svg" alt="Uber" width="180" height="54" loading="lazy" decoding="async" />
+        </a>
       </div>
     </section>
   );

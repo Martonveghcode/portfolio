@@ -472,14 +472,14 @@ select:focus-visible {
 }
 .industry-contributions__logo-line {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-start;
+  gap: 18px 28px;
   overflow: visible;
 }
 .industry-contributions__logo-link {
-  grid-column: 1;
-  justify-self: start;
   display: inline-flex;
   width: clamp(124px, 18vw, 172px);
   transform: translateX(0);
