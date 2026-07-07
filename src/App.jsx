@@ -96,9 +96,6 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
               <a className="nav-action" href={cvLink} target="_blank" rel="noreferrer">
                 CV
               </a>
-              <a className="nav-action" href="https://orcid.org/0009-0004-2687-8812" target="_blank" rel="noreferrer">
-                ORCID
-              </a>
               <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label={ui.themeToggleLabel}>
                 {theme === "dark" ? ui.themeDark : ui.themeLight}
               </button>
@@ -157,9 +154,6 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
           </a>
           <a className="nav-action" href={cvLink} target="_blank" rel="noreferrer">
             CV
-          </a>
-          <a className="nav-action" href="https://orcid.org/0009-0004-2687-8812" target="_blank" rel="noreferrer">
-            ORCID
           </a>
           <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label={ui.themeToggleLabel}>
             {theme === "dark" ? ui.themeDark : ui.themeLight}
