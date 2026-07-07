@@ -18,6 +18,56 @@ const CASE_STUDY_PATHS = {
 };
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}`;
 const DEFAULT_HEATMAP_RANGE_DAYS = 365;
+const INDUSTRY_CONTRIBUTIONS = [
+  {
+    name: "Microsoft",
+    href: "https://www.microsoft.com/",
+    logo: "/company-logos/microsoft.svg",
+    width: 238,
+    height: 54,
+    logoWidth: "clamp(136px, 19.8vw, 189px)",
+  },
+  {
+    name: "Uber",
+    href: "https://www.uber.com/",
+    logo: "/company-logos/uber.svg",
+    width: 96,
+    height: 34,
+    logoWidth: "clamp(90px, 11vw, 106px)",
+  },
+  {
+    name: "Airbnb",
+    href: "https://www.airbnb.com/",
+    logo: "/company-logos/airbnb.svg",
+    width: 54,
+    height: 54,
+    logoWidth: "clamp(55px, 6.6vw, 64px)",
+  },
+  {
+    name: "Apple",
+    href: "https://www.apple.com/",
+    logo: "/company-logos/apple.svg",
+    width: 54,
+    height: 54,
+    logoWidth: "clamp(48px, 6.6vw, 59px)",
+  },
+  {
+    name: "NVIDIA",
+    href: "https://www.nvidia.com/",
+    logo: "/company-logos/nvidia.svg",
+    width: 54,
+    height: 54,
+    logoWidth: "clamp(57px, 7.7vw, 70px)",
+  },
+  {
+    name: "JetBrains",
+    href: "https://www.jetbrains.com/",
+    logo: "/company-logos/jetbrains.svg",
+    width: 54,
+    height: 54,
+    logoWidth: "clamp(51px, 6.6vw, 64px)",
+  },
+];
 
 function getRollingHeatmapStartDate(maxDate, dayCount = DEFAULT_HEATMAP_RANGE_DAYS) {
   const startDate = new Date(maxDate);
@@ -407,24 +457,19 @@ function IndustryContributions() {
         Contributor to industry leading projects for
       </h2>
       <div className="industry-contributions__logo-line" aria-label="Industry leading project logos">
-        <a
-          className="industry-contributions__logo-link"
-          href="https://www.microsoft.com/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Microsoft"
-        >
-          <img src="/company-logos/microsoft.svg" alt="Microsoft" width="238" height="54" loading="lazy" decoding="async" />
-        </a>
-        <a
-          className="industry-contributions__logo-link"
-          href="https://www.uber.com/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Uber"
-        >
-          <img src="/company-logos/uber.svg" alt="Uber" width="180" height="54" loading="lazy" decoding="async" />
-        </a>
+        {INDUSTRY_CONTRIBUTIONS.map((company) => (
+          <a
+            className="industry-contributions__logo-link"
+            href={company.href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={company.name}
+            style={{ "--logo-width": company.logoWidth }}
+            key={company.name}
+          >
+            <img src={company.logo} alt={company.name} width={company.width} height={company.height} loading="lazy" decoding="async" />
+          </a>
+        ))}
       </div>
     </section>
   );

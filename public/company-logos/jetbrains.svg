@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54" role="img" aria-labelledby="jetbrains-logo-title">
+  <title id="jetbrains-logo-title">JetBrains</title>
+  <defs>
+    <linearGradient id="jetbrains-logo-bg" x1="0" x2="54" y1="0" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff007f"/>
+      <stop offset="0.5" stop-color="#6b57ff"/>
+      <stop offset="1" stop-color="#00c4ff"/>
+    </linearGradient>
+    <linearGradient id="jetbrains-logo-accent" x1="5" x2="50" y1="48" y2="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffdd00"/>
+      <stop offset="0.48" stop-color="#ff5a00"/>
+      <stop offset="1" stop-color="#ff007f"/>
+    </linearGradient>
+  </defs>
+  <rect width="54" height="54" rx="8" fill="url(#jetbrains-logo-bg)"/>
+  <path d="M4 48 27 5l23 43H4Z" fill="url(#jetbrains-logo-accent)" opacity="0.92"/>
+  <path d="M8 8h38v38H8z" fill="#000"/>
+  <text x="14" y="31" fill="#fff" font-family="Inter, Arial, Helvetica, sans-serif" font-size="17" font-weight="800" letter-spacing="-1">JB</text>
+  <path d="M14 38h16v3H14z" fill="#fff"/>
+</svg>

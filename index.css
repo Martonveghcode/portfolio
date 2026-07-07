@@ -475,13 +475,15 @@ select:focus-visible {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
-  gap: 18px 28px;
+  justify-content: space-between;
+  row-gap: 18px;
   overflow: visible;
 }
 .industry-contributions__logo-link {
   display: inline-flex;
-  width: clamp(124px, 18vw, 172px);
+  align-items: center;
+  justify-content: center;
+  width: var(--logo-width, clamp(124px, 18vw, 172px));
   transform: translateX(0);
   transition: transform 180ms ease, filter 180ms ease;
 }
