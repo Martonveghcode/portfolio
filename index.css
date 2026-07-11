@@ -125,15 +125,15 @@ select:focus-visible {
   );
   transform: translate(-50%, -50%);
   animation: app-pattern-rotate 8s linear infinite;
-  filter: blur(50px);
-  opacity: 0.5;
+  filter: blur(50px) saturate(1.3);
+  opacity: 0.62;
 }
 
 .app-background__container::after {
   width: 180%;
   height: 180%;
   animation: app-pattern-rotate-reverse 10s linear infinite;
-  opacity: 0.35;
+  opacity: 0.46;
 }
 
 :root[data-theme="dark"] .app-background__container {
@@ -236,6 +236,17 @@ select:focus-visible {
   gap: 8px;
   justify-content: flex-end;
   align-items: center;
+}
+.site-nav--mobile {
+  padding: 12px 12px 0;
+}
+.site-nav__inner--mobile {
+  width: min(100vw - 24px, 720px);
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+  padding: 12px;
+  border-radius: 20px;
 }
 .site-nav__mobile-panel {
   grid-column: 1 / -1;
@@ -1476,7 +1487,6 @@ button.heatmap-day:hover { transform: translateY(-1px); box-shadow: 0 0 0 3px va
 }
 
 @media (max-width: 1080px) {
-  .site-nav__inner,
   .hero,
   .split-layout,
   .whoami-grid { grid-template-columns: 1fr; }
@@ -1488,6 +1498,36 @@ button.heatmap-day:hover { transform: translateY(-1px); box-shadow: 0 0 0 3px va
   .books-grid,
   .route-page__summary-grid,
   .route-link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 761px) and (max-height: 800px) {
+  .site-nav { padding-top: 10px; }
+  .site-nav__inner {
+    padding: 8px 12px;
+    gap: 8px;
+    border-radius: 18px;
+  }
+  .site-nav__links { gap: 4px; }
+  .site-nav__actions { gap: 6px; }
+  .nav-tab,
+  .nav-action,
+  .theme-toggle,
+  .language-chip {
+    min-height: 34px;
+    padding: 6px 10px;
+  }
+  .theme-toggle,
+  .language-chip { min-width: 42px; }
+  .site-main { padding: 28px 0 64px; }
+  .hero { gap: 18px; }
+  .hero-card,
+  .surface-card,
+  .page-intro,
+  .project-card__body,
+  .text-card,
+  .book-card__body,
+  .timeline-item__card { padding: 22px; }
+  .hero-card h1 { font-size: clamp(3rem, 6vw, 3.75rem); }
 }
 
 @media (max-width: 760px) {

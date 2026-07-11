@@ -18,6 +18,7 @@ const CASE_STUDY_PATHS = {
 };
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}`;
 const DEFAULT_HEATMAP_RANGE_DAYS = 365;
+const COMPACT_NAV_MEDIA_QUERY = "(max-width: 1180px)";
 const INDUSTRY_CONTRIBUTIONS = [
   {
     name: "Microsoft",
@@ -767,7 +768,7 @@ function getInitialPathname() {
 
 function getInitialIsMobile() {
   if (typeof window === "undefined") return false;
-  return window.matchMedia("(max-width: 760px)").matches;
+  return window.matchMedia(COMPACT_NAV_MEDIA_QUERY).matches;
 }
 
 export default function App() {
@@ -817,7 +818,7 @@ export default function App() {
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
 
-    const mediaQuery = window.matchMedia("(max-width: 760px)");
+    const mediaQuery = window.matchMedia(COMPACT_NAV_MEDIA_QUERY);
     const handleChange = (event) => {
       setIsMobile(event.matches);
     };
