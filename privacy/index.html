@@ -48,11 +48,35 @@
         color: #0a6cda;
         font-weight: 600;
       }
+      .seo-site-footer {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 24px 0 36px;
+        border-top: 1px solid #d9dde3;
+      }
+      .seo-site-footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+      }
+      .seo-site-footer a {
+        color: #0a6cda;
+        font-weight: 600;
+      }
     </style>
-    <script id="route-structured-data" type="application/ld+json">[{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://marton.top/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"url":"https://marton.top/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top","author":{"@type":"Person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://marton.top"},{"@type":"ListItem","position":2,"name":"Privacy and cookie information for Portfolio Marton","item":"https://marton.top/privacy/"}]},{"@context":"https://schema.org","@type":"WebPage","name":"Privacy and cookie information for Portfolio Marton","description":"Privacy and cookie information for Portfolio Marton, including contact form data, cookie consent records, local preferences, and external profile links.","url":"https://marton.top/privacy/","isPartOf":{"@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://marton.top/profile/marton-vegh-portrait.jpg"},"about":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"}}]</script>
+    <script id="route-structured-data" type="application/ld+json">[{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://marton.top/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"@id":"https://marton.top/about/marton-vegh/#person","url":"https://marton.top/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top","author":{"@type":"Person","@id":"https://marton.top/about/marton-vegh/#person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://marton.top"},{"@type":"ListItem","position":2,"name":"Privacy and cookie information for Portfolio Marton","item":"https://marton.top/privacy/"}]},{"@context":"https://schema.org","@type":"WebPage","name":"Privacy and cookie information for Portfolio Marton","description":"Privacy and cookie information for Portfolio Marton, including contact form data, cookie consent records, local preferences, and external profile links.","url":"https://marton.top/privacy/","isPartOf":{"@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://marton.top/profile/marton-vegh-portrait.jpg"},"about":{"@type":"Person","@id":"https://marton.top/about/marton-vegh/#person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"}}]</script>
   </head>
   <body>
-    <main id="seo-content"><section class="seo-prerender" data-seo-route="privacy"><article><h1>Privacy and cookie information for Portfolio Marton</h1><p>Portfolio Marton uses a small amount of data to keep the site functional, remember basic preferences, and receive messages through the contact form.</p><p>The cookie preference banner records whether a visitor accepted or declined preferences, along with basic browser and page context needed to store that choice. The contact form collects the name, email address, and message a visitor submits.</p><p>The site also links to external services such as GitHub, ORCID, Google Docs, Gmail, and project repositories. Those services have their own privacy practices when opened.</p><nav aria-label="Related pages"><ul><li><a href="/about/marton-vegh/">About Marton Vegh</a></li><li><a href="/projects/">Selected software projects and case studies by Marton Vegh</a></li><li><a href="/">Portfolio Marton: frontend, Python, and quantitative project portfolio</a></li></ul></nav></article></section></main>
+    <div id="seo-content">
+      <main><section class="seo-prerender" data-seo-route="privacy"><article><h1>Privacy and cookie information for Portfolio Marton</h1><p>Portfolio Marton uses a small amount of data to keep the site functional, remember basic preferences, and receive messages through the contact form.</p><p>The cookie preference banner records whether a visitor accepted or declined preferences, along with basic browser and page context needed to store that choice. The contact form collects the name, email address, and message a visitor submits.</p><p>The site also links to external services such as GitHub, ORCID, Google Docs, Gmail, and project repositories. Those services have their own privacy practices when opened.</p><nav aria-label="Related pages"><ul><li><a href="/about/marton-vegh/">About Marton Vegh</a></li><li><a href="/projects/">Selected software projects and case studies by Marton Vegh</a></li><li><a href="/">Portfolio Marton: frontend, Python, and quantitative project portfolio</a></li></ul></nav></article></section></main>
+      <footer class="seo-site-footer">
+      <nav aria-label="Portfolio pages">
+        <a href="/projects/">Projects</a>
+        <a href="/about/marton-vegh/">About</a>
+        <a href="/experience/">Experience</a>
+      </nav>
+    </footer>
+    </div>
     <div id="root"></div>
     <script type="module" src="../index.jsx"></script>
   </body>

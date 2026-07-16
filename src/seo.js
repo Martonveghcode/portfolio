@@ -11,6 +11,12 @@ export const PRIMARY_PAGE_PATHS = {
   whoami: "/who-am-i/",
 };
 
+export const SITE_FOOTER_LINKS = [
+  { href: "/projects/", label: "Projects" },
+  { href: "/about/marton-vegh/", label: "About" },
+  { href: "/experience/", label: "Experience" },
+];
+
 const projectById = Object.fromEntries(PROJECTS_CONTENT.map((project) => [project.id, project]));
 
 const BASE_PERSON_SCHEMA = {
@@ -42,10 +48,6 @@ function getProjectTitle(projectId) {
   return projectById[projectId]?.translations?.en?.title ?? projectId;
 }
 
-function getProjectSummary(projectId) {
-  return projectById[projectId]?.translations?.en?.summary ?? "";
-}
-
 function getProjectRepo(projectId) {
   return projectById[projectId]?.links?.github ?? "";
 }
@@ -62,12 +64,12 @@ const ROUTE_DEFINITIONS = [
     type: "website",
     title: "Portfolio Marton | Frontend Developer, Python, Quant Projects",
     description:
-      "Portfolio Marton showcases Marton Vegh's React, Python, education software, and quantitative finance projects with focused case-study routes and technical project context.",
+      "Portfolio Marton showcases Marton Vegh's React, Python, education software, and quantitative finance projects through detailed case studies and technical context.",
     image: "/profile/marton-vegh-portrait.jpg",
     hiddenHeading: "Portfolio Marton: frontend, Python, and quantitative project portfolio",
     hiddenParagraphs: [
       "Portfolio Marton is the personal portfolio site of Marton Vegh, a student developer based in Mallorca, Spain. The work shown here focuses on practical software projects in React, JavaScript, Python, automation, and quantitative analysis.",
-      "The site brings together project case studies, background information, and experience across student-facing tools, handwriting and document pipelines, and finance-oriented analytics projects. It is designed to make each major project easier to understand through route-level context, structured data, and crawlable page metadata.",
+      "The project case studies explain the problems behind each build, the tools used, and the decisions that shaped the result. They range from student planning and daily learning tools to document automation and portfolio analysis.",
     ],
     relatedPaths: [
       "/services/frontend-react-development/",
@@ -89,8 +91,8 @@ const ROUTE_DEFINITIONS = [
     image: "/projects/homework-calendar-dashboard.png",
     hiddenHeading: "Selected software projects and case studies by Marton Vegh",
     hiddenParagraphs: [
-      "This project portfolio groups together software work spanning frontend development, automation, data analysis, and education-focused tooling. The visible gallery provides the quick overview, while dedicated route-level case-study pages provide additional technical and contextual detail.",
-      "The main project themes are React interfaces, Python pipelines, analytics tooling, and applications that turn repeated manual work into structured workflows. Each major project has supporting metadata, internal links, and case-study pages to make the work more indexable and easier to evaluate.",
+      "This collection spans frontend development, automation, data analysis, and education-focused tooling. Each case study expands on the problem, implementation choices, and practical use of the project beyond the summary shown in the gallery.",
+      "The React work concentrates on clear, state-driven interfaces for recurring tasks. The Python projects cover document pipelines, individualized learning records, and quantitative portfolio analysis, with an emphasis on replacing repetitive work with maintainable workflows.",
     ],
     relatedPaths: [
       "/projects/homework-calendar/",
@@ -138,13 +140,13 @@ const ROUTE_DEFINITIONS = [
     type: "profile",
     title: "About Marton Vegh | Multilingual Student Developer Portfolio",
     description:
-      "About Marton Vegh: multilingual student developer in Mallorca with interests in React, Python, finance, mathematics, books, sports, and practical software projects.",
+      "Professional profile of Marton Vegh, a multilingual student developer in Mallorca building practical software with React, Python, JavaScript, C, and C++.",
     image: "/profile/marton-vegh-portrait.jpg",
     hiddenHeading: "About Marton Vegh",
     hiddenParagraphs: [
-      "Marton Vegh is a student developer living in Mallorca, Spain, with a working focus on practical projects in React, Python, automation, and quantitative finance topics. The portfolio combines technical work with broader interests in mathematics, books, art, politics, and sport.",
-      "The background presented on this site reflects firsthand experience across multilingual study, independent software building, and long-term canoe sprint training. It also highlights fluency in Hungarian, English, Spanish, French, and Catalan.",
-      "This profile route exists to give search engines and visitors a dedicated page about the author and owner of the site, supported by profile-oriented structured data and related links to project and experience pages.",
+      "Marton Vegh is a student developer based in Mallorca, Spain. He builds practical software with React, JavaScript, Python, C, and C++, focusing on automation, education tools, and quantitative finance.",
+      "His independent work includes a student calendar, an individualized learning system, a handwriting-formatting pipeline, and a portfolio analytics tool. Across these projects he handles problem definition, implementation, testing, and documentation.",
+      "He studies in an international environment and works across Hungarian, English, Spanish, French, and Catalan. GitHub, project case studies, and the experience timeline provide the supporting record for this professional profile.",
     ],
     relatedPaths: ["/who-am-i/", "/projects/", "/experience/"],
   },
@@ -176,9 +178,9 @@ const ROUTE_DEFINITIONS = [
     image: "/projects/homework-calendar-dashboard.png",
     hiddenHeading: "Frontend developer portfolio for React and JavaScript projects",
     hiddenParagraphs: [
-      "This service-focused portfolio page groups the frontend work on the site under a single search-targeted route. The emphasis is on React and JavaScript projects built around practical interfaces, responsive layouts, and utility-first problem solving rather than visual polish alone.",
-      "The strongest example on this route is Homework Calendar, a student-focused React application that helps manage recurring lessons and send class, test, and homework events to Google Calendar. It shows a mix of interface design, stateful behavior, and a workflow tied to a real recurring problem.",
-      "Across the portfolio, frontend work is connected to concrete outcomes: making information easier to manage, reducing repeated manual steps, and turning ideas into usable browser-based tools. Related case-study pages provide additional detail about role, problem framing, tools, and implementation choices.",
+      "The frontend work in this portfolio uses React and JavaScript to turn recurring tasks into clear, responsive interfaces. The priority is practical interaction design: understandable states, efficient workflows, and layouts that remain usable across screen sizes.",
+      "Homework Calendar is the main example. It helps students organize recurring lessons and send class, test, and homework events to Google Calendar, combining stateful interface behavior with a workflow grounded in day-to-day school planning.",
+      "Other interface work follows the same approach: structure information clearly, reduce repeated manual steps, and make the primary action obvious. The linked case studies describe the problem framing, tools, and implementation decisions behind each build.",
     ],
     relatedPaths: ["/projects/homework-calendar/", "/projects/", "/services/education-software-tools/"],
   },
@@ -193,7 +195,7 @@ const ROUTE_DEFINITIONS = [
     image: "/projects/portfolio-analytics-tool.png",
     hiddenHeading: "Python automation and analytics portfolio",
     hiddenParagraphs: [
-      "This route focuses on Python-based work across automation, analysis, and workflow tooling. The projects selected here are less about generic scripts and more about building reusable tools that structure data, reduce repetitive processing, or help interpret technical output.",
+      "The Python work covers automation, analysis, and workflow tooling. These projects use reusable components to structure data, reduce repetitive processing, and turn technical output into information that is easier to act on.",
       "The Handwriting Formatting Pipeline extends an existing handwriting-generation workflow with formatting, print preparation, limited Unicode-to-ASCII support, and training-data utilities. Portfolio Analytics Tool focuses on financial analysis, using market data and portfolio metrics to examine performance, drawdowns, and efficient-frontier scenarios.",
       "Together, these projects show two sides of the same Python skill set: operational tooling for documents and training workflows, and analytical tooling for finance and decision support. Each related case-study page adds context about the constraints, process, and technical stack involved.",
     ],
@@ -210,13 +212,13 @@ const ROUTE_DEFINITIONS = [
     type: "service",
     title: "Education Software Portfolio | Student Tools and Language Learning | Portfolio Marton",
     description:
-      "Education software portfolio route featuring student planning and language-learning tools built with React, Python, SQLite, and LLM-assisted workflows.",
+      "Education software portfolio featuring student planning and language-learning tools built with React, Python, SQLite, and LLM-assisted workflows.",
     image: "/projects/habitro.png",
     hiddenHeading: "Education software and student tool portfolio",
     hiddenParagraphs: [
-      "This education-focused route brings together projects built around student use cases, planning workflows, and language-learning support. The portfolio examples are designed to solve concrete problems: organizing recurring lessons, exporting schedules, or generating adaptive practice for grammar work.",
+      "The education projects address student planning, daily practice, and language-learning workflows. They are built around concrete tasks such as organizing recurring lessons, exporting schedules, and adapting exercises to an individual learning record.",
       "Homework Calendar helps students manage recurring school structures in a browser-based interface and push the output into Google Calendar. Habitro uses SQLite-based performance tracking and a daily workflow to support retained learning across school material.",
-      "For search and indexing purposes, this page groups the education software angle of the portfolio into its own route while linking directly to the relevant case studies. That makes it easier to understand the niche the work serves without changing the visible homepage layout.",
+      "Together, the projects explore two connected needs: keeping school commitments organized and making daily practice responsive to past performance. Their case studies explain the different technology choices behind the browser-based planner and the SQLite-backed learning system.",
     ],
     relatedPaths: ["/projects/homework-calendar/", "/projects/habitro/", "/projects/"],
   },
@@ -233,8 +235,8 @@ const ROUTE_DEFINITIONS = [
     hiddenParagraphs: [
       `${getProjectTitle("calendar")} is a self-directed React project built around a clear student planning problem: recurring lessons, changing deadlines, and the friction of manually transferring school information into a usable calendar workflow.`,
       "The project focuses on browser-based scheduling with repeated lesson structures and event export to Google Calendar. That makes it less of a generic to-do interface and more of a practical education tool aimed at turning class schedules, tests, and homework into an organized repeatable system.",
-      `Technically, the project is positioned as a Vite + React application with an automation angle. The work reflects frontend development, state-driven UI decisions, and a problem frame that is grounded in day-to-day student use rather than abstract design exercises. Summary: ${getProjectSummary("calendar")}`,
-      "As a case study, this route exists to give the project a dedicated search destination with project-specific text, metadata, image references, and structured data while leaving the visible portfolio grid unchanged.",
+      "The Vite, React, and Tailwind implementation uses state-driven UI decisions to keep repeated lesson structures manageable. Calendar export connects the planning interface to the calendar students already use instead of creating another isolated schedule.",
+      "The result is a focused workflow for entering school information once, reviewing it in context, and transferring class, test, and homework events without recreating them manually.",
     ],
     relatedPaths: [
       "/services/frontend-react-development/",
@@ -243,6 +245,11 @@ const ROUTE_DEFINITIONS = [
     ],
     repo: getProjectRepo("calendar"),
     tech: getProjectTech("calendar"),
+    caseStudy: {
+      problem: "Recurring lessons, tests, and homework are tedious to copy into a calendar and easy to enter inconsistently.",
+      role: "Independent design and frontend implementation with React, Vite, Tailwind, and Google Calendar export.",
+      evidence: "The working interface supports repeated lesson structures and distinct class, test, and homework events.",
+    },
   },
   {
     id: "case-study-handwriting",
@@ -257,8 +264,8 @@ const ROUTE_DEFINITIONS = [
     hiddenParagraphs: [
       `${getProjectTitle("handwriting-pipeline")} extends the existing "My Text in Your Handwriting" project by Thaines with supporting workflow pieces that make the output more usable in practice.`,
       "The problem here is not just handwriting generation itself but everything around it: text formatting, printable layout, limited Unicode-to-ASCII handling, and preparing training materials in a way that is easier to repeat and maintain.",
-      `The project is implemented as a Python pipeline with macros and utilities for formatting and training-data preparation. It shows an automation mindset: instead of treating each output as a one-off manual process, the work tries to standardize the surrounding steps into a repeatable pipeline. Summary: ${getProjectSummary("handwriting-pipeline")}`,
-      "This case-study route adds project-level textual context for search while keeping the main portfolio presentation intact. It also links the project into a broader Python automation and workflow narrative across the site.",
+      "The Python pipeline combines formatting utilities, print preparation, limited Unicode-to-ASCII conversion, and macros for training-data processing. Standardizing these supporting steps makes the handwriting workflow easier to repeat and maintain.",
+      "A recommended training sheet completes the workflow by giving data preparation and output formatting a shared starting point, reducing the manual cleanup required around generated handwriting.",
     ],
     relatedPaths: [
       "/services/python-automation-analysis/",
@@ -267,6 +274,11 @@ const ROUTE_DEFINITIONS = [
     ],
     repo: getProjectRepo("handwriting-pipeline"),
     tech: getProjectTech("handwriting-pipeline"),
+    caseStudy: {
+      problem: "Generated handwriting still required manual text cleanup, print formatting, and repetitive training-data preparation.",
+      role: "Extended the upstream project with a Python pipeline, formatting utilities, processing macros, and training guidance.",
+      evidence: "The public repository documents Unicode conversion, printable output, training-data utilities, and the recommended sheet.",
+    },
   },
   {
     id: "case-study-portfolio-analytics",
@@ -281,8 +293,8 @@ const ROUTE_DEFINITIONS = [
     hiddenParagraphs: [
       `${getProjectTitle("portfolio-analytics-tool")} is a quantitative finance project built around a common investor problem: holdings data is easy to collect, but it is much harder to turn that into structured analysis of risk, return, and portfolio construction choices.`,
       "The project uses Python libraries such as yfinance, NumPy, Pandas, SciPy, and Matplotlib to build portfolios from share holdings and analyze them using measures like Sharpe ratio, Sortino ratio, maximum drawdown, efficient-frontier comparisons, and optimized portfolio scenarios.",
-      `This is one of the clearest examples of the portfolio's finance and mathematics angle because it combines technical implementation with a decision-making use case. The project summary already reports a current best portfolio at 1.74 Sharpe and 2.52 Sortino, which gives the case study a concrete analytical reference point. Summary: ${getProjectSummary("portfolio-analytics-tool")}`,
-      "On this route, the project is framed as a case study so it can target finance, analytics, and Python search intent more directly than a simple project-card description allows.",
+      "The analysis combines risk-adjusted return measures with drawdown and efficient-frontier visualizations, so a portfolio can be compared from several perspectives instead of by headline return alone. One analyzed portfolio currently records a 1.74 Sharpe ratio and 2.52 Sortino ratio.",
+      "Optimized scenarios provide reference points rather than automatic investment decisions. The tool is designed to make assumptions, trade-offs, and the relationship between holdings and portfolio-level results easier to inspect.",
     ],
     relatedPaths: [
       "/services/python-automation-analysis/",
@@ -290,6 +302,11 @@ const ROUTE_DEFINITIONS = [
       "/projects/",
     ],
     tech: getProjectTech("portfolio-analytics-tool"),
+    caseStudy: {
+      problem: "A list of share holdings does not by itself explain risk-adjusted performance, drawdowns, or diversification trade-offs.",
+      role: "Built the Python analysis workflow and visualizations using market data, numerical, optimization, and plotting libraries.",
+      evidence: "Outputs include Sharpe and Sortino ratios, maximum drawdown, efficient-frontier comparisons, and optimized scenarios.",
+    },
   },
   {
     id: "case-study-habitro",
@@ -304,8 +321,8 @@ const ROUTE_DEFINITIONS = [
     hiddenParagraphs: [
       `${getProjectTitle("habitro")} is an education software project built around a daily learning workflow for retaining and learning school material.`,
       "The app uses individualized SQLite-based performance tracking so exercises can be reviewed through a more personal record of progress instead of a static worksheet flow.",
-      `In daily use, the system covers Spanish grammar, Catalan, and maths exercises. Summary: ${getProjectSummary("habitro")}`,
-      "This route gives the project its own search-targeted case-study page and connects it to the portfolio's broader education-software niche without changing the visible structure of the projects page.",
+      "In daily use, the system covers Spanish grammar, Catalan, and maths exercises. The stored performance history allows the learning workflow to respond to the individual student rather than presenting the same sequence every day.",
+      "Habitro connects practice content with a consistent daily routine: complete the exercises, record performance, and use that history to guide later review. SQLite keeps the progress data local and structured.",
     ],
     relatedPaths: [
       "/services/education-software-tools/",
@@ -314,6 +331,11 @@ const ROUTE_DEFINITIONS = [
     ],
     repo: getProjectRepo("habitro"),
     tech: getProjectTech("habitro"),
+    caseStudy: {
+      problem: "Static worksheets do not adapt to past performance or provide a consistent record across daily practice sessions.",
+      role: "Designed and built the learning workflow, exercise handling, and individualized SQLite performance tracking.",
+      evidence: "The system is used for daily Spanish grammar, Catalan, and mathematics practice with per-user progress data.",
+    },
   },
 ];
 
@@ -385,10 +407,6 @@ function buildBreadcrumbList(route, siteUrl) {
     breadcrumbs.push({ name: "Services", path: "/" });
   }
 
-  if (route.path.startsWith("/about/")) {
-    breadcrumbs.push({ name: "About", path: "/who-am-i/" });
-  }
-
   if (route.path !== "/") {
     breadcrumbs.push({ name: route.hiddenHeading, path: route.path });
   }
@@ -405,6 +423,7 @@ function buildBreadcrumbList(route, siteUrl) {
 }
 
 function buildPrimarySchema(route, siteUrl) {
+  const personId = `${getAbsoluteUrl(siteUrl, "/about/marton-vegh/")}#person`;
   const baseWebPage = {
     "@type": route.type === "profile" ? "ProfilePage" : route.type === "collection" ? "CollectionPage" : "WebPage",
     name: route.hiddenHeading,
@@ -421,10 +440,21 @@ function buildPrimarySchema(route, siteUrl) {
     },
     about: {
       "@type": "Person",
+      "@id": personId,
       name: PROFILE.name,
       url: getAbsoluteUrl(siteUrl, "/about/marton-vegh/"),
     },
   };
+
+  if (route.type === "profile") {
+    baseWebPage.mainEntity = {
+      "@type": "Person",
+      "@id": personId,
+      name: PROFILE.name,
+      url: getAbsoluteUrl(siteUrl, "/about/marton-vegh/"),
+      image: getImageUrl(siteUrl, BASE_PERSON_SCHEMA.image),
+    };
+  }
 
   if (route.type === "case-study") {
     return {
@@ -468,10 +498,12 @@ function buildSecondarySchema(route, siteUrl) {
 }
 
 export function getStructuredData(route, siteUrl) {
+  const personId = `${getAbsoluteUrl(siteUrl, "/about/marton-vegh/")}#person`;
   const graph = [
     {
       "@context": "https://schema.org",
       ...BASE_PERSON_SCHEMA,
+      "@id": personId,
       url: getAbsoluteUrl(siteUrl, "/about/marton-vegh/"),
       image: getImageUrl(siteUrl, BASE_PERSON_SCHEMA.image),
     },
@@ -482,6 +514,7 @@ export function getStructuredData(route, siteUrl) {
       url: getSiteUrl(siteUrl),
       author: {
         "@type": "Person",
+        "@id": personId,
         name: PROFILE.name,
       },
     },

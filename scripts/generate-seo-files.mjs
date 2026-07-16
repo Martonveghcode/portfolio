@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import {
   DEFAULT_SITE_URL,
   SEO_ROUTES,
+  SITE_FOOTER_LINKS,
   getAbsoluteUrl,
   getHtmlEntryPath,
   getImageUrl,
@@ -25,6 +26,18 @@ function getOgType(route) {
   if (route.type === "case-study" || route.type === "paper") return "article";
   if (route.type === "profile") return "profile";
   return "website";
+}
+
+function getStaticFooterHtml() {
+  const links = SITE_FOOTER_LINKS
+    .map((link) => `<a href="${link.href}">${link.label}</a>`)
+    .join("\n        ");
+
+  return `<footer class="seo-site-footer">
+      <nav aria-label="Portfolio pages">
+        ${links}
+      </nav>
+    </footer>`;
 }
 
 function getHtmlDocument(route) {
@@ -82,11 +95,29 @@ function getHtmlDocument(route) {
         color: #0a6cda;
         font-weight: 600;
       }
+      .seo-site-footer {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 24px 0 36px;
+        border-top: 1px solid #d9dde3;
+      }
+      .seo-site-footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+      }
+      .seo-site-footer a {
+        color: #0a6cda;
+        font-weight: 600;
+      }
     </style>
     <script id="route-structured-data" type="application/ld+json">${structuredData}</script>
   </head>
   <body>
-    <main id="seo-content">${renderSeoContentHtml(route)}</main>
+    <div id="seo-content">
+      <main>${renderSeoContentHtml(route)}</main>
+      ${getStaticFooterHtml()}
+    </div>
     <div id="root"></div>
     <script type="module" src="${scriptPath}"></script>
   </body>
@@ -100,10 +131,8 @@ async function ensureDirectoryFor(entryPath) {
 }
 
 async function writeRoutePages() {
-  const nestedRoutes = SEO_ROUTES.filter((route) => route.path !== "/");
-
   await Promise.all(
-    nestedRoutes.map(async (route) => {
+    SEO_ROUTES.map(async (route) => {
       const entryPath = getHtmlEntryPath(route.path);
       const targetFile = new URL(`../${entryPath}`, import.meta.url);
       await ensureDirectoryFor(entryPath);

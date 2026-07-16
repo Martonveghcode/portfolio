@@ -5,7 +5,7 @@ import { EXPERIENCE_CONTENT, PROJECTS_CONTENT } from "./content";
 import CookieConsentBanner from "./CookieConsentBanner";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
-import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
+import { PRIMARY_PAGE_PATHS, SITE_FOOTER_LINKS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
 const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "macro-recorder-plus", "portfolio-analytics-tool", "handwriting-pipeline", "habitro", "calendar"];
@@ -649,6 +649,23 @@ function RelatedRouteLinks({ links }) {
   );
 }
 
+function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <div className="site-footer__info">
+        <span>{PROFILE.name}</span>
+        <span aria-hidden="true">·</span>
+        <span>{PROFILE.location}</span>
+      </div>
+      <nav className="site-footer__links" aria-label="Portfolio pages">
+        {SITE_FOOTER_LINKS.map((link) => (
+          <a href={link.href} key={link.href}>{link.label}</a>
+        ))}
+      </nav>
+    </footer>
+  );
+}
+
 function RouteDetailPage({ route, copy }) {
   const content = getRouteSeoContent(route);
   const eyebrow = ROUTE_TYPE_LABELS[route.type] ?? "Portfolio page";
@@ -697,15 +714,15 @@ function RouteDetailPage({ route, copy }) {
           <div className="route-page__summary-grid">
             <article>
               <h2>Problem</h2>
-              <p>The project is framed around a concrete workflow problem instead of a generic portfolio demo.</p>
+              <p>{route.caseStudy?.problem}</p>
             </article>
             <article>
               <h2>Role</h2>
-              <p>Independent build by {PROFILE.name}, covering problem framing, implementation, testing, and documentation.</p>
+              <p>{route.caseStudy?.role}</p>
             </article>
             <article>
               <h2>Evidence</h2>
-              <p>The project links back to related services and, where available, the public repository for code review.</p>
+              <p>{route.caseStudy?.evidence}</p>
             </article>
           </div>
         ) : null}
@@ -979,6 +996,7 @@ export default function App() {
         isMobile={isMobile}
       />
       {pageView}
+      <SiteFooter />
       <CookieConsentBanner language={language} page={page} />
       <ContactPanel language={language} page={page} openSignal={contactPanelOpenSignal} isMobile={isMobile} copy={copy} />
     </div>
