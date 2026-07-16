@@ -1,4 +1,4 @@
-import { Fragment, startTransition, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, startTransition, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import ContributionHeatmap from "./ContributionHeatmap";
 import ContactPanel from "./ContactPanel";
 import { EXPERIENCE_CONTENT, PROJECTS_CONTENT } from "./content";
@@ -76,17 +76,123 @@ function getRollingHeatmapStartDate(maxDate, dayCount = DEFAULT_HEATMAP_RANGE_DA
   return startDate;
 }
 
-function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile }) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const ui = copy.ui ?? translations.en.ui;
+function useSlidingIndicator(activeKey) {
+  const containerRef = useRef(null);
+  const [indicator, setIndicator] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    visible: false,
+  });
 
-  function handleNavClick(event, nextPage) {
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const activeItem = container?.querySelector(`[data-slide-key="${activeKey}"]`);
+
+    if (!container || !activeItem) return undefined;
+
+    const updateIndicator = () => {
+      setIndicator({
+        x: activeItem.offsetLeft,
+        y: activeItem.offsetTop,
+        width: activeItem.offsetWidth,
+        height: activeItem.offsetHeight,
+        visible: true,
+      });
+    };
+
+    updateIndicator();
+
+    const resizeObserver = new ResizeObserver(updateIndicator);
+    resizeObserver.observe(container);
+    container.querySelectorAll("[data-slide-key]").forEach((item) => resizeObserver.observe(item));
+
+    return () => resizeObserver.disconnect();
+  }, [activeKey]);
+
+  return { containerRef, indicator };
+}
+
+function SlidingIndicator({ className, indicator }) {
+  return (
+    <span
+      className={className}
+      aria-hidden="true"
+      style={{
+        width: `${indicator.width}px`,
+        height: `${indicator.height}px`,
+        opacity: indicator.visible ? 1 : 0,
+        transform: `translate(${indicator.x}px, ${indicator.y}px)`,
+      }}
+    />
+  );
+}
+
+function LanguageSwitch({ language, onLanguageChange, label }) {
+  const { containerRef, indicator } = useSlidingIndicator(language);
+
+  return (
+    <div className="language-switch" aria-label={label} role="group" ref={containerRef}>
+      <SlidingIndicator className="language-switch__indicator" indicator={indicator} />
+      {LANGUAGE_OPTIONS.map((option) => (
+        <button
+          type="button"
+          key={option.code}
+          data-slide-key={option.code}
+          className={`language-chip ${language === option.code ? "language-chip--active" : ""}`}
+          aria-pressed={language === option.code}
+          onClick={() => onLanguageChange(option.code)}
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function PrimaryNavigation({ page, copy, label, onNavigate, onOpenContactPanel, isMobile }) {
+  const { containerRef, indicator } = useSlidingIndicator(page);
+
+  function handleClick(event, nextPage) {
     event.preventDefault();
     onNavigate(nextPage);
   }
 
-  function handleMobileNavigate(event, nextPage) {
-    handleNavClick(event, nextPage);
+  return (
+    <nav
+      className={isMobile ? "site-nav__mobile-links" : "site-nav__links"}
+      aria-label={label}
+      ref={containerRef}
+    >
+      <SlidingIndicator className="site-nav__indicator" indicator={indicator} />
+      {PAGES.map((key) => (
+        <a
+          href={PRIMARY_PAGE_PATHS[key] ?? "/"}
+          key={key}
+          data-slide-key={key}
+          className={`nav-tab ${page === key ? "nav-tab--active" : ""}`}
+          aria-current={page === key ? "page" : undefined}
+          onClick={(event) => handleClick(event, key)}
+        >
+          {copy.nav[key]}
+        </a>
+      ))}
+      {!isMobile ? (
+        <button type="button" className="nav-tab" onClick={onOpenContactPanel}>
+          {copy.getInTouch}
+        </button>
+      ) : null}
+    </nav>
+  );
+}
+
+function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const ui = copy.ui ?? translations.en.ui;
+
+  function handleMobileNavigate(nextPage) {
+    onNavigate(nextPage);
     setIsMobileMenuOpen(false);
   }
 
@@ -123,18 +229,13 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
             id="mobile-nav-panel"
             className={`site-nav__mobile-panel ${isMobileMenuOpen ? "is-open" : ""}`}
           >
-            <nav className="site-nav__mobile-links" aria-label={ui.primaryNavLabel}>
-              {PAGES.map((key) => (
-                <a
-                  href={PRIMARY_PAGE_PATHS[key] ?? "/"}
-                  key={key}
-                  className={`nav-tab ${page === key ? "nav-tab--active" : ""}`}
-                  onClick={(event) => handleMobileNavigate(event, key)}
-                >
-                  {copy.nav[key]}
-                </a>
-              ))}
-            </nav>
+            <PrimaryNavigation
+              page={page}
+              copy={copy}
+              label={ui.primaryNavLabel}
+              onNavigate={handleMobileNavigate}
+              isMobile
+            />
 
             <div className="site-nav__mobile-actions">
               <a className="nav-action" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
@@ -152,18 +253,7 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
             </div>
 
             <div className="site-nav__mobile-meta">
-              <div className="language-switch" aria-label={ui.languageLabel}>
-                {LANGUAGE_OPTIONS.map((option) => (
-                  <button
-                    type="button"
-                    key={option.code}
-                    className={`language-chip ${language === option.code ? "language-chip--active" : ""}`}
-                    onClick={() => onLanguageChange(option.code)}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
+              <LanguageSwitch language={language} onLanguageChange={onLanguageChange} label={ui.languageLabel} />
             </div>
           </div>
         </div>
@@ -179,21 +269,14 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
           <span className="brand__meta">{PROFILE.location}</span>
         </div>
 
-        <nav className="site-nav__links" aria-label={ui.primaryNavLabel}>
-          {PAGES.map((key) => (
-            <a
-              href={PRIMARY_PAGE_PATHS[key] ?? "/"}
-              key={key}
-              className={`nav-tab ${page === key ? "nav-tab--active" : ""}`}
-              onClick={(event) => handleNavClick(event, key)}
-            >
-              {copy.nav[key]}
-            </a>
-          ))}
-          <button type="button" className="nav-tab" onClick={onOpenContactPanel}>
-            {copy.getInTouch}
-          </button>
-        </nav>
+        <PrimaryNavigation
+          page={page}
+          copy={copy}
+          label={ui.primaryNavLabel}
+          onNavigate={onNavigate}
+          onOpenContactPanel={onOpenContactPanel}
+          isMobile={false}
+        />
 
         <div className="site-nav__actions">
           <a className="nav-action" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
@@ -208,18 +291,7 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
           <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label={ui.themeToggleLabel}>
             {theme === "dark" ? ui.themeDark : ui.themeLight}
           </button>
-          <div className="language-switch" aria-label={ui.languageLabel}>
-            {LANGUAGE_OPTIONS.map((option) => (
-              <button
-                type="button"
-                key={option.code}
-                className={`language-chip ${language === option.code ? "language-chip--active" : ""}`}
-                onClick={() => onLanguageChange(option.code)}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
+          <LanguageSwitch language={language} onLanguageChange={onLanguageChange} label={ui.languageLabel} />
         </div>
       </div>
     </header>
