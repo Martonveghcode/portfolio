@@ -6,7 +6,7 @@ export const PROJECTS_CONTENT = [
     id: "ti-nspire-cxii-custom-keyboard-remap",
     tech: ["C", "Ndless", "RAM Hooks"],
     links: {
-      github: "https://github.com/Martonveghcode/ti-nspire-cxii-custom-keyboard-remap",
+      github: "https://github.com/Martonveghcode/tiNspire-CXii-keyboard-remap",
     },
     image: {
       src: "/projects/ti-nspire-cxii-keyboard-remap.gif",
@@ -16,27 +16,27 @@ export const PROJECTS_CONTENT = [
     },
     translations: {
       en: {
-        title: "TI Nspire CX II Custom Keyboard Remap",
+        title: "TI-Nspire CX II Custom Keyboard Remap",
         summary:
-          "Remaps alphabetic input on the TI-Nspire CX II CAS into a QWERTY-style layout using an Ndless RAM hook on the OS event queue, making typing more familiar while preserving the calculator's native keyboard behavior.",
+          "A small Ndless app that rewrites alphabetic key events into a QWERTY-style layout on the TI-Nspire CX II CAS, while leaving modifiers and non-letter keys alone.",
       },
       es: {
-        title: "TI Nspire CX II Custom Keyboard Remap",
+        title: "TI-Nspire CX II Custom Keyboard Remap",
         summary:
           "Reasigna la entrada alfabética en la TI-Nspire CX II CAS a una distribución de estilo QWERTY mediante un hook de RAM de Ndless en la cola de eventos del sistema, haciendo la escritura más familiar mientras conserva el comportamiento nativo del teclado de la calculadora.",
       },
       fr: {
-        title: "TI Nspire CX II Custom Keyboard Remap",
+        title: "TI-Nspire CX II Custom Keyboard Remap",
         summary:
           "Remappe la saisie alphabétique sur la TI-Nspire CX II CAS en une disposition de type QWERTY grâce à un hook RAM Ndless sur la file d'événements du système, rendant la frappe plus familière tout en préservant le comportement natif du clavier de la calculatrice",
       },
       de: {
-        title: "TI Nspire CX II Custom Keyboard Remap",
+        title: "TI-Nspire CX II Custom Keyboard Remap",
         summary:
           "Ordnet die alphabetische Eingabe auf dem TI-Nspire CX II CAS mithilfe eines Ndless-RAM-Hooks in der Ereigniswarteschlange des Betriebssystems einem QWERTY-ähnlichen Layout zu, wodurch das Tippen vertrauter wird, während das native Tastaturverhalten des Rechners erhalten bleibt.",
       },
       hu: {
-        title: "TI Nspire CX II Custom Keyboard Remap",
+        title: "TI-Nspire CX II Custom Keyboard Remap",
         summary:
           "A TI-Nspire CX II CAS betűbevitelét QWERTY-stílusú kiosztásra alakítja egy Ndless RAM-hook segítségével az operációs rendszer eseménysorán, ismerősebbé téve a gépelést, miközben megőrzi a számológép natív billentyűzetműködését.",
       },
@@ -58,7 +58,7 @@ export const PROJECTS_CONTENT = [
       en: {
         title: "Macro Recorder +",
         summary:
-          "The macro recorder that actually works. Windows desktop app built with Python and PySide6 for recording, editing, replaying, and exporting keyboard and mouse workflows. Exports to .py and .exe to make your macros run effortlessly. Fully open source and free.",
+          "A Windows desktop app for recording keyboard and mouse input, editing each action, and exporting the finished workflow as a Python script or executable.",
       },
       es: {
         title: "Macro Recorder +",
@@ -98,7 +98,7 @@ export const PROJECTS_CONTENT = [
       en: {
         title: "Homework Calendar",
         summary:
-          "Lesson Calendar is a Vite + React + Tailwind single-page app that helps students manage recurring lessons and push Class/Test/Homework events to Google Calendar.",
+          "A student calendar built around recurring lessons, with a focused flow for turning classes, tests, and homework into Google Calendar events.",
       },
       es: {
         title: "Homework Calendar",
@@ -138,7 +138,7 @@ export const PROJECTS_CONTENT = [
       en: {
         title: "Handwriting Formatting Pipeline",
         summary:
-          'An extension/pipeline to "My Text in Your Handwriting" by Thaines. Includes text formatting, limited Unicode->ASCII support, a print-formatting pipeline, and training-data processing macros/utils, plus a recommended training sheet.',
+          "A set of Python and desktop tools that take handwriting-synthesis output through text cleanup, training-data preparation, and printable page formatting.",
       },
       es: {
         title: "Handwriting Formatting Pipeline",
@@ -176,7 +176,7 @@ export const PROJECTS_CONTENT = [
       en: {
         title: "Portfolio Analytics Tool",
         summary:
-          "Portfolio Analytics Tool is a Python script using yfinance, NumPy, Pandas, and SciPy that builds portfolios from share holdings and analyzes performance with Sharpe, Sortino, max drawdown etc., while also generating an efficient frontier and optimized portfolios with matplotlib visualizations. My current best portfolio is 1.74 Sharpe and 2.52 Sortino.",
+          "A Python research tool for comparing a real portfolio with efficient-frontier scenarios through risk-adjusted returns, drawdown, and optimization plots.",
       },
       es: {
         title: "Portfolio Analytics Tool",
@@ -216,7 +216,7 @@ export const PROJECTS_CONTENT = [
       en: {
         title: "Habitro",
         summary:
-          "A daily learning system optimized for retaining and learning school material. It has individualized SQLite-based performance tracking and a daily learning workflow; in my case, it includes Spanish grammar, Catalan, and maths exercises I do daily.",
+          "A daily practice system that uses SQLite history to keep mistakes, previous attempts, and subject-specific exercises in one repeatable learning workflow.",
       },
       es: {
         title: "Habitro",

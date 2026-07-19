@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png?v=20260401" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TI-Nspire QWERTY Keyboard Remap | Ndless C Project | Marton Vegh</title>
+    <meta name="description" content="A C and Ndless project that gives the TI-Nspire CX II CAS a QWERTY-style alphabet layout by rewriting selected OS key events in memory." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Marton Vegh" />
+    <link rel="canonical" href="https://marton.top/projects/ti-nspire-keyboard-remap/" />
+    <meta property="og:site_name" content="Portfolio Marton" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="TI-Nspire QWERTY Keyboard Remap | Ndless C Project | Marton Vegh" />
+    <meta property="og:description" content="A C and Ndless project that gives the TI-Nspire CX II CAS a QWERTY-style alphabet layout by rewriting selected OS key events in memory." />
+    <meta property="og:url" content="https://marton.top/projects/ti-nspire-keyboard-remap/" />
+    <meta property="og:image" content="https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TI-Nspire QWERTY Keyboard Remap | Ndless C Project | Marton Vegh" />
+    <meta name="twitter:description" content="A C and Ndless project that gives the TI-Nspire CX II CAS a QWERTY-style alphabet layout by rewriting selected OS key events in memory." />
+    <meta name="twitter:image" content="https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif" />
+    <style>
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #16181b;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .seo-prerender {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+      .seo-prerender h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.08;
+      }
+      .seo-prerender p,
+      .seo-prerender li {
+        color: #4f5661;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      .seo-prerender a {
+        color: #0a6cda;
+        font-weight: 600;
+      }
+      .seo-site-footer {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 24px 0 36px;
+        border-top: 1px solid #d9dde3;
+      }
+      .seo-site-footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+      }
+      .seo-site-footer a {
+        color: #0a6cda;
+        font-weight: 600;
+      }
+    </style>
+    <script id="route-structured-data" type="application/ld+json">[{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://marton.top/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"@id":"https://marton.top/about/marton-vegh/#person","url":"https://marton.top/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top","author":{"@type":"Person","@id":"https://marton.top/about/marton-vegh/#person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://marton.top"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://marton.top/projects/"},{"@type":"ListItem","position":3,"name":"TI-Nspire CX II Custom Keyboard Remap","item":"https://marton.top/projects/ti-nspire-keyboard-remap/"}]},{"@context":"https://schema.org","@type":"Article","headline":"TI-Nspire CX II Custom Keyboard Remap","description":"A C and Ndless project that gives the TI-Nspire CX II CAS a QWERTY-style alphabet layout by rewriting selected OS key events in memory.","image":["https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif"],"author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"mainEntityOfPage":"https://marton.top/projects/ti-nspire-keyboard-remap/","about":[{"@type":"Thing","name":"C"},{"@type":"Thing","name":"Ndless"},{"@type":"Thing","name":"RAM Hooks"}]},{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"TI-Nspire CX II Custom Keyboard Remap","codeRepository":"https://github.com/Martonveghcode/tiNspire-CXii-keyboard-remap","programmingLanguage":"C, Ndless, RAM Hooks","author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"url":"https://marton.top/projects/ti-nspire-keyboard-remap/","image":"https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif","description":"A C and Ndless project that gives the TI-Nspire CX II CAS a QWERTY-style alphabet layout by rewriting selected OS key events in memory."}]</script>
+  </head>
+  <body>
+    <div id="seo-content">
+      <main><section class="seo-prerender" data-seo-route="case-study-keyboard-remap"><article><h1>TI-Nspire CX II Custom Keyboard Remap</h1><p>The TI-Nspire CX II CAS arranges its alphabet keys alphabetically, which is awkward for anyone who types by muscle memory on QWERTY. This project changes the characters delivered by those keys without changing the calculator&#39;s other input behavior.</p><p>A resident Ndless hook intercepts the operating system event queue and rewrites only A-Z and a-z key events. Modifier combinations and non-letter keys pass through unchanged, and installation is gated by checks for the supported calculator OS and function fingerprint.</p><p>The current build deliberately targets TI-Nspire CX II CAS OS 6.2.0.333. A probe mode prints the mapping on-device before installation, keeping the experiment testable and its compatibility limits explicit.</p><nav aria-label="Related pages"><ul><li><a href="/projects/">Selected software projects and case studies by Marton Vegh</a></li><li><a href="/services/education-software-tools/">Education software and student tool portfolio</a></li></ul></nav></article></section></main>
+      <footer class="seo-site-footer">
+      <nav aria-label="Portfolio pages">
+        <a href="/projects/">Projects</a>
+        <a href="/about/marton-vegh/">About</a>
+        <a href="/experience/">Experience</a>
+      </nav>
+    </footer>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="../../index.jsx"></script>
+  </body>
+</html>

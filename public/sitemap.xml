@@ -2,54 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://marton.top</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/experience/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/who-am-i/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/about/marton-vegh/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/privacy/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/services/frontend-react-development/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/services/python-automation-analysis/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/services/education-software-tools/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/projects/ti-nspire-keyboard-remap/</loc>
+    <lastmod>2026-07-19</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/projects/macro-recorder-plus/</loc>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/homework-calendar/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/handwriting-formatting-pipeline/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/portfolio-analytics-tool/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/habitro/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
 </urlset>
