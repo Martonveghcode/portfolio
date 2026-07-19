@@ -173,18 +173,17 @@ const ROUTE_DEFINITIONS = [
     id: "service-frontend",
     path: "/services/frontend-react-development/",
     page: "service",
-    type: "service",
-    title: "Frontend Developer Portfolio | React, JavaScript, Performance | Portfolio Marton",
+    type: "collection",
+    title: "Frontend Projects | React and JavaScript Portfolio | Marton Vegh",
     description:
-      "Frontend development portfolio page focused on React and JavaScript projects by Marton Vegh, with work in responsive UI, practical tooling, and performance-aware implementation.",
+      "Browse frontend projects by Marton Vegh, including Homework Calendar, a responsive React app for moving recurring school events into Google Calendar.",
     image: "/projects/homework-calendar-dashboard.png",
-    hiddenHeading: "Frontend developer portfolio for React and JavaScript projects",
+    hiddenHeading: "Frontend projects built with React and JavaScript",
     hiddenParagraphs: [
-      "The frontend work in this portfolio uses React and JavaScript to turn recurring tasks into clear, responsive interfaces. The priority is practical interaction design: understandable states, efficient workflows, and layouts that remain usable across screen sizes.",
-      "Homework Calendar is the main example. It helps students organize recurring lessons and send class, test, and homework events to Google Calendar, combining stateful interface behavior with a workflow grounded in day-to-day school planning.",
-      "Other interface work follows the same approach: structure information clearly, reduce repeated manual steps, and make the primary action obvious. The linked case studies describe the problem framing, tools, and implementation decisions behind each build.",
+      "I build interfaces around tasks I actually need to complete. Homework Calendar is the main React example: it turns a recurring school timetable into class, test, and homework events for Google Calendar.",
+      "Start with the case study for the interface and workflow decisions, or browse the full projects page for desktop automation, Python tooling, education software, and more.",
     ],
-    relatedPaths: ["/projects/homework-calendar/", "/projects/", "/services/education-software-tools/"],
+    relatedPaths: ["/projects/", "/projects/homework-calendar/"],
   },
   {
     id: "service-python",
@@ -661,7 +660,9 @@ function buildBreadcrumbList(route, siteUrl) {
     breadcrumbs.push({ name: "Projects", path: "/projects/" });
   }
 
-  if (route.path.startsWith("/services/")) {
+  if (route.id === "service-frontend") {
+    breadcrumbs.push({ name: "Projects", path: "/projects/" });
+  } else if (route.path.startsWith("/services/")) {
     breadcrumbs.push({ name: "Services", path: "/" });
   }
 

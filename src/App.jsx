@@ -701,6 +701,7 @@ function WhoAmIPage({ copy, whoAmI }) {
 
 const ROUTE_TYPE_LABELS = {
   service: "Portfolio focus",
+  collection: "Projects",
   "case-study": "Case study",
   profile: "Profile",
   webpage: "Site information",
@@ -842,7 +843,44 @@ function SiteFooter() {
   );
 }
 
-function RouteDetailPage({ route, copy }) {
+function FrontendProjectsLandingPage({ route, copy, projects }) {
+  const content = getRouteSeoContent(route);
+  const featuredProject = projects.find((project) => project.id === "calendar");
+
+  return (
+    <main className="site-main route-page frontend-projects-landing">
+      <section className="frontend-projects-landing__hero">
+        <div className="page-intro frontend-projects-landing__intro">
+          <p className="eyebrow">React &amp; JavaScript</p>
+          <h1>{content.heading}</h1>
+          <p>{content.paragraphs[0]}</p>
+          <div className="card-actions frontend-projects-landing__actions">
+            <a className="button button--primary" href="/projects/">Browse all projects</a>
+            <a className="button button--secondary" href="/projects/homework-calendar/">Read the React case study</a>
+          </div>
+        </div>
+
+        {featuredProject ? (
+          <div className="frontend-projects-landing__featured">
+            <p className="eyebrow">Featured React project</p>
+            <ProjectCard project={featuredProject} copy={copy} />
+          </div>
+        ) : null}
+      </section>
+
+      <section className="surface-card frontend-projects-landing__handoff">
+        <div>
+          <p className="eyebrow">Full portfolio</p>
+          <h2>See the rest of the projects</h2>
+          <p>{content.paragraphs[1]}</p>
+        </div>
+        <a className="button button--primary" href="/projects/">Go to projects</a>
+      </section>
+    </main>
+  );
+}
+
+function RouteDetailPage({ route, copy, projects }) {
   const content = getRouteSeoContent(route);
   const eyebrow = ROUTE_TYPE_LABELS[route.type] ?? "Portfolio page";
   const isCaseStudy = route.type === "case-study";
@@ -850,6 +888,10 @@ function RouteDetailPage({ route, copy }) {
   const isProfile = route.type === "profile";
   const isPrivacy = route.id === "privacy";
   const externalLink = content.externalLink;
+
+  if (route.id === "service-frontend") {
+    return <FrontendProjectsLandingPage route={route} copy={copy} projects={projects} />;
+  }
 
   if (isCaseStudy) {
     return <CaseStudyPage route={route} copy={copy} content={content} />;
@@ -1140,14 +1182,14 @@ export default function App() {
   if (page === "experience") pageView = <ExperiencePage copy={copy} experience={localizedExperience} />;
   if (page === "whoami") pageView = <WhoAmIPage copy={copy} whoAmI={localizedWhoAmI} />;
   if (["service", "case-study", "profile", "privacy"].includes(page)) {
-    pageView = <RouteDetailPage route={route} copy={copy} />;
+    pageView = <RouteDetailPage route={route} copy={copy} projects={localizedProjects} />;
   }
 
   return (
     <div className="page-shell">
       <AppBackground />
       <SiteNav
-        page={page}
+        page={route.id === "service-frontend" ? "projects" : page}
         onNavigate={handlePrimaryPageNavigate}
         onOpenContactPanel={() => setContactPanelOpenSignal((current) => current + 1)}
         language={language}

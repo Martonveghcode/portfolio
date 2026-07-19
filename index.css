@@ -634,6 +634,73 @@ select:focus-visible {
   line-height: 1.7;
 }
 
+.frontend-projects-landing__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.frontend-projects-landing__intro {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  margin: 0;
+}
+
+.frontend-projects-landing__intro h1 {
+  max-width: 13ch;
+}
+
+.frontend-projects-landing__actions {
+  margin-top: 24px;
+}
+
+.frontend-projects-landing__featured {
+  display: grid;
+  gap: 12px;
+}
+
+.frontend-projects-landing__featured .project-card {
+  height: 100%;
+}
+
+.frontend-projects-landing__featured .project-media img {
+  object-fit: contain;
+}
+
+.frontend-projects-landing__handoff {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.frontend-projects-landing__handoff > div {
+  display: grid;
+  gap: 10px;
+}
+
+.frontend-projects-landing__handoff h2,
+.frontend-projects-landing__handoff p {
+  margin: 0;
+}
+
+.frontend-projects-landing__handoff h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  letter-spacing: -0.035em;
+}
+
+.frontend-projects-landing__handoff p {
+  max-width: 72ch;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.frontend-projects-landing__handoff .button {
+  flex: 0 0 auto;
+}
+
 .route-page__media-shell {
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1685,6 +1752,7 @@ button.heatmap-day:hover { transform: translateY(-1px); box-shadow: 0 0 0 3px va
   .route-page__summary-grid,
   .route-link-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .case-study-layout { grid-template-columns: 1fr; }
+  .frontend-projects-landing__hero { grid-template-columns: 1fr; }
   .case-study-sidebar {
     position: static;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1741,6 +1809,11 @@ button.heatmap-day:hover { transform: translateY(-1px); box-shadow: 0 0 0 3px va
   .stats-grid { grid-template-columns: 1fr; }
   .case-study-gallery--split,
   .case-study-sidebar { grid-template-columns: 1fr; }
+  .frontend-projects-landing__actions,
+  .frontend-projects-landing__handoff {
+    align-items: stretch;
+    flex-direction: column;
+  }
   .cookie-banner {
     width: calc(100vw - 20px);
     bottom: 10px;
