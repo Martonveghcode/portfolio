@@ -228,7 +228,7 @@ const ROUTE_DEFINITIONS = [
     path: "/projects/ti-nspire-keyboard-remap/",
     page: "case-study",
     type: "case-study",
-    title: "TI-Nspire Keyboard Remap Case Study | C and Ndless | Portfolio Marton",
+    title: "TI-Nspire QWERTY Keyboard Remap | Ndless C Project | Marton Vegh",
     description:
       "A C and Ndless project that gives the TI-Nspire CX II CAS a QWERTY-style alphabet layout by rewriting selected OS key events in memory.",
     image: "/projects/ti-nspire-cxii-keyboard-remap.gif",
@@ -265,21 +265,21 @@ const ROUTE_DEFINITIONS = [
       ],
       sections: [
         {
-          title: "QWERTY where the calculator expects A-Z",
+          title: "Remapping alphabetic input to QWERTY",
           paragraphs: [
             "The calculator's stock alpha layout follows its physical key order, not the keyboard layout most people already know. That is manageable for short variable names, but it becomes noticeably slow when entering commands or longer text.",
             "The remap keeps the hardware exactly as it is and changes the letter delivered to the active input field. The result feels familiar without replacing the rest of the calculator keyboard.",
           ],
         },
         {
-          title: "A narrow hook, not a replacement keyboard",
+          title: "Rewriting only letter events in the OS queue",
           paragraphs: [
             "The app attaches a resident hook to the OS event queue. It inspects alphabetic events, swaps the low ASCII byte through a small mapping table, and then hands control back to the operating system. Modifiers, non-letter keys, and the event's other data are left alone.",
             "Before installing, the app checks the calculator model, OS signature, and the expected first instructions at the hook location. Those checks keep a low-level edit tied to the one layout it was built and tested against.",
           ],
         },
         {
-          title: "Built for one known target",
+          title: "Limiting installation to OS 6.2.0.333",
           paragraphs: [
             "This is intentionally not advertised as a universal TI-Nspire patch. The current build supports the CX II CAS on OS 6.2.0.333, and a probe mode lets the mapping be checked on-screen before the hook is installed.",
           ],
@@ -292,7 +292,7 @@ const ROUTE_DEFINITIONS = [
     path: "/projects/macro-recorder-plus/",
     page: "case-study",
     type: "case-study",
-    title: "Macro Recorder Plus Case Study | Python Desktop Automation | Portfolio Marton",
+    title: "Macro Recorder Plus | Editable Python Desktop Automation | Marton Vegh",
     description:
       "A Windows desktop macro editor built with Python and PySide6 for recording, refining, replaying, and exporting keyboard and mouse workflows.",
     image: "/projects/macro-recorder-plus.png",
@@ -322,21 +322,21 @@ const ROUTE_DEFINITIONS = [
       ],
       sections: [
         {
-          title: "Recording is only the starting point",
+          title: "Turning recorded input into editable actions",
           paragraphs: [
             "Raw mouse and keyboard events are rarely a finished automation. Timing needs adjustment, noisy actions need removing, and useful steps often need to be added by hand.",
             "Macro Recorder Plus turns the recording into a table of structured actions. Each row can be enabled, labelled, reordered, and edited; manual actions cover URLs, files, programs, typed text, waits, image clicks, and comments.",
           ],
         },
         {
-          title: "Macros can leave the app",
+          title: "Exporting workflows as Python scripts or executables",
           paragraphs: [
             "A workflow can be exported as a standalone Python script with its dependency list, asset folder, launcher, and run notes. An optional PyInstaller flow builds a Windows executable from the same export when a single-file handoff is more practical.",
             "The generated runner also accepts useful command-line controls such as playback speed, dry-run mode, and a starting action, so exported macros remain inspectable rather than becoming a black box.",
           ],
         },
         {
-          title: "Safer handling for real workflows",
+          title: "Keeping credentials out of saved macros",
           paragraphs: [
             "The Type Secret action saves only the name of an environment variable. The value is read at runtime, which avoids writing passwords directly into the macro file or generated script.",
           ],
@@ -349,7 +349,7 @@ const ROUTE_DEFINITIONS = [
     path: "/projects/homework-calendar/",
     page: "case-study",
     type: "case-study",
-    title: "Homework Calendar Case Study | React Student Scheduling App | Portfolio Marton",
+    title: "Homework Calendar | React and Google Calendar Project | Marton Vegh",
     description:
       "A React scheduling tool that turns recurring lessons, tests, and homework into Google Calendar events without maintaining a second isolated planner.",
     image: "/projects/homework-calendar-dashboard.png",
@@ -383,21 +383,21 @@ const ROUTE_DEFINITIONS = [
       ],
       sections: [
         {
-          title: "Use the calendar students already check",
+          title: "Using Google Calendar as the final destination",
           paragraphs: [
             "Schoolwork often ends up split between a timetable, a homework list, and a calendar. Homework Calendar keeps the recurring timetable as its source material, then uses Google Calendar as the final place for dated events.",
             "That choice keeps the app focused: it prepares a well-structured event rather than trying to replace the rest of a student's planning system.",
           ],
         },
         {
-          title: "A schedule becomes an event in one pass",
+          title: "Building events from recurring lesson data",
           paragraphs: [
             "Lessons store their regular weekly slots. To create an event, the student chooses a lesson and date, marks it as a class, test, or homework item, and adds the topic and notes. The relevant context stays visible beside the lesson list before anything is sent.",
             "The interface is state-driven, so changing the lesson or event type updates the same compact workflow instead of opening a chain of separate forms.",
           ],
         },
         {
-          title: "Configuration stays explicit",
+          title: "Handling OAuth and saved preferences",
           paragraphs: [
             "Calendar access uses the student's own Google Cloud OAuth client and API key. Setup is a deliberate first-run step, while connection details and appearance preferences can be remembered for later sessions.",
           ],
@@ -410,7 +410,7 @@ const ROUTE_DEFINITIONS = [
     path: "/projects/handwriting-formatting-pipeline/",
     page: "case-study",
     type: "case-study",
-    title: "Handwriting Formatting Pipeline Case Study | Python Workflow Tool | Portfolio Marton",
+    title: "Handwriting Formatting Pipeline | Python Print Workflow | Marton Vegh",
     description:
       "A Python and desktop-tool pipeline that prepares handwriting training data, formats synthesis input, and turns generated handwriting into printable pages.",
     image: "/projects/handwriting-formatting-pipeline.png",
@@ -434,7 +434,7 @@ const ROUTE_DEFINITIONS = [
     hiddenParagraphs: [
       "The Handwriting Formatting Pipeline extends Thaines's My Text in Your Handwriting project with the surrounding tools needed to move from scanned samples to a printable result.",
       "The repository groups training-sheet preparation, scan cleanup, sample splitting, text formatting, limited Unicode-to-ASCII mapping, synthesis handoff, and printable-page layout. It also collects the compatibility notes needed to run the older upstream Python 2 and GTK tooling.",
-      "The project does not replace the upstream synthesis engine. It packages the workflow around it, including a combined Windows desktop app, while keeping responsible personal, educational, and research use explicit.",
+      "The project does not replace the upstream synthesis engine. It packages the preparation and print workflow around it while keeping responsible personal, educational, and research use explicit.",
     ],
     relatedPaths: [
       "/services/python-automation-analysis/",
@@ -451,23 +451,23 @@ const ROUTE_DEFINITIONS = [
       ],
       sections: [
         {
-          title: "The missing middle of handwriting synthesis",
+          title: "Preparing samples and input text for synthesis",
           paragraphs: [
-            "Generating handwriting is only one part of the job. Scanned samples still need cleaning and splitting, target text needs to match the trained character set, and the generated lines need to become a page that can actually be printed.",
-            "This repository collects those surrounding steps into one workflow instead of presenting them as a loose set of one-off fixes.",
+            "Scanned handwriting samples need cleaning and splitting before they can be used for training. The target text also has to stay within the character set represented by those samples.",
+            "The repository keeps the sample-preparation and text-compatibility tools alongside the formatting pipeline so the same steps can be repeated for later documents.",
           ],
         },
         {
-          title: "Two stages, shown separately",
+          title: "Formatting generated lines for print",
           paragraphs: [
-            "The first image is the direct synthesis result. The second is the page-ready version with line placement and spacing applied. Keeping them as separate, uncropped images makes the contribution easier to understand than a single wide strip.",
+            "The synthesis output contains the generated handwriting, but it is not yet a printable sheet. The formatting stage places those lines on a page and applies the spacing shown in the finished example.",
             "Text formatting also includes a limited mapping for accented characters that the ASCII-only upstream pipeline cannot represent directly. It is a practical compatibility layer, not full Unicode support.",
           ],
         },
         {
-          title: "An extension, not a new synthesis engine",
+          title: "Extending the workflow around the upstream model",
           paragraphs: [
-            "The handwriting model and core synthesis work remain in the upstream project. This work concentrates on data preparation, repeatable formatting, print output, and the environment notes required to keep the older Python 2 tooling running. The repository also combines the helper tools in a Windows desktop app under the MTYH folder.",
+            "The handwriting model and core synthesis work remain in the upstream project. This repository handles data preparation, text compatibility, repeatable formatting, printable output, and the environment notes required to keep the older Python 2 tooling running.",
           ],
         },
       ],
@@ -478,7 +478,7 @@ const ROUTE_DEFINITIONS = [
     path: "/projects/portfolio-analytics-tool/",
     page: "case-study",
     type: "case-study",
-    title: "Portfolio Analytics Tool Case Study | Python Finance Project | Portfolio Marton",
+    title: "Portfolio Analytics Tool | Python Risk and Optimization Project | Marton Vegh",
     description:
       "A Python research tool for comparing real holdings with risk-adjusted performance, drawdown, efficient-frontier, and optimized portfolio scenarios.",
     image: "/projects/portfolio-analytics-tool.png",
@@ -511,21 +511,21 @@ const ROUTE_DEFINITIONS = [
       ],
       sections: [
         {
-          title: "A portfolio is more than its return",
+          title: "Calculating risk-adjusted performance from holdings",
           paragraphs: [
             "A holdings list can show what is owned, but it says little about how the positions behave together. This tool pulls price history, rebuilds the weighted portfolio, and places return beside volatility, downside risk, and maximum drawdown.",
             "Sharpe and Sortino ratios provide two different views of risk-adjusted performance: one counts all volatility, while the other concentrates on harmful downside variation.",
           ],
         },
         {
-          title: "One chart, many alternatives",
+          title: "Comparing allocations on the efficient frontier",
           paragraphs: [
             "The efficient-frontier view plots thousands of candidate allocations rather than presenting a single optimized answer without context. Color encodes Sharpe ratio, while the maximum-Sharpe and minimum-volatility portfolios are marked as reference points.",
             "That makes the current allocation easier to discuss in terms of trade-offs. One portfolio analyzed with the tool currently records a Sharpe ratio of 1.74 and a Sortino ratio of 2.52.",
           ],
         },
         {
-          title: "A research aid, not a recommendation",
+          title: "Keeping optimized portfolios in research context",
           paragraphs: [
             "Optimization is sensitive to its historical window, assumptions, and constraints. The generated portfolios are comparison cases for further research, not instructions to trade.",
           ],
@@ -538,7 +538,7 @@ const ROUTE_DEFINITIONS = [
     path: "/projects/habitro/",
     page: "case-study",
     type: "case-study",
-    title: "Habitro Case Study | Daily Learning System with SQLite Tracking | Portfolio Marton",
+    title: "Habitro | SQLite Learning and Practice System | Marton Vegh",
     description:
       "A daily learning system that uses SQLite performance history to organize Spanish, Catalan, and mathematics practice around previous attempts.",
     image: "/projects/habitro.png",
@@ -572,21 +572,21 @@ const ROUTE_DEFINITIONS = [
       ],
       sections: [
         {
-          title: "Practice that remembers yesterday",
+          title: "Using SQLite history to shape later practice",
           paragraphs: [
             "A static worksheet can tell you whether today's answer is right, but it cannot show the mistakes that keep returning. Habitro stores results and previous attempts per exercise type, so later sessions have a useful memory.",
             "The daily workflow spans Spanish grammar, Catalan, syntax, morphology, mathematics, and derivatives. Local question banks and examples remain usable even when generated practice is not configured.",
           ],
         },
         {
-          title: "The derivative screen shows the idea",
+          title: "Keeping derivative practice in one view",
           paragraphs: [
             "The derivative module generates a small batch, can shuffle pending questions, and reveals the worked answer only when requested. Batch size and order sit beside the current expression instead of being buried in a separate settings screen.",
             "A history tab keeps the exercise connected to earlier work. The goal is not more dashboard chrome; it is a short loop of attempt, check, record, and revisit.",
           ],
         },
         {
-          title: "One system, two interfaces",
+          title: "Moving the primary interface from Streamlit to React",
           paragraphs: [
             "The React and Vite app is the current interface. An earlier Streamlit version remains in the repository as a local experimentation path, sharing the broader idea of structured daily practice and stored progress.",
           ],
