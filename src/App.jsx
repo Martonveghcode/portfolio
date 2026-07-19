@@ -11,6 +11,8 @@ import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./site
 const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "macro-recorder-plus", "portfolio-analytics-tool", "handwriting-pipeline", "habitro", "calendar"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const CASE_STUDY_PATHS = {
+  "ti-nspire-cxii-custom-keyboard-remap": "/projects/ti-nspire-keyboard-remap/",
+  "macro-recorder-plus": "/projects/macro-recorder-plus/",
   calendar: "/projects/homework-calendar/",
   "handwriting-pipeline": "/projects/handwriting-formatting-pipeline/",
   "portfolio-analytics-tool": "/projects/portfolio-analytics-tool/",
@@ -721,6 +723,108 @@ function RelatedRouteLinks({ links }) {
   );
 }
 
+function CaseStudyGallery({ items, heading }) {
+  if (!items?.length) return null;
+
+  return (
+    <section
+      className={`case-study-gallery ${items.length > 1 ? "case-study-gallery--split" : "case-study-gallery--single"}`}
+      aria-label={`${heading} screenshots`}
+    >
+      {items.map((item) => (
+        <figure className="case-study-gallery__item" key={item.src}>
+          <div className="case-study-gallery__frame">
+            <img
+              src={item.src}
+              alt={item.alt}
+              width={item.width}
+              height={item.height}
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+            />
+          </div>
+          {item.caption ? <figcaption>{item.caption}</figcaption> : null}
+        </figure>
+      ))}
+    </section>
+  );
+}
+
+function CaseStudyPage({ route, copy, content }) {
+  const media = route.media?.length
+    ? route.media
+    : route.image
+      ? [{ src: route.image, alt: content.heading }]
+      : [];
+
+  return (
+    <main className="site-main route-page case-study-page">
+      <section className="page-intro route-page__intro case-study-page__intro">
+        <p className="eyebrow">Case study</p>
+        <h1>{content.heading}</h1>
+        <p>{route.description}</p>
+        {route.repo ? (
+          <div className="card-actions case-study-page__intro-actions">
+            <a className="button button--primary" href={route.repo} target="_blank" rel="noreferrer">
+              View repository
+            </a>
+          </div>
+        ) : null}
+      </section>
+
+      <CaseStudyGallery items={media} heading={content.heading} />
+
+      <div className="case-study-layout">
+        <article className="surface-card case-study-story">
+          {route.caseStudy?.sections?.map((section) => (
+            <section className="case-study-story__section" key={section.title}>
+              <h2>{section.title}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </section>
+          ))}
+        </article>
+
+        <aside className="surface-card case-study-sidebar" aria-label="Project details">
+          {route.caseStudy?.facts?.length ? (
+            <dl className="case-study-facts">
+              {route.caseStudy.facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
+
+          {route.tech?.length ? (
+            <div className="case-study-sidebar__section">
+              <p className="eyebrow">Built with</p>
+              <div className="chip-list" aria-label="Technologies used">
+                {route.tech.map((tech) => (
+                  <span className="chip" key={tech}>{tech}</span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {route.repo ? (
+            <div className="case-study-repository">
+              <p className="eyebrow">Repository</p>
+              <p>Source, setup notes, and the fuller technical documentation live on GitHub.</p>
+              <a className="inline-link" href={route.repo} target="_blank" rel="noreferrer">
+                {copy.links.github} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          ) : null}
+        </aside>
+      </div>
+    </main>
+  );
+}
+
 function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -746,6 +850,10 @@ function RouteDetailPage({ route, copy }) {
   const isProfile = route.type === "profile";
   const isPrivacy = route.id === "privacy";
   const externalLink = content.externalLink;
+
+  if (isCaseStudy) {
+    return <CaseStudyPage route={route} copy={copy} content={content} />;
+  }
 
   return (
     <main className="site-main route-page">
@@ -779,23 +887,6 @@ function RouteDetailPage({ route, copy }) {
             {route.tech.map((tech) => (
               <span className="chip" key={tech}>{tech}</span>
             ))}
-          </div>
-        ) : null}
-
-        {isCaseStudy ? (
-          <div className="route-page__summary-grid">
-            <article>
-              <h2>Problem</h2>
-              <p>{route.caseStudy?.problem}</p>
-            </article>
-            <article>
-              <h2>Role</h2>
-              <p>{route.caseStudy?.role}</p>
-            </article>
-            <article>
-              <h2>Evidence</h2>
-              <p>{route.caseStudy?.evidence}</p>
-            </article>
           </div>
         ) : null}
 

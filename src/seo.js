@@ -95,6 +95,8 @@ const ROUTE_DEFINITIONS = [
       "The React work concentrates on clear, state-driven interfaces for recurring tasks. The Python projects cover document pipelines, individualized learning records, and quantitative portfolio analysis, with an emphasis on replacing repetitive work with maintainable workflows.",
     ],
     relatedPaths: [
+      "/projects/ti-nspire-keyboard-remap/",
+      "/projects/macro-recorder-plus/",
       "/projects/homework-calendar/",
       "/projects/handwriting-formatting-pipeline/",
       "/projects/portfolio-analytics-tool/",
@@ -223,20 +225,149 @@ const ROUTE_DEFINITIONS = [
     relatedPaths: ["/projects/homework-calendar/", "/projects/habitro/", "/projects/"],
   },
   {
+    id: "case-study-keyboard-remap",
+    path: "/projects/ti-nspire-keyboard-remap/",
+    page: "case-study",
+    type: "case-study",
+    title: "TI-Nspire Keyboard Remap Case Study | C and Ndless | Portfolio Marton",
+    description:
+      "A C and Ndless project that gives the TI-Nspire CX II CAS a QWERTY-style alphabet layout by rewriting selected OS key events in memory.",
+    image: "/projects/ti-nspire-cxii-keyboard-remap.gif",
+    media: [
+      {
+        src: "/projects/ti-nspire-cxii-keyboard-remap.gif",
+        alt: "QWERTY keyboard remap typing in the TI-Nspire CX II emulator",
+        width: 892,
+        height: 652,
+        caption: "The remap running in the calculator emulator: the physical alpha keys now produce a QWERTY-style sequence.",
+      },
+      {
+        src: "/projects/ti-nspire-remap-terminal.png",
+        alt: "TI-Nspire keyboard remap probe and install menu",
+        width: 950,
+        height: 1092,
+        caption: "The probe and install screen checks the target OS before attaching the hook.",
+      },
+    ],
+    hiddenHeading: getProjectTitle("ti-nspire-cxii-custom-keyboard-remap"),
+    hiddenParagraphs: [
+      "The TI-Nspire CX II CAS arranges its alphabet keys alphabetically, which is awkward for anyone who types by muscle memory on QWERTY. This project changes the characters delivered by those keys without changing the calculator's other input behavior.",
+      "A resident Ndless hook intercepts the operating system event queue and rewrites only A-Z and a-z key events. Modifier combinations and non-letter keys pass through unchanged, and installation is gated by checks for the supported calculator OS and function fingerprint.",
+      "The current build deliberately targets TI-Nspire CX II CAS OS 6.2.0.333. A probe mode prints the mapping on-device before installation, keeping the experiment testable and its compatibility limits explicit.",
+    ],
+    relatedPaths: ["/projects/", "/services/education-software-tools/"],
+    repo: getProjectRepo("ti-nspire-cxii-custom-keyboard-remap"),
+    tech: getProjectTech("ti-nspire-cxii-custom-keyboard-remap"),
+    caseStudy: {
+      facts: [
+        { label: "Device", value: "TI-Nspire CX II CAS" },
+        { label: "Target", value: "OS 6.2.0.333 with Ndless" },
+        { label: "Scope", value: "Alphabetic key events only" },
+      ],
+      sections: [
+        {
+          title: "QWERTY where the calculator expects A-Z",
+          paragraphs: [
+            "The calculator's stock alpha layout follows its physical key order, not the keyboard layout most people already know. That is manageable for short variable names, but it becomes noticeably slow when entering commands or longer text.",
+            "The remap keeps the hardware exactly as it is and changes the letter delivered to the active input field. The result feels familiar without replacing the rest of the calculator keyboard.",
+          ],
+        },
+        {
+          title: "A narrow hook, not a replacement keyboard",
+          paragraphs: [
+            "The app attaches a resident hook to the OS event queue. It inspects alphabetic events, swaps the low ASCII byte through a small mapping table, and then hands control back to the operating system. Modifiers, non-letter keys, and the event's other data are left alone.",
+            "Before installing, the app checks the calculator model, OS signature, and the expected first instructions at the hook location. Those checks keep a low-level edit tied to the one layout it was built and tested against.",
+          ],
+        },
+        {
+          title: "Built for one known target",
+          paragraphs: [
+            "This is intentionally not advertised as a universal TI-Nspire patch. The current build supports the CX II CAS on OS 6.2.0.333, and a probe mode lets the mapping be checked on-screen before the hook is installed.",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "case-study-macro-recorder",
+    path: "/projects/macro-recorder-plus/",
+    page: "case-study",
+    type: "case-study",
+    title: "Macro Recorder Plus Case Study | Python Desktop Automation | Portfolio Marton",
+    description:
+      "A Windows desktop macro editor built with Python and PySide6 for recording, refining, replaying, and exporting keyboard and mouse workflows.",
+    image: "/projects/macro-recorder-plus.png",
+    media: [
+      {
+        src: "/projects/macro-recorder-plus.png",
+        alt: "Macro Recorder Plus editor showing a structured automation workflow",
+        width: 1600,
+        height: 950,
+        caption: "Recorded and manual actions remain editable before playback or export.",
+      },
+    ],
+    hiddenHeading: getProjectTitle("macro-recorder-plus"),
+    hiddenParagraphs: [
+      "Macro Recorder Plus records desktop keyboard and mouse input, but its main focus is what happens after recording: each event becomes an editable action in a structured workflow.",
+      "The PySide6 interface supports recorded input alongside manual steps such as opening a URL, typing text, waiting, clicking an image, launching a program, and adding comments. Workflows can be replayed in the app or exported as Python scripts and optional Windows executables.",
+      "Exported scripts include their runtime requirements and launcher files. Secret actions store an environment-variable name rather than a password, keeping credentials out of saved macro files.",
+    ],
+    relatedPaths: ["/projects/", "/services/python-automation-analysis/"],
+    repo: getProjectRepo("macro-recorder-plus"),
+    tech: getProjectTech("macro-recorder-plus"),
+    caseStudy: {
+      facts: [
+        { label: "Platform", value: "Windows desktop" },
+        { label: "Workflow", value: "Record, edit, replay, export" },
+        { label: "Exports", value: "Python script or optional EXE" },
+      ],
+      sections: [
+        {
+          title: "Recording is only the starting point",
+          paragraphs: [
+            "Raw mouse and keyboard events are rarely a finished automation. Timing needs adjustment, noisy actions need removing, and useful steps often need to be added by hand.",
+            "Macro Recorder Plus turns the recording into a table of structured actions. Each row can be enabled, labelled, reordered, and edited; manual actions cover URLs, files, programs, typed text, waits, image clicks, and comments.",
+          ],
+        },
+        {
+          title: "Macros can leave the app",
+          paragraphs: [
+            "A workflow can be exported as a standalone Python script with its dependency list, asset folder, launcher, and run notes. An optional PyInstaller flow builds a Windows executable from the same export when a single-file handoff is more practical.",
+            "The generated runner also accepts useful command-line controls such as playback speed, dry-run mode, and a starting action, so exported macros remain inspectable rather than becoming a black box.",
+          ],
+        },
+        {
+          title: "Safer handling for real workflows",
+          paragraphs: [
+            "The Type Secret action saves only the name of an environment variable. The value is read at runtime, which avoids writing passwords directly into the macro file or generated script.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     id: "case-study-homework-calendar",
     path: "/projects/homework-calendar/",
     page: "case-study",
     type: "case-study",
     title: "Homework Calendar Case Study | React Student Scheduling App | Portfolio Marton",
     description:
-      "Case study for Homework Calendar, a React app by Marton Vegh that helps students manage recurring lessons and push class, test, and homework events to Google Calendar.",
+      "A React scheduling tool that turns recurring lessons, tests, and homework into Google Calendar events without maintaining a second isolated planner.",
     image: "/projects/homework-calendar-dashboard.png",
-    hiddenHeading: `Case study: ${getProjectTitle("calendar")}`,
+    media: [
+      {
+        src: "/projects/homework-calendar-dashboard.png",
+        alt: "Homework Calendar dashboard with recurring lessons and event controls",
+        width: 1505,
+        height: 940,
+        caption: "A lesson, weekly slot, event type, and notes come together in one calendar-export flow.",
+      },
+    ],
+    hiddenHeading: getProjectTitle("calendar"),
     hiddenParagraphs: [
-      `${getProjectTitle("calendar")} is a self-directed React project built around a clear student planning problem: recurring lessons, changing deadlines, and the friction of manually transferring school information into a usable calendar workflow.`,
-      "The project focuses on browser-based scheduling with repeated lesson structures and event export to Google Calendar. That makes it less of a generic to-do interface and more of a practical education tool aimed at turning class schedules, tests, and homework into an organized repeatable system.",
-      "The Vite, React, and Tailwind implementation uses state-driven UI decisions to keep repeated lesson structures manageable. Calendar export connects the planning interface to the calendar students already use instead of creating another isolated schedule.",
-      "The result is a focused workflow for entering school information once, reviewing it in context, and transferring class, test, and homework events without recreating them manually.",
+      "Homework Calendar treats recurring lessons as the stable part of a student's schedule. Each lesson keeps its weekly slots, so a class, test, or homework item can be created from information that is already structured.",
+      "The React interface combines the selected lesson, date, event type, topic, and notes in one view, then sends the finished event to Google Calendar. It uses an existing calendar as the destination instead of asking the student to maintain another planner.",
+      "Google Calendar access is configured explicitly through a user's own OAuth client and API key. Appearance settings are stored separately, keeping the scheduling workflow focused while still allowing the interface to be personalized.",
     ],
     relatedPaths: [
       "/services/frontend-react-development/",
@@ -246,9 +377,33 @@ const ROUTE_DEFINITIONS = [
     repo: getProjectRepo("calendar"),
     tech: getProjectTech("calendar"),
     caseStudy: {
-      problem: "Recurring lessons, tests, and homework are tedious to copy into a calendar and easy to enter inconsistently.",
-      role: "Independent design and frontend implementation with React, Vite, Tailwind, and Google Calendar export.",
-      evidence: "The working interface supports repeated lesson structures and distinct class, test, and homework events.",
+      facts: [
+        { label: "Interface", value: "React single-page app" },
+        { label: "Calendar", value: "Google Calendar API" },
+        { label: "Event types", value: "Class, test, homework" },
+      ],
+      sections: [
+        {
+          title: "Use the calendar students already check",
+          paragraphs: [
+            "Schoolwork often ends up split between a timetable, a homework list, and a calendar. Homework Calendar keeps the recurring timetable as its source material, then uses Google Calendar as the final place for dated events.",
+            "That choice keeps the app focused: it prepares a well-structured event rather than trying to replace the rest of a student's planning system.",
+          ],
+        },
+        {
+          title: "A schedule becomes an event in one pass",
+          paragraphs: [
+            "Lessons store their regular weekly slots. To create an event, the student chooses a lesson and date, marks it as a class, test, or homework item, and adds the topic and notes. The relevant context stays visible beside the lesson list before anything is sent.",
+            "The interface is state-driven, so changing the lesson or event type updates the same compact workflow instead of opening a chain of separate forms.",
+          ],
+        },
+        {
+          title: "Configuration stays explicit",
+          paragraphs: [
+            "Calendar access uses the student's own Google Cloud OAuth client and API key. Setup is a deliberate first-run step, while connection details and appearance preferences can be remembered for later sessions.",
+          ],
+        },
+      ],
     },
   },
   {
@@ -258,14 +413,29 @@ const ROUTE_DEFINITIONS = [
     type: "case-study",
     title: "Handwriting Formatting Pipeline Case Study | Python Workflow Tool | Portfolio Marton",
     description:
-      "Case study for the Handwriting Formatting Pipeline, a Python-based extension and workflow tool for handwriting generation, print formatting, and training-data preparation.",
+      "A Python and desktop-tool pipeline that prepares handwriting training data, formats synthesis input, and turns generated handwriting into printable pages.",
     image: "/projects/handwriting-formatting-pipeline.png",
-    hiddenHeading: `Case study: ${getProjectTitle("handwriting-pipeline")}`,
+    media: [
+      {
+        src: "/projects/handwriting-before.png",
+        alt: "Generated handwriting before printable page formatting",
+        width: 1326,
+        height: 984,
+        caption: "Synthesis output before page formatting: the handwriting is present, but it is not yet laid out as a printable sheet.",
+      },
+      {
+        src: "/projects/handwriting-after.png",
+        alt: "Generated handwriting arranged on a lined printable page",
+        width: 901,
+        height: 1266,
+        caption: "The same text after spacing, line placement, and printable-page formatting.",
+      },
+    ],
+    hiddenHeading: getProjectTitle("handwriting-pipeline"),
     hiddenParagraphs: [
-      `${getProjectTitle("handwriting-pipeline")} extends the existing "My Text in Your Handwriting" project by Thaines with supporting workflow pieces that make the output more usable in practice.`,
-      "The problem here is not just handwriting generation itself but everything around it: text formatting, printable layout, limited Unicode-to-ASCII handling, and preparing training materials in a way that is easier to repeat and maintain.",
-      "The Python pipeline combines formatting utilities, print preparation, limited Unicode-to-ASCII conversion, and macros for training-data processing. Standardizing these supporting steps makes the handwriting workflow easier to repeat and maintain.",
-      "A recommended training sheet completes the workflow by giving data preparation and output formatting a shared starting point, reducing the manual cleanup required around generated handwriting.",
+      "The Handwriting Formatting Pipeline extends Thaines's My Text in Your Handwriting project with the surrounding tools needed to move from scanned samples to a printable result.",
+      "The repository groups training-sheet preparation, scan cleanup, sample splitting, text formatting, limited Unicode-to-ASCII mapping, synthesis handoff, and printable-page layout. It also collects the compatibility notes needed to run the older upstream Python 2 and GTK tooling.",
+      "The project does not replace the upstream synthesis engine. It packages the workflow around it, including a combined Windows desktop app, while keeping responsible personal, educational, and research use explicit.",
     ],
     relatedPaths: [
       "/services/python-automation-analysis/",
@@ -275,9 +445,33 @@ const ROUTE_DEFINITIONS = [
     repo: getProjectRepo("handwriting-pipeline"),
     tech: getProjectTech("handwriting-pipeline"),
     caseStudy: {
-      problem: "Generated handwriting still required manual text cleanup, print formatting, and repetitive training-data preparation.",
-      role: "Extended the upstream project with a Python pipeline, formatting utilities, processing macros, and training guidance.",
-      evidence: "The public repository documents Unicode conversion, printable output, training-data utilities, and the recommended sheet.",
+      facts: [
+        { label: "Upstream", value: "My Text in Your Handwriting" },
+        { label: "Project type", value: "Workflow extension and desktop tools" },
+        { label: "Use", value: "Personal, educational, and research" },
+      ],
+      sections: [
+        {
+          title: "The missing middle of handwriting synthesis",
+          paragraphs: [
+            "Generating handwriting is only one part of the job. Scanned samples still need cleaning and splitting, target text needs to match the trained character set, and the generated lines need to become a page that can actually be printed.",
+            "This repository collects those surrounding steps into one workflow instead of presenting them as a loose set of one-off fixes.",
+          ],
+        },
+        {
+          title: "Two stages, shown separately",
+          paragraphs: [
+            "The first image is the direct synthesis result. The second is the page-ready version with line placement and spacing applied. Keeping them as separate, uncropped images makes the contribution easier to understand than a single wide strip.",
+            "Text formatting also includes a limited mapping for accented characters that the ASCII-only upstream pipeline cannot represent directly. It is a practical compatibility layer, not full Unicode support.",
+          ],
+        },
+        {
+          title: "An extension, not a new synthesis engine",
+          paragraphs: [
+            "The handwriting model and core synthesis work remain in the upstream project. This work concentrates on data preparation, repeatable formatting, print output, and the environment notes required to keep the older Python 2 tooling running. The repository also combines the helper tools in a Windows desktop app under the MTYH folder.",
+          ],
+        },
+      ],
     },
   },
   {
@@ -287,14 +481,22 @@ const ROUTE_DEFINITIONS = [
     type: "case-study",
     title: "Portfolio Analytics Tool Case Study | Python Finance Project | Portfolio Marton",
     description:
-      "Case study for Portfolio Analytics Tool, a Python finance project by Marton Vegh for portfolio construction, Sharpe and Sortino analysis, efficient frontier modeling, and visualization.",
+      "A Python research tool for comparing real holdings with risk-adjusted performance, drawdown, efficient-frontier, and optimized portfolio scenarios.",
     image: "/projects/portfolio-analytics-tool.png",
-    hiddenHeading: `Case study: ${getProjectTitle("portfolio-analytics-tool")}`,
+    media: [
+      {
+        src: "/projects/portfolio-analytics-tool.png",
+        alt: "Efficient-frontier simulation with maximum-Sharpe and minimum-volatility portfolios marked",
+        width: 1250,
+        height: 750,
+        caption: "Simulated portfolios make the return, volatility, and Sharpe trade-off visible; the two reference portfolios are called out directly.",
+      },
+    ],
+    hiddenHeading: getProjectTitle("portfolio-analytics-tool"),
     hiddenParagraphs: [
-      `${getProjectTitle("portfolio-analytics-tool")} is a quantitative finance project built around a common investor problem: holdings data is easy to collect, but it is much harder to turn that into structured analysis of risk, return, and portfolio construction choices.`,
-      "The project uses Python libraries such as yfinance, NumPy, Pandas, SciPy, and Matplotlib to build portfolios from share holdings and analyze them using measures like Sharpe ratio, Sortino ratio, maximum drawdown, efficient-frontier comparisons, and optimized portfolio scenarios.",
-      "The analysis combines risk-adjusted return measures with drawdown and efficient-frontier visualizations, so a portfolio can be compared from several perspectives instead of by headline return alone. One analyzed portfolio currently records a 1.74 Sharpe ratio and 2.52 Sortino ratio.",
-      "Optimized scenarios provide reference points rather than automatic investment decisions. The tool is designed to make assumptions, trade-offs, and the relationship between holdings and portfolio-level results easier to inspect.",
+      "Portfolio Analytics Tool turns share holdings and market data into a comparable set of return, volatility, drawdown, Sharpe, and Sortino measures.",
+      "The Python workflow uses yfinance, NumPy, Pandas, SciPy, and Matplotlib to evaluate the current allocation beside simulated and optimized portfolios. The efficient-frontier plot highlights maximum-Sharpe and minimum-volatility reference points without hiding the rest of the distribution.",
+      "The output is designed for research rather than automatic investment advice. Data windows, market assumptions, and optimization constraints remain part of the interpretation; one current analyzed portfolio records a 1.74 Sharpe ratio and 2.52 Sortino ratio.",
     ],
     relatedPaths: [
       "/services/python-automation-analysis/",
@@ -303,9 +505,33 @@ const ROUTE_DEFINITIONS = [
     ],
     tech: getProjectTech("portfolio-analytics-tool"),
     caseStudy: {
-      problem: "A list of share holdings does not by itself explain risk-adjusted performance, drawdowns, or diversification trade-offs.",
-      role: "Built the Python analysis workflow and visualizations using market data, numerical, optimization, and plotting libraries.",
-      evidence: "Outputs include Sharpe and Sortino ratios, maximum drawdown, efficient-frontier comparisons, and optimized scenarios.",
+      facts: [
+        { label: "Input", value: "Share holdings and market history" },
+        { label: "Measures", value: "Sharpe, Sortino, drawdown" },
+        { label: "Output", value: "Efficient-frontier comparisons" },
+      ],
+      sections: [
+        {
+          title: "A portfolio is more than its return",
+          paragraphs: [
+            "A holdings list can show what is owned, but it says little about how the positions behave together. This tool pulls price history, rebuilds the weighted portfolio, and places return beside volatility, downside risk, and maximum drawdown.",
+            "Sharpe and Sortino ratios provide two different views of risk-adjusted performance: one counts all volatility, while the other concentrates on harmful downside variation.",
+          ],
+        },
+        {
+          title: "One chart, many alternatives",
+          paragraphs: [
+            "The efficient-frontier view plots thousands of candidate allocations rather than presenting a single optimized answer without context. Color encodes Sharpe ratio, while the maximum-Sharpe and minimum-volatility portfolios are marked as reference points.",
+            "That makes the current allocation easier to discuss in terms of trade-offs. One portfolio analyzed with the tool currently records a Sharpe ratio of 1.74 and a Sortino ratio of 2.52.",
+          ],
+        },
+        {
+          title: "A research aid, not a recommendation",
+          paragraphs: [
+            "Optimization is sensitive to its historical window, assumptions, and constraints. The generated portfolios are comparison cases for further research, not instructions to trade.",
+          ],
+        },
+      ],
     },
   },
   {
@@ -315,14 +541,22 @@ const ROUTE_DEFINITIONS = [
     type: "case-study",
     title: "Habitro Case Study | Daily Learning System with SQLite Tracking | Portfolio Marton",
     description:
-      "Case study for Habitro, a daily learning system with individualized SQLite-based performance tracking for school material.",
+      "A daily learning system that uses SQLite performance history to organize Spanish, Catalan, and mathematics practice around previous attempts.",
     image: "/projects/habitro.png",
-    hiddenHeading: `Case study: ${getProjectTitle("habitro")}`,
+    media: [
+      {
+        src: "/projects/habitro.png",
+        alt: "Habitro derivative practice screen with exercise controls and answer reveal",
+        width: 1379,
+        height: 776,
+        caption: "The derivative module keeps batch controls, the current problem, answer reveal, and practice history in one view.",
+      },
+    ],
+    hiddenHeading: getProjectTitle("habitro"),
     hiddenParagraphs: [
-      `${getProjectTitle("habitro")} is an education software project built around a daily learning workflow for retaining and learning school material.`,
-      "The app uses individualized SQLite-based performance tracking so exercises can be reviewed through a more personal record of progress instead of a static worksheet flow.",
-      "In daily use, the system covers Spanish grammar, Catalan, and maths exercises. The stored performance history allows the learning workflow to respond to the individual student rather than presenting the same sequence every day.",
-      "Habitro connects practice content with a consistent daily routine: complete the exercises, record performance, and use that history to guide later review. SQLite keeps the progress data local and structured.",
+      "Habitro is a daily practice system for Spanish grammar, Catalan, syntax, morphology, mathematics, and derivatives. It keeps exercise-level performance and previous attempts in SQLite rather than treating each session as a blank slate.",
+      "The main React and Vite interface builds short practice batches, reveals answers on demand, and keeps history available for review. Question banks can be maintained manually, while generated practice remains optional where configured.",
+      "An older Streamlit workflow remains in the repository for local experimentation, but the web app is the primary interface. The system can still run with local examples and imported decks when no API key is present.",
     ],
     relatedPaths: [
       "/services/education-software-tools/",
@@ -332,9 +566,33 @@ const ROUTE_DEFINITIONS = [
     repo: getProjectRepo("habitro"),
     tech: getProjectTech("habitro"),
     caseStudy: {
-      problem: "Static worksheets do not adapt to past performance or provide a consistent record across daily practice sessions.",
-      role: "Designed and built the learning workflow, exercise handling, and individualized SQLite performance tracking.",
-      evidence: "The system is used for daily Spanish grammar, Catalan, and mathematics practice with per-user progress data.",
+      facts: [
+        { label: "Subjects", value: "Languages and mathematics" },
+        { label: "History", value: "SQLite per-exercise tracking" },
+        { label: "Primary UI", value: "React and Vite web app" },
+      ],
+      sections: [
+        {
+          title: "Practice that remembers yesterday",
+          paragraphs: [
+            "A static worksheet can tell you whether today's answer is right, but it cannot show the mistakes that keep returning. Habitro stores results and previous attempts per exercise type, so later sessions have a useful memory.",
+            "The daily workflow spans Spanish grammar, Catalan, syntax, morphology, mathematics, and derivatives. Local question banks and examples remain usable even when generated practice is not configured.",
+          ],
+        },
+        {
+          title: "The derivative screen shows the idea",
+          paragraphs: [
+            "The derivative module generates a small batch, can shuffle pending questions, and reveals the worked answer only when requested. Batch size and order sit beside the current expression instead of being buried in a separate settings screen.",
+            "A history tab keeps the exercise connected to earlier work. The goal is not more dashboard chrome; it is a short loop of attempt, check, record, and revisit.",
+          ],
+        },
+        {
+          title: "One system, two interfaces",
+          paragraphs: [
+            "The React and Vite app is the current interface. An earlier Streamlit version remains in the repository as a local experimentation path, sharing the broader idea of structured daily practice and stored progress.",
+          ],
+        },
+      ],
     },
   },
 ];
