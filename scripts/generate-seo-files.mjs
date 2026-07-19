@@ -92,7 +92,7 @@ function getHtmlDocument(route) {
         line-height: 1.7;
       }
       .seo-prerender a {
-        color: #0a6cda;
+        color: #3251ae;
         font-weight: 600;
       }
       .seo-site-footer {
@@ -107,7 +107,7 @@ function getHtmlDocument(route) {
         gap: 12px 24px;
       }
       .seo-site-footer a {
-        color: #0a6cda;
+        color: #3251ae;
         font-weight: 600;
       }
     </style>

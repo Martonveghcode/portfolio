@@ -1,7 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const HEATMAP_COLORS = {
-  blue: ["#d8e8ff", "#9fc3ff", "#5e9bf0", "#0a6cda", "#005fcc"],
+  blue: [
+    "color-mix(in srgb, var(--accent) 18%, var(--card-bg))",
+    "color-mix(in srgb, var(--accent) 38%, var(--card-bg))",
+    "color-mix(in srgb, var(--accent) 60%, var(--card-bg))",
+    "color-mix(in srgb, var(--accent) 82%, var(--card-bg))",
+    "var(--accent)",
+  ],
   green: ["#d5f0dc", "#95d5aa", "#55b977", "#1f883d", "#166c2c"],
   red: ["#fde0e2", "#f7b0b5", "#e56d77", "#cf222e", "#a40e18"],
 };
