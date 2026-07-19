@@ -513,7 +513,9 @@ function ProfileTextAccordion({ title, paragraphs, quote, quoteSource, isOpen, o
 function AppBackground() {
   return (
     <div className="app-background" aria-hidden="true">
-      <div className="app-background__container" />
+      <div className="app-background__container">
+        <div className="app-background__grain" />
+      </div>
     </div>
   );
 }

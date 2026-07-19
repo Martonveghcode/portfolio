@@ -9,11 +9,27 @@
   --text: #4f5661;
   --text-soft: #6f7782;
   --border: #d8dee6;
-  --accent: #0a6cda;
-  --accent-hover: #005fcc;
-  --accent-soft: rgba(10, 108, 218, 0.1);
-  --accent-strong: rgba(10, 108, 218, 0.24);
-  --accent-shadow: rgba(10, 108, 218, 0.12);
+  --accent: #3251ae;
+  --accent-hover: #3251ae;
+  --accent-soft: rgba(50, 81, 174, 0.1);
+  --accent-strong: rgba(50, 81, 174, 0.24);
+  --accent-shadow: rgba(50, 81, 174, 0.12);
+  --app-background: linear-gradient(135deg, #ffe8f3, #d9f3ff);
+  --app-background-overlay: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+  --app-pattern: conic-gradient(
+    from 0deg,
+    #ff9aa2,
+    #ffb7b2,
+    #ffdac1,
+    #e2f0cb,
+    #a2e4ff,
+    #c9afff,
+    #ffb7b2,
+    #ff9aa2
+  );
+  --app-pattern-opacity: 0.8;
+  --app-pattern-secondary-opacity: 0.6;
+  --grain-dot: rgba(255, 255, 255, 0.42);
   --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.08);
   --shadow-card: 0 20px 44px rgba(15, 23, 42, 0.08);
   --nav-width: min(1480px, calc(100vw - 24px));
@@ -25,23 +41,38 @@
 }
 
 :root[data-theme="dark"] {
-  --page-bg: #0b0d10;
-  --section-bg: #12161a;
-  --card-bg: #1b2128;
-  --overlay-bg: rgba(18, 22, 26, 0.78);
-  --text-strong: #f5f7fa;
-  --text: #c0c8d1;
+  --page-bg: #0d1014;
+  --section-bg: #171c23;
+  --card-bg: #141920;
+  --overlay-bg: rgba(17, 21, 27, 0.84);
+  --text-strong: #f4f7fb;
+  --text: #b8c0ca;
   --text-soft: #88929d;
-  --border: rgba(255, 255, 255, 0.12);
-  --accent: #0a6cda;
-  --accent-hover: #2a84f0;
-  --accent-soft: rgba(10, 108, 218, 0.18);
-  --accent-strong: rgba(10, 108, 218, 0.34);
-  --accent-shadow: rgba(10, 108, 218, 0.22);
-  --shadow-soft: 0 24px 64px rgba(0, 0, 0, 0.32);
-  --shadow-card: 0 18px 44px rgba(0, 0, 0, 0.3);
-  --heatmap-border: rgba(255, 255, 255, 0.12);
-  --heatmap-text: #f5f7fa;
+  --border: #353d48;
+  --accent: #4b66b8;
+  --accent-hover: #4b66b8;
+  --accent-soft: rgba(75, 102, 184, 0.13);
+  --accent-strong: rgba(75, 102, 184, 0.32);
+  --accent-shadow: rgba(75, 102, 184, 0.28);
+  --app-background: linear-gradient(135deg, #0a1118, #17101b);
+  --app-background-overlay: radial-gradient(circle, rgba(83, 148, 185, 0.12), rgba(0, 0, 0, 0.58));
+  --app-pattern: conic-gradient(
+    from 0deg,
+    #6d2f47,
+    #76453f,
+    #655535,
+    #365848,
+    #315b6d,
+    #4c3e68,
+    #6d2f47
+  );
+  --app-pattern-opacity: 0.48;
+  --app-pattern-secondary-opacity: 0.32;
+  --grain-dot: rgba(255, 255, 255, 0.22);
+  --shadow-soft: 0 24px 64px rgba(0, 0, 0, 0.36);
+  --shadow-card: 0 20px 48px rgba(0, 0, 0, 0.34);
+  --heatmap-border: #353d48;
+  --heatmap-text: #f4f7fb;
   color-scheme: dark;
 }
 
@@ -95,15 +126,15 @@ select:focus-visible {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  background: var(--app-background);
+  transition: background 360ms ease;
 }
 
 .app-background__container {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.08)),
-    linear-gradient(135deg, #ffe8f3 0%, #d9f3ff 100%);
+  background: var(--app-background-overlay);
 }
 
 .app-background__container::before,
@@ -114,47 +145,28 @@ select:focus-visible {
   left: 50%;
   width: 200%;
   height: 200%;
-  background: conic-gradient(
-    from 0deg,
-    #ff9aa2,
-    #ffb7b2,
-    #ffdac1,
-    #e2f0cb,
-    #a2e4ff,
-    #c9afff,
-    #ffb7b2,
-    #ff9aa2
-  );
+  background: var(--app-pattern);
   transform: translate(-50%, -50%);
-  animation: app-pattern-rotate 8s linear infinite;
+  animation: app-pattern-rotate 10s linear infinite;
   filter: blur(50px);
-  opacity: 0.5;
+  opacity: var(--app-pattern-opacity);
+  transition: opacity 360ms ease;
 }
 
 .app-background__container::after {
   width: 180%;
   height: 180%;
-  animation: app-pattern-rotate-reverse 10s linear infinite;
-  opacity: 0.35;
+  animation: app-pattern-rotate-reverse 12.5s linear infinite;
+  opacity: var(--app-pattern-secondary-opacity);
 }
 
-:root[data-theme="dark"] .app-background__container {
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.22)),
-    linear-gradient(135deg, #0b0d10 0%, #12161a 54%, #10233b 100%);
-}
-
-:root[data-theme="dark"] .app-background__container::before,
-:root[data-theme="dark"] .app-background__container::after {
-  background: conic-gradient(
-    from 0deg,
-    rgba(10, 108, 218, 0.9),
-    rgba(47, 108, 191, 0.7),
-    rgba(92, 146, 214, 0.6),
-    rgba(16, 35, 59, 0.8),
-    rgba(10, 108, 218, 0.9)
-  );
-  opacity: 0.24;
+.app-background__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image: radial-gradient(var(--grain-dot) 0.6px, transparent 0.7px);
+  background-size: 5px 5px;
+  mix-blend-mode: soft-light;
 }
 
 .site-nav,
@@ -375,7 +387,7 @@ select:focus-visible {
 :root[data-theme="dark"] .text-card,
 :root[data-theme="dark"] .book-card,
 :root[data-theme="dark"] .timeline-item__card {
-  background: linear-gradient(180deg, rgba(31, 38, 47, 0.92), rgba(24, 29, 36, 0.98));
+  background: linear-gradient(180deg, rgba(20, 25, 32, 0.92), rgba(20, 25, 32, 0.98));
 }
 
 .page-intro,
