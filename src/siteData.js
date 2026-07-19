@@ -83,6 +83,7 @@ export const translations = {
     favoritePaintingsTitle: "My top 5 favourite paintings",
     worstBooksTitle: "Top 3 worst books",
     sportsAchievementsTitle: "Canoe sprint achievements",
+    caseStudy: { label: "Case study", viewRepository: "View repository", details: "Project details", builtWith: "Built with", repository: "Repository", repositoryDescription: "Source, setup notes, and the fuller technical documentation live on GitHub.", screenshots: "screenshots" },
     links: { live: "Live", github: "GitHub" },
   },
   es: {
@@ -129,6 +130,7 @@ export const translations = {
     favoritePaintingsTitle: "Mis 5 pinturas favoritas",
     worstBooksTitle: "Top 3 peores libros",
     sportsAchievementsTitle: "Logros en piraguismo de velocidad",
+    caseStudy: { label: "Caso de estudio", viewRepository: "Ver repositorio", details: "Detalles del proyecto", builtWith: "Creado con", repository: "Repositorio", repositoryDescription: "El código fuente, las notas de instalación y la documentación técnica completa están en GitHub.", screenshots: "capturas" },
     links: { live: "Live", github: "GitHub" },
   },
   fr: {
@@ -175,6 +177,7 @@ export const translations = {
     favoritePaintingsTitle: "Mes 5 peintures preferees",
     worstBooksTitle: "Top 3 pires livres",
     sportsAchievementsTitle: "Palmares en canoe sprint",
+    caseStudy: { label: "Étude de cas", viewRepository: "Voir le dépôt", details: "Détails du projet", builtWith: "Créé avec", repository: "Dépôt", repositoryDescription: "Le code source, les notes d'installation et la documentation technique complète sont disponibles sur GitHub.", screenshots: "captures d'écran" },
     links: { live: "Live", github: "GitHub" },
   },
   de: {
@@ -221,6 +224,7 @@ export const translations = {
     favoritePaintingsTitle: "Meine 5 Lieblingsgemalde",
     worstBooksTitle: "Top 3 schlechteste Bucher",
     sportsAchievementsTitle: "Erfolge im Kanusprint",
+    caseStudy: { label: "Fallstudie", viewRepository: "Repository ansehen", details: "Projektdetails", builtWith: "Erstellt mit", repository: "Repository", repositoryDescription: "Quellcode, Einrichtungsnotizen und die ausführlichere technische Dokumentation sind auf GitHub verfügbar.", screenshots: "Screenshots" },
     links: { live: "Live", github: "GitHub" },
   },
   hu: {
@@ -267,6 +271,7 @@ export const translations = {
     favoritePaintingsTitle: "Az 5 kedvenc festmenyem",
     worstBooksTitle: "Top 3 legrosszabb konyv",
     sportsAchievementsTitle: "Kajak sprint eredmenyek",
+    caseStudy: { label: "Esettanulmány", viewRepository: "Tároló megtekintése", details: "Projekt részletei", builtWith: "Készült ezzel", repository: "Tároló", repositoryDescription: "A forráskód, a beállítási jegyzetek és a részletesebb műszaki dokumentáció a GitHubon található.", screenshots: "képernyőképek" },
     links: { live: "Elo", github: "GitHub" },
   },
 };
