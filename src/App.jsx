@@ -5,6 +5,7 @@ import { EXPERIENCE_CONTENT, PROJECTS_CONTENT } from "./content";
 import CookieConsentBanner from "./CookieConsentBanner";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
+import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTranslations";
 import { PRIMARY_PAGE_PATHS, SITE_FOOTER_LINKS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
@@ -726,13 +727,13 @@ function RelatedRouteLinks({ links }) {
   );
 }
 
-function CaseStudyGallery({ items, heading }) {
+function CaseStudyGallery({ items, heading, screenshotsLabel }) {
   if (!items?.length) return null;
 
   return (
     <section
       className={`case-study-gallery ${items.length > 1 ? "case-study-gallery--split" : "case-study-gallery--single"}`}
-      aria-label={`${heading} screenshots`}
+      aria-label={`${heading} ${screenshotsLabel}`}
     >
       {items.map((item) => (
         <figure className="case-study-gallery__item" key={item.src}>
@@ -754,7 +755,7 @@ function CaseStudyGallery({ items, heading }) {
   );
 }
 
-function CaseStudyPage({ route, copy, content }) {
+function CaseStudyPage({ route, copy, content, caseStudy }) {
   const media = route.media?.length
     ? route.media
     : route.image
@@ -764,23 +765,23 @@ function CaseStudyPage({ route, copy, content }) {
   return (
     <main className="site-main route-page case-study-page">
       <section className="page-intro route-page__intro case-study-page__intro">
-        <p className="eyebrow">Case study</p>
+        <p className="eyebrow">{copy.caseStudy.label}</p>
         <h1>{content.heading}</h1>
-        <p>{route.description}</p>
+        <p>{content.description ?? route.description}</p>
         {route.repo ? (
           <div className="card-actions case-study-page__intro-actions">
             <a className="button button--primary" href={route.repo} target="_blank" rel="noreferrer">
-              View repository
+              {copy.caseStudy.viewRepository}
             </a>
           </div>
         ) : null}
       </section>
 
-      <CaseStudyGallery items={media} heading={content.heading} />
+      <CaseStudyGallery items={media} heading={content.heading} screenshotsLabel={copy.caseStudy.screenshots} />
 
       <div className="case-study-layout">
         <article className="surface-card case-study-story">
-          {route.caseStudy?.sections?.map((section) => (
+          {caseStudy?.sections?.map((section) => (
             <section className="case-study-story__section" key={section.title}>
               <h2>{section.title}</h2>
               {section.paragraphs.map((paragraph) => (
@@ -790,10 +791,10 @@ function CaseStudyPage({ route, copy, content }) {
           ))}
         </article>
 
-        <aside className="surface-card case-study-sidebar" aria-label="Project details">
-          {route.caseStudy?.facts?.length ? (
+        <aside className="surface-card case-study-sidebar" aria-label={copy.caseStudy.details}>
+          {caseStudy?.facts?.length ? (
             <dl className="case-study-facts">
-              {route.caseStudy.facts.map((fact) => (
+              {caseStudy.facts.map((fact) => (
                 <div key={fact.label}>
                   <dt>{fact.label}</dt>
                   <dd>{fact.value}</dd>
@@ -804,7 +805,7 @@ function CaseStudyPage({ route, copy, content }) {
 
           {route.tech?.length ? (
             <div className="case-study-sidebar__section">
-              <p className="eyebrow">Built with</p>
+              <p className="eyebrow">{copy.caseStudy.builtWith}</p>
               <div className="chip-list" aria-label="Technologies used">
                 {route.tech.map((tech) => (
                   <span className="chip" key={tech}>{tech}</span>
@@ -815,8 +816,8 @@ function CaseStudyPage({ route, copy, content }) {
 
           {route.repo ? (
             <div className="case-study-repository">
-              <p className="eyebrow">Repository</p>
-              <p>Source, setup notes, and the fuller technical documentation live on GitHub.</p>
+              <p className="eyebrow">{copy.caseStudy.repository}</p>
+              <p>{copy.caseStudy.repositoryDescription}</p>
               <a className="inline-link" href={route.repo} target="_blank" rel="noreferrer">
                 {copy.links.github} <span aria-hidden="true">↗</span>
               </a>
@@ -882,7 +883,7 @@ function FrontendProjectsLandingPage({ route, copy, projects }) {
   );
 }
 
-function RouteDetailPage({ route, copy, projects }) {
+function RouteDetailPage({ route, copy, projects, language }) {
   const content = getRouteSeoContent(route);
   const eyebrow = ROUTE_TYPE_LABELS[route.type] ?? "Portfolio page";
   const isCaseStudy = route.type === "case-study";
@@ -896,7 +897,7 @@ function RouteDetailPage({ route, copy, projects }) {
   }
 
   if (isCaseStudy) {
-    return <CaseStudyPage route={route} copy={copy} content={content} />;
+    return <CaseStudyPage route={route} copy={copy} content={getLocalizedCaseStudyIntro(route, language, content)} caseStudy={getLocalizedCaseStudy(route, language)} />;
   }
 
   return (
@@ -1184,7 +1185,7 @@ export default function App() {
   if (page === "experience") pageView = <ExperiencePage copy={copy} experience={localizedExperience} />;
   if (page === "whoami") pageView = <WhoAmIPage copy={copy} whoAmI={localizedWhoAmI} />;
   if (["service", "case-study", "profile", "privacy"].includes(page)) {
-    pageView = <RouteDetailPage route={route} copy={copy} projects={localizedProjects} />;
+    pageView = <RouteDetailPage route={route} copy={copy} projects={localizedProjects} language={language} />;
   }
 
   return (
