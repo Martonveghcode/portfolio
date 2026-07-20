@@ -133,16 +133,20 @@ function SlidingIndicator({ className, indicator }) {
 }
 
 function LanguageSwitch({ language, onLanguageChange, label }) {
-  const { containerRef, indicator } = useSlidingIndicator(language);
+  const activeLanguageIndex = LANGUAGE_OPTIONS.findIndex((option) => option.code === language);
 
   return (
-    <div className="language-switch" aria-label={label} role="group" ref={containerRef}>
-      <SlidingIndicator className="language-switch__indicator" indicator={indicator} />
+    <div
+      className="language-switch"
+      aria-label={label}
+      role="group"
+      data-language-index={Math.max(0, activeLanguageIndex)}
+    >
+      <span className="language-switch__indicator" aria-hidden="true" />
       {LANGUAGE_OPTIONS.map((option) => (
         <button
           type="button"
           key={option.code}
-          data-slide-key={option.code}
           className={`language-chip ${language === option.code ? "language-chip--active" : ""}`}
           aria-pressed={language === option.code}
           onClick={() => onLanguageChange(option.code)}
@@ -182,7 +186,7 @@ function PrimaryNavigation({ page, copy, label, onNavigate, onOpenContactPanel, 
         </a>
       ))}
       {!isMobile ? (
-        <button type="button" className="nav-tab" onClick={onOpenContactPanel}>
+        <button type="button" className="nav-tab nav-tab--contact" onClick={onOpenContactPanel}>
           {copy.getInTouch}
         </button>
       ) : null}
@@ -1169,9 +1173,7 @@ export default function App() {
   }
 
   function handleLanguageChange(nextLanguage) {
-    startTransition(() => {
-      setLanguage(nextLanguage);
-    });
+    setLanguage(nextLanguage);
   }
 
   let pageView = (
