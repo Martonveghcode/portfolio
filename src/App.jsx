@@ -209,7 +209,7 @@ function PrimaryNavigation({ page, copy, label, onNavigate, onOpenContactPanel, 
   );
 }
 
-function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile }) {
+function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile, backgroundAnimationsPaused, onToggleBackgroundAnimations }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const ui = copy.ui ?? translations.en.ui;
 
@@ -228,6 +228,19 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
       <header className="site-nav site-nav--mobile">
         <div className={`site-nav__inner site-nav__inner--mobile ${isMobileMenuOpen ? "is-open" : ""}`}>
           <div className="site-nav__mobile-toolbar">
+            {isMobileMenuOpen ? (
+              <div className="site-nav__mobile-preferences">
+                <MobileLanguageSelect language={language} onLanguageChange={onLanguageChange} label={ui.languageLabel} />
+                <button
+                  type="button"
+                  className="nav-action background-animation-toggle"
+                  aria-pressed={backgroundAnimationsPaused}
+                  onClick={onToggleBackgroundAnimations}
+                >
+                  {backgroundAnimationsPaused ? "Enable animations" : "Reduce animations"}
+                </button>
+              </div>
+            ) : null}
             <button
               type="button"
               className="nav-action site-nav__menu-toggle"
@@ -270,9 +283,6 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
               </button>
             </div>
 
-            <div className="site-nav__mobile-meta">
-              <MobileLanguageSelect language={language} onLanguageChange={onLanguageChange} label={ui.languageLabel} />
-            </div>
           </div>
         </div>
       </header>
@@ -526,9 +536,9 @@ function ProfileTextAccordion({ title, paragraphs, quote, quoteSource, isOpen, o
   );
 }
 
-function AppBackground() {
+function AppBackground({ paused }) {
   return (
-    <div className="app-background" aria-hidden="true">
+    <div className={`app-background ${paused ? "app-background--paused" : ""}`} aria-hidden="true">
       <div className="app-background__container">
         <div className="app-background__grain" />
       </div>
@@ -1015,6 +1025,7 @@ export default function App() {
   const [pathname, setPathname] = useState(getInitialPathname);
   const [theme, setTheme] = useState(getInitialTheme);
   const [isMobile, setIsMobile] = useState(getInitialIsMobile);
+  const [backgroundAnimationsPaused, setBackgroundAnimationsPaused] = useState(false);
   const [contactPanelOpenSignal, setContactPanelOpenSignal] = useState(0);
   const route = useMemo(() => resolveRoute(pathname), [pathname]);
   const page = route.page;
@@ -1205,7 +1216,7 @@ export default function App() {
 
   return (
     <div className="page-shell">
-      <AppBackground />
+      <AppBackground paused={backgroundAnimationsPaused} />
       <SiteNav
         page={route.id === "service-frontend" ? "projects" : page}
         onNavigate={handlePrimaryPageNavigate}
@@ -1217,6 +1228,8 @@ export default function App() {
         cvLink={cvLink}
         copy={copy}
         isMobile={isMobile}
+        backgroundAnimationsPaused={backgroundAnimationsPaused}
+        onToggleBackgroundAnimations={() => setBackgroundAnimationsPaused((current) => !current)}
       />
       {pageView}
       <SiteFooter />
