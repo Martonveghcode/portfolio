@@ -271,9 +271,6 @@ select:focus-visible {
   min-width: 0;
 }
 .background-animation-toggle {
-  min-height: 34px;
-  padding: 6px 8px;
-  font-size: 11px;
   white-space: nowrap;
 }
 .site-nav__mobile-panel {
@@ -322,7 +319,17 @@ select:focus-visible {
   background: transparent;
 }
 .mobile-language-select {
+  position: relative;
   display: inline-flex;
+}
+.mobile-language-select::after {
+  content: "⌄";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  pointer-events: none;
+  color: var(--text);
+  transform: translateY(-58%);
 }
 .sr-only {
   position: absolute;
@@ -336,12 +343,14 @@ select:focus-visible {
   border: 0;
 }
 .mobile-language-select select {
-  min-height: 34px;
+  min-height: 38px;
   width: auto;
   padding: 6px 30px 6px 10px;
   border: 1px solid var(--border);
   border-radius: 10px;
-  background: var(--section-bg);
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
   color: var(--text);
   cursor: pointer;
   font: inherit;

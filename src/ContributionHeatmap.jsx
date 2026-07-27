@@ -417,17 +417,18 @@ export default function ContributionHeatmap({
           {weeks.map((week, index) => {
             const weekStartDate = week[0]?.date;
             const previousStartDate = weeks[index - 1]?.[0]?.date;
+            const nextMonthIndex = weeks.findIndex((nextWeek, nextIndex) => (
+              nextIndex > index && nextWeek[0]?.date.getMonth() !== weekStartDate?.getMonth()
+            ));
             const shouldLabel =
-              weekStartDate && (!previousStartDate || weekStartDate.getMonth() !== previousStartDate.getMonth());
-            const shouldAlignLabelEnd = index >= weeks.length - 4;
+              weekStartDate &&
+              (!previousStartDate || weekStartDate.getMonth() !== previousStartDate.getMonth()) &&
+              (nextMonthIndex === -1 || nextMonthIndex - index >= 3);
 
             return shouldLabel ? (
               <span
                 key={`month-${index}`}
-                style={{
-                  gridColumnStart: index + 1,
-                  justifySelf: shouldAlignLabelEnd ? "end" : "start",
-                }}
+                style={{ gridColumnStart: index + 1 }}
               >
                 {MONTH_NAMES[weekStartDate.getMonth()]}
               </span>
