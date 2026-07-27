@@ -160,6 +160,11 @@ select:focus-visible {
   opacity: var(--app-pattern-secondary-opacity);
 }
 
+.app-background--paused .app-background__container::before,
+.app-background--paused .app-background__container::after {
+  animation-play-state: paused;
+}
+
 .app-background__grain {
   position: absolute;
   inset: 0;
@@ -256,6 +261,21 @@ select:focus-visible {
   justify-content: flex-end;
   align-items: center;
 }
+.site-nav__inner--mobile.is-open .site-nav__mobile-toolbar {
+  justify-content: space-between;
+}
+.site-nav__mobile-preferences {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.background-animation-toggle {
+  min-height: 34px;
+  padding: 6px 8px;
+  font-size: 11px;
+  white-space: nowrap;
+}
 .site-nav__mobile-panel {
   grid-column: 1 / -1;
   display: grid;
@@ -300,11 +320,6 @@ select:focus-visible {
 .site-nav__mobile-actions .theme-toggle {
   border: 1px solid var(--border);
   background: transparent;
-}
-.site-nav__mobile-meta {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 }
 .mobile-language-select {
   display: inline-flex;
