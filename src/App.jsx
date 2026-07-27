@@ -154,6 +154,25 @@ function LanguageSwitch({ language, onLanguageChange, label }) {
   );
 }
 
+function MobileLanguageSelect({ language, onLanguageChange, label }) {
+  return (
+    <label className="mobile-language-select">
+      <span className="sr-only">{label}</span>
+      <select
+        value={language}
+        aria-label={label}
+        onChange={(event) => onLanguageChange(event.target.value)}
+      >
+        {LANGUAGE_OPTIONS.map((option) => (
+          <option value={option.code} key={option.code}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
 function PrimaryNavigation({ page, copy, label, onNavigate, onOpenContactPanel, isMobile }) {
   const { containerRef, indicator } = useSlidingIndicator(page);
 
@@ -207,19 +226,11 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
   if (isMobile) {
     return (
       <header className="site-nav site-nav--mobile">
-        <div className="site-nav__inner site-nav__inner--mobile">
-          <div className="brand">
-            <span className="brand__name">{PROFILE.name}</span>
-            <span className="brand__meta">{PROFILE.location}</span>
-          </div>
-
+        <div className={`site-nav__inner site-nav__inner--mobile ${isMobileMenuOpen ? "is-open" : ""}`}>
           <div className="site-nav__mobile-toolbar">
-            <button type="button" className="nav-action" onClick={handleMobileContactOpen}>
-              {copy.getInTouch}
-            </button>
             <button
               type="button"
-              className="nav-action"
+              className="nav-action site-nav__menu-toggle"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-nav-panel"
               onClick={() => setIsMobileMenuOpen((current) => !current)}
@@ -240,6 +251,10 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
               isMobile
             />
 
+            <button type="button" className="nav-action site-nav__mobile-contact" onClick={handleMobileContactOpen}>
+              {copy.getInTouch}
+            </button>
+
             <div className="site-nav__mobile-actions">
               <a className="nav-action" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
                 GitHub
@@ -256,7 +271,7 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
             </div>
 
             <div className="site-nav__mobile-meta">
-              <LanguageSwitch language={language} onLanguageChange={onLanguageChange} label={ui.languageLabel} />
+              <MobileLanguageSelect language={language} onLanguageChange={onLanguageChange} label={ui.languageLabel} />
             </div>
           </div>
         </div>
@@ -298,6 +313,33 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
         </div>
       </div>
     </header>
+  );
+}
+
+function PhonePreviewButton() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button type="button" className="phone-preview-button" onClick={() => setIsOpen(true)}>
+        Preview phone
+      </button>
+      {isOpen ? (
+        <div className="phone-preview-overlay" role="dialog" aria-modal="true" aria-label="Phone preview">
+          <div className="phone-preview-window">
+            <div className="phone-preview-toolbar">
+              <span>390 × 844</span>
+              <button type="button" className="phone-preview-close" onClick={() => setIsOpen(false)}>
+                Close preview
+              </button>
+            </div>
+            <div className="phone-preview-frame">
+              <iframe title="Portfolio phone preview" src={window.location.href} width="390" height="844" />
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }
 
@@ -1207,6 +1249,7 @@ export default function App() {
       <SiteFooter />
       <CookieConsentBanner language={language} page={page} />
       <ContactPanel language={language} page={page} openSignal={contactPanelOpenSignal} isMobile={isMobile} copy={copy} />
+      {!isMobile ? <PhonePreviewButton /> : null}
     </div>
   );
 }
