@@ -9,7 +9,7 @@ import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTr
 import { PRIMARY_PAGE_PATHS, SITE_FOOTER_LINKS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
-const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "macro-recorder-plus", "portfolio-analytics-tool", "handwriting-pipeline", "habitro", "calendar"];
+const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "macro-recorder-plus", "portfolio-analytics-tool", "habitro", "calendar"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const CASE_STUDY_PATHS = {
   "ti-nspire-cxii-custom-keyboard-remap": "/projects/ti-nspire-keyboard-remap/",
@@ -313,33 +313,6 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
         </div>
       </div>
     </header>
-  );
-}
-
-function PhonePreviewButton() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <>
-      <button type="button" className="phone-preview-button" onClick={() => setIsOpen(true)}>
-        Preview phone
-      </button>
-      {isOpen ? (
-        <div className="phone-preview-overlay" role="dialog" aria-modal="true" aria-label="Phone preview">
-          <div className="phone-preview-window">
-            <div className="phone-preview-toolbar">
-              <span>390 × 844</span>
-              <button type="button" className="phone-preview-close" onClick={() => setIsOpen(false)}>
-                Close preview
-              </button>
-            </div>
-            <div className="phone-preview-frame">
-              <iframe title="Portfolio phone preview" src={window.location.href} width="390" height="844" />
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </>
   );
 }
 
@@ -1249,7 +1222,6 @@ export default function App() {
       <SiteFooter />
       <CookieConsentBanner language={language} page={page} />
       <ContactPanel language={language} page={page} openSignal={contactPanelOpenSignal} isMobile={isMobile} copy={copy} />
-      {!isMobile ? <PhonePreviewButton /> : null}
     </div>
   );
 }

@@ -96,11 +96,11 @@ const ROUTE_DEFINITIONS = [
     ],
     relatedPaths: [
       "/projects/ti-nspire-keyboard-remap/",
-      "/projects/macro-recorder-plus/",
-      "/projects/homework-calendar/",
       "/projects/handwriting-formatting-pipeline/",
+      "/projects/macro-recorder-plus/",
       "/projects/portfolio-analytics-tool/",
       "/projects/habitro/",
+      "/projects/homework-calendar/",
     ],
   },
   {
@@ -197,7 +197,7 @@ const ROUTE_DEFINITIONS = [
     hiddenHeading: "Python automation and analytics portfolio",
     hiddenParagraphs: [
       "The Python work covers automation, analysis, and workflow tooling. These projects use reusable components to structure data, reduce repetitive processing, and turn technical output into information that is easier to act on.",
-      "The Handwriting Formatting Pipeline extends an existing handwriting-generation workflow with formatting, print preparation, limited Unicode-to-ASCII support, and training-data utilities. Portfolio Analytics Tool focuses on financial analysis, using market data and portfolio metrics to examine performance, drawdowns, and efficient-frontier scenarios.",
+      "The Handwriting generation pipeline extends an existing handwriting-generation workflow with formatting, print preparation, limited Unicode-to-ASCII support, and training-data utilities. Portfolio Analytics Tool focuses on financial analysis, using market data and portfolio metrics to examine performance, drawdowns, and efficient-frontier scenarios.",
       "Together, these projects show two sides of the same Python skill set: operational tooling for documents and training workflows, and analytical tooling for finance and decision support. Each related case-study page adds context about the constraints, process, and technical stack involved.",
     ],
     relatedPaths: [
@@ -410,7 +410,7 @@ const ROUTE_DEFINITIONS = [
     path: "/projects/handwriting-formatting-pipeline/",
     page: "case-study",
     type: "case-study",
-    title: "Handwriting Formatting Pipeline | Python Print Workflow | Marton Vegh",
+    title: "Handwriting generation pipeline | Python Print Workflow | Marton Vegh",
     description:
       "A Python and desktop-tool pipeline that prepares handwriting training data, formats synthesis input, and turns generated handwriting into printable pages.",
     image: "/projects/handwriting-formatting-pipeline.png",
@@ -432,7 +432,7 @@ const ROUTE_DEFINITIONS = [
     ],
     hiddenHeading: getProjectTitle("handwriting-pipeline"),
     hiddenParagraphs: [
-      "The Handwriting Formatting Pipeline extends Thaines's My Text in Your Handwriting project with the surrounding tools needed to move from scanned samples to a printable result.",
+      "The Handwriting generation pipeline extends Thaines's My Text in Your Handwriting project with the surrounding tools needed to move from scanned samples to a printable result.",
       "The repository groups training-sheet preparation, scan cleanup, sample splitting, text formatting, limited Unicode-to-ASCII mapping, synthesis handoff, and printable-page layout. It also collects the compatibility notes needed to run the older upstream Python 2 and GTK tooling.",
       "The project does not replace the upstream synthesis engine. It packages the preparation and print workflow around it while keeping responsible personal, educational, and research use explicit.",
     ],

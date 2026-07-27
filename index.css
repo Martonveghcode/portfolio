@@ -270,7 +270,6 @@ select:focus-visible {
   max-height: 760px;
   opacity: 1;
   padding-top: 14px;
-  border-top: 1px solid var(--border);
 }
 .site-nav__mobile-links,
 .site-nav__mobile-actions {
@@ -391,100 +390,6 @@ select:focus-visible {
 .language-chip--active { color: var(--accent); }
 .theme-toggle,
 .language-chip { min-width: 46px; }
-
-.phone-preview-button {
-  position: fixed;
-  right: 14px;
-  bottom: 14px;
-  z-index: 40;
-  min-height: 36px;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--section-bg);
-  color: var(--text);
-  cursor: pointer;
-  box-shadow: var(--shadow-card);
-}
-.phone-preview-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  overflow: auto;
-  background: rgba(15, 23, 42, 0.58);
-}
-.phone-preview-window {
-  width: max-content;
-  max-width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--section-bg);
-  box-shadow: var(--shadow-card);
-}
-.phone-preview-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 10px;
-  font-size: 12px;
-}
-.phone-preview-close {
-  min-height: 32px;
-  padding: 6px 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-}
-.phone-preview-frame {
-  width: 234px;
-  height: 507px;
-  max-width: 100%;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--background);
-}
-.phone-preview-frame iframe {
-  display: block;
-  width: 390px;
-  height: 844px;
-  border: 0;
-  background: var(--background);
-  transform: scale(0.6);
-  transform-origin: top left;
-}
-
-@media (min-height: 680px) {
-  .phone-preview-frame {
-    width: 281px;
-    height: 608px;
-  }
-  .phone-preview-frame iframe { transform: scale(0.72); }
-}
-
-@media (min-height: 900px) {
-  .phone-preview-frame {
-    width: 351px;
-    height: 760px;
-  }
-  .phone-preview-frame iframe { transform: scale(0.9); }
-}
-
-@media (min-height: 1020px) {
-  .phone-preview-frame {
-    width: 390px;
-    height: 844px;
-  }
-  .phone-preview-frame iframe { transform: none; }
-}
 
 .site-main {
   width: var(--content-width);
