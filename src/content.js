@@ -130,33 +130,33 @@ export const PROJECTS_CONTENT = [
     },
     image: {
       src: "/projects/handwriting-formatting-pipeline.png",
-      alt: "Placeholder preview for Handwriting Formatting Pipeline",
+      alt: "Preview of Handwriting generation pipeline",
       width: 759,
       height: 470,
     },
     translations: {
       en: {
-        title: "Handwriting Formatting Pipeline",
+        title: "Handwriting generation pipeline",
         summary:
           "A set of Python and desktop tools that take handwriting-synthesis output through text cleanup, training-data preparation, and printable page formatting.",
       },
       es: {
-        title: "Handwriting Formatting Pipeline",
+        title: "Handwriting generation pipeline",
         summary:
           'Una extension/pipeline para "My Text in Your Handwriting" de Thaines. Incluye formateo de texto, soporte limitado de Unicode->ASCII, un pipeline de formateo para impresion y macros/utilidades para procesar datos de entrenamiento, ademas de una hoja de entrenamiento recomendada.',
       },
       fr: {
-        title: "Handwriting Formatting Pipeline",
+        title: "Handwriting generation pipeline",
         summary:
           'Une extension/pipeline pour "My Text in Your Handwriting" de Thaines. Elle comprend le formatage du texte, une prise en charge limitee de Unicode->ASCII, un pipeline de mise en page pour l\'impression, ainsi que des macros/outils de traitement des donnees d\'entrainement, plus une feuille d\'entrainement recommandee.',
       },
       de: {
-        title: "Handwriting Formatting Pipeline",
+        title: "Handwriting generation pipeline",
         summary:
           'Eine Erweiterung/Pipeline fur "My Text in Your Handwriting" von Thaines. Enthalt Textformatierung, begrenzte Unicode->ASCII-Unterstutzung, eine Druckformatierungs-Pipeline sowie Makros/Tools zur Verarbeitung von Trainingsdaten plus ein empfohlenes Trainingsblatt.',
       },
       hu: {
-        title: "Handwriting Formatting Pipeline",
+        title: "Handwriting generation pipeline",
         summary:
           'Egy kiegeszites/pipeline a Thaines-fele "My Text in Your Handwriting" projekthez. Tartalmaz szovegformazast, korlatozott Unicode->ASCII tamogatast, egy nyomtatasra optimalizalt formazasi pipeline-t, valamint tanitoadat-feldolgozo makrokat/eszkozoket, plusz egy ajanlott gyakorlolapot.',
       },

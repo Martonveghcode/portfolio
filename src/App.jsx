@@ -9,7 +9,7 @@ import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTr
 import { PRIMARY_PAGE_PATHS, SITE_FOOTER_LINKS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
-const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "macro-recorder-plus", "portfolio-analytics-tool", "handwriting-pipeline", "habitro", "calendar"];
+const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "macro-recorder-plus", "portfolio-analytics-tool", "habitro", "calendar"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const CASE_STUDY_PATHS = {
   "ti-nspire-cxii-custom-keyboard-remap": "/projects/ti-nspire-keyboard-remap/",
@@ -154,6 +154,25 @@ function LanguageSwitch({ language, onLanguageChange, label }) {
   );
 }
 
+function MobileLanguageSelect({ language, onLanguageChange, label }) {
+  return (
+    <label className="mobile-language-select">
+      <span className="sr-only">{label}</span>
+      <select
+        value={language}
+        aria-label={label}
+        onChange={(event) => onLanguageChange(event.target.value)}
+      >
+        {LANGUAGE_OPTIONS.map((option) => (
+          <option value={option.code} key={option.code}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
 function PrimaryNavigation({ page, copy, label, onNavigate, onOpenContactPanel, isMobile }) {
   const { containerRef, indicator } = useSlidingIndicator(page);
 
@@ -190,7 +209,7 @@ function PrimaryNavigation({ page, copy, label, onNavigate, onOpenContactPanel, 
   );
 }
 
-function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile }) {
+function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageChange, theme, onToggleTheme, cvLink, copy, isMobile, backgroundAnimationsPaused, onToggleBackgroundAnimations }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const ui = copy.ui ?? translations.en.ui;
 
@@ -207,19 +226,24 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
   if (isMobile) {
     return (
       <header className="site-nav site-nav--mobile">
-        <div className="site-nav__inner site-nav__inner--mobile">
-          <div className="brand">
-            <span className="brand__name">{PROFILE.name}</span>
-            <span className="brand__meta">{PROFILE.location}</span>
-          </div>
-
+        <div className={`site-nav__inner site-nav__inner--mobile ${isMobileMenuOpen ? "is-open" : ""}`}>
           <div className="site-nav__mobile-toolbar">
-            <button type="button" className="nav-action" onClick={handleMobileContactOpen}>
-              {copy.getInTouch}
-            </button>
+            {isMobileMenuOpen ? (
+              <div className="site-nav__mobile-preferences">
+                <MobileLanguageSelect language={language} onLanguageChange={onLanguageChange} label={ui.languageLabel} />
+                <button
+                  type="button"
+                  className="nav-action background-animation-toggle"
+                  aria-pressed={backgroundAnimationsPaused}
+                  onClick={onToggleBackgroundAnimations}
+                >
+                  {backgroundAnimationsPaused ? "Enable animations" : "Reduce animations"}
+                </button>
+              </div>
+            ) : null}
             <button
               type="button"
-              className="nav-action"
+              className="nav-action site-nav__menu-toggle"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-nav-panel"
               onClick={() => setIsMobileMenuOpen((current) => !current)}
@@ -240,6 +264,10 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
               isMobile
             />
 
+            <button type="button" className="nav-action site-nav__mobile-contact" onClick={handleMobileContactOpen}>
+              {copy.getInTouch}
+            </button>
+
             <div className="site-nav__mobile-actions">
               <a className="nav-action" href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
                 GitHub
@@ -255,9 +283,6 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
               </button>
             </div>
 
-            <div className="site-nav__mobile-meta">
-              <LanguageSwitch language={language} onLanguageChange={onLanguageChange} label={ui.languageLabel} />
-            </div>
           </div>
         </div>
       </header>
@@ -511,9 +536,9 @@ function ProfileTextAccordion({ title, paragraphs, quote, quoteSource, isOpen, o
   );
 }
 
-function AppBackground() {
+function AppBackground({ paused }) {
   return (
-    <div className="app-background" aria-hidden="true">
+    <div className={`app-background ${paused ? "app-background--paused" : ""}`} aria-hidden="true">
       <div className="app-background__container">
         <div className="app-background__grain" />
       </div>
@@ -1000,6 +1025,7 @@ export default function App() {
   const [pathname, setPathname] = useState(getInitialPathname);
   const [theme, setTheme] = useState(getInitialTheme);
   const [isMobile, setIsMobile] = useState(getInitialIsMobile);
+  const [backgroundAnimationsPaused, setBackgroundAnimationsPaused] = useState(false);
   const [contactPanelOpenSignal, setContactPanelOpenSignal] = useState(0);
   const route = useMemo(() => resolveRoute(pathname), [pathname]);
   const page = route.page;
@@ -1190,7 +1216,7 @@ export default function App() {
 
   return (
     <div className="page-shell">
-      <AppBackground />
+      <AppBackground paused={backgroundAnimationsPaused} />
       <SiteNav
         page={route.id === "service-frontend" ? "projects" : page}
         onNavigate={handlePrimaryPageNavigate}
@@ -1202,6 +1228,8 @@ export default function App() {
         cvLink={cvLink}
         copy={copy}
         isMobile={isMobile}
+        backgroundAnimationsPaused={backgroundAnimationsPaused}
+        onToggleBackgroundAnimations={() => setBackgroundAnimationsPaused((current) => !current)}
       />
       {pageView}
       <SiteFooter />
