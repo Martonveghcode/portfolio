@@ -97,8 +97,9 @@ const ROUTE_DEFINITIONS = [
     relatedPaths: [
       "/projects/ti-nspire-keyboard-remap/",
       "/projects/handwriting-formatting-pipeline/",
-      "/projects/macro-recorder-plus/",
+      "/projects/chess-anki-maker/",
       "/projects/portfolio-analytics-tool/",
+      "/projects/macro-recorder-plus/",
       "/projects/habitro/",
       "/projects/homework-calendar/",
     ],
@@ -217,11 +218,11 @@ const ROUTE_DEFINITIONS = [
     image: "/projects/habitro.png",
     hiddenHeading: "Education software and student tool portfolio",
     hiddenParagraphs: [
-      "The education projects address student planning, daily practice, and language-learning workflows. They are built around concrete tasks such as organizing recurring lessons, exporting schedules, and adapting exercises to an individual learning record.",
+      "The education projects address student planning, daily practice, language learning, and chess study. They are built around concrete tasks such as organizing recurring lessons, exporting schedules, adapting exercises to an individual learning record, and turning move sequences into Anki cards.",
       "Homework Calendar helps students manage recurring school structures in a browser-based interface and push the output into Google Calendar. Habitro uses SQLite-based performance tracking and a daily workflow to support retained learning across school material.",
       "Together, the projects explore two connected needs: keeping school commitments organized and making daily practice responsive to past performance. Their case studies explain the different technology choices behind the browser-based planner and the SQLite-backed learning system.",
     ],
-    relatedPaths: ["/projects/homework-calendar/", "/projects/habitro/", "/projects/"],
+    relatedPaths: ["/projects/homework-calendar/", "/projects/chess-anki-maker/", "/projects/habitro/", "/projects/"],
   },
   {
     id: "case-study-keyboard-remap",
@@ -468,6 +469,62 @@ const ROUTE_DEFINITIONS = [
           title: "Extending the workflow around the upstream model",
           paragraphs: [
             "The handwriting model and core synthesis work remain in the upstream project. This repository handles data preparation, text compatibility, repeatable formatting, printable output, and the environment notes required to keep the older Python 2 tooling running.",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "case-study-chess-anki-maker",
+    path: "/projects/chess-anki-maker/",
+    page: "case-study",
+    type: "case-study",
+    title: "Chess Anki Maker | Interactive Chess Training Cards | Marton Vegh",
+    description:
+      "A local React, TypeScript, and Python editor for building chess study cards and interactive move trainers, then exporting them as Anki packages.",
+    image: "/projects/chess-anki-maker.png",
+    media: [
+      {
+        src: "/projects/chess-anki-maker.png",
+        alt: "Chess Anki Maker board editor showing the initial chess position",
+        width: 1127,
+        height: 1088,
+        caption: "The board is used to build positions and record the moves that become Anki cards.",
+      },
+    ],
+    hiddenHeading: getProjectTitle("chess-anki-maker"),
+    hiddenParagraphs: [
+      "Chess Anki Maker is a local editor for creating normal chess study cards and interactive move trainers. Its board tools record positions, arrows, and ordered move sequences for openings or other lines.",
+      "Study cards can use click-through diagrams, still images, or animated GIFs. Trainer cards check the learner's moves inside Anki, animate the opposing replies, and give immediate feedback before the line is reset or repeated.",
+      "The application creates the required Anki note type and exports an .apkg file that is ready to import. Normal and reversed study cards can be generated from the same project.",
+    ],
+    relatedPaths: ["/projects/", "/services/education-software-tools/"],
+    repo: getProjectRepo("chess-anki-maker"),
+    tech: getProjectTech("chess-anki-maker"),
+    hideCaseStudyEyebrows: true,
+    caseStudy: {
+      facts: [
+        { label: "Format", value: "Local editor" },
+        { label: "Card types", value: "Study cards and interactive trainers" },
+        { label: "Export", value: "Import-ready .apkg package" },
+      ],
+      sections: [
+        {
+          title: "Building positions and move sequences",
+          paragraphs: [
+            "The board editor can place, move, or remove pieces, flip the board, draw arrows, and save an ordered sequence of positions for openings or other lines.",
+          ],
+        },
+        {
+          title: "Practising lines inside Anki",
+          paragraphs: [
+            "Trainer mode records the side to play and the expected sequence. The exported card checks each move, animates the opponent's reply, and can reset the line for another attempt.",
+          ],
+        },
+        {
+          title: "Exporting a complete package",
+          paragraphs: [
+            "Study cards can be normal or reversed and use a click-through diagram, still image, or GIF. The app creates the note type and downloads an import-ready .apkg file.",
           ],
         },
       ],

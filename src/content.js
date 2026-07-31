@@ -163,6 +163,52 @@ export const PROJECTS_CONTENT = [
     },
   },
   {
+    id: "chess-anki-maker",
+    tech: ["React", "TypeScript", "Python", "Anki"],
+    links: {
+      github: "https://github.com/Martonveghcode/chess-anki-maker",
+    },
+    image: {
+      src: "/projects/chess-anki-maker.png",
+      alt: "Chess Anki Maker board editor",
+      altTranslations: {
+        es: "Editor de tablero de Chess Anki Maker",
+        fr: "Éditeur d'échiquier de Chess Anki Maker",
+        de: "Bretteditor von Chess Anki Maker",
+        hu: "A Chess Anki Maker sakktábla-szerkesztője",
+      },
+      width: 1127,
+      height: 1088,
+    },
+    translations: {
+      en: {
+        title: "Chess Anki Maker",
+        summary:
+          "A local editor for building normal or interactive chess cards, recording move sequences, and exporting ready-to-import Anki decks.",
+      },
+      es: {
+        title: "Chess Anki Maker",
+        summary:
+          "Un editor local para crear tarjetas de ajedrez normales o interactivas, grabar secuencias de jugadas y exportar mazos listos para Anki.",
+      },
+      fr: {
+        title: "Chess Anki Maker",
+        summary:
+          "Un éditeur local pour créer des cartes d'échecs classiques ou interactives, enregistrer des suites de coups et exporter des paquets prêts pour Anki.",
+      },
+      de: {
+        title: "Chess Anki Maker",
+        summary:
+          "Ein lokaler Editor zum Erstellen normaler oder interaktiver Schachkarten, Aufzeichnen von Zugfolgen und Exportieren fertiger Anki-Decks.",
+      },
+      hu: {
+        title: "Chess Anki Maker",
+        summary:
+          "Helyi szerkesztő hagyományos vagy interaktív sakk-kártyák készítéséhez, lépéssorok rögzítéséhez és Anki-importálásra kész paklik exportálásához.",
+      },
+    },
+  },
+  {
     id: "portfolio-analytics-tool",
     tech: ["Python", "yfinance", "NumPy", "Pandas", "SciPy", "Matplotlib"],
     links: {},

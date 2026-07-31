@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png?v=20260401" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess Anki Maker | Interactive Chess Training Cards | Marton Vegh</title>
+    <meta name="description" content="A local React, TypeScript, and Python editor for building chess study cards and interactive move trainers, then exporting them as Anki packages." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Marton Vegh" />
+    <link rel="canonical" href="https://marton.top/projects/chess-anki-maker/" />
+    <meta property="og:site_name" content="Portfolio Marton" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chess Anki Maker | Interactive Chess Training Cards | Marton Vegh" />
+    <meta property="og:description" content="A local React, TypeScript, and Python editor for building chess study cards and interactive move trainers, then exporting them as Anki packages." />
+    <meta property="og:url" content="https://marton.top/projects/chess-anki-maker/" />
+    <meta property="og:image" content="https://marton.top/projects/chess-anki-maker.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chess Anki Maker | Interactive Chess Training Cards | Marton Vegh" />
+    <meta name="twitter:description" content="A local React, TypeScript, and Python editor for building chess study cards and interactive move trainers, then exporting them as Anki packages." />
+    <meta name="twitter:image" content="https://marton.top/projects/chess-anki-maker.png" />
+    <style>
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #16181b;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .seo-prerender {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+      .seo-prerender h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.08;
+      }
+      .seo-prerender p,
+      .seo-prerender li {
+        color: #4f5661;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      .seo-prerender a {
+        color: #3251ae;
+        font-weight: 600;
+      }
+      .seo-site-footer {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 24px 0 36px;
+        border-top: 1px solid #d9dde3;
+      }
+      .seo-site-footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+      }
+      .seo-site-footer a {
+        color: #3251ae;
+        font-weight: 600;
+      }
+    </style>
+    <script id="route-structured-data" type="application/ld+json">[{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://marton.top/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"@id":"https://marton.top/about/marton-vegh/#person","url":"https://marton.top/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top","author":{"@type":"Person","@id":"https://marton.top/about/marton-vegh/#person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://marton.top"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://marton.top/projects/"},{"@type":"ListItem","position":3,"name":"Chess Anki Maker","item":"https://marton.top/projects/chess-anki-maker/"}]},{"@context":"https://schema.org","@type":"Article","headline":"Chess Anki Maker","description":"A local React, TypeScript, and Python editor for building chess study cards and interactive move trainers, then exporting them as Anki packages.","image":["https://marton.top/projects/chess-anki-maker.png"],"author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"mainEntityOfPage":"https://marton.top/projects/chess-anki-maker/","about":[{"@type":"Thing","name":"React"},{"@type":"Thing","name":"TypeScript"},{"@type":"Thing","name":"Python"},{"@type":"Thing","name":"Anki"}]},{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"Chess Anki Maker","codeRepository":"https://github.com/Martonveghcode/chess-anki-maker","programmingLanguage":"React, TypeScript, Python, Anki","author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"url":"https://marton.top/projects/chess-anki-maker/","image":"https://marton.top/projects/chess-anki-maker.png","description":"A local React, TypeScript, and Python editor for building chess study cards and interactive move trainers, then exporting them as Anki packages."}]</script>
+  </head>
+  <body>
+    <div id="seo-content">
+      <main><section class="seo-prerender" data-seo-route="case-study-chess-anki-maker"><article><h1>Chess Anki Maker</h1><p>Chess Anki Maker is a local editor for creating normal chess study cards and interactive move trainers. Its board tools record positions, arrows, and ordered move sequences for openings or other lines.</p><p>Study cards can use click-through diagrams, still images, or animated GIFs. Trainer cards check the learner&#39;s moves inside Anki, animate the opposing replies, and give immediate feedback before the line is reset or repeated.</p><p>The application creates the required Anki note type and exports an .apkg file that is ready to import. Normal and reversed study cards can be generated from the same project.</p><nav aria-label="Related pages"><ul><li><a href="/projects/">Selected software projects and case studies by Marton Vegh</a></li><li><a href="/services/education-software-tools/">Education software and student tool portfolio</a></li></ul></nav></article></section></main>
+      <footer class="seo-site-footer">
+      <nav aria-label="Portfolio pages">
+        <a href="/projects/">Projects</a>
+        <a href="/about/marton-vegh/">About</a>
+        <a href="/experience/">Experience</a>
+      </nav>
+    </footer>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="../../index.jsx"></script>
+  </body>
+</html>

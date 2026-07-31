@@ -9,10 +9,11 @@ import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTr
 import { PRIMARY_PAGE_PATHS, SITE_FOOTER_LINKS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
-const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "macro-recorder-plus", "portfolio-analytics-tool", "habitro", "calendar"];
+const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "chess-anki-maker", "portfolio-analytics-tool", "macro-recorder-plus", "habitro", "calendar"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const CASE_STUDY_PATHS = {
   "ti-nspire-cxii-custom-keyboard-remap": "/projects/ti-nspire-keyboard-remap/",
+  "chess-anki-maker": "/projects/chess-anki-maker/",
   "macro-recorder-plus": "/projects/macro-recorder-plus/",
   calendar: "/projects/homework-calendar/",
   "handwriting-pipeline": "/projects/handwriting-formatting-pipeline/",
@@ -785,16 +786,18 @@ function CaseStudyGallery({ items, heading, screenshotsLabel }) {
 }
 
 function CaseStudyPage({ route, copy, content, caseStudy }) {
-  const media = route.media?.length
-    ? route.media
-    : route.image
-      ? [{ src: route.image, alt: content.heading }]
-      : [];
+  const media = caseStudy?.media?.length
+    ? caseStudy.media
+    : route.media?.length
+      ? route.media
+      : route.image
+        ? [{ src: route.image, alt: content.heading }]
+        : [];
 
   return (
     <main className="site-main route-page case-study-page">
       <section className="page-intro route-page__intro case-study-page__intro">
-        <p className="eyebrow">{copy.caseStudy.label}</p>
+        {!route.hideCaseStudyEyebrows ? <p className="eyebrow">{copy.caseStudy.label}</p> : null}
         <h1>{content.heading}</h1>
         <p>{content.description ?? route.description}</p>
         {route.repo ? (
@@ -834,8 +837,8 @@ function CaseStudyPage({ route, copy, content, caseStudy }) {
 
           {route.tech?.length ? (
             <div className="case-study-sidebar__section">
-              <p className="eyebrow">{copy.caseStudy.builtWith}</p>
-              <div className="chip-list" aria-label="Technologies used">
+              {!route.hideCaseStudyEyebrows ? <p className="eyebrow">{copy.caseStudy.builtWith}</p> : null}
+              <div className="chip-list" aria-label={copy.caseStudy.technologiesUsed}>
                 {route.tech.map((tech) => (
                   <span className="chip" key={tech}>{tech}</span>
                 ))}
@@ -843,7 +846,7 @@ function CaseStudyPage({ route, copy, content, caseStudy }) {
             </div>
           ) : null}
 
-          {route.repo ? (
+          {route.repo && !route.hideCaseStudyEyebrows ? (
             <div className="case-study-repository">
               <p className="eyebrow">{copy.caseStudy.repository}</p>
               <p>{copy.caseStudy.repositoryDescription}</p>
@@ -1106,7 +1109,12 @@ export default function App() {
     const locale = projectTranslations[language] ?? projectTranslations.en ?? {};
     return {
       id: project.id,
-      image: project.image ?? { src: "", alt: "" },
+      image: project.image
+        ? {
+            ...project.image,
+            alt: project.image.altTranslations?.[language] ?? project.image.alt,
+          }
+        : { src: "", alt: "" },
       tech: project.tech ?? [],
       links: project.links ?? {},
       caseStudyPath: CASE_STUDY_PATHS[project.id],
