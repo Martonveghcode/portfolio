@@ -6,7 +6,7 @@ import CookieConsentBanner from "./CookieConsentBanner";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
 import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTranslations";
-import { PRIMARY_PAGE_PATHS, SITE_FOOTER_LINKS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
+import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
 const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "chess-anki-maker", "portfolio-analytics-tool", "macro-recorder-plus", "habitro", "calendar"];
@@ -864,16 +864,7 @@ function CaseStudyPage({ route, copy, content, caseStudy }) {
 function SiteFooter() {
   return (
     <footer className="site-footer">
-      <div className="site-footer__info">
-        <span>{PROFILE.name}</span>
-        <span aria-hidden="true">·</span>
-        <span>{PROFILE.location}</span>
-      </div>
-      <nav className="site-footer__links" aria-label="Portfolio pages">
-        {SITE_FOOTER_LINKS.map((link) => (
-          <a href={link.href} key={link.href}>{link.label}</a>
-        ))}
-      </nav>
+      <small>© 2026 MartonVegh. Some rights reserved.</small>
     </footer>
   );
 }
