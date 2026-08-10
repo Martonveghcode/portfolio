@@ -100,6 +100,7 @@ const ROUTE_DEFINITIONS = [
       "/projects/chess-anki-maker/",
       "/projects/portfolio-analytics-tool/",
       "/projects/macro-recorder-plus/",
+      "/projects/marvella-design/",
       "/projects/habitro/",
       "/projects/homework-calendar/",
     ],
@@ -340,6 +341,62 @@ const ROUTE_DEFINITIONS = [
           title: "Keeping credentials out of saved macros",
           paragraphs: [
             "The Type Secret action saves only the name of an environment variable. The value is read at runtime, which avoids writing passwords directly into the macro file or generated script.",
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "case-study-marvella-design",
+    path: "/projects/marvella-design/",
+    page: "case-study",
+    type: "case-study",
+    title: "Marvella Design | Multilingual Web Design Startup | Marton Vegh",
+    description:
+      "Marvella Design is Marton Vegh's first startup concept: a responsive, multilingual web-design service with clear one-time packages and a Firebase client portal.",
+    image: "/projects/marvella-design.png",
+    media: [
+      {
+        src: "/projects/marvella-design.png",
+        alt: "Marvella Design homepage with multilingual navigation and three website packages",
+        width: 1672,
+        height: 941,
+        caption: "The responsive homepage brings the service tiers, pricing, language controls, and next step into one focused view.",
+      },
+    ],
+    hiddenHeading: getProjectTitle("marvella-design"),
+    hiddenParagraphs: [
+      "Marvella Design began as my first startup idea: turning web design from an open-ended conversation into a clear service that small businesses can understand and compare.",
+      "The React and Vite interface presents three one-time website packages, optional ongoing services, five language choices, light and dark themes, and a direct contact journey. A Firebase-powered client portal provides the foundation for authenticated customer access.",
+      "The project combines the commercial decisions behind a service offer with the product work needed to make it responsive, multilingual, transparent, and usable across desktop and mobile screens.",
+    ],
+    relatedPaths: ["/projects/", "/services/frontend-react-development/"],
+    repo: getProjectRepo("marvella-design"),
+    live: projectById["marvella-design"]?.links?.live ?? "",
+    tech: getProjectTech("marvella-design"),
+    caseStudy: {
+      facts: [
+        { label: "Origin", value: "My first startup idea" },
+        { label: "Offer", value: "Three one-time website packages" },
+        { label: "Experience", value: "Five languages and a client portal" },
+      ],
+      sections: [
+        {
+          title: "Turning a first startup idea into a real service",
+          paragraphs: [
+            "Marvella Design started as my first attempt to shape a technical skill into a customer-facing business. The goal was to make professional websites approachable for small businesses through a focused offer, clear expectations, and a direct path to getting in touch.",
+          ],
+        },
+        {
+          title: "Making the offer easy to compare",
+          paragraphs: [
+            "Launch, Growth, and Partner packages place scope and one-time pricing side by side. Optional hosting, maintenance, website updates, and promotion services remain visible without obscuring the core offer, helping a potential client understand the differences before starting a conversation.",
+          ],
+        },
+        {
+          title: "Building for trust across languages and devices",
+          paragraphs: [
+            "The interface supports English, Spanish, French, German, and Hungarian, plus light and dark themes. Responsive layouts keep navigation, pricing, contact actions, and the Firebase-backed client portal usable from compact mobile screens through wide desktop displays.",
           ],
         },
       ],
