@@ -9,12 +9,13 @@ import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTr
 import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
-const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "chess-anki-maker", "portfolio-analytics-tool", "macro-recorder-plus", "habitro", "calendar"];
+const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "chess-anki-maker", "portfolio-analytics-tool", "macro-recorder-plus", "marvella-design", "habitro", "calendar"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const CASE_STUDY_PATHS = {
   "ti-nspire-cxii-custom-keyboard-remap": "/projects/ti-nspire-keyboard-remap/",
   "chess-anki-maker": "/projects/chess-anki-maker/",
   "macro-recorder-plus": "/projects/macro-recorder-plus/",
+  "marvella-design": "/projects/marvella-design/",
   calendar: "/projects/homework-calendar/",
   "handwriting-pipeline": "/projects/handwriting-formatting-pipeline/",
   "portfolio-analytics-tool": "/projects/portfolio-analytics-tool/",
@@ -374,7 +375,7 @@ function ProjectCard({ project, copy, compact = false }) {
         <div className="card-actions">
           {project.caseStudyPath ? (
             <a className="inline-link" href={project.caseStudyPath}>
-              Case study
+              {copy.caseStudy.label}
             </a>
           ) : null}
           {project.links.live ? (
@@ -800,11 +801,23 @@ function CaseStudyPage({ route, copy, content, caseStudy }) {
         {!route.hideCaseStudyEyebrows ? <p className="eyebrow">{copy.caseStudy.label}</p> : null}
         <h1>{content.heading}</h1>
         <p>{content.description ?? route.description}</p>
-        {route.repo ? (
+        {route.live || route.repo ? (
           <div className="card-actions case-study-page__intro-actions">
-            <a className="button button--primary" href={route.repo} target="_blank" rel="noreferrer">
-              {copy.caseStudy.viewRepository}
-            </a>
+            {route.live ? (
+              <a className="button button--primary" href={route.live} target="_blank" rel="noreferrer">
+                {copy.caseStudy.viewLiveSite}
+              </a>
+            ) : null}
+            {route.repo ? (
+              <a
+                className={`button ${route.live ? "button--secondary" : "button--primary"}`}
+                href={route.repo}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {copy.caseStudy.viewRepository}
+              </a>
+            ) : null}
           </div>
         ) : null}
       </section>

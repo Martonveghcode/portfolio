@@ -83,6 +83,53 @@ export const PROJECTS_CONTENT = [
     },
   },
   {
+    id: "marvella-design",
+    tech: ["React", "Vite", "Firebase"],
+    links: {
+      live: "https://marvela.design/#home",
+      github: "https://github.com/Martonveghcode/Marvela-2",
+    },
+    image: {
+      src: "/projects/marvella-design.png",
+      alt: "Marvella Design multilingual website service",
+      altTranslations: {
+        es: "Servicio web multilingüe de Marvella Design",
+        fr: "Service web multilingue Marvella Design",
+        de: "Mehrsprachiger Webservice von Marvella Design",
+        hu: "A Marvella Design többnyelvű webes szolgáltatása",
+      },
+      width: 1672,
+      height: 941,
+    },
+    translations: {
+      en: {
+        title: "Marvella Design",
+        summary:
+          "My first startup idea: a multilingual web-design service with clear one-time packages, a client portal, and a responsive customer journey.",
+      },
+      es: {
+        title: "Marvella Design",
+        summary:
+          "Mi primera idea de startup: un servicio multilingüe de diseño web con paquetes claros de pago único, un portal de clientes y una experiencia adaptable.",
+      },
+      fr: {
+        title: "Marvella Design",
+        summary:
+          "Ma première idée de startup : un service multilingue de création de sites web avec des forfaits clairs à paiement unique, un portail client et une expérience adaptative.",
+      },
+      de: {
+        title: "Marvella Design",
+        summary:
+          "Meine erste Startup-Idee: ein mehrsprachiger Webdesign-Service mit klaren Einmalpreis-Paketen, Kundenportal und responsiver Nutzerführung.",
+      },
+      hu: {
+        title: "Marvella Design",
+        summary:
+          "Az első startupötletem: többnyelvű webdesign-szolgáltatás egyértelmű, egyszeri díjas csomagokkal, ügyfélportállal és reszponzív ügyfélúttal.",
+      },
+    },
+  },
+  {
     id: "calendar",
     tech: ["React", "Automation"],
     links: {
