@@ -470,7 +470,7 @@ const ROUTE_DEFINITIONS = [
     type: "case-study",
     title: "Handwriting generation pipeline | Python Print Workflow | Marton Vegh",
     description:
-      "A Python and desktop-tool pipeline that prepares handwriting training data, formats synthesis input, and turns generated handwriting into printable pages.",
+      "A modernized Python handwriting-synthesis pipeline for Ubuntu 24.04 that accelerates line generation and export while adding training-data and printable-PDF tools.",
     image: "/projects/handwriting-formatting-pipeline.png",
     media: [
       {
@@ -490,9 +490,9 @@ const ROUTE_DEFINITIONS = [
     ],
     hiddenHeading: getProjectTitle("handwriting-pipeline"),
     hiddenParagraphs: [
-      "The Handwriting generation pipeline extends Thaines's My Text in Your Handwriting project with the surrounding tools needed to move from scanned samples to a printable result.",
-      "The repository groups training-sheet preparation, scan cleanup, sample splitting, text formatting, limited Unicode-to-ASCII mapping, synthesis handoff, and printable-page layout. It also collects the compatibility notes needed to run the older upstream Python 2 and GTK tooling.",
-      "The project does not replace the upstream synthesis engine. It packages the preparation and print workflow around it while keeping responsible personal, educational, and research use explicit.",
+      "The Handwriting generation pipeline extends Tom Haines's My Text in Your Handwriting project with the surrounding tools needed to move from scanned samples to a printable result.",
+      "The repository groups training-sheet preparation, scan cleanup, sample splitting, text formatting, limited Unicode-to-ASCII mapping, synthesis, and printable-page layout. Its modern-hst branch also ports the active HST and LET paths to Python 3 on Ubuntu 24.04.",
+      "The optimized compositor reduced a validated page benchmark from 1.695 seconds to 0.190 seconds and peak memory from 1625 MiB to 362 MiB while preserving byte-for-byte output.",
     ],
     relatedPaths: [
       "/services/python-automation-analysis/",
@@ -504,7 +504,8 @@ const ROUTE_DEFINITIONS = [
     caseStudy: {
       facts: [
         { label: "Upstream", value: "My Text in Your Handwriting" },
-        { label: "Project type", value: "Workflow extension and desktop tools" },
+        { label: "Modern runtime", value: "Ubuntu 24.04 / Python 3" },
+        { label: "Project type", value: "Optimized synthesis and workflow tools" },
         { label: "Use", value: "Personal, educational, and research" },
       ],
       sections: [
@@ -523,9 +524,10 @@ const ROUTE_DEFINITIONS = [
           ],
         },
         {
-          title: "Extending the workflow around the upstream model",
+          title: "Modernizing and accelerating the upstream engine",
           paragraphs: [
-            "The handwriting model and core synthesis work remain in the upstream project. This repository handles data preparation, text compatibility, repeatable formatting, printable output, and the environment notes required to keep the older Python 2 tooling running.",
+            "The modern-hst branch ports the active HST and LET code paths from Python 2 to Python 3 for Ubuntu 24.04. It adds active-pixel compositing, bounded allocation, cropped graph-cut workloads, OpenMP for suitable loops, and persistent PLY and texture caches.",
+            "On a validated 5411 x 5168 synthetic page, total compositor time fell from 1.695 seconds to 0.190 seconds and peak memory fell from 1625 MiB to 362 MiB. A golden test matched the previous compositor output byte for byte.",
           ],
         },
       ],
@@ -924,7 +926,12 @@ export function getRouteSeoContent(route) {
       href: normalizePath(path),
       label: getRouteLinkLabel(path),
     })),
-    externalLink: route.externalLink
+    externalLink: route.repo
+      ? {
+          href: route.repo,
+          label: "View source on GitHub",
+        }
+      : route.externalLink
       ? {
           href: route.externalLink,
           label: "Open the full external document",

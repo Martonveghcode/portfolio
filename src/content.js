@@ -185,7 +185,7 @@ export const PROJECTS_CONTENT = [
       en: {
         title: "Handwriting generation pipeline",
         summary:
-          "A set of Python and desktop tools that take handwriting-synthesis output through text cleanup, training-data preparation, and printable page formatting.",
+          "A modernized Ubuntu 24.04/Python toolchain for faster handwriting synthesis, training-data preparation, and printable PDF export.",
       },
       es: {
         title: "Handwriting generation pipeline",
