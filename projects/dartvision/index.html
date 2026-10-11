@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png?v=20260401" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DartVision | Camera-Assisted Dart Scoring with Python and OpenCV | Marton Vegh</title>
+    <meta name="description" content="A Windows dart-scoring prototype using an RTSP camera, calibrated board geometry, marked-dart detection, and a 301/501 interface with manual corrections." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Marton Vegh" />
+    <link rel="canonical" href="https://marton.top/projects/dartvision/" />
+    <meta property="og:site_name" content="Portfolio Marton" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="DartVision | Camera-Assisted Dart Scoring with Python and OpenCV | Marton Vegh" />
+    <meta property="og:description" content="A Windows dart-scoring prototype using an RTSP camera, calibrated board geometry, marked-dart detection, and a 301/501 interface with manual corrections." />
+    <meta property="og:url" content="https://marton.top/projects/dartvision/" />
+    <meta property="og:image" content="https://marton.top/projects/dartvision.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DartVision | Camera-Assisted Dart Scoring with Python and OpenCV | Marton Vegh" />
+    <meta name="twitter:description" content="A Windows dart-scoring prototype using an RTSP camera, calibrated board geometry, marked-dart detection, and a 301/501 interface with manual corrections." />
+    <meta name="twitter:image" content="https://marton.top/projects/dartvision.png" />
+    <style>
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #16181b;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .seo-prerender {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+      .seo-prerender h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.08;
+      }
+      .seo-prerender p,
+      .seo-prerender li {
+        color: #4f5661;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      .seo-prerender a {
+        color: #3251ae;
+        font-weight: 600;
+      }
+      .seo-site-footer {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 24px 0 36px;
+        border-top: 1px solid #d9dde3;
+      }
+      .seo-site-footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+      }
+      .seo-site-footer a {
+        color: #3251ae;
+        font-weight: 600;
+      }
+    </style>
+    <script id="route-structured-data" type="application/ld+json">[{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://marton.top/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"@id":"https://marton.top/about/marton-vegh/#person","url":"https://marton.top/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top","author":{"@type":"Person","@id":"https://marton.top/about/marton-vegh/#person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://marton.top"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://marton.top/projects/"},{"@type":"ListItem","position":3,"name":"DartVision","item":"https://marton.top/projects/dartvision/"}]},{"@context":"https://schema.org","@type":"Article","headline":"DartVision","description":"A Windows dart-scoring prototype using an RTSP camera, calibrated board geometry, marked-dart detection, and a 301/501 interface with manual corrections.","image":["https://marton.top/projects/dartvision.png"],"author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"mainEntityOfPage":"https://marton.top/projects/dartvision/","about":[{"@type":"Thing","name":"Python"},{"@type":"Thing","name":"OpenCV"},{"@type":"Thing","name":"Computer Vision"}]},{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"DartVision","codeRepository":"https://github.com/Martonveghcode/DartVision","programmingLanguage":"Python, OpenCV, Computer Vision","author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"url":"https://marton.top/projects/dartvision/","image":"https://marton.top/projects/dartvision.png","description":"A Windows dart-scoring prototype using an RTSP camera, calibrated board geometry, marked-dart detection, and a 301/501 interface with manual corrections."}]</script>
+  </head>
+  <body>
+    <div id="seo-content">
+      <main><section class="seo-prerender" data-seo-route="case-study-dartvision"><article><h1>DartVision</h1><p>DartVision turns an RTSP camera feed into a single-player 301/501 scoring interface. OpenCV detects bright markers and supported dart shafts, while calibrated board geometry maps estimated contacts to scoring regions.</p><p>The app keeps three permanent throw slots through temporary occlusion and allows individual manual corrections. Empty-board checks, bounded pose correction, and wire-ambiguity review help control uncertain estimates.</p><p>This is a setup-specific prototype. It needs a fixed camera, stable lighting, marked darts, local board calibration, and a compatible empirical contact profile for automatic scoring. Independent physical accuracy has not been established.</p><p><a href="https://github.com/Martonveghcode/DartVision">View source on GitHub</a></p><nav aria-label="Related pages"><ul><li><a href="/projects/">Selected software projects and case studies by Marton Vegh</a></li><li><a href="/services/python-automation-analysis/">Python automation and analytics portfolio</a></li></ul></nav></article></section></main>
+      <footer class="seo-site-footer">
+      <nav aria-label="Portfolio pages">
+        <a href="/projects/">Projects</a>
+        <a href="/about/marton-vegh/">About</a>
+        <a href="/experience/">Experience</a>
+      </nav>
+    </footer>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="../../index.jsx"></script>
+  </body>
+</html>

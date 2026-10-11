@@ -3,6 +3,46 @@
 
 export const PROJECTS_CONTENT = [
   {
+    id: "dartvision",
+    tech: ["Python", "OpenCV", "Computer Vision"],
+    links: { github: "https://github.com/Martonveghcode/DartVision" },
+    image: {
+      src: "/projects/dartvision.png",
+      alt: "DartVision scoring a three-dart visit: 3, 11 and 20, with 267 remaining",
+      altTranslations: {
+        es: "DartVision registra tres dardos: 3, 11 y 20, con 267 puntos restantes",
+        fr: "DartVision compte trois fléchettes : 3, 11 et 20, avec 267 points restants",
+        de: "DartVision erfasst drei Würfe: 3, 11 und 20, mit 267 Restpunkten",
+        hu: "A DartVision három dobást rögzít: 3, 11 és 20, 267 maradék ponttal",
+      },
+      width: 1225,
+      height: 825,
+      fit: "contain",
+    },
+    translations: {
+      en: {
+        title: "DartVision",
+        summary: "A Windows dart-scoring prototype that uses a camera and OpenCV to detect marked darts, track 301/501 visits, and let players correct individual scores.",
+      },
+      es: {
+        title: "DartVision",
+        summary: "Un prototipo para Windows que utiliza una cámara y OpenCV para detectar dardos marcados, registrar turnos de 301/501 y corregir puntuaciones individuales.",
+      },
+      fr: {
+        title: "DartVision",
+        summary: "Un prototype Windows qui utilise une caméra et OpenCV pour détecter des fléchettes marquées, suivre les volées en 301/501 et corriger chaque score.",
+      },
+      de: {
+        title: "DartVision",
+        summary: "Ein Windows-Prototyp, der mit einer Kamera und OpenCV markierte Darts erkennt, Aufnahmen in 301/501 erfasst und einzelne Punktzahlen korrigieren lässt.",
+      },
+      hu: {
+        title: "DartVision",
+        summary: "Windows-prototípus, amely kamerával és OpenCV-vel felismeri a megjelölt dartsokat, követi a 301/501-es köröket, és lehetővé teszi az egyes pontszámok javítását.",
+      },
+    },
+  },
+  {
     id: "ti-nspire-cxii-custom-keyboard-remap",
     tech: ["C", "Ndless", "RAM Hooks"],
     links: {

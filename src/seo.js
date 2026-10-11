@@ -95,6 +95,7 @@ const ROUTE_DEFINITIONS = [
       "The React work concentrates on clear, state-driven interfaces for recurring tasks. The Python projects cover document pipelines, individualized learning records, and quantitative portfolio analysis, with an emphasis on replacing repetitive work with maintainable workflows.",
     ],
     relatedPaths: [
+      "/projects/dartvision/",
       "/projects/ti-nspire-keyboard-remap/",
       "/projects/handwriting-formatting-pipeline/",
       "/projects/chess-anki-maker/",
@@ -224,6 +225,52 @@ const ROUTE_DEFINITIONS = [
       "Together, the projects explore two connected needs: keeping school commitments organized and making daily practice responsive to past performance. Their case studies explain the different technology choices behind the browser-based planner and the SQLite-backed learning system.",
     ],
     relatedPaths: ["/projects/homework-calendar/", "/projects/chess-anki-maker/", "/projects/habitro/", "/projects/"],
+  },
+  {
+    id: "case-study-dartvision",
+    path: "/projects/dartvision/",
+    page: "case-study",
+    type: "case-study",
+    title: "DartVision | Camera-Assisted Dart Scoring with Python and OpenCV | Marton Vegh",
+    description: "A Windows dart-scoring prototype using an RTSP camera, calibrated board geometry, marked-dart detection, and a 301/501 interface with manual corrections.",
+    image: "/projects/dartvision.png",
+    media: [{
+      src: "/projects/dartvision.png",
+      alt: "DartVision interface with three detected darts and 267 points remaining",
+      width: 1225,
+      height: 825,
+      caption: "A real three-dart visit: single 3, single 11 and single 20 take the score from 301 to 267. The board preview labels each detected dart.",
+    }],
+    hiddenHeading: getProjectTitle("dartvision"),
+    hiddenParagraphs: [
+      "DartVision turns an RTSP camera feed into a single-player 301/501 scoring interface. OpenCV detects bright markers and supported dart shafts, while calibrated board geometry maps estimated contacts to scoring regions.",
+      "The app keeps three permanent throw slots through temporary occlusion and allows individual manual corrections. Empty-board checks, bounded pose correction, and wire-ambiguity review help control uncertain estimates.",
+      "This is a setup-specific prototype. It needs a fixed camera, stable lighting, marked darts, local board calibration, and a compatible empirical contact profile for automatic scoring. Independent physical accuracy has not been established.",
+    ],
+    relatedPaths: ["/projects/", "/services/python-automation-analysis/"],
+    repo: getProjectRepo("dartvision"),
+    tech: getProjectTech("dartvision"),
+    caseStudy: {
+      facts: [
+        { label: "Platform", value: "Windows desktop · Python and OpenCV" },
+        { label: "Game modes", value: "Single-player 301/501 · double-out" },
+        { label: "Input", value: "RTSP camera · marked darts" },
+      ],
+      sections: [
+        {
+          title: "Following a three-dart visit",
+          paragraphs: ["The aim is to keep the score beside the live board view while the player throws. Each detected dart occupies a permanent slot, so a later dart hiding an earlier one does not erase its score. The interface tracks the remaining total, supports double-out, and starts the next visit after removal."],
+        },
+        {
+          title: "Connecting camera evidence to board regions",
+          paragraphs: ["OpenCV compares frames with a verified empty-board reference, looks for bright tape markers and supported shaft or flight evidence, and estimates contact positions in calibrated board coordinates. A compatible empirical contact profile refines those estimates; temporal agreement and wire checks determine when a score can be accepted automatically.", "The camera view must stay aligned with the measured board. Small motion can be corrected within bounds, while larger changes require an explicitly verified reference or fresh calibration. The detector checks that the board is empty before establishing a new playing baseline."],
+        },
+        {
+          title: "Keeping uncertain scores editable",
+          paragraphs: ["Players can correct individual throws, enter invisible misses, and continue scoring manually when camera checks need attention. Local reports retain the supporting images and decisions for later review.", "The public repository includes setup instructions and tests. Camera credentials, personal captures, and trained profiles remain local. Detection was developed for one camera, lighting, and marked-dart setup; independent physical scoring accuracy and reliability on other setups remain unvalidated."],
+        },
+      ],
+    },
   },
   {
     id: "case-study-keyboard-remap",

@@ -9,9 +9,10 @@ import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTr
 import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
-const PROJECT_DISPLAY_ORDER = ["ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "chess-anki-maker", "portfolio-analytics-tool", "macro-recorder-plus", "marvella-design", "habitro", "calendar"];
+const PROJECT_DISPLAY_ORDER = ["dartvision", "ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "chess-anki-maker", "portfolio-analytics-tool", "macro-recorder-plus", "marvella-design", "habitro", "calendar"];
 const PROJECT_DISPLAY_RANK = new Map(PROJECT_DISPLAY_ORDER.map((id, index) => [id, index]));
 const CASE_STUDY_PATHS = {
+  dartvision: "/projects/dartvision/",
   "ti-nspire-cxii-custom-keyboard-remap": "/projects/ti-nspire-keyboard-remap/",
   "chess-anki-maker": "/projects/chess-anki-maker/",
   "macro-recorder-plus": "/projects/macro-recorder-plus/",
@@ -347,7 +348,7 @@ function SectionHeader({ eyebrow, title, action }) {
 function ProjectCard({ project, copy, compact = false }) {
   return (
     <article className={`project-card ${compact ? "project-card--compact" : ""}`}>
-      <div className={`project-media ${project.image?.src ? "" : "project-media--empty"}`}>
+      <div className={`project-media ${project.image?.src ? "" : "project-media--empty"} ${project.image?.fit === "contain" ? "project-media--contain" : ""}`}>
         {project.image?.src ? (
           <img
             src={project.image.src}
