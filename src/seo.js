@@ -232,7 +232,7 @@ const ROUTE_DEFINITIONS = [
     page: "case-study",
     type: "case-study",
     title: "DartVision | Camera-Assisted Dart Scoring with Python and OpenCV | Marton Vegh",
-    description: "A Windows dart-scoring prototype using an RTSP camera, calibrated board geometry, marked-dart detection, and a 301/501 interface with manual corrections.",
+    description: "A Windows dart-scoring prototype built around a €25 RTSP camera and OpenCV, with automatic 301/501 scoring and individual manual corrections.",
     image: "/projects/dartvision.png",
     media: [{
       src: "/projects/dartvision.png",

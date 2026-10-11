@@ -22,23 +22,23 @@ export const PROJECTS_CONTENT = [
     translations: {
       en: {
         title: "DartVision",
-        summary: "A Windows dart-scoring prototype that uses a camera and OpenCV to detect marked darts, track 301/501 visits, and let players correct individual scores.",
+        summary: "A Windows dart-scoring prototype built around a €25 camera, aiming to deliver automatic 301/501 scoring comparable to much more expensive systems.",
       },
       es: {
         title: "DartVision",
-        summary: "Un prototipo para Windows que utiliza una cámara y OpenCV para detectar dardos marcados, registrar turnos de 301/501 y corregir puntuaciones individuales.",
+        summary: "Un prototipo de puntuación de dardos para Windows basado en una cámara de 25 €, con el objetivo de ofrecer puntuación automática de 301/501 comparable a sistemas mucho más caros.",
       },
       fr: {
         title: "DartVision",
-        summary: "Un prototype Windows qui utilise une caméra et OpenCV pour détecter des fléchettes marquées, suivre les volées en 301/501 et corriger chaque score.",
+        summary: "Un prototype Windows de comptage des points aux fléchettes basé sur une caméra à 25 €, visant un comptage automatique en 301/501 comparable à celui de systèmes bien plus coûteux.",
       },
       de: {
         title: "DartVision",
-        summary: "Ein Windows-Prototyp, der mit einer Kamera und OpenCV markierte Darts erkennt, Aufnahmen in 301/501 erfasst und einzelne Punktzahlen korrigieren lässt.",
+        summary: "Ein Windows-Prototyp zur Dart-Punktewertung mit einer 25-Euro-Kamera, der eine automatische 301/501-Wertung auf dem Niveau deutlich teurerer Systeme anstrebt.",
       },
       hu: {
         title: "DartVision",
-        summary: "Windows-prototípus, amely kamerával és OpenCV-vel felismeri a megjelölt dartsokat, követi a 301/501-es köröket, és lehetővé teszi az egyes pontszámok javítását.",
+        summary: "Darts-pontozó Windows-prototípus egy 25 eurós kamerával, amelynek célja a jóval drágább rendszerekhez mérhető automatikus 301/501-es pontozás.",
       },
     },
   },
