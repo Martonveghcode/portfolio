@@ -1,16 +1,33 @@
-# React + Vite
+# Marton Vegh — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My personal portfolio of practical software projects in React, JavaScript, Python and C/C++.
 
-Currently, two official plugins are available:
+Visit [marton.top](https://marton.top/) for project case studies, technical decisions and more about my work.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Selected projects
 
-## React Compiler
+- [DartVision](https://marton.top/projects/dartvision/) — camera-assisted dart scoring.
+- [TI-Nspire keyboard remap](https://marton.top/projects/ti-nspire-keyboard-remap/) — a QWERTY-style calculator layout.
+- [Macro Recorder +](https://marton.top/projects/macro-recorder-plus/) — desktop workflow automation.
+- [Marvela Design](https://marvela.design/) — custom web design.
+- [Homework Calendar](https://marton.top/projects/homework-calendar/) — Google Calendar scheduling for lessons and homework.
+- [Handwriting formatting pipeline](https://marton.top/projects/handwriting-formatting-pipeline/) — text formatting and printable handwriting workflows.
+- [Chess Anki Maker](https://marton.top/projects/chess-anki-maker/) — interactive chess study cards.
+- [Habitro](https://marton.top/projects/habitro/) — daily language and maths practice.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Development
 
-## Expanding the ESLint configuration
+```sh
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```sh
+npm run build
+```
+
+The production build generates the static SEO pages and checks their output automatically. Run `npm run check:seo` to check an existing build.
+
+---
+
+Created by [Marton Vegh](https://marton.top/).
