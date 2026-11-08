@@ -61,7 +61,7 @@ export const translations = {
     },
     aboutTitle: "General information",
     aboutBlurb:
-      "Pentalingual student developer based in Mallorca, Spain, focused on geopolitics, finance, and mathematics. I build React interfaces and practical tools in Python, JavaScript, C, and C++, have authored multiple independent papers, study corporate finance and probability, and compete as a national-level athlete.",
+      "Pentalingual student developer based in Mallorca, Spain, focused on geopolitics, finance, and mathematics. I build practical tools in Python, JavaScript, C, and C++, am in the process of publishing an independent research paper, and compete as a national-level athlete. In my free time, I mostly learn about art, watch the news, and play sports.",
     languagesTitle: "Languages",
     languagesList: [
       "Hungarian (native)",
