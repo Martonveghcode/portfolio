@@ -2,74 +2,282 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://marton.top</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/experience/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/experience/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/experience/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/experience/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/experience/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/who-am-i/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/who-am-i/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/who-am-i/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/who-am-i/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/who-am-i/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/about/marton-vegh/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/privacy/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/services/frontend-react-development/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/services/python-automation-analysis/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/services/education-software-tools/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/dartvision/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/dartvision/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/dartvision/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/dartvision/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/dartvision/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/ti-nspire-keyboard-remap/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/ti-nspire-keyboard-remap/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/ti-nspire-keyboard-remap/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/ti-nspire-keyboard-remap/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/ti-nspire-keyboard-remap/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/macro-recorder-plus/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/macro-recorder-plus/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/macro-recorder-plus/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/macro-recorder-plus/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/macro-recorder-plus/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/marvella-design/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/marvella-design/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/marvella-design/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/marvella-design/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/marvella-design/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/homework-calendar/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/homework-calendar/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/homework-calendar/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/homework-calendar/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/homework-calendar/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/handwriting-formatting-pipeline/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/handwriting-formatting-pipeline/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/handwriting-formatting-pipeline/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/handwriting-formatting-pipeline/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/handwriting-formatting-pipeline/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/chess-anki-maker/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/chess-anki-maker/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/chess-anki-maker/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/chess-anki-maker/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/chess-anki-maker/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/portfolio-analytics-tool/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/portfolio-analytics-tool/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/portfolio-analytics-tool/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/portfolio-analytics-tool/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/portfolio-analytics-tool/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
   <url>
     <loc>https://marton.top/projects/habitro/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/es/projects/habitro/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/fr/projects/habitro/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/de/projects/habitro/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://marton.top/hu/projects/habitro/</loc>
+    <lastmod>2026-11-08</lastmod>
   </url>
 </urlset>

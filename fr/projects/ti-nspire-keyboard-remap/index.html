@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png?v=20260401" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TI-Nspire CX II Custom Keyboard Remap | Portfolio Marton</title>
+    <meta name="description" content="Remappe la saisie alphabétique sur la TI-Nspire CX II CAS en une disposition de type QWERTY grâce à un hook RAM Ndless sur la file d&#39;événements du système, rendant la frappe plus familière tout en préservant le comportement natif du clavier de la calculatrice" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Marton Vegh" />
+    <link rel="canonical" href="https://marton.top/fr/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="en" href="https://marton.top/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="es" href="https://marton.top/es/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="fr" href="https://marton.top/fr/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="de" href="https://marton.top/de/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="hu" href="https://marton.top/hu/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="x-default" href="https://marton.top/projects/ti-nspire-keyboard-remap/" />
+    <meta property="og:site_name" content="Portfolio Marton" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="TI-Nspire CX II Custom Keyboard Remap | Portfolio Marton" />
+    <meta property="og:description" content="Remappe la saisie alphabétique sur la TI-Nspire CX II CAS en une disposition de type QWERTY grâce à un hook RAM Ndless sur la file d&#39;événements du système, rendant la frappe plus familière tout en préservant le comportement natif du clavier de la calculatrice" />
+    <meta property="og:url" content="https://marton.top/fr/projects/ti-nspire-keyboard-remap/" />
+    <meta property="og:image" content="https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TI-Nspire CX II Custom Keyboard Remap | Portfolio Marton" />
+    <meta name="twitter:description" content="Remappe la saisie alphabétique sur la TI-Nspire CX II CAS en une disposition de type QWERTY grâce à un hook RAM Ndless sur la file d&#39;événements du système, rendant la frappe plus familière tout en préservant le comportement natif du clavier de la calculatrice" />
+    <meta name="twitter:image" content="https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif" />
+    <style>
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #16181b;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .seo-prerender {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+      .seo-prerender h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.08;
+      }
+      .seo-prerender p,
+      .seo-prerender li {
+        color: #4f5661;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      .seo-prerender a {
+        color: #3251ae;
+        font-weight: 600;
+      }
+      .seo-site-footer {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 24px 0 36px;
+        border-top: 1px solid #d9dde3;
+      }
+      .seo-site-footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+      }
+      .seo-site-footer a {
+        color: #3251ae;
+        font-weight: 600;
+      }
+    </style>
+    <script id="route-structured-data" type="application/ld+json">[{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://marton.top/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"@id":"https://marton.top/about/marton-vegh/#person","url":"https://marton.top/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top","author":{"@type":"Person","@id":"https://marton.top/about/marton-vegh/#person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://marton.top/fr/"},{"@type":"ListItem","position":2,"name":"Projets","item":"https://marton.top/fr/projects/"},{"@type":"ListItem","position":3,"name":"TI-Nspire CX II Custom Keyboard Remap","item":"https://marton.top/fr/projects/ti-nspire-keyboard-remap/"}]},{"@context":"https://schema.org","@type":"Article","headline":"TI-Nspire CX II Custom Keyboard Remap","description":"Remappe la saisie alphabétique sur la TI-Nspire CX II CAS en une disposition de type QWERTY grâce à un hook RAM Ndless sur la file d'événements du système, rendant la frappe plus familière tout en préservant le comportement natif du clavier de la calculatrice","inLanguage":"fr","image":["https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif"],"author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"mainEntityOfPage":"https://marton.top/fr/projects/ti-nspire-keyboard-remap/","about":[{"@type":"Thing","name":"C"},{"@type":"Thing","name":"Ndless"},{"@type":"Thing","name":"RAM Hooks"}]},{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"TI-Nspire CX II Custom Keyboard Remap","codeRepository":"https://github.com/Martonveghcode/tiNspire-CXii-keyboard-remap","programmingLanguage":"C, Ndless, RAM Hooks","author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"url":"https://marton.top/fr/projects/ti-nspire-keyboard-remap/","image":"https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif","description":"Remappe la saisie alphabétique sur la TI-Nspire CX II CAS en une disposition de type QWERTY grâce à un hook RAM Ndless sur la file d'événements du système, rendant la frappe plus familière tout en préservant le comportement natif du clavier de la calculatrice"}]</script>
+  </head>
+  <body>
+    <div id="seo-content">
+      <main><section class="seo-prerender" data-seo-route="case-study-keyboard-remap"><article><h1>TI-Nspire CX II Custom Keyboard Remap</h1><p>Remappe la saisie alphabétique sur la TI-Nspire CX II CAS en une disposition de type QWERTY grâce à un hook RAM Ndless sur la file d&#39;événements du système, rendant la frappe plus familière tout en préservant le comportement natif du clavier de la calculatrice</p><p>La disposition alphabétique d&#39;origine est lente pour les personnes qui tapent par mémoire musculaire en QWERTY. Le remappage conserve le matériel et ne change que la lettre envoyée au champ de saisie, sans modifier le reste du clavier.</p><p>L&#39;application installe un hook résident dans la file d&#39;événements du système. Elle examine les événements A-Z et a-z, remplace l&#39;octet ASCII grâce à une petite table, puis laisse intacts les modificateurs et les touches non alphabétiques.</p><p>Il ne s&#39;agit pas d&#39;un correctif universel : cette version est conçue et testée pour la CX II CAS sous OS 6.2.0.333. Un mode de vérification affiche le mappage avant l&#39;installation du hook.</p><p><a href="https://github.com/Martonveghcode/tiNspire-CXii-keyboard-remap">View source on GitHub</a></p><nav aria-label="Related pages"><ul><li><a href="/fr/projects/">Projets personels</a></li><li><a href="/services/education-software-tools/">Education software and student tool portfolio</a></li></ul></nav></article></section></main>
+      <footer class="seo-site-footer">
+      <nav aria-label="Portfolio pages">
+        <a href="/fr/projects/">Projects</a>
+        <a href="/about/marton-vegh/">About</a>
+        <a href="/fr/experience/">Experience</a>
+      </nav>
+    </footer>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="../../../index.jsx"></script>
+  </body>
+</html>

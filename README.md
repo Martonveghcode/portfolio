@@ -28,6 +28,8 @@ npm run build
 
 The production build generates the static SEO pages and checks their output automatically. Run `npm run check:seo` to check an existing build.
 
+Translated pages use `/es/`, `/fr/`, `/de/`, and `/hu/` prefixes; English keeps the original URLs. The language selector, navigation, and browser history preserve the selected language. Each static page includes reciprocal `hreflang` links, a self-referencing canonical, and an English `x-default` fallback. Pages without translated main content advertise only English. The SEO check validates language annotations in both source HTML and production output.
+
 ---
 
 Created by [Marton Vegh](https://marton.top/).

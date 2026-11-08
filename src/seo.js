@@ -1,5 +1,6 @@
-import { PROJECTS_CONTENT } from "./content.js";
-import { PROFILE, STACK } from "./siteData.js";
+import { EXPERIENCE_CONTENT, PROJECTS_CONTENT } from "./content.js";
+import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTranslations.js";
+import { LANGUAGE_OPTIONS, PROFILE, STACK, translations } from "./siteData.js";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT.js";
 
 export const DEFAULT_SITE_URL = "https://marton.top";
@@ -759,14 +760,68 @@ const ROUTE_DEFINITIONS = [
   },
 ];
 
-function enrichRoute(route) {
+function getTranslatedRoute(route, language) {
+  const copy = translations[language];
+  let heading;
+  let paragraphs;
+  let caseStudy;
+
+  if (route.type === "case-study") {
+    const original = { heading: route.hiddenHeading, description: route.description };
+    const intro = getLocalizedCaseStudyIntro(route, language, original);
+    caseStudy = getLocalizedCaseStudy(route, language);
+    if (intro === original || caseStudy.sections === route.caseStudy?.sections) return null;
+    heading = intro.heading;
+    paragraphs = [intro.description, ...caseStudy.sections.flatMap((section) => section.paragraphs)];
+  } else if (route.page === "home") {
+    heading = `${PROFILE.name} | ${copy.heroTagline}`;
+    paragraphs = [copy.aboutBlurb];
+  } else if (route.page === "projects") {
+    heading = copy.projectsTitle;
+    paragraphs = PROJECTS_CONTENT.map((project) => project.translations[language]?.summary);
+  } else if (route.page === "experience") {
+    heading = copy.experienceTitle;
+    paragraphs = EXPERIENCE_CONTENT.map((item) => {
+      const translated = item.translations[language];
+      return translated ? `${translated.title}: ${translated.detail}` : null;
+    });
+  } else if (route.page === "whoami") {
+    heading = copy.whoAmITitle;
+    paragraphs = WHO_AM_I_CONTENT.translations[language]?.paragraphs;
+  } else {
+    // Do not advertise localized URLs for pages whose main content is English-only.
+    return null;
+  }
+
+  if (!paragraphs?.length || paragraphs.some((paragraph) => !paragraph)) return null;
+
   return {
     ...route,
+    path: `/${language}${route.path}`,
+    title: `${heading} | Portfolio Marton`,
+    description: paragraphs[0],
+    hiddenHeading: heading,
+    hiddenParagraphs: paragraphs,
+    ...(caseStudy ? { caseStudy, media: caseStudy.media } : {}),
+  };
+}
+
+function enrichRoute(route, language = "en", basePath = route.path) {
+  return {
+    ...route,
+    language,
+    basePath,
     canonicalPath: normalizePath(route.path),
   };
 }
 
-export const SEO_ROUTES = ROUTE_DEFINITIONS.map(enrichRoute);
+export const SEO_ROUTES = ROUTE_DEFINITIONS.flatMap((route) => [
+  enrichRoute(route),
+  ...LANGUAGE_OPTIONS.filter(({ code }) => code !== "en").flatMap(({ code }) => {
+    const translated = getTranslatedRoute(route, code);
+    return translated ? [enrichRoute(translated, code, route.path)] : [];
+  }),
+]);
 
 export function normalizePath(pathname = "/") {
   if (!pathname) return "/";
@@ -781,6 +836,20 @@ export function normalizePath(pathname = "/") {
 export function resolveRoute(pathname = "/") {
   const normalized = normalizePath(pathname);
   return SEO_ROUTES.find((route) => route.canonicalPath === normalized) ?? SEO_ROUTES[0];
+}
+
+export function getLocalizedPath(pathname, language = "en") {
+  const route = resolveRoute(pathname);
+  return SEO_ROUTES.find((candidate) => candidate.basePath === route.basePath && candidate.language === language)?.path
+    ?? route.basePath;
+}
+
+export function getLanguageAlternates(route, siteUrl) {
+  const variants = SEO_ROUTES.filter((candidate) => candidate.basePath === route.basePath);
+  return [
+    ...variants.map((variant) => ({ language: variant.language, href: getAbsoluteUrl(siteUrl, variant.path) })),
+    { language: "x-default", href: getAbsoluteUrl(siteUrl, route.basePath) },
+  ];
 }
 
 export function getSiteUrl(explicitSiteUrl) {
@@ -817,10 +886,10 @@ export function getHtmlEntryPaths() {
 }
 
 function buildBreadcrumbList(route, siteUrl) {
-  const breadcrumbs = [{ name: "Home", path: "/" }];
+  const breadcrumbs = [{ name: translations[route.language].nav.home, path: getLocalizedPath("/", route.language) }];
 
-  if (route.path.startsWith("/projects/") && route.path !== "/projects/") {
-    breadcrumbs.push({ name: "Projects", path: "/projects/" });
+  if (route.basePath.startsWith("/projects/") && route.basePath !== "/projects/") {
+    breadcrumbs.push({ name: translations[route.language].nav.projects, path: getLocalizedPath("/projects/", route.language) });
   }
 
   if (route.id === "service-frontend") {
@@ -829,7 +898,7 @@ function buildBreadcrumbList(route, siteUrl) {
     breadcrumbs.push({ name: "Services", path: "/" });
   }
 
-  if (route.path !== "/") {
+  if (route.basePath !== "/") {
     breadcrumbs.push({ name: route.hiddenHeading, path: route.path });
   }
 
@@ -850,6 +919,7 @@ function buildPrimarySchema(route, siteUrl) {
     "@type": route.type === "profile" ? "ProfilePage" : route.type === "collection" ? "CollectionPage" : "WebPage",
     name: route.hiddenHeading,
     description: route.description,
+    inLanguage: route.language,
     url: getAbsoluteUrl(siteUrl, route.path),
     isPartOf: {
       "@type": "WebSite",
@@ -883,6 +953,7 @@ function buildPrimarySchema(route, siteUrl) {
       "@type": "Article",
       headline: route.hiddenHeading,
       description: route.description,
+      inLanguage: route.language,
       image: [getImageUrl(siteUrl, route.image)],
       author: {
         "@type": "Person",
@@ -970,8 +1041,8 @@ export function getRouteSeoContent(route) {
     heading: route.hiddenHeading,
     paragraphs: route.hiddenParagraphs,
     links: (route.relatedPaths ?? []).map((path) => ({
-      href: normalizePath(path),
-      label: getRouteLinkLabel(path),
+      href: getLocalizedPath(path, route.language),
+      label: getRouteLinkLabel(getLocalizedPath(path, route.language)),
     })),
     externalLink: route.repo
       ? {
@@ -1049,6 +1120,17 @@ function upsertCanonicalLink(href) {
   link.setAttribute("href", href);
 }
 
+function upsertLanguageAlternates(route, siteUrl) {
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((link) => link.remove());
+  for (const alternate of getLanguageAlternates(route, siteUrl)) {
+    const link = document.createElement("link");
+    link.setAttribute("rel", "alternate");
+    link.setAttribute("hreflang", alternate.language);
+    link.setAttribute("href", alternate.href);
+    document.head.append(link);
+  }
+}
+
 function upsertStructuredData(scriptContent) {
   if (typeof document === "undefined") return;
 
@@ -1072,6 +1154,7 @@ export function applyRouteMetadata(route, siteUrl) {
 
   document.title = route.title;
   upsertCanonicalLink(canonicalUrl);
+  upsertLanguageAlternates(route, resolvedSiteUrl);
   upsertMetaTag({ name: "description", content: route.description });
   upsertMetaTag({ name: "robots", content: "index,follow,max-image-preview:large" });
   upsertMetaTag({ name: "author", content: PROFILE.name });
