@@ -1,5 +1,5 @@
-import { PROJECTS_CONTENT } from "./content";
-import { DARTVISION_CASE_STUDY_TRANSLATIONS } from "./dartvisionTranslations";
+import { PROJECTS_CONTENT } from "./content.js";
+import { DARTVISION_CASE_STUDY_TRANSLATIONS } from "./dartvisionTranslations.js";
 
 const CASE_STUDY_TRANSLATIONS = {
   es: {

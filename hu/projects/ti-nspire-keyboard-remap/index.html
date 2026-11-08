@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png?v=20260401" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TI-Nspire CX II Custom Keyboard Remap | Portfolio Marton</title>
+    <meta name="description" content="A TI-Nspire CX II CAS betűbevitelét QWERTY-stílusú kiosztásra alakítja egy Ndless RAM-hook segítségével az operációs rendszer eseménysorán, ismerősebbé téve a gépelést, miközben megőrzi a számológép natív billentyűzetműködését." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Marton Vegh" />
+    <link rel="canonical" href="https://marton.top/hu/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="en" href="https://marton.top/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="es" href="https://marton.top/es/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="fr" href="https://marton.top/fr/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="de" href="https://marton.top/de/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="hu" href="https://marton.top/hu/projects/ti-nspire-keyboard-remap/" />
+    <link rel="alternate" hreflang="x-default" href="https://marton.top/projects/ti-nspire-keyboard-remap/" />
+    <meta property="og:site_name" content="Portfolio Marton" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="TI-Nspire CX II Custom Keyboard Remap | Portfolio Marton" />
+    <meta property="og:description" content="A TI-Nspire CX II CAS betűbevitelét QWERTY-stílusú kiosztásra alakítja egy Ndless RAM-hook segítségével az operációs rendszer eseménysorán, ismerősebbé téve a gépelést, miközben megőrzi a számológép natív billentyűzetműködését." />
+    <meta property="og:url" content="https://marton.top/hu/projects/ti-nspire-keyboard-remap/" />
+    <meta property="og:image" content="https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TI-Nspire CX II Custom Keyboard Remap | Portfolio Marton" />
+    <meta name="twitter:description" content="A TI-Nspire CX II CAS betűbevitelét QWERTY-stílusú kiosztásra alakítja egy Ndless RAM-hook segítségével az operációs rendszer eseménysorán, ismerősebbé téve a gépelést, miközben megőrzi a számológép natív billentyűzetműködését." />
+    <meta name="twitter:image" content="https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif" />
+    <style>
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #16181b;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .seo-prerender {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+      .seo-prerender h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 1.08;
+      }
+      .seo-prerender p,
+      .seo-prerender li {
+        color: #4f5661;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+      .seo-prerender a {
+        color: #3251ae;
+        font-weight: 600;
+      }
+      .seo-site-footer {
+        width: min(880px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 24px 0 36px;
+        border-top: 1px solid #d9dde3;
+      }
+      .seo-site-footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+      }
+      .seo-site-footer a {
+        color: #3251ae;
+        font-weight: 600;
+      }
+    </style>
+    <script id="route-structured-data" type="application/ld+json">[{"@context":"https://schema.org","@type":"Person","name":"Marton Vegh","email":"martonvegh2009@gmail.com","jobTitle":"Student developer","image":"https://marton.top/profile/marton-vegh-portrait.jpg","homeLocation":{"@type":"Place","name":"Mallorca, Spain"},"knowsAbout":["React","JavaScript","HTML/CSS","Python","C++","Automation","Quantitative finance","Education software","Portfolio analysis"],"sameAs":["https://github.com/Martonveghcode","https://www.instagram.com/marton.alt","https://orcid.org/0009-0004-2687-8812"],"@id":"https://marton.top/about/marton-vegh/#person","url":"https://marton.top/about/marton-vegh/"},{"@context":"https://schema.org","@type":"WebSite","name":"Portfolio Marton","url":"https://marton.top","author":{"@type":"Person","@id":"https://marton.top/about/marton-vegh/#person","name":"Marton Vegh"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Kezdolap","item":"https://marton.top/hu/"},{"@type":"ListItem","position":2,"name":"Projektek","item":"https://marton.top/hu/projects/"},{"@type":"ListItem","position":3,"name":"TI-Nspire CX II Custom Keyboard Remap","item":"https://marton.top/hu/projects/ti-nspire-keyboard-remap/"}]},{"@context":"https://schema.org","@type":"Article","headline":"TI-Nspire CX II Custom Keyboard Remap","description":"A TI-Nspire CX II CAS betűbevitelét QWERTY-stílusú kiosztásra alakítja egy Ndless RAM-hook segítségével az operációs rendszer eseménysorán, ismerősebbé téve a gépelést, miközben megőrzi a számológép natív billentyűzetműködését.","inLanguage":"hu","image":["https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif"],"author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"mainEntityOfPage":"https://marton.top/hu/projects/ti-nspire-keyboard-remap/","about":[{"@type":"Thing","name":"C"},{"@type":"Thing","name":"Ndless"},{"@type":"Thing","name":"RAM Hooks"}]},{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"TI-Nspire CX II Custom Keyboard Remap","codeRepository":"https://github.com/Martonveghcode/tiNspire-CXii-keyboard-remap","programmingLanguage":"C, Ndless, RAM Hooks","author":{"@type":"Person","name":"Marton Vegh","url":"https://marton.top/about/marton-vegh/"},"url":"https://marton.top/hu/projects/ti-nspire-keyboard-remap/","image":"https://marton.top/projects/ti-nspire-cxii-keyboard-remap.gif","description":"A TI-Nspire CX II CAS betűbevitelét QWERTY-stílusú kiosztásra alakítja egy Ndless RAM-hook segítségével az operációs rendszer eseménysorán, ismerősebbé téve a gépelést, miközben megőrzi a számológép natív billentyűzetműködését."}]</script>
+  </head>
+  <body>
+    <div id="seo-content">
+      <main><section class="seo-prerender" data-seo-route="case-study-keyboard-remap"><article><h1>TI-Nspire CX II Custom Keyboard Remap</h1><p>A TI-Nspire CX II CAS betűbevitelét QWERTY-stílusú kiosztásra alakítja egy Ndless RAM-hook segítségével az operációs rendszer eseménysorán, ismerősebbé téve a gépelést, miközben megőrzi a számológép natív billentyűzetműködését.</p><p>A számológép eredeti betűrendes kiosztása lassú annak, aki QWERTY izommemóriával gépel. Az átkiosztás változatlanul hagyja a hardvert, és csak a beviteli mezőbe kerülő betűt módosítja.</p><p>Az alkalmazás rezidens hookot telepít az operációs rendszer eseménysorába. Az A-Z és a-z eseményeket vizsgálja, egy kis táblázattal cseréli az ASCII bájtot, a módosítókat és nem betűs billentyűket pedig érintetlenül hagyja.</p><p>Ez szándékosan nem univerzális javítás. A jelenlegi build a CX II CAS OS 6.2.0.333 változatához készült és azon lett tesztelve; ellenőrző mód mutatja a kiosztást telepítés előtt.</p><p><a href="https://github.com/Martonveghcode/tiNspire-CXii-keyboard-remap">View source on GitHub</a></p><nav aria-label="Related pages"><ul><li><a href="/hu/projects/">személyes projektek</a></li><li><a href="/services/education-software-tools/">Education software and student tool portfolio</a></li></ul></nav></article></section></main>
+      <footer class="seo-site-footer">
+      <nav aria-label="Portfolio pages">
+        <a href="/hu/projects/">Projects</a>
+        <a href="/about/marton-vegh/">About</a>
+        <a href="/hu/experience/">Experience</a>
+      </nav>
+    </footer>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="../../../index.jsx"></script>
+  </body>
+</html>

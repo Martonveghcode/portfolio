@@ -5,8 +5,12 @@ import {
   DEFAULT_SITE_URL,
   SEO_ROUTES,
   SITE_FOOTER_LINKS,
+  getAbsoluteUrl,
   getHtmlEntryPath,
   getHtmlEntryPaths,
+  getLanguageAlternates,
+  getLocalizedPath,
+  getSiteUrl,
   getStructuredData,
 } from "../src/seo.js";
 
@@ -60,6 +64,34 @@ const filesToCheck = [
 ];
 
 const failures = [];
+const siteUrl = getSiteUrl(process.env.VITE_SITE_URL || DEFAULT_SITE_URL);
+
+function checkLanguageMetadata(file, content, route) {
+  const head = content.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] ?? "";
+  const links = [...head.matchAll(/<link\b[^>]*>/gi)].map(([tag]) =>
+    Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map(([, key, value]) => [key, value]))
+  );
+  const alternates = links.filter((link) => link.rel === "alternate" && link.hreflang);
+  const expected = getLanguageAlternates(route, siteUrl);
+  const canonicalUrl = getAbsoluteUrl(siteUrl, route.path);
+
+  if (!content.includes(`<html lang="${route.language}">`)) {
+    failures.push(`${file} has an incorrect document language (expected ${route.language})`);
+  }
+  const canonicals = links.filter((link) => link.rel === "canonical");
+  if (canonicals.length !== 1 || canonicals[0].href !== canonicalUrl) {
+    failures.push(`${file} must have exactly one self-referencing canonical (${canonicalUrl})`);
+  }
+  if (alternates.length !== expected.length) {
+    failures.push(`${file} has ${alternates.length} hreflang links; expected ${expected.length}`);
+  }
+  for (const alternate of expected) {
+    const matching = alternates.filter((link) => link.hreflang === alternate.language && link.href === alternate.href);
+    if (matching.length !== 1) {
+      failures.push(`${file} must have exactly one hreflang=${alternate.language} link to ${alternate.href}`);
+    }
+  }
+}
 
 for (const file of filesToCheck) {
   const content = await readFile(file, "utf8");
@@ -80,9 +112,17 @@ for (const file of filesToCheck) {
 for (const route of SEO_ROUTES) {
   const entryPath = getHtmlEntryPath(route.path);
   const content = await readFile(entryPath, "utf8");
+  checkLanguageMetadata(entryPath, content, route);
+
+  const builtPath = join("dist", entryPath);
+  if (await fileExists(builtPath)) {
+    checkLanguageMetadata(builtPath, await readFile(builtPath, "utf8"), route);
+  } else {
+    failures.push(`${builtPath} is missing from the production build`);
+  }
 
   for (const link of SITE_FOOTER_LINKS) {
-    if (!content.includes(`href="${link.href}"`)) {
+    if (!content.includes(`href="${getLocalizedPath(link.href, route.language)}"`)) {
       failures.push(`${entryPath} is missing the permanent ${link.label} link (${link.href})`);
     }
   }
@@ -93,6 +133,17 @@ for (const route of SEO_ROUTES) {
 
     if (primarySchema?.mainEntity?.["@type"] !== "Person") {
       failures.push(`${entryPath} ProfilePage is missing mainEntity Person structured data`);
+    }
+  }
+}
+
+for (const sitemapPath of ["public/sitemap.xml", "dist/sitemap.xml"]) {
+  const sitemap = await readFile(sitemapPath, "utf8");
+  const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, location]) => location);
+  for (const route of SEO_ROUTES) {
+    const url = getAbsoluteUrl(siteUrl, route.path);
+    if (locations.filter((location) => location === url).length !== 1) {
+      failures.push(`${sitemapPath} must list ${url} exactly once`);
     }
   }
 }

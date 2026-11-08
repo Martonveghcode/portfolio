@@ -6,9 +6,12 @@ import {
   DEFAULT_SITE_URL,
   SEO_ROUTES,
   SITE_FOOTER_LINKS,
+  escapeHtml,
   getAbsoluteUrl,
   getHtmlEntryPath,
   getImageUrl,
+  getLanguageAlternates,
+  getLocalizedPath,
   getSiteUrl,
   getStructuredData,
   renderSeoContentHtml,
@@ -28,9 +31,9 @@ function getOgType(route) {
   return "website";
 }
 
-function getStaticFooterHtml() {
+function getStaticFooterHtml(route) {
   const links = SITE_FOOTER_LINKS
-    .map((link) => `<a href="${link.href}">${link.label}</a>`)
+    .map((link) => `<a href="${getLocalizedPath(link.href, route.language)}">${link.label}</a>`)
     .join("\n        ");
 
   return `<footer class="seo-site-footer">
@@ -44,29 +47,35 @@ function getHtmlDocument(route) {
   const canonicalUrl = getAbsoluteUrl(siteUrl, route.path);
   const structuredData = JSON.stringify(getStructuredData(route, siteUrl));
   const scriptPath = getScriptPath(getHtmlEntryPath(route.path));
+  const alternateLinks = getLanguageAlternates(route, siteUrl)
+    .map(({ language, href }) => `<link rel="alternate" hreflang="${language}" href="${escapeHtml(href)}" />`)
+    .join("\n    ");
+  const title = escapeHtml(route.title);
+  const description = escapeHtml(route.description);
 
   return `<!doctype html>
-<html lang="en">
+<html lang="${route.language}">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png?v=20260401" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${route.title}</title>
-    <meta name="description" content="${route.description}" />
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="author" content="Marton Vegh" />
     <link rel="canonical" href="${canonicalUrl}" />
+    ${alternateLinks}
     <meta property="og:site_name" content="Portfolio Marton" />
     <meta property="og:type" content="${getOgType(route)}" />
-    <meta property="og:title" content="${route.title}" />
-    <meta property="og:description" content="${route.description}" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${description}" />
     <meta property="og:url" content="${canonicalUrl}" />
     <meta property="og:image" content="${getImageUrl(siteUrl, route.image)}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${route.title}" />
-    <meta name="twitter:description" content="${route.description}" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${description}" />
     <meta name="twitter:image" content="${getImageUrl(siteUrl, route.image)}" />
     <style>
       body {
@@ -116,7 +125,7 @@ function getHtmlDocument(route) {
   <body>
     <div id="seo-content">
       <main>${renderSeoContentHtml(route)}</main>
-      ${getStaticFooterHtml()}
+      ${getStaticFooterHtml(route)}
     </div>
     <div id="root"></div>
     <script type="module" src="${scriptPath}"></script>

@@ -6,7 +6,7 @@ import CookieConsentBanner from "./CookieConsentBanner";
 import { WHO_AM_I_CONTENT } from "./WHO_AM_I_CONTENT";
 import heatmapConfig from "./heatmap";
 import { getLocalizedCaseStudy, getLocalizedCaseStudyIntro } from "./caseStudyTranslations";
-import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
+import { PRIMARY_PAGE_PATHS, applyRouteMetadata, getLocalizedPath, getRouteSeoContent, getRuntimeSiteUrl, normalizePath, resolveRoute } from "./seo";
 import { CV_LINKS, LANGUAGE_OPTIONS, PAGES, PROFILE, translations } from "./siteData";
 
 const PROJECT_DISPLAY_ORDER = ["dartvision", "ti-nspire-cxii-custom-keyboard-remap", "handwriting-pipeline", "chess-anki-maker", "portfolio-analytics-tool", "macro-recorder-plus", "marvella-design", "habitro", "calendar"];
@@ -180,10 +180,11 @@ function MobileLanguageSelect({ language, onLanguageChange, label }) {
   );
 }
 
-function PrimaryNavigation({ page, copy, label, onNavigate, onOpenContactPanel, isMobile }) {
+function PrimaryNavigation({ page, copy, label, language, onNavigate, onOpenContactPanel, isMobile }) {
   const { containerRef, indicator } = useSlidingIndicator(page);
 
   function handleClick(event, nextPage) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     onNavigate(nextPage);
   }
@@ -197,7 +198,7 @@ function PrimaryNavigation({ page, copy, label, onNavigate, onOpenContactPanel, 
       <SlidingIndicator className="site-nav__indicator" indicator={indicator} />
       {PAGES.map((key) => (
         <a
-          href={PRIMARY_PAGE_PATHS[key] ?? "/"}
+          href={getLocalizedPath(PRIMARY_PAGE_PATHS[key] ?? "/", language)}
           key={key}
           data-slide-key={key}
           className={`nav-tab ${page === key ? "nav-tab--active" : ""}`}
@@ -266,6 +267,7 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
             <PrimaryNavigation
               page={page}
               copy={copy}
+              language={language}
               label={ui.primaryNavLabel}
               onNavigate={handleMobileNavigate}
               isMobile
@@ -307,6 +309,7 @@ function SiteNav({ page, onNavigate, onOpenContactPanel, language, onLanguageCha
         <PrimaryNavigation
           page={page}
           copy={copy}
+          language={language}
           label={ui.primaryNavLabel}
           onNavigate={onNavigate}
           onOpenContactPanel={onOpenContactPanel}
@@ -1033,7 +1036,7 @@ function getInitialIsMobile() {
 }
 
 export default function App() {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(() => resolveRoute(getInitialPathname()).language);
   const [pathname, setPathname] = useState(getInitialPathname);
   const [theme, setTheme] = useState(getInitialTheme);
   const [isMobile, setIsMobile] = useState(getInitialIsMobile);
@@ -1051,8 +1054,8 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
+    document.documentElement.lang = route.language;
+  }, [route.language]);
 
   useEffect(() => {
     const runtimeSiteUrl = getRuntimeSiteUrl();
@@ -1067,7 +1070,9 @@ export default function App() {
     if (typeof window === "undefined") return undefined;
 
     const handlePopState = () => {
-      setPathname(normalizePath(window.location.pathname));
+      const nextPath = normalizePath(window.location.pathname);
+      setPathname(nextPath);
+      setLanguage(resolveRoute(nextPath).language);
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -1122,7 +1127,7 @@ export default function App() {
         : { src: "", alt: "" },
       tech: project.tech ?? [],
       links: project.links ?? {},
-      caseStudyPath: CASE_STUDY_PATHS[project.id],
+      caseStudyPath: CASE_STUDY_PATHS[project.id] ? getLocalizedPath(CASE_STUDY_PATHS[project.id], language) : undefined,
       title: locale.title ?? projectTranslations.en?.title ?? project.title ?? "",
       summary: locale.summary ?? projectTranslations.en?.summary ?? project.summary ?? "",
     };
@@ -1195,15 +1200,17 @@ export default function App() {
     };
   }, [language]);
 
-  function navigateToPath(nextPath) {
-    const normalizedPath = normalizePath(nextPath);
+  function navigateToPath(nextPath, nextLanguage = language, preserveSearch = false) {
+    const normalizedPath = getLocalizedPath(nextPath, nextLanguage);
 
     if (typeof window !== "undefined" && normalizePath(window.location.pathname) !== normalizedPath) {
-      window.history.pushState({}, "", normalizedPath);
+      const suffix = preserveSearch ? `${window.location.search}${window.location.hash}` : "";
+      window.history.pushState({}, "", `${normalizedPath}${suffix}`);
     }
 
     startTransition(() => {
       setPathname(normalizedPath);
+      setLanguage(nextLanguage);
     });
   }
 
@@ -1212,9 +1219,7 @@ export default function App() {
   }
 
   function handleLanguageChange(nextLanguage) {
-    startTransition(() => {
-      setLanguage(nextLanguage);
-    });
+    navigateToPath(pathname, nextLanguage, true);
   }
 
   let pageView = (
